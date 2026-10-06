@@ -36,3 +36,27 @@ window.addEventListener('scroll', () => {
 }, { passive: true });
 window.addEventListener('resize', updateActiveSection);
 updateActiveSection();
+
+const themeToggle = document.querySelector('.theme-toggle');
+function applyTheme(dark) {
+  document.documentElement.dataset.theme = dark ? 'dark' : 'light';
+  themeToggle.setAttribute('aria-pressed', String(dark));
+  themeToggle.setAttribute('aria-label', dark ? '切换浅色模式' : '切换深色模式');
+  document.querySelector('meta[name="theme-color"]').content = dark ? '#151b17' : '#fafbf9';
+}
+try { applyTheme(localStorage.getItem('zupeng-theme') === 'dark'); } catch { applyTheme(false); }
+themeToggle.addEventListener('click', () => {
+  const dark = document.documentElement.dataset.theme !== 'dark';
+  applyTheme(dark);
+  try { localStorage.setItem('zupeng-theme', dark ? 'dark' : 'light'); } catch {}
+});
+const galleryViewport = document.querySelector('.gallery-viewport');
+const mobileGallery = matchMedia('(max-width: 650px)');
+function centerGallery() {
+  if (mobileGallery.matches) galleryViewport.scrollLeft = Math.max(0, (galleryViewport.querySelector('.gallery').offsetWidth - galleryViewport.clientWidth) / 2);
+  else galleryViewport.scrollLeft = 0;
+}
+centerGallery();
+mobileGallery.addEventListener('change', centerGallery);
+
+window.addEventListener('resize', centerGallery);
