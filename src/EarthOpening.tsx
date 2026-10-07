@@ -10,6 +10,7 @@ export default function EarthOpening() {
   const [visible, setVisible] = useState(true);
   const [reduced, setReduced] = useState(false);
   const [hidden, setHidden] = useState(false);
+  const [hasFrames, setHasFrames] = useState(false);
   useEffect(() => {
     const media = matchMedia('(prefers-reduced-motion: reduce)');
     const update = () => setReduced(media.matches);
@@ -42,7 +43,8 @@ export default function EarthOpening() {
   }
   return <section id="home" ref={section} className={`earth-opening ${paused || reduced || !visible || hidden ? 'space-paused' : ''}`} aria-label="地球动画开场" onPointerMove={move} onPointerLeave={() => { cancelAnimationFrame(pointerFrame.current); section.current?.style.setProperty('--space-x', '0px'); section.current?.style.setProperty('--space-y', '0px'); }}>
 
-    <video ref={video} autoPlay muted playsInline loop preload="auto" poster="./assets/serene-poster.jpg" aria-hidden="true"><source src="./assets/serene-background.mp4" type="video/mp4" /></video>
+    <video ref={video} onPlaying={() => setHasFrames(true)} onError={() => setHasFrames(false)} autoPlay muted playsInline loop preload="auto" poster="./assets/serene-poster.jpg" aria-hidden="true"><source src="./assets/serene-background.mp4" type="video/mp4" /></video>
+    <img className={`opening-poster ${hasFrames ? 'has-video' : ''}`} src="./assets/serene-poster.jpg" alt="" aria-hidden="true" fetchPriority="high" />
     <div className="opening-shade" aria-hidden="true" />
     <div className="space-depth" aria-hidden="true"><div className="space-nebula" /><div className="space-stars">{stars.map((star, i) => <i key={i} style={{ left: `${star.x}%`, top: `${star.y}%`, width: star.size, height: star.size, '--twinkle-delay': `${star.delay}s`, '--twinkle-time': `${star.duration}s` } as CSSProperties} />)}</div><div className="space-orbit"><i /></div><div className="space-airglow" /><div className="space-sunrise"><i /></div></div>
     <span className="space-coordinate" aria-hidden="true">EARTH / OUR LITTLE BLUE WORLD</span>
