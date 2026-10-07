@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import MotionHero from './MotionHero';
 
 const asset = (name: string) => `./assets/${name}`;
 const navLinks = [{ label: '关于我', en: 'About', href: '#about' }, { label: '军旅经历', en: 'Experience', href: '#service' }, { label: '生活与热爱', en: 'Journal', href: '#life' }, { label: '下一站', en: 'What’s next', href: '#future' }];
@@ -54,40 +55,6 @@ function Navbar() {
   </>;
 }
 
-function Hero() {
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const [paused, setPaused] = useState(false);
-  useEffect(() => {
-    const preference = window.matchMedia('(prefers-reduced-motion: reduce)');
-    const apply = () => {
-      if (preference.matches) { videoRef.current?.pause(); setPaused(true); }
-      else videoRef.current?.play().catch(() => setPaused(true));
-    };
-    apply(); preference.addEventListener('change', apply);
-    return () => preference.removeEventListener('change', apply);
-  }, []);
-  async function togglePlayback() {
-    if (!videoRef.current) return;
-    if (videoRef.current.paused) { try { await videoRef.current.play(); setPaused(false); } catch { setPaused(true); } }
-    else { videoRef.current.pause(); setPaused(true); }
-  }
-  return <section id="home" className="hero" aria-labelledby="hero-heading">
-    <video ref={videoRef} className="hero-video" autoPlay muted loop playsInline preload="auto" poster={asset('serene-poster.jpg')} aria-hidden="true" onPlay={() => setPaused(false)} onPause={() => setPaused(true)}><source src={asset('serene-background.mp4')} type="video/mp4" /></video>
-    <div className="hero-overlay" />
-    <div className="hero-content">
-      <p className="eyebrow hero-eyebrow">ZU PENG · 贵阳出发，向世界生长</p>
-      <h1 id="hero-heading" className="font-instrument text-glow">A steady heart.<br /><em>A curious soul.</em></h1>
-      <p className="hero-description">你好，我是祖朋。<span>带着军人的坚定，也带着对生活的热爱。</span></p>
-      <a href="#about" className="pill button-glow hero-cta">开始认识我 <Arrow /></a>
-    </div>
-    <div className="hero-bottom">
-      <button type="button" className="sound-control" onClick={togglePlayback} aria-label={paused ? '播放背景视频' : '暂停背景视频'} aria-pressed={!paused}><span className="sound-circle" aria-hidden="true">{paused ? '▷' : 'Ⅱ'}</span><span>Experience<br /><strong>{paused ? '播放画面' : '暂停画面'}</strong></span></button>
-      <a href="#perspective" className="scroll-cue"><span>SCROLL TO DISCOVER</span><Arrow down /></a>
-      <span className="hero-coordinate">26.65° N · 106.63° E</span>
-    </div>
-  </section>;
-}
-
 function QuoteSection() {
   const section = useRef<HTMLElement>(null);
   const rainbow = useRef<HTMLImageElement>(null);
@@ -127,71 +94,12 @@ function QuoteSection() {
       <p className="quote-attribution">祖朋 <span>—</span> 坚定向前，保持好奇</p>
     </div>
     <span className="section-coordinate">01 / A NOTE ON WHO I AM</span>
-    <a className="quote-next" href="#stories" aria-label="探索个人照片画廊"><Arrow down /></a>
+    <a className="quote-next" href="#about" aria-label="继续阅读自我介绍"><Arrow down /></a>
   </section>;
 }
 
 function Photo({ file, caption, className = '' }: { file: string; caption: string; className?: string }) {
   return <figure className={`source-photo ${className}`}><a href={asset(file)} target="_blank" rel="noopener noreferrer" aria-label={`查看${caption}完整图片`}><img src={asset(file)} alt={caption} loading="lazy" /></a><figcaption><span>{caption}</span><Arrow /></figcaption></figure>;
-}
-
-const galleryCards = [
-  { file: 'portrait.jpg', title: '你好，我是祖朋', label: 'THE PERSON', href: '#about' },
-  { file: 'marine.jpg', title: '向海而行', label: 'THE MARINE YEARS', href: '#service' },
-  { file: 'court.jpg', title: '球场见', label: 'STAY IN MOTION', href: '#sports' },
-  { file: 'fitness.jpg', title: '健身房打卡', label: 'A LITTLE STRONGER', href: '#sports' },
-  { file: 'beyond-original.jpg', title: '经典永流传', label: 'BEYOND', href: '#music' },
-  { file: 'book-namiya.jpg', title: '在细节里找真相', label: 'BETWEEN THE LINES', href: '#reading' },
-  { file: 'guiyang.jpg', title: '爽爽的贵阳', label: 'WHERE I COME FROM', href: '#hometown' },
-];
-
-function StoryGallery() {
-  const root = useRef<HTMLElement>(null);
-  const dragStart = useRef<number | null>(null);
-  const dragged = useRef(false);
-  const [active, setActive] = useState(0);
-  const [paused, setPaused] = useState(false);
-  const [interacting, setInteracting] = useState(false);
-  const [inView, setInView] = useState(false);
-  const [reducedMotion, setReducedMotion] = useState(false);
-  const [width, setWidth] = useState(1000);
-  const count = galleryCards.length;
-  const selected = galleryCards[((active % count) + count) % count];
-  useEffect(() => {
-    const element = root.current;
-    if (!element) return;
-    const observer = new IntersectionObserver(([entry]) => setInView(entry.isIntersecting), { threshold: .15 });
-    const resize = new ResizeObserver(([entry]) => setWidth(entry.contentRect.width));
-    const pref = window.matchMedia('(prefers-reduced-motion: reduce)');
-    const update = () => setReducedMotion(pref.matches);
-    update(); pref.addEventListener('change', update); observer.observe(element); resize.observe(element);
-    return () => { observer.disconnect(); resize.disconnect(); pref.removeEventListener('change', update); };
-  }, []);
-  useEffect(() => {
-    if (paused || interacting || !inView || reducedMotion) return;
-    const timer = window.setInterval(() => setActive(value => value + 1), 3800);
-    return () => window.clearInterval(timer);
-  }, [paused, interacting, inView, reducedMotion]);
-  const step = (amount: number) => { setPaused(true); setActive(value => value + amount); };
-  const mobile = width < 768;
-  return <section ref={root} className="story-gallery" id="stories" aria-label="祖朋的立体照片画廊" onMouseEnter={() => setInteracting(true)} onMouseLeave={() => setInteracting(false)} onFocusCapture={() => setInteracting(true)} onBlurCapture={event => { if (!event.currentTarget.contains(event.relatedTarget)) setInteracting(false); }}>
-    <div className="gallery-intro"><p className="eyebrow">A FEW PIECES OF MY WORLD</p><h2 className="font-instrument">Many sides.<br /><em>One story.</em></h2><p>军旅之外，生活还有很多面。</p></div>
-    <div className="carousel-stage" tabIndex={0} role="group" aria-roledescription="轮播图" aria-label="使用左右方向键切换照片，也可以左右拖动" onKeyDown={event => { if (event.key === 'ArrowRight' || event.key === 'ArrowLeft') { event.preventDefault(); step(event.key === 'ArrowRight' ? 1 : -1); } }} onPointerDown={event => { dragStart.current = event.clientX; dragged.current = false; }} onPointerMove={event => { if (dragStart.current !== null && Math.abs(event.clientX - dragStart.current) > 10) dragged.current = true; }} onPointerUp={event => { if (dragStart.current !== null && Math.abs(event.clientX - dragStart.current) > 35) step(event.clientX < dragStart.current ? 1 : -1); dragStart.current = null; }} onPointerCancel={() => { dragStart.current = null; }} onPointerLeave={() => { dragStart.current = null; }}>
-      <div className="carousel-halo" aria-hidden="true" />
-      <div className="carousel-track">{galleryCards.map((card, i) => {
-        const relative = ((i - active) % count + count + Math.floor(count / 2)) % count - Math.floor(count / 2);
-        const angle = relative * (Math.PI * 2 / count);
-        const radius = Math.min(width * .43, 525);
-        const x = Math.sin(angle) * radius;
-        const z = Math.cos(angle) * (mobile ? 65 : 130);
-        const rotation = -Math.sin(angle) * 45;
-        return <button key={card.file} className={`story-card ${relative === 0 ? 'is-active' : ''}`} type="button" aria-label={`选择照片：${card.title}`} aria-pressed={relative === 0} style={{ transform: `translate3d(${x}px,${Math.abs(relative) * (mobile ? 4 : 8)}px,${z}px) rotateY(${rotation}deg)`, zIndex: 10 - Math.abs(relative), opacity: Math.abs(relative) === 3 ? .22 : Math.abs(relative) === 2 ? .55 : 1 }} onClick={() => { if (dragged.current) return; setPaused(true); setActive(value => value + relative); }}><img src={asset(card.file)} alt={card.title} loading="lazy" draggable={false} /><span className="story-card-label"><small>0{i + 1} / {card.label}</small></span></button>;
-      })}</div>
-    </div>
-    <div className="gallery-caption" aria-live={paused ? 'polite' : 'off'}><span className="eyebrow">{selected.label}</span><a href={selected.href}>{selected.title}<Arrow /></a></div>
-    <div className="gallery-controls"><button type="button" aria-label="上一张照片" onClick={() => step(-1)}><span className="rotate-180"><Arrow /></span></button><span className="gallery-count">0{((active % count) + count) % count + 1}<span> / 07</span></span><button type="button" aria-label="下一张照片" onClick={() => step(1)}><Arrow /></button><button type="button" className="gallery-pause" aria-label={paused || reducedMotion ? '照片自动旋转已暂停，点击切换' : '暂停照片自动旋转'} aria-pressed={paused || reducedMotion} disabled={reducedMotion} onClick={() => setPaused(value => !value)}>{paused || reducedMotion ? '▷' : 'Ⅱ'}</button></div>
-    <p className="gallery-hint">左右拖动，发现我的另一面</p>
-  </section>;
 }
 
 function SectionHeading({ number, english, title, subtitle }: { number: string; english: string; title: string; subtitle?: string }) {
@@ -253,5 +161,5 @@ export default function App() {
     });
     return () => cancelAnimationFrame(frame);
   }, []);
-  return <div className="site-shell"><a className="skip-link" href="#about">跳到自我介绍</a><Navbar /><main><Hero /><QuoteSection /><StoryGallery /><About /><Service /><Life /><Future /></main><footer><a href="#home" className="brand" aria-label="祖朋，回到首页">Zu Peng</a><span>认真做事，自由生活。</span><a className="text-link" href="#home">回到顶部 <span aria-hidden="true">↑</span></a><div className="footer-bottom"><span>© {new Date().getFullYear()} 祖朋 · PERSONAL WEBSITE</span><span>GUIYANG, CHINA</span></div></footer></div>;
+  return <div className="site-shell"><a className="skip-link" href="#about">跳到自我介绍</a><Navbar /><main><MotionHero /><QuoteSection /><About /><Service /><Life /><Future /></main><footer><a href="#home" className="brand" aria-label="祖朋，回到首页">Zu Peng</a><span>认真做事，自由生活。</span><a className="text-link" href="#home">回到顶部 <span aria-hidden="true">↑</span></a><div className="footer-bottom"><span>© {new Date().getFullYear()} 祖朋 · PERSONAL WEBSITE</span><span>GUIYANG, CHINA</span></div></footer></div>;
 }
