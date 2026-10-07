@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import MotionHero from './MotionHero';
+import EarthOpening from './EarthOpening';
+import Atmosphere from './Atmosphere';
 import RecordPlayer from './RecordPlayer';
 import useJournalEffects from './useJournalEffects';
 
@@ -16,10 +18,11 @@ function Navbar() {
   const menuRef = useRef<HTMLDivElement>(null);
   const toggleRef = useRef<HTMLButtonElement>(null);
   useEffect(() => {
-    const update = () => setScrolled(window.scrollY > 40);
+    const update = () => setScrolled(window.scrollY > window.innerHeight * .8);
     update();
     window.addEventListener('scroll', update, { passive: true });
-    return () => window.removeEventListener('scroll', update);
+    window.addEventListener('resize', update);
+    return () => { window.removeEventListener('scroll', update); window.removeEventListener('resize', update); };
   }, []);
   useEffect(() => {
     if (!open) return;
@@ -41,7 +44,7 @@ function Navbar() {
     return () => { document.body.style.overflow = previousOverflow; window.removeEventListener('keydown', onKey); window.removeEventListener('resize', resize); };
   }, [open]);
   return <>
-    <header className={`navbar ${scrolled || open ? 'navbar-scrolled' : ''}`}>
+    <header inert={!scrolled && !open} className={`navbar ${scrolled || open ? 'navbar-scrolled' : 'navbar-intro-hidden'}`}>
       <a href="#home" className="brand" aria-label="祖朋，回到首页" onClick={() => setOpen(false)}>Zu Peng<span>祖朋</span></a>
       <nav className="hidden md:flex items-center gap-8 lg:gap-12" aria-label="主导航">{navLinks.map(link => <a href={link.href} key={link.href}>{link.label}</a>)}</nav>
       <a className="pill nav-cta hidden md:inline-flex" href="#about">认识祖朋 <Arrow /></a>
@@ -175,5 +178,5 @@ export default function App() {
     });
     return () => cancelAnimationFrame(frame);
   }, []);
-  return <div className="site-shell"><a className="skip-link" href="#about">跳到自我介绍</a><Navbar /><main><MotionHero /><QuoteSection /><About /><Life /><Service /><Future /></main><footer><a href="#home" className="brand" aria-label="祖朋，回到首页">Zu Peng</a><span>认真做事，自由生活。</span><a className="text-link" href="#home">回到顶部 <span aria-hidden="true">↑</span></a><div className="footer-bottom"><span>© {new Date().getFullYear()} 祖朋 · PERSONAL WEBSITE</span><span>GUIYANG, CHINA</span></div></footer></div>;
+  return <div className="site-shell"><a className="skip-link" href="#about">跳到自我介绍</a><Navbar /><main><EarthOpening /><MotionHero /><QuoteSection /><About /><Life /><Service /><Future /></main><footer><a href="#home" className="brand" aria-label="祖朋，回到首页">Zu Peng</a><span>认真做事，自由生活。</span><a className="text-link" href="#home">回到顶部 <span aria-hidden="true">↑</span></a><div className="footer-bottom"><span>© {new Date().getFullYear()} 祖朋 · PERSONAL WEBSITE</span><span>GUIYANG, CHINA</span></div><Atmosphere /></footer></div>;
 }

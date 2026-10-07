@@ -9,3 +9,5 @@ ReactDOM.createRoot(document.getElementById('root')!).render(<React.StrictMode><
 import './record-player.css';
 
 import "./journal.css";
+
+import "./atmosphere.css";

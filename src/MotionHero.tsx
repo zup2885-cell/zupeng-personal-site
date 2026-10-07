@@ -143,7 +143,7 @@ export default function MotionHero() {
     if (event.currentTarget.hasPointerCapture(event.pointerId)) event.currentTarget.releasePointerCapture(event.pointerId);
   }
 
-  return <section id="home" ref={hero} className="motion-hero" aria-labelledby="motion-title">
+  return <section id="explore" ref={hero} className="motion-hero" aria-labelledby="motion-title">
     <video ref={video} className="motion-earth" autoPlay muted playsInline loop preload="metadata" poster="./assets/serene-poster.jpg" aria-hidden="true"><source src="./assets/serene-background.mp4" type="video/mp4" /></video>
     <div className="motion-vignette" aria-hidden="true" />
     <button className="earth-control" type="button" disabled={reduced} aria-pressed={earthPaused || reduced} onClick={() => setEarthPaused(value => !value)}>{earthPaused || reduced ? '▷ 播放地球' : 'Ⅱ 暂停地球'}</button>
