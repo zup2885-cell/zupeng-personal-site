@@ -1,9 +1,12 @@
 /* A personal journal in blue: light, paper, and moments in motion. */
 .journal-surface{position:relative;isolation:isolate;--pointer-x:50%;--pointer-y:40%}
 .journal-surface:before{content:'';position:absolute;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(600px circle at var(--pointer-x) var(--pointer-y),#3d92d018,transparent 70%)}
-[data-reveal].reveal-ready{transition:opacity .85s ease,translate .85s cubic-bezier(.16,1,.3,1)}
-[data-reveal].reveal-ready:not(.is-revealed){opacity:0;translate:0 32px}
-.photo-grid [data-reveal]:nth-child(2){transition-delay:.12s}.photo-grid [data-reveal]:nth-child(3){transition-delay:.24s}
+.reveal-ready{transition:opacity 1s ease,translate 1.15s cubic-bezier(.16,1,.3,1),scale 1.15s cubic-bezier(.16,1,.3,1),filter 1s ease;transition-delay:var(--reveal-delay,0ms)}
+.reveal-ready:not(.is-revealed){opacity:0;translate:0 48px;filter:blur(5px)}
+[data-reveal="photo"].reveal-ready{transform-origin:50% 80%;transition-duration:1.2s,1.4s,1.4s,1.1s}
+[data-reveal="photo"].reveal-ready:not(.is-revealed){translate:0 65px;scale:.93;filter:blur(7px)}
+.reveal-ready.is-revealed{opacity:1;translate:0 0;scale:1;filter:blur(0)}
+.reveal-ready:focus-within{opacity:1;translate:0 0;scale:1;filter:none;transition-delay:0ms}
 .about-section{max-width:1360px;grid-template-columns:1fr 1.08fr;column-gap:110px;row-gap:88px;padding:145px 80px 85px;background:radial-gradient(ellipse at 20% 40%,#164f7666,transparent 52%),#09131e}
 .about-orbit{position:absolute;width:690px;height:690px;left:-180px;top:90px;z-index:-1;pointer-events:none}
 .about-orbit i{position:absolute;inset:0;border:1px solid #71c1ff29;border-radius:50%;transform:rotate(-30deg) scaleY(.7)}.about-orbit i:nth-child(2){inset:50px;transform:rotate(30deg) scaleY(.7)}.about-orbit>span{position:absolute;top:50px;right:140px;color:#9bdbff;font-size:36px;text-shadow:0 0 24px #47b8ff;animation:journal-float 7s ease-in-out infinite}
@@ -32,3 +35,8 @@
 /* Frame the subject in the fitness preview; its link retains the complete original. */
 .sports-chapter .source-photo:nth-child(2)>a{aspect-ratio:1.05;padding:0}
 .sports-chapter .source-photo:nth-child(2) img{position:absolute;inset:12px;width:calc(100% - 24px);height:calc(100% - 24px);max-height:none;object-fit:cover;object-position:center bottom}
+
+/* Keep entry timing consistent with the existing card hover treatments. */
+.reading-notes .reading-note.reveal-ready,.source-photo.reveal-ready{transition-property:opacity,translate,scale,filter;transition-delay:var(--reveal-delay,0ms)}
+@media(max-width:767px){.reveal-ready:not(.is-revealed){translate:0 32px;filter:blur(3px)}[data-reveal="photo"].reveal-ready:not(.is-revealed){translate:0 45px;scale:.95;filter:blur(5px)}}
+@media(prefers-reduced-motion:reduce){.reveal-ready,.reveal-ready:not(.is-revealed),[data-reveal="photo"].reveal-ready:not(.is-revealed){opacity:1;translate:none;scale:1;filter:none;transition:none}}

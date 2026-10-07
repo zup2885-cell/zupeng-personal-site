@@ -101,7 +101,7 @@ function QuoteSection() {
 }
 
 function Photo({ file, caption, className = '' }: { file: string; caption: string; className?: string }) {
-  return <figure data-reveal className={`source-photo ${className}`}><a href={asset(file)} target="_blank" rel="noopener noreferrer" aria-label={`查看${caption}完整图片`}><img src={asset(file)} alt={caption} loading="lazy" /></a><figcaption><span>{caption}</span><Arrow /></figcaption></figure>;
+  return <figure data-reveal="photo" className={`source-photo ${className}`}><a href={asset(file)} target="_blank" rel="noopener noreferrer" aria-label={`查看${caption}完整图片`}><img src={asset(file)} alt={caption} loading="lazy" /></a><figcaption><span>{caption}</span><Arrow /></figcaption></figure>;
 }
 
 function SectionHeading({ number, english, title, subtitle }: { number: string; english: string; title: string; subtitle?: string }) {
@@ -111,13 +111,13 @@ function SectionHeading({ number, english, title, subtitle }: { number: string; 
 function About() {
   return <section id="about" className="content-section about-section journal-surface">
     <div className="about-orbit" aria-hidden="true"><i /><i /><span>✦</span></div>
-    <div className="about-photo" data-reveal><div className="portrait-frame"><Photo file="portrait.jpg" caption="祖朋 · 自我介绍" /></div><span className="portrait-sticker">贵阳出发<br /><strong>保持好奇 ↗</strong></span><span className="portrait-note font-instrument">A little more me.</span></div>
-    <div className="about-copy" data-reveal><p className="eyebrow">02 / HELLO, THIS IS MY LITTLE WORLD</p><p className="about-original-title">祖朋 · 自我介绍</p><h2>你好啊，<br />我是<span>祖朋</span><i>✳</i></h2><p className="about-opening">阳光开朗，热爱运动。<br />听 Beyond，读东野圭吾，也在探索 AI 的新世界。</p>
+    <div className="about-photo"><div className="portrait-frame"><Photo file="portrait.jpg" caption="祖朋 · 自我介绍" /></div><span className="portrait-sticker">贵阳出发<br /><strong>保持好奇 ↗</strong></span><span className="portrait-note font-instrument">A little more me.</span></div>
+    <div className="about-copy"><p className="eyebrow">02 / HELLO, THIS IS MY LITTLE WORLD</p><p className="about-original-title">祖朋 · 自我介绍</p><h2>你好啊，<br />我是<span>祖朋</span><i>✳</i></h2><p className="about-opening">阳光开朗，热爱运动。<br />听 Beyond，读东野圭吾，也在探索 AI 的新世界。</p>
       <div className="about-details"><p className="profile-name">祖朋（也可以叫我"啊祖"）</p><p>广州软件学院毕业</p><p>希望帮你能更好地了解我。</p></div>
       <ul className="tags">{['运动全能选手', 'AI 学习者', 'Beyond 忠实听众', '推理小说爱好者'].map(t => <li key={t}>{t}</li>)}</ul>
       <a href="#life" className="text-link">来看看我的日常 <Arrow /></a>
     </div>
-    <div className="interest-links" data-reveal>{[{ href: '#sports', number: '01', title: '去运动', sub: 'MOVE & FEEL', icon: '↗' }, { href: '#music', number: '02', title: '听一首歌', sub: 'PRESS PLAY', icon: '◉' }, { href: '#reading', number: '03', title: '翻几页书', sub: 'ONE MORE PAGE', icon: '✦' }, { href: '#future', number: '04', title: '探索 AI', sub: 'STAY CURIOUS', icon: '✳' }].map(item => <a href={item.href} key={item.href}><small>{item.number} / {item.sub}</small><span>{item.title}<i>{item.icon}</i></span></a>)}</div>
+    <div className="interest-links">{[{ href: '#sports', number: '01', title: '去运动', sub: 'MOVE & FEEL', icon: '↗' }, { href: '#music', number: '02', title: '听一首歌', sub: 'PRESS PLAY', icon: '◉' }, { href: '#reading', number: '03', title: '翻几页书', sub: 'ONE MORE PAGE', icon: '✦' }, { href: '#future', number: '04', title: '探索 AI', sub: 'STAY CURIOUS', icon: '✳' }].map(item => <a href={item.href} key={item.href}><small>{item.number} / {item.sub}</small><span>{item.title}<i>{item.icon}</i></span></a>)}</div>
   </section>;
 }
 
@@ -130,11 +130,11 @@ const abilities = [
 
 function Service() {
   return <section id="service" className="service-section journal-surface"><div className="content-section">
-    <div className="journey-heading" data-reveal><p className="eyebrow">04 / SOMEWHERE ALONG THE WAY</p><h2>走过的路，<em>都算数。</em></h2><p>那些与海有关的日子，是人生里很珍贵的一章。</p></div><div className="journey-source" data-reveal><h3>🤝职业亮点</h3><p>2021年9月入伍 · 海军陆战队</p><p>5年海军陆战队服役，用任务与荣誉说话：</p><div className="tags"><span>入伍5年</span><span>执行力拉满</span></div></div>
-    <div className="service-facts" data-reveal><article><span className="fact-number font-instrument">Honor.</span><h3>🏅荣誉</h3><ul><li>两次“四有”优秀士兵、两次嘉奖</li><li>班三等功</li><li>集体嘉奖</li></ul></article><article><span className="fact-number font-instrument">Purpose.</span><h3>🌊重大任务</h3><ul><li>第47批亚丁湾护航</li><li>联合利剑-2024A</li></ul></article></div>
-    <div className="abilities" data-reveal><p className="journey-original">雷厉风行，令行禁止；认准的事，干到底。5年军旅，把“扛事”刻进了骨子里。</p><h3>💪能力沉淀</h3><div className="ability-grid">{abilities.map(([label, text], i) => <p key={label}><span className="ability-number">0{i + 1}</span><span><strong>{label}</strong>：{text}</span></p>)}</div></div>
+    <div className="journey-heading"><p className="eyebrow">04 / SOMEWHERE ALONG THE WAY</p><h2>走过的路，<em>都算数。</em></h2><p>那些与海有关的日子，是人生里很珍贵的一章。</p></div><div className="journey-source"><h3>🤝职业亮点</h3><p>2021年9月入伍 · 海军陆战队</p><p>5年海军陆战队服役，用任务与荣誉说话：</p><div className="tags"><span>入伍5年</span><span>执行力拉满</span></div></div>
+    <div className="service-facts"><article><span className="fact-number font-instrument">Honor.</span><h3>🏅荣誉</h3><ul><li>两次“四有”优秀士兵、两次嘉奖</li><li>班三等功</li><li>集体嘉奖</li></ul></article><article><span className="fact-number font-instrument">Purpose.</span><h3>🌊重大任务</h3><ul><li>第47批亚丁湾护航</li><li>联合利剑-2024A</li></ul></article></div>
+    <div className="abilities"><p className="journey-original">雷厉风行，令行禁止；认准的事，干到底。5年军旅，把“扛事”刻进了骨子里。</p><h3>💪能力沉淀</h3><div className="ability-grid">{abilities.map(([label, text], i) => <p key={label}><span className="ability-number">0{i + 1}</span><span><strong>{label}</strong>：{text}</span></p>)}</div></div>
     <div className="military-gallery"><div className="gallery-heading"><h3>📸军旅掠影</h3><span className="eyebrow">MOMENTS AT SEA & IN THE SKY</span></div><div className="photo-grid two-photos"><Photo file="marine.jpg" caption="海上执勤" /><Photo file="deck.jpg" caption="甲板列队" /></div>
-      <div className="photo-grid video-grid">{[{ name: 'sea-training', caption: '海上训练' }, { name: 'parachuting', caption: '空降跳伞' }].map(video => <figure data-reveal key={video.name}><video controls playsInline preload="metadata" poster={asset(`${video.name}-poster.jpg`)} aria-label={`${video.caption}视频`}><source src={asset(`${video.name}.mp4`)} type="video/mp4" />你的浏览器不支持视频播放，请打开下方原视频链接。</video><figcaption><span>{video.caption}</span><a href={asset(`${video.name}.mp4`)} target="_blank" rel="noopener noreferrer">原视频 ↗</a></figcaption></figure>)}</div>
+      <div className="photo-grid video-grid">{[{ name: 'sea-training', caption: '海上训练' }, { name: 'parachuting', caption: '空降跳伞' }].map(video => <figure data-reveal="photo" key={video.name}><video controls playsInline preload="metadata" poster={asset(`${video.name}-poster.jpg`)} aria-label={`${video.caption}视频`}><source src={asset(`${video.name}.mp4`)} type="video/mp4" />你的浏览器不支持视频播放，请打开下方原视频链接。</video><figcaption><span>{video.caption}</span><a href={asset(`${video.name}.mp4`)} target="_blank" rel="noopener noreferrer">原视频 ↗</a></figcaption></figure>)}</div>
     </div>
   </div></section>;
 }
@@ -156,8 +156,8 @@ function ReadingNotes() {
 }
 
 function Life() {
-  return <section id="life" className="content-section life-section"><div className="life-intro" data-reveal><p className="eyebrow">03 / THE THINGS THAT MAKE ME, ME</p><p className="life-super-title">Life in <em>full color.</em></p><SectionHeading number="03" english="LIFE, WITH INTENTION" title="🫡关于生活" /></div><nav className="chapter-nav" aria-label="生活篇章">{chapters.map(c => <a key={c.id} href={`#${c.id}`}>{c.title}<Arrow down /></a>)}</nav>
-    {chapters.map((c, i) => <article id={c.id} key={c.id} className={`life-chapter ${c.id}-chapter journal-surface`}><div className="chapter-heading" data-reveal><div><p className="eyebrow">0{i + 1} / {c.english}</p><h3>{c.title}</h3></div><p className="chapter-lead font-instrument">{c.lead}</p></div><div className={`photo-grid ${c.photos.length === 2 ? 'two-photos' : 'three-photos'}`}>{c.photos.map(([file, caption]) => <Photo key={file} file={file} caption={caption} />)}</div><div className="chapter-copy">{c.lines.map(line => <p key={line}>{line}</p>)}</div>{c.id === 'music' && <RecordPlayer />}{c.id === 'reading' && <ReadingNotes />}</article>)}
+  return <section id="life" className="content-section life-section"><div className="life-intro"><p className="eyebrow">03 / THE THINGS THAT MAKE ME, ME</p><p className="life-super-title">Life in <em>full color.</em></p><SectionHeading number="03" english="LIFE, WITH INTENTION" title="🫡关于生活" /></div><nav className="chapter-nav" aria-label="生活篇章">{chapters.map(c => <a key={c.id} href={`#${c.id}`}>{c.title}<Arrow down /></a>)}</nav>
+    {chapters.map((c, i) => <article id={c.id} key={c.id} className={`life-chapter ${c.id}-chapter journal-surface`}><div className="chapter-heading"><div><p className="eyebrow">0{i + 1} / {c.english}</p><h3>{c.title}</h3></div><p className="chapter-lead font-instrument">{c.lead}</p></div><div className={`photo-grid ${c.photos.length === 2 ? 'two-photos' : 'three-photos'}`}>{c.photos.map(([file, caption]) => <Photo key={file} file={file} caption={caption} />)}</div><div className="chapter-copy">{c.lines.map(line => <p key={line}>{line}</p>)}</div>{c.id === 'music' && <RecordPlayer />}{c.id === 'reading' && <ReadingNotes />}</article>)}
   </section>;
 }
 
