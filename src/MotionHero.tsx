@@ -30,6 +30,7 @@ export default function MotionHero() {
   const stars = useRef<(HTMLDivElement | null)[]>([]);
   const [active, setActive] = useState(0);
   const [paused, setPaused] = useState(false);
+  const [earthPaused, setEarthPaused] = useState(false);
   const [reduced, setReduced] = useState(false);
   const [visible, setVisible] = useState(true);
   const state = useRef({ phase: 0, target: null as number | null, width: 1200, paused: false, reduced: false, hovered: false, focused: false, dragging: false, suppressClickUntil: 0 });
@@ -49,12 +50,12 @@ export default function MotionHero() {
     state.current.paused = paused;
     state.current.reduced = reduced;
     const updateVideo = () => {
-      if (paused || reduced || !visible || document.hidden) video.current?.pause();
+      if (earthPaused || reduced || !visible || document.hidden) video.current?.pause();
       else video.current?.play().catch(() => { /* The static poster remains visible if autoplay is unavailable. */ });
     };
     updateVideo(); document.addEventListener('visibilitychange', updateVideo);
     return () => document.removeEventListener('visibilitychange', updateVideo);
-  }, [paused, reduced, visible]);
+  }, [paused, earthPaused, reduced, visible]);
 
   useEffect(() => {
     const element = hero.current;
@@ -145,6 +146,7 @@ export default function MotionHero() {
   return <section id="home" ref={hero} className="motion-hero" aria-labelledby="motion-title">
     <video ref={video} className="motion-earth" autoPlay muted playsInline loop preload="metadata" poster="./assets/serene-poster.jpg" aria-hidden="true"><source src="./assets/serene-background.mp4" type="video/mp4" /></video>
     <div className="motion-vignette" aria-hidden="true" />
+    <button className="earth-control" type="button" disabled={reduced} aria-pressed={earthPaused || reduced} onClick={() => setEarthPaused(value => !value)}>{earthPaused || reduced ? '▷ 播放地球' : 'Ⅱ 暂停地球'}</button>
     <div className="motion-copy">
       <p className="motion-kicker"><span /> 祖朋的个人空间 <span className="kicker-slash">/</span> GUIYANG, CHINA</p>
       <h1 id="motion-title">认真做事，自由生活。<em>More than one story.</em></h1>
@@ -161,7 +163,7 @@ export default function MotionHero() {
 
     <div className="motion-rail">
       <span className="rail-hint"><span className="drag-mark" aria-hidden="true">↔</span> 拖动照片，探索我的另一面</span>
-      <div className="motion-controls"><button type="button" aria-label="上一张照片" onClick={() => step(-1)}><SmallArrow left /></button><span className="motion-count">0{active + 1}<span> / 07</span></span><button type="button" aria-label="下一张照片" onClick={() => step(1)}><SmallArrow /></button><button className="motion-toggle" type="button" aria-label={paused || reduced ? '播放动态' : '暂停动态'} aria-pressed={paused || reduced} disabled={reduced} onClick={() => { state.current.target = null; setPaused(value => !value); }}>{paused || reduced ? '▷' : 'Ⅱ'}</button></div>
+      <div className="motion-controls"><button type="button" aria-label="上一张照片" onClick={() => step(-1)}><SmallArrow left /></button><span className="motion-count">0{active + 1}<span> / 07</span></span><button type="button" aria-label="下一张照片" onClick={() => step(1)}><SmallArrow /></button><button className="motion-toggle" type="button" aria-label={paused || reduced ? '播放照片轮播' : '暂停照片轮播'} aria-pressed={paused || reduced} disabled={reduced} onClick={() => { state.current.target = null; setPaused(value => !value); }}>{paused || reduced ? '▷' : 'Ⅱ'}</button></div>
       <a className="motion-more" href={current.href}>阅读这段故事 <SmallArrow /></a>
     </div>
     <div className="motion-footer"><span>DISCIPLINE. CURIOSITY. EVERYDAY.</span><a href="#perspective">继续向下探索 <span aria-hidden="true">↓</span></a><span>PERSONAL ARCHIVE — 2026</span></div>

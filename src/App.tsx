@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import MotionHero from './MotionHero';
+import RecordPlayer from './RecordPlayer';
 
 const asset = (name: string) => `./assets/${name}`;
 const navLinks = [{ label: '关于我', en: 'About', href: '#about' }, { label: '军旅经历', en: 'Experience', href: '#service' }, { label: '生活与热爱', en: 'Journal', href: '#life' }, { label: '下一站', en: 'What’s next', href: '#future' }];
@@ -142,9 +143,18 @@ const chapters = [
   { id: 'reading', title: '📖爱阅读', english: 'BETWEEN THE LINES', lead: 'A world within pages.', photos: [['book-white-night.jpg', '白夜行'], ['book-namiya.jpg', '解忧杂货店'], ['book-suspect-x.jpg', '嫌疑人X的献身']], lines: ['东野圭吾推理小说爱好者，喜欢在细节里找真相。'] },
 ];
 
+const bookNotes = [
+  { title: '白夜行', quote: '我的天空里没有太阳，总是黑夜，但并不暗。', note: '一道光，可能是救赎，也可能成为执念。读这本书时，不妨留意人物没有说出口的部分：沉默同样是线索。', source: 'https://book.douban.com/subject/3259440/' },
+  { title: '解忧杂货店', quote: '对你来说，一切都是自由的，在你面前是无限的可能。', note: '人生没有标准答案。那些看似平凡的来信，让选择与善意有了回声，也让尚未写下的未来值得期待。', source: 'https://book.douban.com/subject/25862578/blockquotes?sort=page_num&start=420' },
+  { title: '嫌疑人X的献身', quote: '有时候，一个人只要好好活着，就足以拯救某人。', note: '逻辑可以逼近真相，却不一定能解释一个人的全部。谜底之外，更值得回看的，是人物之间那些微小而深刻的连接。', source: 'https://book.douban.com/subject/3211779/blockquotes?sort=page_num' },
+];
+function ReadingNotes() {
+  return <div className="reading-notes">{bookNotes.map((book, i) => <section className="reading-note" key={book.title} aria-label={`${book.title}摘句与阅读侧记`}><p className="eyebrow">PASSAGE 0{i + 1} / 纸页之间</p><blockquote>“{book.quote}”</blockquote><cite>— 东野圭吾《{book.title}》</cite><p className="reading-comment"><span>阅读侧记</span>{book.note}</p><a href={book.source} target="_blank" rel="noopener noreferrer">摘句来源 ↗</a></section>)}</div>;
+}
+
 function Life() {
   return <section id="life" className="content-section life-section"><SectionHeading number="04" english="LIFE, WITH INTENTION" title="🫡关于生活" /><nav className="chapter-nav" aria-label="生活篇章">{chapters.map(c => <a key={c.id} href={`#${c.id}`}>{c.title}<Arrow down /></a>)}</nav>
-    {chapters.map((c, i) => <article id={c.id} key={c.id} className={`life-chapter ${c.id}-chapter`}><div className="chapter-heading"><div><p className="eyebrow">0{i + 1} / {c.english}</p><h3>{c.title}</h3></div><p className="chapter-lead font-instrument">{c.lead}</p></div><div className={`photo-grid ${c.photos.length === 2 ? 'two-photos' : 'three-photos'}`}>{c.photos.map(([file, caption]) => <Photo key={file} file={file} caption={caption} />)}</div><div className="chapter-copy">{c.lines.map(line => <p key={line}>{line}</p>)}</div></article>)}
+    {chapters.map((c, i) => <article id={c.id} key={c.id} className={`life-chapter ${c.id}-chapter`}><div className="chapter-heading"><div><p className="eyebrow">0{i + 1} / {c.english}</p><h3>{c.title}</h3></div><p className="chapter-lead font-instrument">{c.lead}</p></div><div className={`photo-grid ${c.photos.length === 2 ? 'two-photos' : 'three-photos'}`}>{c.photos.map(([file, caption]) => <Photo key={file} file={file} caption={caption} />)}</div><div className="chapter-copy">{c.lines.map(line => <p key={line}>{line}</p>)}</div>{c.id === 'music' && <RecordPlayer />}{c.id === 'reading' && <ReadingNotes />}</article>)}
   </section>;
 }
 
