@@ -7,3 +7,5 @@ import './motion-hero.css';
 ReactDOM.createRoot(document.getElementById('root')!).render(<React.StrictMode><App /></React.StrictMode>);
 
 import './record-player.css';
+
+import "./journal.css";

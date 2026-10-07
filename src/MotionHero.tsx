@@ -150,7 +150,7 @@ export default function MotionHero() {
     <div className="motion-copy">
       <p className="motion-kicker"><span /> 祖朋的个人空间 <span className="kicker-slash">/</span> GUIYANG, CHINA</p>
       <h1 id="motion-title">认真做事，自由生活。<em>More than one story.</em></h1>
-      <p className="motion-intro">你好，我是祖朋。带着军人的坚定，也带着对世界的好奇。</p>
+      <p className="motion-intro">你好，我是祖朋。热爱运动、音乐，也对世界保持好奇。</p>
       <div className="motion-topic" aria-live={paused ? 'polite' : 'off'} onMouseEnter={() => { state.current.hovered = true; }} onMouseLeave={() => { state.current.hovered = false; }}><span className="topic-star"><ChromeStar /></span><a href={current.href} key={active} onFocus={() => setPaused(true)}><span>{current.title}</span><SmallArrow /></a></div>
       <div className="topic-switcher" role="group" aria-label="选择想了解的生活主题">{[0, 1, 2, 4, 5, 6].map(i => <button key={i} type="button" aria-pressed={active === i || (i === 2 && active === 3)} onClick={() => select(i)}>{stories[i].short}</button>)}</div>
     </div>
@@ -166,6 +166,6 @@ export default function MotionHero() {
       <div className="motion-controls"><button type="button" aria-label="上一张照片" onClick={() => step(-1)}><SmallArrow left /></button><span className="motion-count">0{active + 1}<span> / 07</span></span><button type="button" aria-label="下一张照片" onClick={() => step(1)}><SmallArrow /></button><button className="motion-toggle" type="button" aria-label={paused || reduced ? '播放照片轮播' : '暂停照片轮播'} aria-pressed={paused || reduced} disabled={reduced} onClick={() => { state.current.target = null; setPaused(value => !value); }}>{paused || reduced ? '▷' : 'Ⅱ'}</button></div>
       <a className="motion-more" href={current.href}>阅读这段故事 <SmallArrow /></a>
     </div>
-    <div className="motion-footer"><span>DISCIPLINE. CURIOSITY. EVERYDAY.</span><a href="#perspective">继续向下探索 <span aria-hidden="true">↓</span></a><span>PERSONAL ARCHIVE — 2026</span></div>
+    <div className="motion-footer"><span>MUSIC. MOVEMENT. EVERYDAY.</span><a href="#perspective">继续向下探索 <span aria-hidden="true">↓</span></a><span>PERSONAL ARCHIVE — 2026</span></div>
   </section>;
 }
