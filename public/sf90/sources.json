@@ -1,0 +1,138 @@
+{
+  "format": "desktop_scroll_website",
+  "revised_on": "2026-10-09",
+  "design_reference": "https://www.pinterest.com/pin/3307399722796158/",
+  "opening": {
+    "file": "assets/opening.mp4",
+    "sha256": "ae4654bc7ceeca37da1be17ab8cbe5ec658f7e7efadbec4a06756fd24bc186eb",
+    "status": "approved_unchanged",
+    "autoplay": "audible_first_no_muted_fallback",
+    "browser_policy_fallback": "first_page_click_starts_picture_and_original_audio_together"
+  },
+  "speech": {
+    "source": "阿祖提供的2026-10-09恩佐故事版",
+    "title": "SF90 演讲稿 · 恩佐故事版",
+    "full_text": "SF90完整讲述.txt",
+    "sections": "speech.json",
+    "presentation": "短句与大画面，六段完整正文分别可展开"
+  },
+  "reference_video": {
+    "file": "assets/reference-sf90.mp4",
+    "original": "https://www.douyin.com/video/7585881437933833509",
+    "supplied_link": "https://v.douyin.com/VWVIvsGf8fc/",
+    "title": "开上法拉利才会感觉到幸福吗？",
+    "credit": "And刘十.",
+    "likes": "56.3万",
+    "shares": "6.3万",
+    "checked_on": "2026-10-09"
+  },
+  "new_media": {
+    "original": "https://www.douyin.com/video/7242628677266050304",
+    "title": "圈出你觉得以后能开上法拉利的人！",
+    "credit": "CarTops「超清4K」",
+    "published_on": "2023-06-09",
+    "checked_on": "2026-10-09",
+    "likes": "17.6万",
+    "shares": "4.0万",
+    "selection": "SF90汽车摄影搜索结果中互动量较高且能清楚呈现红色整车、灯光与车尾的作品，不声称全网最高",
+    "web_video": "assets/sf90-red-motion.mp4",
+    "video_processing": "H.264转码；新外观影像静音；CSS显示原视频的画面区域。已确认片头不改动。",
+    "stills": [
+      {
+        "file": "assets/sf90-red-whole.png",
+        "time_seconds": 2.65,
+        "subject": "整车"
+      },
+      {
+        "file": "assets/sf90-front-detail.png",
+        "time_seconds": 3.5,
+        "subject": "车头灯"
+      },
+      {
+        "file": "assets/sf90-tail-detail.png",
+        "time_seconds": 6,
+        "subject": "尾灯"
+      },
+      {
+        "file": "assets/sf90-side.png",
+        "time_seconds": 10.8,
+        "subject": "前脸与侧面"
+      }
+    ],
+    "still_processing": "从作品原帧提取，CSS取景；原像素保留。裁切参数见images.json。"
+  },
+  "user_photo": {
+    "file": "assets/sf90-user-original.jpg",
+    "source": "阿祖提供的SF90家族照片",
+    "processing": "CSS显示截图内(0,1020,1280,720)区域，保留整车"
+  },
+  "official_facts": [
+    {
+      "url": "https://www.ferrari.com/zh-CN/auto/sf90-stradale?enquire=open",
+      "supports": "法拉利车队90周年命名；SF90 Stradale首款法拉利PHEV；三台电动机"
+    },
+    {
+      "url": "https://cdn.ferrari.com/cms/network/media/pdf/pr_ferrari_sf90_stradale_gbr.pdf",
+      "supports": "SF90 Stradale官方设计与车型资料"
+    },
+    {
+      "url": "https://www.ferrari.com/it-CH/formula1/1000-gp-monaco-1950",
+      "supports": "恩佐十岁观赛、成为车手、与巴拉卡母亲的相遇：法拉利官网 Ferrari 100x1000。"
+    },
+    {
+      "url": "https://cdn.ferrari.com/cms/network/media/pdf/2016_12_31_-_ferrari_nv_20f_0.pdf",
+      "supports": "恩佐创立车队、公司及首辆赛车：法拉利2016年官方年报。"
+    },
+    {
+      "url": "https://www.ferrari.com/en-US/competizioni-gt/articles/wec-original-prancing-horse-emblem-back-on-track",
+      "supports": "跃马图案源自巴拉卡，家人祝愿好运，黄色代表摩德纳：法拉利官网。"
+    },
+    {
+      "url": "https://www.ferrari.com/en-CA/corse-clienti/articles/blancpain-endurance-cup-ferrari-at-spa-24-hours-with-11-cars",
+      "supports": "巴拉卡母亲将图案托付给恩佐：法拉利官网。"
+    }
+  ],
+  "missing_media": [],
+  "f40": "paused_by_user_2026-10-09",
+  "image_motion": [
+    "after_intro_reveal",
+    "hero_breathing",
+    "scroll_reveal",
+    "subtle_parallax",
+    "pointer_depth",
+    "card_hover"
+  ],
+  "story_revision": {
+    "red_90_bridge": "preserved",
+    "replaces": [
+      "series_planning",
+      "plug_in_hybrid_story"
+    ],
+    "adds": [
+      "enzo_racing_dream",
+      "prancing_horse_origin"
+    ],
+    "historical_media_public_views": null,
+    "note": "历史配图无公开点击量；不把SF90作品点赞量移作历史照片的指标。"
+  },
+  "historical_media": [
+    {
+      "file": "assets/enzo-portrait-official.jpg",
+      "source": "https://www.ferrari.com/en-EN/formula1/year-1988",
+      "credit": "Ferrari官方历史页面",
+      "depicts": "恩佐·法拉利肖像"
+    },
+    {
+      "file": "assets/baracca-aircraft-rai.jpg",
+      "source": "https://www.rai.it/ufficiostampa/assets/template/us-articolo.html?ssiPath=/articoli/2021/01/Francesco-Baracca-Laviatore-rampante-8fd8e9bd-952e-4f5a-a0ef-582d9bc3a397-ssi.html",
+      "credit": "RAI Ufficio Stampa",
+      "depicts": "巴拉卡与飞机上的跃马"
+    },
+    {
+      "file": "assets/prancing-horse-museum.jpg",
+      "source": "https://www.museodelmarchioitaliano.it/en/ferrari-2/",
+      "credit": "Museo del Marchio Italiano",
+      "depicts": "1932年跃马徽章"
+    }
+  ]
+}

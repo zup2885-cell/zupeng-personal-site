@@ -1,0 +1,77 @@
+{
+  "whole": {
+    "src": "assets/sf90-red-whole.png",
+    "alt": "红色 SF90 Stradale 整车，CarTops作品画面",
+    "crop": {
+      "x": 280,
+      "y": 220,
+      "width": 980,
+      "height": 370,
+      "sourceWidth": 1470,
+      "sourceHeight": 720
+    }
+  },
+  "side": {
+    "src": "assets/sf90-side.png",
+    "alt": "红色 SF90 Stradale 侧面与前脸",
+    "crop": {
+      "x": 380,
+      "y": 240,
+      "width": 1020,
+      "height": 335,
+      "sourceWidth": 1470,
+      "sourceHeight": 720
+    }
+  },
+  "headlight": {
+    "src": "assets/sf90-front-detail.png",
+    "alt": "SF90 Stradale 细长的车头灯光",
+    "crop": {
+      "x": 230,
+      "y": 260,
+      "width": 608,
+      "height": 342,
+      "sourceWidth": 1470,
+      "sourceHeight": 720
+    }
+  },
+  "tail": {
+    "src": "assets/sf90-tail-detail.png",
+    "alt": "SF90 Stradale 发光的尾灯",
+    "crop": {
+      "x": 400,
+      "y": 80,
+      "width": 1000,
+      "height": 560,
+      "sourceWidth": 1470,
+      "sourceHeight": 720
+    }
+  },
+  "user": {
+    "src": "assets/sf90-user-original.jpg",
+    "alt": "阿祖提供的红色 SF90 家族整车摄影",
+    "crop": {
+      "x": 0,
+      "y": 1020,
+      "width": 1280,
+      "height": 720,
+      "sourceWidth": 1280,
+      "sourceHeight": 2816
+    }
+  },
+  "enzo": {
+    "src": "assets/enzo-portrait-official.jpg",
+    "alt": "恩佐·法拉利的官方历史肖像",
+    "fit": "contain"
+  },
+  "baracca": {
+    "src": "assets/baracca-aircraft-rai.jpg",
+    "alt": "巴拉卡与机身带有跃马图案的飞机，RAI历史照片",
+    "fit": "contain"
+  },
+  "emblem": {
+    "src": "assets/prancing-horse-museum.jpg",
+    "alt": "1932年的黄色跃马徽章，意大利商标博物馆资料",
+    "fit": "contain"
+  }
+}
