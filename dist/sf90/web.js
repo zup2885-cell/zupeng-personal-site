@@ -2,15 +2,18 @@
  'use strict';
  const intro=document.getElementById('intro'),opening=document.getElementById('opening-video'),website=document.getElementById('website');
  const gate=document.getElementById('entry-gate'),enter=document.getElementById('enter-opening'),introError=document.getElementById('intro-error');
- const evidence=document.getElementById('reference-sf90'),dialog=document.getElementById('motion-dialog'),motion=document.getElementById('motion-video');
+ const referenceVideos=[...document.querySelectorAll('.film-player video')],dialog=document.getElementById('motion-dialog'),motion=document.getElementById('motion-video');
  // Music follows the active viewing context; the opening keeps its approved sound.
  const music=document.getElementById('background-music'),videoMusic=document.getElementById('motion-music'),musicDock=document.getElementById('music-dock');
  const musicToggle=document.getElementById('music-toggle'),musicInfo=document.getElementById('music-info'),musicCredit=document.getElementById('music-credit');
+ function referenceTrack(video){return video.dataset.referenceAudio?document.getElementById(video.dataset.referenceAudio):null;}
+ function referenceAudible(video){const sound=referenceTrack(video)||video;return !sound.paused&&!sound.muted&&sound.volume>0;}
+ function pauseReferences(except){referenceVideos.filter(video=>video!==except).forEach(video=>{video.pause();referenceTrack(video)?.pause();});}
  const musicTracks=[music,videoMusic],musicPreferenceKey='ferrari-sf90-music-enabled',musicVolume=.03,videoMusicVolume=.08;
  let musicEnabled=true,musicBlocked=false,siteEntered=false,musicAttempt=0,musicFade=0;
  try{musicEnabled=localStorage.getItem(musicPreferenceKey)!=='false';}catch{}
  function activeMusic(){return dialog.open?videoMusic:music;}
- function canPlayMusic(track){return siteEntered&&intro.hidden&&musicEnabled&&!document.hidden&&(evidence.paused||evidence.muted||evidence.volume===0)&&(track===videoMusic?dialog.open&&!motion.paused:!dialog.open);}
+ function canPlayMusic(track){return siteEntered&&intro.hidden&&musicEnabled&&!document.hidden&&!referenceVideos.some(referenceAudible)&&(track===videoMusic?dialog.open&&!motion.paused:!dialog.open);}
  function syncMusicControl(){
   const track=activeMusic(),inVideo=track===videoMusic,playing=!track.paused&&!musicBlocked;
   musicDock.dataset.state=playing?'playing':musicEnabled&&!musicBlocked?'paused':'off';musicDock.dataset.context=inVideo?'video':'page';
@@ -121,13 +124,13 @@
   let frame=0,lastX=0,lastY=0;
   function reset(){cancelAnimationFrame(frame);frame=0;card.classList.remove('is-engaged');['--card-rx','--card-ry'].forEach(name=>card.style.setProperty(name,'0deg'));card.style.setProperty('--card-lift','0px');}
   card.addEventListener('pointermove',event=>{
-   if(event.pointerType!=='mouse'||(card.dataset.motionKind==='film'&&!evidence.paused))return;
+   if(event.pointerType!=='mouse'||(card.dataset.motionKind==='film'&&!card.querySelector('.film-player video').paused))return;
    const box=card.getBoundingClientRect();lastX=Math.max(-.5,Math.min(.5,(event.clientX-box.left)/box.width-.5));lastY=Math.max(-.5,Math.min(.5,(event.clientY-box.top)/box.height-.5));
    card.classList.add('is-engaged');
    if(frame)return;frame=requestAnimationFrame(()=>{frame=0;const angle=card.dataset.motionKind==='archive'?5:9;card.style.setProperty('--card-rx',`${-lastY*angle}deg`);card.style.setProperty('--card-ry',`${lastX*angle}deg`);card.style.setProperty('--card-lift','-11px');card.style.setProperty('--beam-x',`${(lastX+.5)*100}%`);});
   },{passive:true});
   card.addEventListener('pointerleave',reset);
-  if(card.dataset.motionKind==='film')evidence.addEventListener('play',reset);
+  if(card.dataset.motionKind==='film')card.querySelector('.film-player video').addEventListener('play',reset);
  });
  let attempt=0,finishTimer,scrollFrame=0;
  function revealPhoto(photo,inView){photo.classList.toggle('is-inview',inView);if(inView&&document.body.classList.contains('website-ready'))photo.classList.add('is-revealed');}
@@ -137,7 +140,7 @@
   photos.forEach(photo=>{const box=photo.getBoundingClientRect();revealPhoto(photo,box.bottom>0&&box.top<innerHeight);});updateScroll();
  }
  async function startOpening(){
-  const current=++attempt;siteEntered=false;musicDock.hidden=true;closeMusicCredit();pauseMusic();resetFragments();clearTimeout(finishTimer);evidence.pause();motion.pause();if(dialog.open)dialog.close();
+  const current=++attempt;siteEntered=false;musicDock.hidden=true;closeMusicCredit();pauseMusic();resetFragments();clearTimeout(finishTimer);pauseReferences();motion.pause();if(dialog.open)dialog.close();
   intro.hidden=false;intro.classList.remove('is-finishing');intro.dataset.mode='starting';introError.hidden=true;gate.hidden=true;enter.textContent='进入 SF90 ↗';
   document.body.classList.add('opening-active');document.body.classList.remove('website-ready');website.inert=true;
   opening.currentTime=0;opening.defaultMuted=false;opening.muted=false;opening.volume=1;
@@ -155,11 +158,27 @@
  opening.addEventListener('error',()=>{intro.dataset.mode='error';introError.hidden=false;gate.hidden=false;enter.textContent='重试进场 ↗';});
  document.getElementById('skip-opening').addEventListener('click',finishOpening);
  document.querySelectorAll('[data-replay]').forEach(button=>button.addEventListener('click',startOpening));
- document.querySelector('[data-play]').addEventListener('click',async()=>{pauseMusic();motion.pause();evidence.controls=true;evidence.muted=false;try{await evidence.play();}catch{evidence.controls=true;void syncMusic();}});
- evidence.addEventListener('play',()=>evidence.parentElement.classList.add('is-playing'));evidence.addEventListener('ended',()=>evidence.parentElement.classList.remove('is-playing'));
- ['play','pause','ended','volumechange'].forEach(event=>evidence.addEventListener(event,()=>void syncMusic()));
+ referenceVideos.forEach(video=>{
+  const track=referenceTrack(video),player=video.parentElement;
+  document.querySelector(`[data-play="${video.id}"]`).addEventListener('click',async()=>{
+   pauseReferences(video);pauseMusic();motion.pause();video.controls=true;video.muted=false;
+   if(video.ended||track?.ended){video.currentTime=0;if(track)track.currentTime=0;}
+   try{await video.play();}catch{video.controls=true;void syncMusic();}
+  });
+  video.addEventListener('play',()=>{
+   pauseReferences(video);motion.pause();pauseMusic();player.classList.add('is-playing');
+   if(track){track.volume=video.volume;track.muted=video.muted;void track.play().catch(()=>{video.pause();player.classList.remove('is-playing');});}
+  });
+  video.addEventListener('pause',()=>{if(track)track.pause();void syncMusic();});
+  video.addEventListener('ended',()=>{player.classList.remove('is-playing');if(track){track.pause();track.currentTime=0;}void syncMusic();});
+  video.addEventListener('volumechange',()=>{if(track){track.volume=video.volume;track.muted=video.muted;}void syncMusic();});
+  if(track){
+   ['play','pause','volumechange'].forEach(event=>track.addEventListener(event,()=>void syncMusic()));
+   track.addEventListener('ended',()=>{video.pause();video.currentTime=0;track.currentTime=0;player.classList.remove('is-playing');void syncMusic();});
+  }
+ });
  function syncMotionButton(){const button=document.getElementById('toggle-motion');button.textContent=motion.paused?'▶':'Ⅱ';button.setAttribute('aria-label',motion.paused?'播放外观视频':'暂停外观视频');}
- document.getElementById('open-motion').addEventListener('click',async()=>{pauseMusic();evidence.pause();dialog.showModal();dialog.append(musicDock);closeMusicCredit();musicBlocked=false;motion.currentTime=0;videoMusic.currentTime=0;motion.muted=true;syncMusicControl();try{await motion.play();}catch{}syncMotionButton();void syncMusic();});
+ document.getElementById('open-motion').addEventListener('click',async()=>{pauseMusic();pauseReferences();dialog.showModal();dialog.append(musicDock);closeMusicCredit();musicBlocked=false;motion.currentTime=0;videoMusic.currentTime=0;motion.muted=true;syncMusicControl();try{await motion.play();}catch{}syncMotionButton();void syncMusic();});
  document.getElementById('close-motion').addEventListener('click',()=>dialog.close());dialog.addEventListener('close',()=>{pauseMusic();document.body.insertBefore(musicDock,dialog);closeMusicCredit();musicBlocked=false;motion.pause();videoMusic.currentTime=0;syncMusicControl();void syncMusic();});
  ['play','pause','ended'].forEach(event=>motion.addEventListener(event,()=>void syncMusic()));
  document.getElementById('toggle-motion').addEventListener('click',async()=>{if(motion.paused){try{await motion.play();}catch{}}else motion.pause();syncMotionButton();});

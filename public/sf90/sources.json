@@ -211,15 +211,56 @@
       {
         "family": "Noto Sans SC",
         "asset": "assets/fonts/NotoSansSC-WebSubset-VF.woff2",
-        "bytes": 121544,
+        "bytes": 132188,
         "license_url": "https://raw.githubusercontent.com/google/fonts/main/ofl/notosanssc/OFL.txt",
         "license": "SIL OFL 1.1",
         "weights": "400..800",
         "glyph_text_subset": true,
         "source": "https://fonts.google.com/specimen/Noto+Sans+SC",
-        "sha256": "e219ab378fa59155c7f58c13e2d16e22d6d99b174f3e4df69046dd4e4bc95db8"
+        "sha256": "8483ca614b99284b82beb580c139e2821d3a723b3a4c993e64a379b4e3f9b2c5"
       }
     ],
     "approved_on": "2026-10-09"
+  },
+  "reference_gallery": {
+    "layout": "3-column compact desktop cards",
+    "original_sf90_retained": true,
+    "new_user_references": [
+      {
+        "source": "https://www.douyin.com/note/7595925109127630950",
+        "supplied_link": "https://v.douyin.com/_B6blAlhiBw/",
+        "title": "我菠萝吹雪浪迹一生 最幸福的时候就是梨花诗说我愿意的时候",
+        "author": "Echoooo",
+        "type": "Live Photo with separate original music",
+        "video": "assets/reference-romance.mp4",
+        "audio": "assets/reference-romance-music.mp3",
+        "duration": 2.482993,
+        "audio_duration": 32.626938,
+        "observed_likes": "38.0万",
+        "observed_shares": "2.2万",
+        "checked_on": "2026-10-09",
+        "video_sha256": "efffebae5db80c84d21b4f9d25e4105a68023ada020d92cedf58b72b2496a63f",
+        "audio_sha256": "5439ce14af475cec942aa3ba55c2932a9c638b2734c1e9f81ade9b21f0c47e3b"
+      },
+      {
+        "source": "https://www.douyin.com/video/7656341162346216305",
+        "supplied_link": "https://v.douyin.com/mFnTOXYtgr8/",
+        "title": "恶语相向的那一刻 曾经的爱都背道而驰#法拉利f8",
+        "author": "亿决",
+        "type": "video",
+        "video": "assets/reference-f8.mp4",
+        "duration": 10.400998,
+        "observed_likes": "35.2万",
+        "observed_shares": "4.7万",
+        "checked_on": "2026-10-09",
+        "video_sha256": "288260e9e56ed3a4f68e9d0fc6e0a56401f83802dce2039bd7997c18fa78aa8c",
+        "video_original_codec": "HEVC",
+        "video_web_codec": "H.264",
+        "video_original_sha256": "d07d645bb0385b8865cad36096be6efa03e5f0beaa6a74a080e454bb95352a07",
+        "audio_processing": "Copied original AAC without re-encoding",
+        "web_dimensions": "1920×1080"
+      }
+    ],
+    "playback": "Only one reference plays at a time; page BGM pauses during audible reference playback. Live Photo uses its original separate music."
   }
 }
