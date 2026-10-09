@@ -143,11 +143,46 @@
     "license": "CC BY 4.0",
     "license_url": "https://creativecommons.org/licenses/by/4.0/",
     "attribution_location": "右下角音乐开关旁的信息按钮",
-    "volume": 0.12,
+    "volume": 0.06,
     "fade_in_ms": 1800,
     "during_opening": "paused",
     "during_audible_reference_video": "paused",
-    "switch": "fixed_bottom_right_with_saved_preference",
-    "sha256": "ca1e7194d7d6f49127c77ff2f4011d07182525c826bb7ded3d3944e69ca678d2"
+    "switch": "fixed glossy rotating vinyl record; rotation pauses with audio",
+    "sha256": "ca1e7194d7d6f49127c77ff2f4011d07182525c826bb7ded3d3944e69ca678d2",
+    "during_exterior_video": "paused while the selected video music plays"
+  },
+  "red_story_typography_motion": {
+    "type": "clipped_fragment_assembly",
+    "region": "ninety",
+    "preserves": "red background, grid, original copy and 90 layout",
+    "start": "35% of the section is within the reading viewport",
+    "timing_ms": 2250,
+    "replay": "after the section fully leaves the reading viewport",
+    "motion": "angular text fragments, stagger, shallow depth, focus resolves sharp",
+    "reduced_motion": "original typography shown immediately",
+    "framework": "native CSS keyframes and IntersectionObserver"
+  },
+  "motion_video_music": {
+    "source": "https://www.douyin.com/video/7591012432743583026",
+    "supplied_link": "https://v.douyin.com/s-qopssV9OA/",
+    "title": "【Ferrair】我如法拉利般一往无前",
+    "author": "来份57°的薯条",
+    "website_audio": "assets/ferrari-user-motion-music.mp3",
+    "audio_bytes": 1020720,
+    "sha256": "fd53615a6592de752e9d60930d2ab34ee466779d99fbef181ce2d9c39b600d85",
+    "usage": "阿祖指定：只用于点开的SF90外观视频，小音量；提取原作品音轨，非另找替代曲。",
+    "volume": 0.08,
+    "starts": "when exterior video is opened",
+    "stops": "video pause, dialog close, opening replay or music switch off"
+  },
+  "hero_typography": {
+    "text": "SF90",
+    "color": "Ferrari red with subtle painted-metal highlight",
+    "font": "Racing Sans One",
+    "font_source": "https://fonts.google.com/specimen/Racing+Sans+One",
+    "file": "assets/fonts/RacingSansOne-Regular.ttf",
+    "license": "SIL Open Font License 1.1",
+    "license_file": "assets/fonts/OFL.txt",
+    "claim_removed": "值得多看一眼。"
   }
 }

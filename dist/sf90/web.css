@@ -64,14 +64,36 @@
 @media(min-width:1080px) and (max-width:1279px){.dream-age{font-size:195px}}
 @media(prefers-reduced-motion:reduce){.photo-video-hit .play-icon,.replay-icon{transform:none!important;rotate:none!important}}
 
-/* Persistent music switch: Ferrari red, separate from the opening soundtrack. */
+/* The floating control reads as a glossy vinyl record; its rotation follows playback. */
 .music-dock{position:fixed;right:30px;bottom:27px;z-index:40;display:flex;align-items:center;gap:8px}
-.music-toggle{position:relative;width:56px;height:56px;display:grid;place-items:center;border:1px solid #f3415860;border-radius:50%;background:linear-gradient(145deg,#321019e8,#130b10ef);color:#ff8b9a;box-shadow:0 8px 28px #0008,0 0 22px #e31d321c;backdrop-filter:blur(16px);transition:background .25s,border-color .25s,transform .25s}
-.music-toggle:hover{transform:translateY(-2px);background:#6c1529e8;border-color:#ff6377}
-.music-speaker{width:24px;height:24px}.music-slash{display:none}.music-dock[data-state="off"] .music-slash{display:block}.music-dock[data-state="off"] .music-waves{display:none}.music-dock[data-state="off"] .music-toggle{color:#9e8990;border-color:#ffffff20;background:#121014e8}
-.music-bars{position:absolute;bottom:7px;display:flex;align-items:center;gap:2px;height:7px}.music-bars i{display:block;width:2px;height:3px;background:#f03b56;border-radius:1px}
-.music-dock[data-state="playing"] .music-bars i{animation:music-pulse 1.1s ease-in-out infinite}.music-bars i:nth-child(2){animation-delay:-.4s!important}.music-bars i:nth-child(3){animation-delay:-.7s!important}
-.music-info{width:20px;height:20px;margin-top:25px;padding:0;border:1px solid #a8657750;border-radius:50%;background:#130c11db;color:#cba5b0;font:italic 12px Georgia,serif;transition:border-color .25s}.music-info:hover,.music-info[aria-expanded="true"]{border-color:#ff6377;color:#ffe7ec}
-.music-credit{position:absolute;right:0;bottom:75px;min-width:232px;padding:19px 21px;border:1px solid #ed375148;border-radius:8px;background:#170c12f5;backdrop-filter:blur(16px);box-shadow:0 15px 45px #0008;text-align:left;font-size:13px;line-height:1.8;color:#c6a5af}.music-credit p:first-child{color:#fff;font-size:17px;letter-spacing:.2px;margin-bottom:3px}.music-credit a:hover{color:#ff7189}.music-license{display:inline-block;font-size:11px;margin-top:10px;color:#aa8895}
-@keyframes music-pulse{0%,100%{height:2px;opacity:.55}50%{height:7px;opacity:1}}
-@media(prefers-reduced-motion:reduce){.music-toggle{transition:none}.music-dock[data-state="playing"] .music-bars i{animation:none;height:5px}}
+.music-toggle{position:relative;width:64px;height:64px;padding:0;border:0;border-radius:50%;background:transparent;color:#ffd8dc;filter:drop-shadow(0 5px 12px #0009);transition:filter .3s,transform .3s}
+.music-toggle:hover{transform:translateY(-2px);filter:drop-shadow(0 0 16px #dc173e6b)}
+.music-record{position:absolute;inset:2px;border-radius:50%;border:1px solid #d739536b;background:conic-gradient(from 15deg,#08080a 0deg,#55515a 31deg,#101013 59deg,#09090c 128deg,#3e1924 159deg,#f86b824a 183deg,#0d0b10 217deg,#1c1a22 306deg,#08080a 360deg);box-shadow:0 0 0 2px #08090c,0 0 24px #e31d3230,inset 0 0 0 1px #ffffff15;animation:record-spin 9s linear infinite;animation-play-state:paused}
+.music-record::before{content:"";position:absolute;inset:5px;border-radius:50%;background:repeating-radial-gradient(circle at center,transparent 0 2px,#0008 2px 3px,#ffffff0c 3px 3.5px);border:1px solid #ffffff10}
+.record-label{position:absolute;inset:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:linear-gradient(145deg,#ff3b55,#a60426 70%);border:1px solid #ff9aad45;box-shadow:0 0 10px #bf163b50}.record-label span{font:400 6px 'Racing Sans One',Arial,sans-serif;letter-spacing:.3px;padding-bottom:7px;color:#ffd4dd}
+.record-spindle{position:absolute;left:50%;top:50%;width:4px;height:4px;transform:translate(-50%,-50%);border-radius:50%;background:#08080b;border:1px solid #ffb4c1a0}
+.record-needle{position:absolute;width:24px;height:4px;right:-3px;top:9px;border-radius:4px;background:linear-gradient(#f5ccd0,#855969);box-shadow:0 2px 4px #0009;transform:rotate(120deg);transform-origin:85% 50%;transition:transform .55s cubic-bezier(.2,.8,.2,1);pointer-events:none}
+.music-dock[data-state="playing"] .music-record{animation-play-state:running}.music-dock:not([data-state="playing"]) .record-needle{transform:rotate(88deg)}.music-dock[data-state="off"] .music-record{box-shadow:0 0 0 2px #08090c,inset 0 0 0 1px #ffffff10;border-color:#76616a}
+.music-info{width:20px;height:20px;margin-top:31px;padding:0;border:1px solid #a8657750;border-radius:50%;background:#130c11db;color:#cba5b0;font:italic 12px Georgia,serif;transition:border-color .25s}.music-info:hover,.music-info[aria-expanded="true"]{border-color:#ff6377;color:#ffe7ec}
+.music-credit{position:absolute;right:0;bottom:81px;min-width:232px;padding:19px 21px;border:1px solid #ed375148;border-radius:8px;background:#170c12f5;backdrop-filter:blur(16px);box-shadow:0 15px 45px #0008;text-align:left;font-size:13px;line-height:1.8;color:#c6a5af}.music-credit p:first-child{color:#fff;font-size:17px;letter-spacing:.2px;margin-bottom:3px}.music-credit a:hover{color:#ff7189}.music-license{display:inline-block;font-size:11px;margin-top:10px;color:#aa8895}
+@keyframes record-spin{to{transform:rotate(360deg)}}
+@media(prefers-reduced-motion:reduce){.music-toggle,.record-needle{transition:none}.music-record{animation:none}}
+
+/* The red SF90 bridge assembles its type from four angular cuts per group. */
+.fragment-readable{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0}
+.fragment-visual,.fragment-line{display:block}.fragment-line{perspective:1000px}.fragment-run{position:relative;display:inline-block;white-space:pre;transform-style:preserve-3d}.fragment-solid{display:inline-block}
+.fragment-shard{position:absolute;inset:0;display:block;white-space:pre;pointer-events:none;backface-visibility:hidden;transform-style:preserve-3d;opacity:0}
+.fragments-ready .fragment-solid{opacity:0}
+.fragments-entered .fragment-shard{animation:sf90-fragment-assemble var(--fragment-duration) cubic-bezier(.22,1,.36,1) calc(var(--fragment-delay) + var(--fragment-piece-delay)) both;will-change:transform,opacity,filter}
+.fragments-entered .fragment-solid{animation:sf90-fragment-solid var(--fragment-duration) linear var(--fragment-delay) both}
+.fragments-settled .fragment-solid{opacity:1;animation:none}.fragments-settled .fragment-shard{display:none;animation:none;will-change:auto}
+@keyframes sf90-fragment-assemble{0%{opacity:0;filter:blur(3px);transform:translate3d(var(--fragment-x),var(--fragment-y),var(--fragment-z)) rotate(var(--fragment-rotation)) rotateY(var(--fragment-ry)) scale(1.035)}14%{opacity:.82}72%{opacity:1;filter:blur(0);transform:translate3d(0,0,0) rotate(0) rotateY(0) scale(1)}88%{opacity:1}100%{opacity:0;filter:blur(0);transform:translate3d(0,0,0) rotate(0) rotateY(0) scale(1)}}
+@keyframes sf90-fragment-solid{0%,72%{opacity:0}88%,100%{opacity:1}}
+@media(prefers-reduced-motion:reduce){.fragments-ready .fragment-solid{opacity:1!important;animation:none!important}.fragment-shard{display:none!important;animation:none!important}}
+
+/* Locally hosted racing display face: one large red SF90, with a painted metal highlight. */
+@font-face{font-family:'Racing Sans One';src:url('assets/fonts/RacingSansOne-Regular.ttf') format('truetype');font-style:normal;font-weight:400;font-display:swap}
+.hero h1{margin-top:24px;line-height:.98}.model-name{font-family:'Racing Sans One',Arial,sans-serif;font-size:clamp(156px,16.4vw,236px);font-weight:400;font-synthesis:none;line-height:.98;letter-spacing:1px;color:#ee233b;background-image:linear-gradient(108deg,transparent 42%,#ffb5ac50 49%,transparent 56%),linear-gradient(180deg,#ff4754 0%,#ee1e36 35%,#ac001f 64%,#f72843 82%,#8d031d 100%);background-size:240% 100%,100% 100%;background-position:110% 0,0 0;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;-webkit-text-stroke:.6px #f53b5550;filter:drop-shadow(0 3px 0 #4c000e) drop-shadow(0 12px 28px #8f001733)}
+.website-ready .model-name{animation:sf90-painted-highlight 2.2s .3s cubic-bezier(.2,.6,.3,1) both}
+@keyframes sf90-painted-highlight{from{background-position:110% 0,0 0}to{background-position:-90% 0,0 0}}
+@media(prefers-reduced-motion:reduce){.website-ready .model-name{animation:none}}
