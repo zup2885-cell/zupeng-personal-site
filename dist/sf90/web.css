@@ -98,7 +98,7 @@
 
 /* Approved geometric typography: an even sans-serif rhythm for Chinese, Latin and numerals. */
 @font-face{font-family:'SF90 Geometric';src:url('assets/fonts/Manrope-Geometric-VF.woff2') format('woff2');font-style:normal;font-weight:400 800;font-display:swap}
-@font-face{font-family:'SF90 Chinese';src:url('assets/fonts/NotoSansSC-WebSubset-VF.woff2?v=sf90-reference-gallery-11') format('woff2');font-style:normal;font-weight:400 800;font-display:swap}
+@font-face{font-family:'SF90 Chinese';src:url('assets/fonts/NotoSansSC-WebSubset-VF.woff2?v=sf90-card-metrics-12') format('woff2');font-style:normal;font-weight:400 800;font-display:swap}
 body{font-family:'SF90 Geometric','SF90 Chinese','PingFang SC','Microsoft YaHei',sans-serif;font-weight:400;font-kerning:normal;text-rendering:optimizeLegibility}
 .section-heading{max-width:820px}
 .section-heading h2{font-size:50px;font-weight:650;line-height:1.34;letter-spacing:-.032em}
@@ -132,3 +132,13 @@ body{font-family:'SF90 Geometric','SF90 Chinese','PingFang SC','Microsoft YaHei'
 .film-grid .play-icon{width:44px;height:44px;font-size:13px;box-shadow:0 0 24px #eb304027}
 .film-grid .film-play{background:linear-gradient(0deg,#0005,transparent 70%)}
 @media(min-width:1080px) and (max-width:1279px){.film-grid{gap:18px}.film-grid .film-copy{padding:19px 18px 21px}.film-grid .film-copy h3{font-size:17px}}
+
+/* Every original work carries its own aligned engagement figures. */
+.section-heading>p.reference-intro:last-child{font-size:18px;line-height:1.8;letter-spacing:.035em;color:#ad9fa6;margin-top:18px}
+.film-grid .film-copy{gap:18px}
+.film-stats{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:0;padding:16px 0 17px;border-top:1px solid #ffffff12;border-bottom:1px solid #ffffff12}
+.film-stats>div{min-width:0;display:flex;flex-direction:column;gap:8px}
+.film-stats>div+div{border-left:1px solid #ffffff12;padding-left:18px}
+.film-stats dt{font-size:12px;line-height:1.5;color:#a99ba3;letter-spacing:.04em}
+.film-stats dd{margin:0;white-space:nowrap;font-size:31px;line-height:1.1;font-weight:650;letter-spacing:-.045em;color:#f45c71;font-variant-numeric:lining-nums tabular-nums}
+.film-stats small{font-size:12px;font-weight:450;letter-spacing:0;color:#ad9ca5;margin-left:5px}

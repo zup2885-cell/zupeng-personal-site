@@ -261,6 +261,34 @@
         "web_dimensions": "1920×1080"
       }
     ],
-    "playback": "Only one reference plays at a time; page BGM pauses during audible reference playback. Live Photo uses its original separate music."
+    "playback": "Only one reference plays at a time; page BGM pauses during audible reference playback. Live Photo uses its original separate music.",
+    "card_metrics": [
+      {
+        "id": "reference-sf90",
+        "likes": "56.3万",
+        "shares": "6.3万",
+        "source": "https://www.douyin.com/video/7585881437933833509",
+        "checked_on": "2026-10-09"
+      },
+      {
+        "id": "reference-romance",
+        "likes": "38.0万",
+        "shares": "2.2万",
+        "source": "https://www.douyin.com/note/7595925109127630950",
+        "checked_on": "2026-10-09"
+      },
+      {
+        "id": "reference-f8",
+        "likes": "35.2万",
+        "shares": "4.7万",
+        "source": "https://www.douyin.com/video/7656341162346216305",
+        "checked_on": "2026-10-09"
+      }
+    ],
+    "metrics_display": "Likes and shares belong to each original work and use the same row in every card. No aggregate is shown."
+  },
+  "display_copy": {
+    "punctuation": "Chinese commas and full stops removed from website display text; source metadata and numeric decimal points preserved",
+    "updated_on": "2026-10-09"
   }
 }
