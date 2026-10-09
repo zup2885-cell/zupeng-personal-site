@@ -6,7 +6,7 @@
  // Music follows the active viewing context; the opening keeps its approved sound.
  const music=document.getElementById('background-music'),videoMusic=document.getElementById('motion-music'),musicDock=document.getElementById('music-dock');
  const musicToggle=document.getElementById('music-toggle'),musicInfo=document.getElementById('music-info'),musicCredit=document.getElementById('music-credit');
- const musicTracks=[music,videoMusic],musicPreferenceKey='ferrari-sf90-music-enabled',musicVolume=.06,videoMusicVolume=.08;
+ const musicTracks=[music,videoMusic],musicPreferenceKey='ferrari-sf90-music-enabled',musicVolume=.03,videoMusicVolume=.08;
  let musicEnabled=true,musicBlocked=false,siteEntered=false,musicAttempt=0,musicFade=0;
  try{musicEnabled=localStorage.getItem(musicPreferenceKey)!=='false';}catch{}
  function activeMusic(){return dialog.open?videoMusic:music;}

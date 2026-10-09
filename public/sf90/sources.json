@@ -143,7 +143,7 @@
     "license": "CC BY 4.0",
     "license_url": "https://creativecommons.org/licenses/by/4.0/",
     "attribution_location": "右下角音乐开关旁的信息按钮",
-    "volume": 0.06,
+    "volume": 0.03,
     "fade_in_ms": 1800,
     "during_opening": "paused",
     "during_audible_reference_video": "paused",
