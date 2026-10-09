@@ -3,6 +3,50 @@
  const intro=document.getElementById('intro'),opening=document.getElementById('opening-video'),website=document.getElementById('website');
  const gate=document.getElementById('entry-gate'),enter=document.getElementById('enter-opening'),introError=document.getElementById('intro-error');
  const evidence=document.getElementById('reference-sf90'),dialog=document.getElementById('motion-dialog'),motion=document.getElementById('motion-video');
+ // The approved opening keeps its own soundtrack. Music starts only on the website.
+ const music=document.getElementById('background-music'),musicDock=document.getElementById('music-dock');
+ const musicToggle=document.getElementById('music-toggle'),musicInfo=document.getElementById('music-info'),musicCredit=document.getElementById('music-credit');
+ const musicPreferenceKey='ferrari-sf90-music-enabled',musicVolume=.12;
+ let musicEnabled=true,musicBlocked=false,siteEntered=false,musicAttempt=0,musicFade=0;
+ try{musicEnabled=localStorage.getItem(musicPreferenceKey)!=='false';}catch{}
+ function canPlayMusic(){return siteEntered&&intro.hidden&&musicEnabled&&!document.hidden&&(evidence.paused||evidence.muted||evidence.volume===0);}
+ function syncMusicControl(){
+  const playing=!music.paused&&!musicBlocked;
+  musicDock.dataset.state=playing?'playing':musicEnabled&&!musicBlocked?'paused':'off';
+  musicToggle.setAttribute('aria-pressed',String(musicEnabled&&!musicBlocked));
+  musicToggle.setAttribute('aria-label',musicEnabled&&!musicBlocked?'关闭背景音乐':'播放背景音乐');
+  musicToggle.title='背景音乐：Reverie · '+(musicEnabled&&!musicBlocked?'点击关闭':'点击播放');
+ }
+ function pauseMusic(){musicAttempt++;cancelAnimationFrame(musicFade);musicFade=0;music.pause();music.volume=0;syncMusicControl();}
+ async function syncMusic(){
+  if(!canPlayMusic()){pauseMusic();return;}
+  if(!music.paused){syncMusicControl();return;}
+  const current=++musicAttempt;cancelAnimationFrame(musicFade);music.volume=0;
+  try{
+   await music.play();
+   if(current!==musicAttempt||!canPlayMusic()){if(!canPlayMusic())pauseMusic();return;}
+   musicBlocked=false;syncMusicControl();
+   const started=performance.now();
+   function fade(now){
+    if(current!==musicAttempt||!canPlayMusic())return;
+    const progress=Math.min(1,(now-started)/1800);music.volume=musicVolume*progress*progress*(3-2*progress);
+    if(progress<1)musicFade=requestAnimationFrame(fade);else musicFade=0;
+   }
+   musicFade=requestAnimationFrame(fade);
+  }catch{if(current===musicAttempt){musicBlocked=true;syncMusicControl();}}
+ }
+ function closeMusicCredit(){musicCredit.hidden=true;musicInfo.setAttribute('aria-expanded','false');}
+ musicToggle.addEventListener('click',()=>{
+  if(musicEnabled&&musicBlocked)musicBlocked=false;
+  else musicEnabled=!musicEnabled;
+  try{localStorage.setItem(musicPreferenceKey,String(musicEnabled));}catch{}
+  syncMusicControl();void syncMusic();
+ });
+ musicInfo.addEventListener('click',()=>{musicCredit.hidden=!musicCredit.hidden;musicInfo.setAttribute('aria-expanded',String(!musicCredit.hidden));});
+ document.addEventListener('pointerdown',event=>{if(!musicDock.contains(event.target))closeMusicCredit();});
+ musicDock.addEventListener('keydown',event=>{if(event.key==='Escape'){closeMusicCredit();musicInfo.focus();}});
+ music.addEventListener('play',syncMusicControl);music.addEventListener('pause',syncMusicControl);
+ document.addEventListener('visibilitychange',()=>void syncMusic());
  const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
  const photos=[...document.querySelectorAll('[data-image]')];
  const motionCards=[...document.querySelectorAll('.appearance-stage,.detail-item,.history-card,.founder-photo,.horse-connection,.film-card')];
@@ -32,11 +76,11 @@
  function revealPhoto(photo,inView){photo.classList.toggle('is-inview',inView);if(inView&&document.body.classList.contains('website-ready'))photo.classList.add('is-revealed');}
  function finishOpening(){
   attempt++;opening.pause();gate.hidden=true;website.inert=false;document.body.classList.remove('opening-active');document.body.classList.add('website-ready');
-  intro.dataset.mode='finishing';intro.classList.add('is-finishing');clearTimeout(finishTimer);finishTimer=setTimeout(()=>{intro.hidden=true;},450);
+  intro.dataset.mode='finishing';intro.classList.add('is-finishing');clearTimeout(finishTimer);finishTimer=setTimeout(()=>{intro.hidden=true;siteEntered=true;musicDock.hidden=false;syncMusicControl();void syncMusic();},450);
   photos.forEach(photo=>{const box=photo.getBoundingClientRect();revealPhoto(photo,box.bottom>0&&box.top<innerHeight);});updateScroll();
  }
  async function startOpening(){
-  const current=++attempt;clearTimeout(finishTimer);evidence.pause();motion.pause();if(dialog.open)dialog.close();
+  const current=++attempt;siteEntered=false;musicDock.hidden=true;closeMusicCredit();pauseMusic();clearTimeout(finishTimer);evidence.pause();motion.pause();if(dialog.open)dialog.close();
   intro.hidden=false;intro.classList.remove('is-finishing');intro.dataset.mode='starting';introError.hidden=true;gate.hidden=true;enter.textContent='进入 SF90 ↗';
   document.body.classList.add('opening-active');document.body.classList.remove('website-ready');website.inert=true;
   opening.currentTime=0;opening.defaultMuted=false;opening.muted=false;opening.volume=1;
@@ -54,8 +98,9 @@
  opening.addEventListener('error',()=>{intro.dataset.mode='error';introError.hidden=false;gate.hidden=false;enter.textContent='重试进场 ↗';});
  document.getElementById('skip-opening').addEventListener('click',finishOpening);
  document.querySelectorAll('[data-replay]').forEach(button=>button.addEventListener('click',startOpening));
- document.querySelector('[data-play]').addEventListener('click',async()=>{motion.pause();evidence.controls=true;evidence.muted=false;try{await evidence.play();}catch{evidence.controls=true;}});
+ document.querySelector('[data-play]').addEventListener('click',async()=>{pauseMusic();motion.pause();evidence.controls=true;evidence.muted=false;try{await evidence.play();}catch{evidence.controls=true;void syncMusic();}});
  evidence.addEventListener('play',()=>evidence.parentElement.classList.add('is-playing'));evidence.addEventListener('ended',()=>evidence.parentElement.classList.remove('is-playing'));
+ ['play','pause','ended','volumechange'].forEach(event=>evidence.addEventListener(event,()=>void syncMusic()));
  function syncMotionButton(){const button=document.getElementById('toggle-motion');button.textContent=motion.paused?'▶':'Ⅱ';button.setAttribute('aria-label',motion.paused?'播放外观视频':'暂停外观视频');}
  document.getElementById('open-motion').addEventListener('click',async()=>{evidence.pause();dialog.showModal();motion.currentTime=0;motion.muted=true;try{await motion.play();}catch{}syncMotionButton();});
  document.getElementById('close-motion').addEventListener('click',()=>dialog.close());dialog.addEventListener('close',()=>motion.pause());
