@@ -177,12 +177,49 @@
   },
   "hero_typography": {
     "text": "SF90",
-    "color": "Ferrari red with subtle painted-metal highlight",
+    "status": "approved_by_azu",
+    "approved_on": "2026-10-09",
+    "reference": "https://i.pinimg.com/1200x/62/85/d1/6285d1755ecc8a940db8a30d9cfeacbd.jpg",
+    "treatment": "原创SF90矢量字形：宽体、14度前倾、斜切与锐角，法拉利红色漆面；保留可访问标题SF90。",
+    "implementation": "Original inline SVG lettering",
+    "color": "Ferrari red",
+    "claim_removed": "值得多看一眼。"
+  },
+  "record_label_typography": {
     "font": "Racing Sans One",
     "font_source": "https://fonts.google.com/specimen/Racing+Sans+One",
     "file": "assets/fonts/RacingSansOne-Regular.ttf",
     "license": "SIL Open Font License 1.1",
-    "license_file": "assets/fonts/OFL.txt",
-    "claim_removed": "值得多看一眼。"
+    "license_file": "assets/fonts/OFL.txt"
+  },
+  "body_typography": {
+    "status": "approved_by_azu",
+    "reference": "https://www.pinterest.com/pin/8373949304542095/",
+    "style": "几何无衬线，均匀线条、饱满字形、清晰粗细层级和紧凑标题间距",
+    "fonts": [
+      {
+        "family": "Manrope",
+        "asset": "assets/fonts/Manrope-Geometric-VF.woff2",
+        "bytes": 17324,
+        "license_url": "https://raw.githubusercontent.com/google/fonts/main/ofl/manrope/OFL.txt",
+        "license": "SIL OFL 1.1",
+        "weights": "400..800",
+        "glyph_text_subset": true,
+        "source": "https://fonts.google.com/specimen/Manrope",
+        "sha256": "b0f3fd58b91f08d31a4396f7ffb191f492cbe5330fa23399e2ae2fcc34ab6f2d"
+      },
+      {
+        "family": "Noto Sans SC",
+        "asset": "assets/fonts/NotoSansSC-WebSubset-VF.woff2",
+        "bytes": 121544,
+        "license_url": "https://raw.githubusercontent.com/google/fonts/main/ofl/notosanssc/OFL.txt",
+        "license": "SIL OFL 1.1",
+        "weights": "400..800",
+        "glyph_text_subset": true,
+        "source": "https://fonts.google.com/specimen/Noto+Sans+SC",
+        "sha256": "e219ab378fa59155c7f58c13e2d16e22d6d99b174f3e4df69046dd4e4bc95db8"
+      }
+    ],
+    "approved_on": "2026-10-09"
   }
 }

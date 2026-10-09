@@ -1,7 +1,7 @@
 <!doctype html><html lang="zh-CN"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>SF90 · 阿祖</title><meta name="description" content="阿祖的第一个汽车内容选题：法拉利 SF90。从SF90的外观和观众响应，到恩佐的赛车梦与跃马背后的祝福。">
-<link rel="icon" href="data:,"><link rel="preload" href="assets/fonts/RacingSansOne-Regular.ttf" as="font" type="font/ttf" crossorigin><link rel="stylesheet" href="web.css?v=sf90-volume-7"><script src="web.js?v=sf90-volume-7" defer></script></head>
+<link rel="icon" href="data:,"><link rel="preload" href="assets/fonts/RacingSansOne-Regular.ttf" as="font" type="font/ttf" crossorigin><link rel="preload" href="assets/fonts/Manrope-Geometric-VF.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="assets/fonts/NotoSansSC-WebSubset-VF.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="web.css?v=sf90-typography-10"><script src="web.js?v=sf90-typography-10" defer></script></head>
 <body class="opening-active">
 <div id="intro" class="intro" data-mode="starting" aria-label="法拉利进场动画"><video id="opening-video" src="assets/opening.mp4" poster="assets/opening-poster.png" autoplay playsinline preload="auto" aria-label="已确认的法拉利进场动画"></video><div id="entry-gate" class="entry-gate" hidden><p>FERRARI · SF90</p><button id="enter-opening" class="button">进入 SF90 ↗</button></div><div class="intro-actions"><button id="skip-opening">进入网站 ↗</button></div><p id="intro-error" hidden>片头暂时无法播放，请重试或进入网站。</p></div>
 <div id="website" inert>
@@ -9,7 +9,15 @@
 <main>
 <section id="home" class="hero">
 <div class="hero-grid" aria-hidden="true"></div><div class="hero-glow" aria-hidden="true"></div><div class="light-sweep sweep-one" aria-hidden="true"></div><div class="light-sweep sweep-two" aria-hidden="true"></div>
-<div class="hero-copy"><h1><span class="model-name">SF90</span></h1></div>
+<div class="hero-copy"><h1 class="hero-title"><span class="fragment-readable">SF90</span>
+<svg class="model-name sf90-wordmark" viewBox="0 0 1040 230" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+<defs><linearGradient id="sf90-title-red" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ff3545"/><stop offset=".48" stop-color="#eb142d"/><stop offset="1" stop-color="#c10823"/></linearGradient></defs>
+<g fill="url(#sf90-title-red)" transform="translate(68 20) skewX(-14)" fill-rule="evenodd">
+<path d="M37 0H212L201 44H70L63 70H171L195 101L179 157L143 190H0L11 145H133L140 119H35L11 88L26 29Z"/>
+<path transform="translate(237 0)" d="M0 0H209V44H55V73H167L155 117H55V190H0V57L17 44L0 28Z"/>
+<path transform="translate(474 0)" d="M31 0H185L216 31V151L177 190H19L33 146H143L160 129V117H29L0 88V31ZM55 43V74H160V43Z"/>
+<path transform="translate(717 0)" d="M33 0H183L216 33V157L183 190H33L0 157V33ZM67 44L54 57V133L67 146H149L162 133V57L149 44Z"/>
+</g></svg></h1></div>
 <div class="hero-visual">
 <svg class="circuit" viewBox="0 0 1200 440" fill="none" aria-hidden="true"><g class="circuit-lines"><path d="M0 110H190L260 180H440"/><path d="M1200 110H1010L940 180H760"/><path d="M0 350H210L285 280H440"/><path d="M1200 350H990L915 280H760"/></g><g class="circuit-pulses"><path d="M0 110H190L260 180H440"/><path d="M1200 110H1010L940 180H760"/><path d="M0 350H210L285 280H440"/><path d="M1200 350H990L915 280H760"/></g></svg>
 <figure class="photo hero-photo" data-image="whole"></figure>
