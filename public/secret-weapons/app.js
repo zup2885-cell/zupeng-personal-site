@@ -1,4 +1,4 @@
-const tools=await fetch('./catalog.json?v=1').then(r=>{if(!r.ok)throw Error('目录暂时无法读取');return r.json()});
+const tools=await fetch('./catalog.json?v=2').then(r=>{if(!r.ok)throw Error('目录暂时无法读取');return r.json()});
 const search=document.querySelector('#search'),filters=[...document.querySelectorAll('[data-filter]')],cards=[...document.querySelectorAll('.tool-card')],count=document.querySelector('#result-count'),empty=document.querySelector('#empty');
 let active='all';
 function filter(){const q=search.value.trim().toLocaleLowerCase();let visible=0;for(const c of cards){const t=tools.find(t=>t.id===c.dataset.id);const platform=active==='all'||(active==='web'?!!t.web:!!t.download||t.id==='harbor');const found=[t.name,t.en,t.description,t.category,...t.features].join(' ').toLocaleLowerCase().includes(q);c.hidden=!(platform&&found);if(!c.hidden)visible++;}count.textContent=`${visible} 件工具`;empty.hidden=visible!==0;}
