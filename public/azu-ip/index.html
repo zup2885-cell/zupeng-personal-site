@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="zh-CN" data-preview-version="20261015-c33">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#ed3d40">
+  <meta name="description" content="阿祖 AZU 的个人空间。保持好奇，认真生活。">
+  <title>阿祖 AZU — SOCIAL MEDIA</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23e9662c'/%3E%3Ctext x='32' y='46' text-anchor='middle' font-size='42' font-family='Arial' font-weight='900' fill='%23f3f0e9'%3EA%3C/text%3E%3C/svg%3E">
+  <link rel="preload" as="font" href="./assets/anton.ttf" type="font/ttf" crossorigin>
+  <link rel="preload" as="image" href="./assets/azu-poster-800cfc457216.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- hand-lettered marker fonts for the hero profile: Permanent Marker (Latin) + ZCOOL KuaiLe (Chinese), both open licence -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=ZCOOL+KuaiLe&display=swap">
+  <link rel="stylesheet" href="./style.css?v=20261015-c33">
+  <script src="./app.js?v=20261015-c33" type="module"></script>
+  <script>if(!matchMedia("(prefers-reduced-motion: reduce)").matches){document.documentElement.classList.add("js-drop");if(!location.hash||location.hash==="#home")document.documentElement.classList.add("has-gate")}</script>
+</head>
+<body>
+  <!-- Enter page: browsers only allow sound after a click, so this one click lets the headline drop play with sound -->
+  <div class="enter-gate" id="enter-gate" role="dialog" aria-label="进入阿祖的个人空间"><p class="gate-brand">AZU</p><button class="gate-button" id="gate-button" type="button"><span class="gate-dot" aria-hidden="true"></span>点击进入<small>建议打开声音</small></button></div>
+  <a class="skip" href="#main">跳到正文</a>
+  <header class="header">
+    <a class="brand" href="#home" aria-label="阿祖 AZU 首页">AZU</a>
+    <nav class="nav" aria-label="主导航"><a href="#home" class="active">首页</a><a href="#work">作品</a><a href="#modules">探索 <span>↗</span></a></nav>
+  </header>
+  <main id="main">
+    <section class="hero" id="home" data-module="01" aria-labelledby="hero-title">
+      <h1 class="hero-headline" id="hero-title" aria-label="SOCIAL MEDIA"><svg viewBox="0 0 1400 285" role="img" aria-label="SOCIAL MEDIA"><text x="0" y="260" textLength="1400" lengthAdjust="spacingAndGlyphs">SOCIAL MEDIA</text></svg></h1>
+      <p class="reference-marketing">MARKETING</p>
+      <div class="hero-profile">
+        <p class="eyebrow">HELLO, I'M AZU / 很高兴认识你</p>
+        <h2 class="profile-name">阿祖 <span>AZU.</span></h2>
+        <aside class="introduction profile" id="introduction" aria-label="阿祖的基础信息">
+          <p id="intro-lead">祖朋 · 贵州贵阳</p><p id="intro-detail">广州软件学院毕业</p>
+          <p class="profile-short">阳光开朗 · 热爱运动<br>Beyond 忠实听众 · AI 学习者</p>
+        </aside>
+      </div>
+      <div class="figure" role="img" aria-label="阿祖的橙色外套男性潮玩形象，看手机、挥手、连续向下指三次，再回到看手机">
+        <video id="character" poster="./assets/azu-poster-800cfc457216.png" width="720" height="1280" muted playsinline preload="auto" aria-label="阿祖的男性潮玩形象"></video>
+      </div>
+      <div class="hero-footer"><a class="scroll-cue" href="#world"><span>↓</span>向下认识我</a></div>
+    </section>
+    <section class="world-page" id="world" data-module="02" aria-labelledby="world-title">
+      <h2 class="visually-hidden" id="world-title">生活照片</h2>
+      <div class="world-light" aria-hidden="true"></div>
+      <ul class="photo-fan" aria-label="阿祖的生活照片"></ul>
+      <div class="world-stage">
+        <div class="world-playground" id="world-playground">
+          <figure class="world-character" id="world-character" data-state="loading" data-look="think" aria-label="阿祖的绿色外套男性潮玩形象">
+            <img id="world-character-frame" src="./assets/world-interact/dense/041-00.webp" width="327" height="768" alt="阿祖的绿色外套男性潮玩形象" decoding="async">
+          </figure>
+          <a class="world-entry" href="#work">全部作品 <span>↓</span></a>
+        </div>
+      </div>
+    </section>
+    <section class="content-module module-work ip-board" id="work" data-module="03" aria-labelledby="work-title">
+      <div class="board-ip board-ip--music">
+        <figure class="ip-stage" data-ip="music"><video class="ip-video" muted loop playsinline preload="none" aria-label="戴着耳机听歌的阿祖潮玩形象"></video></figure>
+        <button class="now-playing" type="button" aria-pressed="false" aria-label="播放 Taylor Swift《Love Story》"><span class="disc-wrap" aria-hidden="true"><span class="disc"></span><span class="toggle"></span></span><span class="track"><b>Love Story</b><small>Taylor Swift</small></span><span class="eq" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span></button>
+        <p class="now-playing-hint" id="now-playing-hint" role="status" aria-live="polite"></p>
+        <a class="now-playing-source" id="now-playing-source" target="_blank" rel="noopener" hidden>30 秒官方试听 · 在 Apple Music 听完整版 ↗</a>
+        <audio id="bgm" preload="none" loop></audio>
+      </div>
+      <div class="board-body">
+        <div class="module-heading"><div><p class="eyebrow">03 / SELECTED WORK</p><h2 id="work-title">创作案例</h2></div><p class="module-placeholder">案例位置已预留</p></div>
+        <div class="work-controls"><p>响应式网站 · 界面交互 · AI 短剧</p><div><button type="button" id="work-prev" aria-label="上一个案例">←</button><button type="button" id="work-next" aria-label="下一个案例">→</button></div></div>
+        <div class="work-track" id="work-track" role="region" aria-label="创作案例横向列表" tabindex="0">
+          <article class="work-slot"><div class="work-cover"><span>01</span><span>WEBSITE</span></div><div class="work-copy"><h3>响应式网站</h3><p>项目介绍、职责与交付成果</p><span>待补充案例</span></div></article>
+          <article class="work-slot"><div class="work-cover"><span>02</span><span>INTERACTION</span></div><div class="work-copy"><h3>界面交互</h3><p>设计过程、交互方案与效果</p><span>待补充案例</span></div></article>
+          <article class="work-slot"><div class="work-cover"><span>03</span><span>AI FILM</span></div><div class="work-copy"><h3>AI 短剧</h3><p>故事构思、制作流程与成片</p><span>待补充案例</span></div></article>
+        </div>
+      </div>
+    </section>
+    <section class="content-module module-skills ip-board" id="skills" data-module="04" aria-labelledby="skills-title">
+      <div class="board-body">
+        <div class="module-heading"><div><p class="eyebrow">04 / MY CREATIVE TOOLBOX</p><h2 id="skills-title">秘密武器库</h2></div><p class="module-placeholder">技能方向预留，内容待补充</p></div>
+        <ol class="skill-rows"><li><span>01</span><h3>AI 自动化</h3><p>工作流与效率工具</p></li><li><span>02</span><h3>AI 视频</h3><p>视觉表达与动态内容</p></li><li><span>03</span><h3>UI / UX</h3><p>界面与用户体验</p></li><li><span>04</span><h3>网站开发</h3><p>从页面到可运行网站</p></li><li><span>05</span><h3>0–1 产品架构</h3><p>从想法到产品结构</p></li></ol>
+      </div>
+      <div class="board-ip board-ip--bust">
+        <p class="ip-stamp" aria-hidden="true">5 件武器<br><b>随时上场</b></p>
+        <figure class="ip-stage" data-ip="arsenal"><video class="ip-video" muted loop playsinline preload="none" aria-label="双手抱胸、自信微笑的阿祖潮玩形象"></video></figure>
+      </div>
+    </section>
+    <section class="content-module module-contact ip-board" id="contact" data-module="05" aria-labelledby="contact-title">
+      <div class="board-ip board-ip--seat">
+        <p class="talk-bubble" aria-hidden="true">嗨，坐下来聊聊？</p>
+        <figure class="ip-stage" data-ip="talk"><video class="ip-video" muted loop playsinline preload="none" aria-label="坐着向你伸手打招呼的阿祖潮玩形象"></video><span class="ip-seat" aria-hidden="true"></span></figure>
+      </div>
+      <div class="board-body">
+        <div class="module-heading"><div><p class="eyebrow">05 / LET’S TALK</p><h2 id="contact-title">联系我</h2></div></div>
+        <div class="contact-layout"><div class="contact-identity"><div><h3>阿祖 AZU</h3><p>祖朋 · 家乡贵州贵阳</p><p class="contact-note">所在地与合作方向待补充</p></div></div><div class="contact-email"><span class="eyebrow">EMAIL / 邮箱</span><p id="contact-email">邮箱待补充</p><div class="contact-actions"><button id="copy-email" type="button" disabled>复制邮箱</button><a id="send-email" hidden>发送邮件 ↗</a></div><p id="contact-status" class="contact-note" role="status" aria-live="polite">填写公开邮箱后开放联系入口</p></div></div>
+      </div>
+    </section>
+  </main>
+  <footer class="module-footer" id="modules"><div class="footer-intro"><p>每一面，都很阿祖。</p><span>故事才刚刚开始，接着往下看。</span></div><nav id="module-links" aria-label="五个模块导航"></nav><div class="footer-bottom"><span>AZU — 个人空间</span><a href="#home">回到顶部 ↑</a><span>STAY CURIOUS. KEEP GOING. ↗</span></div></footer>
+</body>
+</html>

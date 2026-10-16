@@ -1,0 +1,80 @@
+{
+  "introLead": "祖朋 · 贵州贵阳",
+  "introDetail": "广州软件学院毕业",
+  "introStatus": "基础信息来自正式网站 src/App.tsx 与 src/content-checklist.json",
+  "chapters": [
+    {
+      "id": "world",
+      "number": "02",
+      "title": "生活照片",
+      "english": "MY LITTLE UNIVERSE",
+      "description": "那些让我保持好奇的小事，以及生活里不同的我。"
+    },
+    {
+      "id": "work",
+      "number": "03",
+      "title": "创作案例",
+      "english": "IDEAS INTO REALITY",
+      "description": "把想法变成作品，把好奇心变成行动。"
+    },
+    {
+      "id": "skills",
+      "number": "04",
+      "title": "秘密武器库",
+      "english": "MY CREATIVE TOOLBOX",
+      "description": "正在学习的技能、顺手的工具，以及新的可能。"
+    },
+    {
+      "id": "contact",
+      "number": "05",
+      "title": "联系我",
+      "english": "LET’S MAKE A CONNECTION",
+      "description": "聊聊想法，分享热爱，或者只是打个招呼。"
+    }
+  ],
+  "worldPhotos": [
+    {
+      "src": "./assets/world/guiyang.jpg",
+      "alt": "家乡贵阳的甲秀楼",
+      "width": 1280,
+      "height": 853
+    },
+    {
+      "src": "./assets/world/marine.jpg",
+      "alt": "海上执勤的军旅时光",
+      "width": 964,
+      "height": 1280,
+      "position": "50% 32%"
+    },
+    {
+      "src": "./assets/world/portrait.jpg",
+      "alt": "阿祖在城市街头的生活照",
+      "width": 1024,
+      "height": 1534,
+      "position": "50% 28%"
+    },
+    {
+      "src": "./assets/world/deck.jpg",
+      "alt": "甲板上的军旅掠影",
+      "width": 1280,
+      "height": 950
+    },
+    {
+      "src": "./assets/world/court.jpg",
+      "alt": "夕阳下的球场",
+      "width": 1280,
+      "height": 865
+    }
+  ],
+  "contact": {
+    "email": ""
+  },
+  "bgm": {
+    "title": "Love Story",
+    "artist": "Taylor Swift",
+    "src": "",
+    "appleTrackId": 1552791427,
+    "appleMusicUrl": "https://music.apple.com/us/album/love-story-taylors-version/1552791073?i=1552791427",
+    "note": "Official 30-second Apple Music preview of “Love Story (Taylor’s Version)”, streamed from Apple at click time (iTunes lookup API); not stored in the site. Put your own licensed file in src to use it instead."
+  }
+}

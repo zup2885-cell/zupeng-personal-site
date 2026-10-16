@@ -64,3 +64,12 @@ npm run preview
 - 独立地球开场增加分层星点微光、淡色星云、艺术化轨道弧线、地球边缘辉光和小幅鼠标视差。开场暂停会同步暂停星空和流星。
 - 视觉参考：NASA https://science.nasa.gov/solar-system/meteors-meteorites/ ；ESA https://www.esa.int/ESA_Multimedia/Images/2024/03/Airglow_above_Earth 。这些是艺术化网页效果，不是科学轨道模拟。
 - 验证：桌面及 390px 手机实际截图能看到流星亮点和尾迹，暂停/恢复联动正常；后续内容保持不变。
+
+
+## AZU 个人 IP 独立页面（2026-10-16）
+
+- 在线入口：https://zup2885-cell.github.io/zupeng-personal-site/azu-ip/
+- 来自本机 `azu-ip-preview` 的 C33 版本；原首页保留。
+- 可部署源码：`public/azu-ip/`；构建产物：`dist/azu-ip/`。`npm run build` 会复制公共目录中的完整页面与资源。
+- 包含当前使用的人物透明视频、照片、逐帧交互素材与字体；旧版备用媒体和检查记录未上传。
+- 作品案例、邮箱等原有待补充内容按当前版本保留。音乐入口使用 Apple 官方试听服务，能否播放取决于该服务可用性。
