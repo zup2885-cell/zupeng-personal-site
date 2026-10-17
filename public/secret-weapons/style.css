@@ -765,6 +765,37 @@ img { max-width: 100%; }
   text-shadow: 6px 6px 0 #2a0006;
 }
 
+[data-id="topic-radar"] .art .checker {
+  top: 28px;
+  left: 12px;
+  width: 118px;
+  height: 118px;
+  background: repeating-conic-gradient(var(--red) 0% 25%, var(--white) 0% 50%) 0 0 / 20px 20px;
+  clip-path: none;
+}
+[data-id="topic-radar"] .art .blk {
+  top: 0;
+  right: 0;
+  width: 54%;
+  height: 58%;
+  background: var(--red);
+  clip-path: polygon(42% 0, 100% 0, 100% 100%, 0 72%);
+}
+[data-id="topic-radar"] .art .slash {
+  top: 42%;
+  left: -6%;
+  width: 62%;
+  height: 12px;
+  background: #fff;
+  transform: rotate(-14deg);
+}
+[data-id="topic-radar"] .art .mark {
+  width: min(168px, 42%);
+  height: auto;
+  right: 18px;
+  top: 46px;
+}
+
 .empty {
   background: var(--black);
   text-align: center;
