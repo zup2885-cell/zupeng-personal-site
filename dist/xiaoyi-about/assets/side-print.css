@@ -1,0 +1,9 @@
+/* Pinstripe-style flourish printed into the empty red margin right of the cards: a cream
+   highlight over a deeper red shadow reads as an embossed print. Fades toward the content. */
+.side-print{position:fixed;z-index:1;top:0;right:0;bottom:0;width:max(250px,calc((100vw - 1100px) / 2));pointer-events:none;opacity:0;visibility:hidden;transition:opacity .5s,visibility .5s}
+.scene-content .side-print{opacity:1;visibility:visible}
+.side-print i{position:absolute;inset:0;-webkit-mask-image:url("pinstripe-print.webp"),linear-gradient(90deg,transparent 0%,#000 38%,#000 100%);mask-image:url("pinstripe-print.webp"),linear-gradient(90deg,transparent 0%,#000 38%,#000 100%);-webkit-mask-size:560px auto,100% 100%;mask-size:560px auto,100% 100%;-webkit-mask-repeat:repeat-y,no-repeat;mask-repeat:repeat-y,no-repeat;-webkit-mask-position:0 var(--print-y,0px),0 0;mask-position:0 var(--print-y,0px),0 0;-webkit-mask-composite:source-in;mask-composite:intersect}
+.side-print .print-shadow{background:#8f1d06;opacity:.38;transform:translate(2px,3px)}
+.side-print .print-light{background:linear-gradient(180deg,#ffd9bd,#ffe9d6 50%,#ffcfae);opacity:.2}
+@media(max-width:1100px){.side-print{display:none}}
+@media(prefers-reduced-motion:reduce){.side-print{transition:none}}

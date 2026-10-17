@@ -1,0 +1,14 @@
+/* Sky opening: shares the cover-arrive rules in ticket-intro.css. */
+.sky-intro{display:none;position:fixed;inset:0;z-index:150;overflow:hidden;background:#120f0a;transition:opacity .36s cubic-bezier(.4,0,.2,1)}
+html.ticket-intro-ready .sky-intro{display:block}
+.sky-intro canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.sky-intro.cutting{background:transparent}
+.sky-intro[data-phase="splitting"]{pointer-events:none}
+.sky-intro[aria-hidden="true"]{display:none}
+.sky-intro .intro-skip{position:absolute;top:24px;right:28px;z-index:5;background:#f8f3e9e6;color:#251711;border:1px solid #25171133;padding:7px 12px;font:600 12px/1.4 var(--sans);cursor:pointer}
+.sky-intro.cutting .intro-skip{opacity:0;pointer-events:none;transition:opacity .15s}
+.sky-intro[data-phase="waiting"]{cursor:pointer}
+.sky-intro[data-phase="waiting"]::after{content:"轻触任意处 · 进入";position:absolute;left:50%;bottom:9vh;z-index:4;transform:translateX(-50%);padding:11px 22px;border:1px solid #ffffff55;border-radius:999px;background:#0d1a26aa;color:#fff;font:500 14px/1.4 var(--sans);letter-spacing:.14em;white-space:nowrap;backdrop-filter:blur(6px);animation:skyPrompt 1.6s ease-in-out infinite;pointer-events:none}
+@keyframes skyPrompt{0%,100%{opacity:.62;transform:translate(-50%,0)}50%{opacity:1;transform:translate(-50%,-4px)}}
+@media(max-width:760px){.sky-intro .intro-skip{top:18px;right:18px}}
+@media(prefers-reduced-motion:reduce){html.ticket-intro-ready .sky-intro{display:none}}

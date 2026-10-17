@@ -1,0 +1,77 @@
+/* Line icons used to replace descriptive text; drawn in currentColor via masks. */
+.ico{display:inline-block;flex:none;width:20px;height:20px;background:currentColor;-webkit-mask:var(--ico) center/contain no-repeat;mask:var(--ico) center/contain no-repeat}
+.ico-car{--ico:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23000%22%20stroke-width%3D%222.1%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M4%2015.5h16l-1.7-5.3A2.5%202.5%200%200%200%2015.9%208.5H8.1a2.5%202.5%200%200%200-2.4%201.7z%22/%3E%3Cpath%20d%3D%22M4%2015.5V19h3v-1.5h10V19h3v-3.5%22/%3E%3Ccircle%20cx%3D%228%22%20cy%3D%2213%22%20r%3D%22.6%22/%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2213%22%20r%3D%22.6%22/%3E%3C/svg%3E")}
+.ico-award{--ico:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23000%22%20stroke-width%3D%222.1%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%229%22%20r%3D%225%22/%3E%3Cpath%20d%3D%22m8.6%2012.8-1.6%208.2%205-2.6%205%202.6-1.6-8.2%22/%3E%3C/svg%3E")}
+.ico-road{--ico:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23000%22%20stroke-width%3D%222.1%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M8.5%203%205%2021M15.5%203%2019%2021M12%204v2.5M12%2010.5v3M12%2017.5v2.5%22/%3E%3C/svg%3E")}
+.ico-target{--ico:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23000%22%20stroke-width%3D%222.1%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%228.5%22/%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%224.5%22/%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%221%22/%3E%3C/svg%3E")}
+.ico-script{--ico:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23000%22%20stroke-width%3D%222.1%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Crect%20x%3D%225.5%22%20y%3D%223%22%20width%3D%2213%22%20height%3D%2218%22%20rx%3D%222%22/%3E%3Cpath%20d%3D%22M9%208h6M9%2012h6M9%2016h3.5%22/%3E%3C/svg%3E")}
+.ico-film{--ico:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23000%22%20stroke-width%3D%222.1%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Crect%20x%3D%223%22%20y%3D%228.5%22%20width%3D%2218%22%20height%3D%2212%22%20rx%3D%222%22/%3E%3Cpath%20d%3D%22M3%208.5%205%204h14l2%204.5M8.5%204%207%208.5M13.5%204%2012%208.5M18.5%204%2017%208.5%22/%3E%3C/svg%3E")}
+.ico-chat{--ico:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23000%22%20stroke-width%3D%222.1%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M4%205.5h16v10H9l-5%204z%22/%3E%3Cpath%20d%3D%22M8%2010h8%22/%3E%3C/svg%3E")}
+.ico-idea{--ico:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23000%22%20stroke-width%3D%222.1%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M9%2018h6M10%2021h4M12%203a6%206%200%200%200-3.5%2010.9V16h7v-2.1A6%206%200%200%200%2012%203z%22/%3E%3C/svg%3E")}
+.ico-pin{--ico:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23000%22%20stroke-width%3D%222.1%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M12%2021s-6.5-6-6.5-11a6.5%206.5%200%200%201%2013%200c0%205-6.5%2011-6.5%2011z%22/%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2210%22%20r%3D%222.3%22/%3E%3C/svg%3E")}
+
+/* 01 About: facts as icon chips plus her own one-line quote. */
+.profile-facts{list-style:none;margin:22px 0 0;padding:0;display:grid;gap:12px}
+.profile-facts li{display:grid;grid-template-columns:40px 1fr;align-items:center;column-gap:14px;padding:12px 14px;border-radius:12px;background:#efe6d8}
+.ico-badge{display:grid;place-items:center;width:40px;height:40px;border-radius:50%;background:#f8dccb;color:#c2471f}
+.ico-badge .ico{width:22px;height:22px}
+.profile-facts .ico-badge{grid-row:span 2}
+.profile-facts b{font-size:15px;color:var(--ink)}
+.profile-facts span{font-size:12px;color:var(--muted)}
+.profile-quote{margin:22px 0 4px;padding:4px 0 4px 16px;border-left:3px solid var(--orange);font:400 19px/1.6 var(--serif);color:var(--orange-dark)}
+.platform-row h4{margin:0}
+/* 02 History: keyword chips instead of paragraphs. */
+.tl-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.tl-chips span{padding:6px 12px;border-radius:999px;background:#efe6d8;font-size:13px;color:#6f5f50}
+.tl-chips b{color:var(--orange-dark);font-weight:600;margin-right:6px}
+/* 03 Practice cards: three icon steps instead of two paragraphs. */
+.work-steps{list-style:none;margin:16px 0 18px;padding:14px 0 0;display:grid;gap:10px;border-top:1px solid var(--line)}
+.work-steps li{display:grid;grid-template-columns:34px auto 1fr;align-items:center;gap:10px}
+.work-steps .ico-badge{width:34px;height:34px}
+.work-steps .ico-badge .ico{width:18px;height:18px}
+.work-steps b{font-size:13px;color:var(--ink)}
+.work-steps span{font-size:12px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.work-card .work-project-top p{display:none}
+/* 07 Create: icon in place of the letter badge. */
+.create-card .ico{width:30px;height:30px;color:var(--orange)}
+
+.ico-video{--ico:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23000%22%20stroke-width%3D%222.1%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Crect%20x%3D%223%22%20y%3D%226%22%20width%3D%2213%22%20height%3D%2212%22%20rx%3D%222.5%22/%3E%3Cpath%20d%3D%22m16%2010.5%205-3v9l-5-3z%22/%3E%3C/svg%3E")}
+.ico-heart{--ico:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23000%22%20stroke-width%3D%222.1%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M12%2020s-7.5-4.6-7.5-10.2A4.2%204.2%200%200%201%2012%207.4a4.2%204.2%200%200%201%207.5%202.4C19.5%2015.4%2012%2020%2012%2020z%22/%3E%3C/svg%3E")}
+
+/* 01 About: platforms as logo cards with a follower bar each. */
+.platforms-head{display:flex;align-items:baseline;justify-content:space-between;gap:16px;padding-bottom:14px;border-bottom:1px solid var(--line)}
+.platforms-head h3{margin:0;font-size:15px;color:var(--muted);font-weight:500}
+.platforms-head strong{font:400 40px/1 Georgia,serif;color:var(--orange-dark)}
+.platforms-head small,.platform-card small{font:500 13px/1 var(--sans);margin-left:3px;color:var(--muted)}
+.platform-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}
+.platform-card{position:relative;display:grid;grid-template-columns:44px 1fr;grid-template-areas:"logo name" "num num" "bar bar";align-items:center;gap:10px 12px;padding:16px;border-radius:14px;background:#efe6d8;color:inherit;text-decoration:none;transition:transform .25s,box-shadow .25s,background .25s}
+a.platform-card:hover{transform:translateY(-3px);background:#f3eadc;box-shadow:0 12px 26px #9342261a}
+.pc-logo{grid-area:logo;width:44px;height:44px;border-radius:12px;box-shadow:0 3px 8px #3a1a0a26}
+.pc-name{grid-area:name;font-size:15px;font-weight:600;color:var(--ink)}
+.pc-go{position:absolute;top:14px;right:14px;font-size:13px;color:#b49a84;transition:color .2s,transform .2s}
+a.platform-card:hover .pc-go{color:var(--orange);transform:translate(2px,-2px)}
+.platform-card strong{grid-area:num;font:400 30px/1 Georgia,serif;color:var(--ink)}
+.pc-bar{grid-area:bar;display:block;height:5px;border-radius:3px;background:#e2d6c5;overflow:hidden}
+.pc-bar b{display:block;height:100%;width:max(4%,calc(var(--v) * 100%));border-radius:3px;background:linear-gradient(90deg,#f0a271,var(--orange))}
+.profile-counts{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+.profile-counts>div{display:grid;grid-template-columns:40px 1fr;grid-template-areas:"ico num" "ico label";align-items:center;column-gap:12px;padding:14px 16px;border-radius:14px;border:1px solid var(--line)}
+.profile-counts .ico-badge{grid-area:ico}
+.profile-counts strong{grid-area:num;font:400 24px/1.1 Georgia,serif;color:var(--ink)}
+.profile-counts>div>span:last-child{grid-area:label;font-size:12px;color:var(--muted)}
+.profile-counts .ico-badge{color:#c2471f}
+.approx{font:500 .45em/1 var(--sans);font-style:normal;color:var(--muted);margin-right:3px;vertical-align:.35em}
+
+/* 01 About: both columns stretch to the same height so the card reads full, not half-empty. */
+.profile-layout{align-items:stretch}
+.profile-story,.platforms{display:flex;flex-direction:column}
+.profile-story .lead{margin-bottom:6px}
+.profile-facts{flex:1;grid-auto-rows:1fr;margin-top:14px}
+.profile-facts li{padding:14px 18px;grid-template-columns:48px 1fr}
+.profile-facts .ico-badge{width:48px;height:48px}
+.profile-facts .ico-badge .ico{width:24px;height:24px}
+.profile-facts b{font-size:17px}
+.profile-facts span{font-size:13px}
+.profile-quote{margin:16px 0 0}
+.platform-grid{flex:1;grid-auto-rows:1fr}
+.platform-card{align-content:space-between}
+.profile-facts .ico-badge{color:#c2471f}

@@ -8,14 +8,14 @@
   "alphaTemporalMixing": false,
   "assets": {
     "poster.png": {
-      "path": "assets/azu-poster-e428d415dd37.png",
-      "sha256": "e428d415dd3739f28055e3973cc0a534f338e9fb18e73ddef48cdf4571e68f5a",
-      "bytes": 476146
+      "path": "assets/azu-poster-800cfc457216.png",
+      "sha256": "800cfc457216bba467bfe01490026a90e0902813e6c577a3df1aee5a25f04cfb",
+      "bytes": 578720
     },
     "final.png": {
-      "path": "assets/azu-final-e428d415dd37.png",
-      "sha256": "e428d415dd3739f28055e3973cc0a534f338e9fb18e73ddef48cdf4571e68f5a",
-      "bytes": 476146
+      "path": "assets/azu-final-800cfc457216.png",
+      "sha256": "800cfc457216bba467bfe01490026a90e0902813e6c577a3df1aee5a25f04cfb",
+      "bytes": 578720
     },
     "hevc.mov": {
       "path": "assets/azu-hevc-alpha-bb31650b97d7.mov",
@@ -31,8 +31,8 @@
   "renderer": "single native transparent video; real alpha probe, VP9 preferred, HEVC fallback",
   "animationDurationMs": 8542,
   "loopCount": 1,
-  "edgeTreatment": "poster/final matte: grey halo on dark edges recolored from nearby solid pixels and outer white-shoe haze choked; HEVC/VP9 alpha videos unchanged",
+  "edgeTreatment": "source-derived local white-plate alpha solve in edge band; preserve white-shoe matte; invisible RGB padding; straight-alpha HEVC",
   "durationSeconds": 8.541666666666666,
-  "interpolation": "RIFE v4.6 2x (24\u219248fps), colour and alpha interpolated in one packed pass; duration unchanged",
+  "interpolation": "RIFE v4.6 2x (24→48fps), colour and alpha interpolated in one packed pass; duration unchanged",
   "retouch": "inner-leg bounce-light smear toned down, mild interior sharpen (.work/polish_c10.py); alpha untouched"
 }

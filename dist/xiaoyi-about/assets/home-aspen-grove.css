@@ -1,0 +1,6 @@
+/* Preview: cover page set in a golden aspen grove (photo: Aspen Chamber Resort Association). */
+.hero{background:#7d8c3a url("home-aspen-grove.jpg") 30% 40%/cover no-repeat}
+.hero:before{background:linear-gradient(90deg,rgba(28,24,6,.55) 0%,rgba(28,24,6,.32) 34%,transparent 58%),linear-gradient(0deg,rgba(24,18,4,.35),transparent 32%)}
+.hero-photo img{-webkit-mask-image:none;mask-image:none;filter:drop-shadow(-16px 10px 28px rgba(20,16,4,.4))}
+.hero h1,.hero-role{text-shadow:0 4px 24px rgba(20,16,0,.55)}
+@media(max-width:760px){.hero{background-position:38% 40%}.hero:before{background:linear-gradient(180deg,rgba(28,24,6,.6) 0%,rgba(28,24,6,.25) 32%,transparent 58%)}}

@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-35 -55 550 530" fill="none">
+  <defs>
+    <linearGradient id="paper" x1="76" y1="75" x2="341" y2="340" gradientUnits="userSpaceOnUse"><stop stop-color="#fff8ed"/><stop offset=".5" stop-color="#f5e1c9"/><stop offset="1" stop-color="#fff4e5"/></linearGradient>
+    <linearGradient id="fold" x1="322" y1="185" x2="176" y2="334" gradientUnits="userSpaceOnUse"><stop stop-color="#d9aa7e"/><stop offset=".45" stop-color="#f4dbbd"/><stop offset="1" stop-color="#fff5e6"/></linearGradient>
+  </defs>
+  <g transform="rotate(-9 240 210)">
+    <path d="M79 319C29 229 48 118 131 101C233 80 245 232 329 217C402 204 379 92 314 60" stroke="url(#paper)" stroke-width="45"/>
+    <path d="M125 325C177 383 306 391 359 316C405 251 373 167 310 179C250 190 245 269 186 279C142 287 110 265 102 225" stroke="url(#fold)" stroke-width="45"/>
+    <path d="M419 53C422 72 425 78 444 81C425 84 422 90 419 109C416 90 413 84 394 81C413 78 416 72 419 53Z" fill="#fff4e3"/>
+    <circle cx="41" cy="83" r="7" fill="#f8d4b5"/>
+    <circle cx="411" cy="299" r="5" fill="#f8d4b5"/>
+    <path d="M46 365C144 412 299 413 404 355" stroke="#ffcbae" stroke-width="1.2" opacity=".65"/>
+  </g>
+</svg>

@@ -1,0 +1,43 @@
+/* Practice plans: clear entry button on each card, and a panel that opens under that card. */
+.work-card .practice-open{display:flex;align-items:center;gap:10px;width:100%;margin-top:4px;padding:9px 12px 9px 9px;border:0;border-radius:999px;background:var(--orange);color:#fff8f1;font:600 14px/1 var(--sans);cursor:pointer;box-shadow:0 6px 16px #c65a3540;transition:transform .2s,box-shadow .2s,background .2s}
+.work-card .practice-open:hover{transform:translateY(-2px);box-shadow:0 10px 22px #c65a3555;background:#b84d2a}
+.work-card .practice-open .ico-badge{width:30px;height:30px;background:#ffffff2e;color:#fff}
+.work-card .practice-open .ico-badge .ico{width:16px;height:16px}
+.work-card .practice-open em{margin-left:auto;padding:3px 8px;border-radius:999px;background:#ffffff2e;font:500 11px/1 var(--sans);font-style:normal}
+.work-card .practice-open .po-arrow{transition:transform .3s}
+.work-card.plan-open .practice-open{background:#3a2a22;box-shadow:0 6px 16px #3a2a2240}
+.work-card.plan-open .practice-open .po-arrow{transform:rotate(180deg)}
+.work-card.plan-open{box-shadow:0 0 0 2px var(--orange),0 14px 30px #93422626}
+.work-steps li{cursor:pointer;border-radius:10px;margin:0 -6px;padding:2px 6px;transition:background .2s}
+.work-steps li:hover,.work-steps li:focus-visible{background:#f3e4d6;outline:none}
+.work-steps li{gap:8px}
+
+.practice-panel{position:relative;margin-top:22px;display:grid;grid-template-rows:0fr;opacity:0;transition:grid-template-rows .35s cubic-bezier(.2,.7,.2,1),opacity .25s}
+.practice-panel.pp-open{grid-template-rows:1fr;opacity:1}
+.practice-panel::before{content:'';position:absolute;top:-9px;left:calc(var(--arrow-x,50%) - 10px);width:20px;height:20px;transform:rotate(45deg);border-radius:4px 0 0 0;background:#2f231d;transition:left .3s}
+.practice-panel-inner{overflow:hidden;border-radius:18px;background:linear-gradient(160deg,#2f231d,#3a2a22);color:#f3e5d6;box-shadow:0 20px 44px #4a1d0b33}
+.pp-head{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;padding:24px 28px 8px}
+.pp-eyebrow{display:block;font:600 10px/1 var(--sans);letter-spacing:.3em;color:#e9a46e;margin-bottom:8px}
+.pp-title h3{margin:0;font:400 24px/1.3 var(--serif);color:#fff4e8}
+.pp-close{width:34px;height:34px;border:0;border-radius:50%;background:#ffffff14;color:#f3e5d6;font-size:20px;line-height:1;cursor:pointer;transition:background .2s,transform .2s}
+.pp-close:hover{background:#ffffff26;transform:rotate(90deg)}
+.pp-tabs{display:flex;gap:8px;padding:12px 28px 0;flex-wrap:wrap}
+.pp-tab{display:inline-flex;align-items:center;gap:8px;padding:6px 14px 6px 6px;border:0;border-radius:999px;background:#ffffff10;color:#d9c3ae;font:500 13px/1 var(--sans);cursor:pointer;transition:background .2s,color .2s}
+.pp-tab .ico-badge{width:28px;height:28px;background:#ffffff14;color:#e9a46e}
+.pp-tab .ico-badge .ico{width:15px;height:15px}
+.pp-tab:hover{background:#ffffff1c;color:#fff}
+.pp-tab[aria-selected="true"]{background:#f6e7d6;color:#3a2a22}
+.pp-tab[aria-selected="true"] .ico-badge{background:var(--orange);color:#fff}
+.pp-views{padding:18px 28px 6px}
+.pp-view table{width:100%;border-collapse:separate;border-spacing:0 8px;font-size:13px}
+.pp-view thead th{padding:0 14px 2px;text-align:left;font:500 11px/1.4 var(--sans);letter-spacing:.08em;color:#a8917c;border:0;background:none}
+.pp-view tbody td{padding:13px 14px;background:#ffffff0d;color:#ecdccb;line-height:1.7;border:0;vertical-align:top}
+.pp-view tbody td:first-child{border-radius:10px 0 0 10px;width:16%;white-space:nowrap;font-weight:600;color:#f2b47c}
+.pp-view tbody td:last-child{border-radius:0 10px 10px 0}
+.pp-view tbody tr{transition:transform .2s}
+.pp-view tbody tr:hover td{background:#ffffff17}
+.pp-foot{display:flex;justify-content:flex-end;padding:6px 28px 22px}
+.pp-watch{padding:9px 16px;border-radius:999px;background:var(--orange);color:#fff8f1;font-size:13px;text-decoration:none;transition:background .2s}
+.pp-watch:hover{background:#b84d2a}
+@media(max-width:760px){.pp-head,.pp-tabs,.pp-views,.pp-foot{padding-left:18px;padding-right:18px}.pp-view tbody td:first-child{white-space:normal}}
+@media(prefers-reduced-motion:reduce){.practice-panel{transition:none}}

@@ -1,0 +1,25 @@
+/* Full-page embossed orange floral. A fixed layer (not background-attachment)
+   so the sheet still covers the viewport on iOS. Cream cards stay readable. */
+html{background:#d2451c}
+body{position:relative;z-index:0;background:transparent}
+body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:url("orange-floral-paper.webp") center/cover no-repeat}
+
+.topbar{background:rgba(176,48,16,.62);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.hero{background:transparent}
+.hero:before{background:linear-gradient(90deg,rgba(70,18,6,.2) 0%,rgba(70,18,6,.08) 20%,rgba(70,18,6,0) 42%),linear-gradient(180deg,rgba(40,12,6,.08),transparent 24%)}
+.hero h1,.hero-role{text-shadow:0 2px 18px rgba(80,22,8,.35)}
+.hero-photo img{-webkit-mask-image:none;mask-image:none}
+
+/* The old flat orange field behind the cards becomes the floral sheet. */
+html.scene-ready #main{background:transparent}
+.section,html.scene-ready #main>.scene-card{background:rgba(246,242,234,.93)}
+footer{color:#fff4ea;border-top-color:rgba(255,244,234,.28);background:transparent}
+footer a:hover{color:#fff}
+
+/* The orange floral replaces the black-and-white side strip. */
+.side-print{display:none}
+
+@media(max-width:760px){
+  .hero:before{background:linear-gradient(180deg,rgba(70,18,6,.28) 0%,rgba(70,18,6,.1) 22%,rgba(70,18,6,0) 48%),linear-gradient(90deg,rgba(70,18,6,.12),transparent 64%)}
+  html.scene-ready #main>.scene-card{background:rgba(246,242,234,.95)}
+}

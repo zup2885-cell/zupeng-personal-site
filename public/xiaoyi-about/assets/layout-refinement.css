@@ -1,0 +1,166 @@
+/* A consistent reading rhythm, with local scrolling for wide data tables. */
+:root{--section-space:clamp(64px,6vw,92px);--content-gutter:clamp(20px,3.5vw,48px)}
+html{scrollbar-gutter:stable}
+body{min-width:0;overflow-wrap:break-word}
+.section{width:100%;max-width:1302px;padding:var(--section-space) var(--content-gutter)}
+.section-heading{margin-bottom:36px}
+.section-heading h2,.works>.section-heading h2{font-size:clamp(34px,4vw,52px);line-height:1.32;letter-spacing:-.03em;text-wrap:balance}
+.section-heading>p:last-child:not(.section-number){max-width:720px;line-height:1.85;margin-top:18px}
+.section-number{font-weight:500;letter-spacing:.14em;margin-bottom:16px}
+.profile{margin-top:36px}
+.profile-layout,.audience-layout,.business-overview{gap:clamp(28px,4.5vw,64px)}
+.profile-layout>*,.business-overview>*,.work-grid>*,.timeline-item>*,.performance-board>*{min-width:0}
+.timeline-item{grid-template-columns:190px minmax(0,1fr);gap:32px;padding:28px 0 32px}
+.timeline-year{font-size:42px}
+.works>.section-heading{margin-bottom:32px}
+.works .work-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
+.works .work-experience-card{border-radius:8px}
+.works .work-experience-body{padding:22px}
+.work-project-content{margin-top:20px;margin-bottom:22px}
+.work-project-content>div+div{margin-top:18px}
+.work-project-content dd{line-height:1.85}
+.practice-plans{margin-top:32px}
+.practice-plan{border-radius:7px;margin-top:14px}
+.practice-plan>summary{padding:20px 24px;font-weight:600}
+.practice-plan-body{padding:24px 28px 28px}
+.practice-table-wrap{overscroll-behavior-x:contain}
+.practice-table-wrap table{min-width:560px}
+.practice-table-wrap table:has(th:last-child:nth-child(2)){min-width:420px}
+.brand-table-wrap{margin-top:36px;overflow-x:auto;overscroll-behavior-x:contain}
+.brand-table{min-width:620px}
+.brand-table td{padding-top:16px;padding-bottom:16px}
+#business{padding-bottom:64px}
+footer{max-width:1206px;margin:0 auto;padding:24px 0 30px;justify-content:flex-end}
+footer a{display:inline-flex;align-items:center;gap:10px;font-size:12px;line-height:1.6;padding:8px 14px;border:1px solid var(--line);border-radius:4px;transition:border-color .2s,background .2s}
+footer a::after{content:'↑';font-size:16px}
+footer a:hover{border-color:#c99778;background:#efe4d4}
+
+@media(max-width:1050px){
+  .topbar{padding-left:28px;padding-right:28px}
+  .topbar nav{gap:22px}
+  .hero{min-height:700px}
+  .hero-title-block{left:3%;width:46%}
+  .hero h1{font-size:clamp(78px,10vw,106px)}
+  .hero-role{font-size:clamp(23px,2.8vw,32px)}
+  .profile-layout{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+  .timeline-item{grid-template-columns:150px minmax(0,1fr);gap:28px}
+  .milestones{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .works .work-grid{width:100%}
+  .works .work-experience-body{padding:18px}
+  .works .work-experience-body>h3{font-size:23px}
+  .audience-layout{grid-template-columns:minmax(0,1fr) minmax(0,1.12fr);gap:28px}
+  .audience-panel{padding:22px 20px}
+  .business-overview{grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:28px}
+  .quote-prices{padding:24px}
+  .business-mini>div+div{padding-left:15px}
+  footer{margin-left:var(--content-gutter);margin-right:var(--content-gutter)}
+}
+
+@media(max-width:760px){
+  html{scroll-padding-top:86px}
+  section,.practice-plan{scroll-margin-top:86px}
+  .topbar{height:72px;padding:0 20px;gap:16px}
+  .topbar nav{min-width:0;flex:1;overflow-x:auto;overscroll-behavior-x:contain;scrollbar-width:none;gap:22px;white-space:nowrap}
+  .topbar nav::-webkit-scrollbar{display:none}
+  .topbar nav a{padding:23px 0;font-size:13px;flex-shrink:0}
+  .topbar-actions{flex-shrink:0}
+  .topbar .button-small{padding:7px 12px;font-size:12px;white-space:nowrap}
+  .hero{height:calc(100svh - 72px);min-height:680px;max-height:860px}
+  .hero-title-block{left:20px;right:20px;top:46px;width:auto;gap:14px}
+  .hero h1{font-size:clamp(64px,17vw,105px)}
+  .hero-role{font-size:clamp(22px,5vw,32px);letter-spacing:.1em}
+  .hero-photo{top:auto;bottom:-7%;right:-14%;height:82%}
+  .hero:before{background:linear-gradient(180deg,#e13e17 0%,#e13e17eb 18%,#e13e1720 51%,transparent 70%),linear-gradient(90deg,#e13e17b3 0%,transparent 70%)}
+  .cover-art{left:5%;top:47%;width:43%;max-width:260px}
+  .section-heading{margin-bottom:28px}
+  .section-heading>p:last-child:not(.section-number){font-size:15px;line-height:1.9}
+  .profile{margin-top:24px}
+  .profile-layout,.audience-layout,.business-overview{grid-template-columns:minmax(0,1fr);gap:32px}
+  .profile-story .lead{font-size:25px}
+  .profile-story>p{font-size:15px}
+  .platforms{padding-left:0}
+  .platform-row p{font-size:11px}
+  .platform-stat strong{font-size:28px}
+  .timeline-item{grid-template-columns:minmax(0,1fr);gap:16px;padding:26px 0}
+  .timeline-year{display:flex;align-items:baseline;gap:16px;padding-left:0;font-size:34px}
+  .timeline-year>span{margin-top:0;font-size:11px;letter-spacing:.08em}
+  .timeline-item h3{font-size:20px}
+  .milestones{gap:12px;margin-top:20px}
+  .milestones>div{padding:16px}
+  .works .work-grid{grid-template-columns:minmax(0,1fr);max-width:500px;gap:24px}
+  .work-experience-card .work-image{width:210px;max-width:65%;margin:20px auto 0;border-radius:5px}
+  .works .work-experience-body{padding:22px}
+  .work-project-top{padding-bottom:14px;margin-bottom:16px}
+  .work-project-content dt{font-size:14px}
+  .work-project-content dd{font-size:14px}
+  .practice-plan>summary{padding:18px 20px;gap:14px;font-size:15px}
+  .practice-plan-body{padding:22px 20px 26px}
+  .practice-plan-body h3{font-size:23px}
+  .practice-table-wrap th,.practice-table-wrap td{padding:12px 13px}
+  .performance-board{padding:24px 20px 20px}
+  .performance-board .performance-top{gap:18px;padding-bottom:21px;margin-bottom:21px}
+  .performance-board .number-stat+.number-stat{padding-left:18px}
+  .performance .performance-board .number-stat strong{font-size:clamp(30px,6vw,42px)}
+  .performance-board .number-stat strong span{font-size:13px;margin-left:5px}
+  .peak-panel .chart-toolbar{flex-direction:column;align-items:flex-start;gap:17px}
+  .peak-panel .chart-toolbar h3{font-size:18px}
+  .peak-panel .segmented{max-width:100%}
+  .peak-panel .segmented button{padding:7px 12px}
+  .peak-panel .chart-legend{padding-left:0;gap:14px;flex-wrap:wrap;margin-top:20px}
+  .peak-panel .chart-hint{flex-basis:100%;margin-left:0}
+  .peak-panel .bars-layout{overflow-x:auto;overflow-y:hidden;overscroll-behavior-x:contain;scrollbar-color:#8b684b #2c251e;scrollbar-width:thin}
+  .peak-panel .bars-plot{min-width:760px}
+  .peak-panel .chart-detail{flex-wrap:wrap;gap:8px 12px;padding:14px;margin-top:15px}
+  .peak-panel .chart-detail .detail-title{flex-basis:calc(100% - 95px)}
+  .peak-panel .chart-detail strong{margin-left:auto;font-size:26px}
+  .performance-board .year-summary{grid-template-columns:repeat(2,minmax(0,1fr));gap:20px 18px}
+  .performance-board .year-summary>div+div{padding-left:18px}
+  .performance-board .year-summary>div:nth-child(odd){border-left:0;padding-left:0}
+  .performance .performance-board .year-summary strong{font-size:clamp(24px,5vw,34px)}
+  .performance-board .year-summary strong span{font-size:12px}
+  .performance-board .live-stats{gap:16px}
+  .performance-board .live-stats>div{padding-left:16px}
+  .performance-board .live-stats>div:first-child{padding-left:0}
+  .performance-board .live-stats strong{font-size:27px}
+  .audience-panel{width:100%;max-width:460px;margin:0 auto;padding:24px 22px 20px}
+  .audience-copy h3{font-size:26px}
+  .audience-highlight{flex-wrap:wrap;gap:10px}
+  .audience-highlight b{font-size:27px}
+  .region-bars>div{min-height:58px}
+  .business-story{padding-top:0}
+  .business-story h3{font-size:26px}
+  .quote-prices strong{font-size:43px}
+  .business-mini strong{font-size:31px}
+  .brand-table caption{font-size:18px;margin-bottom:16px}
+  .editor-toolbar{left:12px;right:12px;bottom:12px;padding:12px}
+  .editor-toolbar-controls{gap:7px}
+  .editor-toolbar button{padding:6px 9px;font-size:11px}
+  .page-editing main{padding-bottom:190px}
+  #business{padding-bottom:48px}
+  footer{padding-top:20px;padding-bottom:24px}
+}
+
+@media(max-width:480px){
+  .section{padding-top:58px;padding-bottom:58px}
+  .section-heading h2,.works>.section-heading h2{font-size:34px}
+  .hero{min-height:650px}
+  .hero-photo{right:-20%;height:80%}
+  .cover-art{width:46%;top:49%}
+  .identity-list{gap:18px}
+  .audience-panel{padding-left:18px;padding-right:18px}
+  .gender-ring #gender-value{font-size:36px}
+  .gender-labels{gap:0;font-size:11px}
+  .gender-labels strong{font-size:20px}
+  .region-bars>div{grid-template-columns:59px minmax(0,1fr) 55px;gap:10px}
+  .performance-board{padding:22px 18px 18px}
+  .performance-board .number-stat p{font-size:11px}
+  .performance-board .year-summary p{font-size:11px}
+  .performance .performance-board .year-summary>div:last-child strong{white-space:normal}
+  .performance-board .live-stats{grid-template-columns:minmax(0,1fr);gap:0}
+  .performance-board .live-stats>div{display:flex;align-items:center;justify-content:space-between;gap:15px;border-left:0;border-bottom:1px solid #e7c3a11a;padding:12px 0}
+  .performance-board .live-stats>div:first-child{padding-top:0}
+  .performance-board .live-stats>div:last-child{border-bottom:0;padding-bottom:0}
+  .performance-board .live-stats small{margin:0;font-size:12px}
+  .performance-board .live-stats strong{font-size:29px}
+  #business{padding-bottom:40px}
+}

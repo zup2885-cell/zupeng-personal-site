@@ -1,0 +1,19 @@
+.topbar-actions{display:flex;align-items:center;gap:10px}
+.content-removed{display:none!important}
+.page-editing [data-content-key]{cursor:text;outline:1px dashed #c65a3540;outline-offset:5px;border-radius:2px}
+.page-editing [data-content-key]:hover{outline-color:#c65a35a0}
+.page-editing .content-selected{outline:2px solid var(--orange);outline-offset:5px;background:#e6c8b32b}
+.page-editing main{padding-bottom:95px}
+.page-editing .hero h1:focus{display:block;white-space:normal}
+.user-content-block{margin-top:18px;overflow-wrap:anywhere}
+.user-content-block h3{font-family:var(--serif)}
+.editor-toolbar{position:fixed;z-index:70;bottom:15px;left:32px;right:32px;max-width:1238px;margin:auto;padding:14px 18px;background:#fffdf9;border:1px solid #cfb9a6;border-radius:9px;box-shadow:0 5px 28px #5a321726;color:var(--ink);display:flex;flex-direction:column;gap:9px}
+.editor-toolbar[hidden]{display:none}
+.editor-toolbar-controls{display:flex;align-items:center;gap:9px;flex-wrap:wrap}
+.editor-toolbar button{font-size:12px;line-height:1.6;border:1px solid #d8c9b9;background:#f5eee4;color:#6f5542;border-radius:4px;padding:7px 13px;transition:background .15s}
+.editor-toolbar button:hover{background:#ecdfcc}
+.editor-toolbar button:disabled{opacity:.4;cursor:default}
+.editor-toolbar button[data-editor-action="save"]{background:#c65a35;border-color:#c65a35;color:#fffdf9;margin-left:auto}
+.editor-toolbar button[data-editor-action="save"]:hover{background:#934226}
+.editor-toolbar-status{font-size:11px;line-height:1.5;color:#8a7461}
+.editor-toolbar button[data-editor-action="delete"]{color:#9a422e}
