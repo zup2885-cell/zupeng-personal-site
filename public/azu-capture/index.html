@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f2eb">
+  <meta name="description" content="阿祖截图：在线截屏、裁剪和收集图片，批量打包带走。也可以下载阿祖的 Mac 截图收集盒。">
+  <title>阿祖截图 · 留住每一个好点子</title>
+  <link rel="icon" href="./mark.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./style.css?v=1">
+  <script type="module" src="./app.js?v=1"></script>
+</head>
+<body>
+  <a class="skip" href="#collection">跳到收集盒</a>
+  <header class="topbar">
+    <a class="brand" href="./"><img src="./mark.svg" width="40" height="40" alt=""><span>阿祖截图<small>AZU CAPTURE</small></span></a>
+    <nav aria-label="页面导航"><a href="#collection">我的收集盒</a><a href="#mac">Mac 版 <span>↗</span></a><a href="../secret-weapons/" class="tools-link">阿祖的工具集 ↗</a></nav>
+  </header>
+  <main>
+    <section class="intro">
+      <div class="intro-copy">
+        <p class="eyebrow"><span></span> A SMALL TOOL BY AZU</p>
+        <h1>把一瞬间，<br>留在<span class="orange">手边。</span><svg viewBox="0 0 80 80" aria-hidden="true"><path d="M40 4v72M4 40h72M14 14l52 52M14 66l52-52"/></svg></h1>
+        <p class="lead">看到好点子，就收起来。<br>截图、裁剪、整理，再一起带走。</p>
+        <div class="intro-actions"><button class="button primary" id="start-capture"><span aria-hidden="true">⌗</span> 开始截屏</button><button class="button" id="import">＋ 导入图片</button></div>
+        <p class="hint" id="capture-hint">选择一个屏幕、窗口或标签页，再截取你想要的画面。</p>
+      </div>
+      <div class="preview-art" aria-hidden="true">
+        <div class="art-label">GOOD IDEAS, SAFELY KEPT.</div>
+        <div class="art-sheet sheet-back"><span>CAPTURE / 02</span><div class="art-lines"></div></div>
+        <div class="art-sheet sheet-front"><div class="art-window"><i></i><i></i><i></i><span>my little inspiration</span></div><div class="art-content"><span class="art-sun">✳</span><p>MAKE<br>SOMETHING<br><em>GOOD.</em></p><div class="art-crop"><b></b><b></b><b></b><b></b></div></div></div>
+        <div class="art-sticker">收好了。<span>✓</span></div><div class="art-caption"><span>01 — 看见</span><span>02 — 留住</span></div>
+      </div>
+    </section>
+    <section class="workspace" id="collection" aria-labelledby="collection-title">
+      <div class="workspace-heading"><div><p class="eyebrow">YOUR LITTLE COLLECTION</p><h2 id="collection-title">我的收集盒 <span id="count">00</span></h2></div><span class="local-badge"><i></i> 只保存在当前浏览器</span></div>
+      <div class="toolbar"><div class="toolbar-left"><label class="check"><input type="checkbox" id="select-all"> 全选</label><span id="selection-label">0 张图片</span></div><div class="toolbar-right"><button class="text-button" id="remove" disabled>移除所选</button><button class="button compact dark" id="export" disabled>打包下载 <span>↓</span></button></div></div>
+      <div id="drop-area" class="drop-area">
+        <div class="empty-state" id="empty"><div class="empty-symbol" aria-hidden="true">＋</div><h3>好点子，从第一张开始。</h3><p>把图片拖到这里，或者直接粘贴 <kbd>⌘ / Ctrl</kbd> <kbd>V</kbd></p><button id="demo" class="text-button orange">用一张示例试试看 ↗</button></div>
+        <div class="image-grid" id="grid"></div>
+        <div class="drop-cover" aria-hidden="true">松手，放进收集盒。 ↓</div>
+      </div>
+      <p class="storage-note" id="storage-note">图片不会上传。清除浏览器数据会清空收集盒，重要的图片记得下载保存。</p>
+    </section>
+    <section class="mac-section" id="mac" aria-labelledby="mac-title"><div class="mac-icon" aria-hidden="true">⌘</div><div class="mac-copy"><p class="eyebrow">ON YOUR DESKTOP</p><h2 id="mac-title">也给桌面，留一个小夹子。</h2><p>阿祖原来的「截图收集盒」Mac 版。按 <kbd>⌘⇧A</kbd> 框选截屏，自动收进浮动夹子，展开后多选、拖出。</p><details><summary>安装与使用说明</summary><p>解压后将「截图收集盒.app」移到应用程序文件夹。首次截图需要在系统设置中允许屏幕录制。Mac 应用和网页版各自保存图片，不会自动同步。</p><p>这是已归档的 1.4.0 本机测试构建，保留原应用名与签名。尚未做 Developer ID 公证，也未验证其他 Mac 的首次安装；若系统阻止打开，请先核对来源与系统提示。</p></details></div><div class="mac-download"><a class="button dark" href="./downloads/ClipShelf-Mac-1.4.0.zip" download>下载 Mac 版 <span>↓</span></a><p>1.4.0 · Apple Silicon · macOS 13+</p></div></section>
+  </main>
+  <footer><span><b>AZU.</b> 小工具，大好奇。</span><a href="https://github.com/zup2885-cell/zupeng-personal-site/tree/main/public/azu-capture" target="_blank" rel="noopener noreferrer">查看 GitHub 源码 ↗</a><span>© 2026 阿祖</span></footer>
+  <input type="file" id="files" accept="image/png,image/jpeg,image/webp,image/gif,image/avif,image/bmp" multiple hidden>
+  <dialog id="capture-dialog" aria-labelledby="capture-title"><div class="dialog-head"><div><p class="eyebrow">LIVE PREVIEW</p><h2 id="capture-title">选好画面，再按快门。</h2></div><button class="close-button" id="cancel-capture" aria-label="关闭截屏">×</button></div><video id="screen-preview" autoplay muted playsinline></video><div class="dialog-foot"><p>只截取一张图片，不录制声音或视频。</p><button class="button primary" id="take-shot" disabled>截取这一帧</button></div></dialog>
+  <dialog id="editor" aria-labelledby="editor-title"><div class="dialog-head"><div><p class="eyebrow" id="editor-eyebrow">CAPTURE & KEEP</p><h2 id="editor-title">留住你想要的部分。</h2></div><button class="close-button" id="close-editor" aria-label="关闭图片编辑">×</button></div><label class="name-field">图片名称<input id="image-name" maxlength="100" autocomplete="off"></label><div class="editor-stage"><canvas id="crop-canvas" aria-label="图片预览，拖动可以选择裁剪范围"></canvas><div id="crop-box" hidden></div></div><div class="crop-options"><p id="crop-info">拖动框选裁剪范围，也可以保留整张。</p><button class="text-button" id="reset-crop">重置选区</button></div><div class="dialog-foot"><button class="button" id="copy">复制图片</button><button class="button" id="download-one">下载 PNG ↓</button><button class="button primary" id="save">保存到收集盒</button></div></dialog>
+  <div class="toast" id="toast" role="status" aria-live="polite" hidden><span></span><button id="undo" hidden>撤销</button></div>
+  <noscript><p class="noscript">请开启 JavaScript 使用在线收集盒。Mac 下载链接无需 JavaScript。</p></noscript>
+</body></html>
