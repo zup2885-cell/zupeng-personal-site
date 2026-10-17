@@ -152,40 +152,61 @@ async function setupCharacter(){
       const go=()=>{removeEventListener('pointerdown',go);removeEventListener('keydown',go);play();};addEventListener('pointerdown',go);addEventListener('keydown',go);}else fallback();}
   };
   if(replay)replay.disabled=true;
-  video.addEventListener('error',fallback);
   video.addEventListener('timeupdate',()=>{cues(video.currentTime);report();});
   video.addEventListener('ended',()=>{figure.dataset.state='complete';revealAll();report();if(callback!==null){video.cancelVideoFrameCallback?.(callback);callback=null;}});
+  // The intro never waits on the video: on a slow connection the poster stands in meanwhile.
+  figure.dataset.state='loading';
+  setTimeout(()=>{if(figure.dataset.state==='loading')revealAll();},6000);
   try{
     manifest=await fetch('./release.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw Error('Missing release');return r.json();});
     figure.dataset.release=manifest.release;video.poster=manifest.assets['poster.png'].path;
-    // Prefer the smaller VP9 file when the browser actually decodes its alpha.
-    // HEVC is probed separately for browsers that need Apple's alpha format.
-    const key=await supportsVideoAlpha(manifest.assets['vp9.webm'].path)?'vp9.webm':
-      await supportsVideoAlpha(manifest.assets['hevc.mov'].path)?'hevc.mov':null;
+    // The alpha check runs on this element's own first frame, so the file is downloaded once and
+    // a slow connection only delays the motion. Only a decode error or missing alpha moves on.
+    let key=null;
+    for(const k of alphaOrder().map(k=>k==='vp9'?'vp9.webm':'hevc.mov')){
+      if(await firstFrame(video,manifest.assets[k].path)&&characterHasAlpha(video)){key=k;break;}
+    }
     if(!key){fallback();return;}figure.dataset.codec=key;
-    figure.dataset.state='loading';
-    video.addEventListener('canplay',()=>{if(replay)replay.disabled=false;if(reduced){figure.dataset.state='static';revealAll();}else entered.then(play);},{once:true});
-    replay?.addEventListener('click',play);video.src=manifest.assets[key].path;video.load();
+    video.addEventListener('error',fallback);
+    // Start once enough is buffered to play straight through, so a slow connection does not
+    // stutter the one-shot animation. Some mobile browsers stop buffering before that point
+    // until play() is called; when the download is suspended like that, start anyway.
+    let started=false;
+    const start=()=>{if(started)return;started=true;if(replay)replay.disabled=false;if(reduced){figure.dataset.state='static';revealAll();}else entered.then(play);};
+    if(video.readyState>=4)start();else{video.addEventListener('canplaythrough',start,{once:true});video.addEventListener('suspend',start,{once:true});}
+    replay?.addEventListener('click',play);
   }catch(error){console.warn('Character static fallback',error);fallback();}
   window.addEventListener('pagehide',()=>{video.pause();if(callback!==null)video.cancelVideoFrameCallback?.(callback);},{once:true});
   // Native video keeps the final decoded frame. No rewind or final-image swap.
-  setTimeout(()=>{if(figure.dataset.state==='loading')revealAll();},6000);
 }
 
-async function supportsVideoAlpha(url){
-  const probe=document.createElement('video');probe.muted=true;probe.playsInline=true;probe.preload='auto';
-  let timeout;
+// Codec order without downloading anything: Safari and every iOS browser show alpha only from
+// HEVC, Chromium and Firefox from VP9. It is a guess; the decoded frame has the final word.
+function alphaOrder(){
+  const t=document.createElement('video'),ua=navigator.userAgent;
+  const webkit=/AppleWebKit/.test(ua)&&!/Chrome|Chromium|Edg|OPR|Android/.test(ua);
+  const vp9=t.canPlayType('video/webm; codecs="vp9"')!=='',hevc=t.canPlayType('video/mp4; codecs="hvc1"')!=='';
+  return (webkit?['hevc','vp9']:['vp9','hevc']).filter(k=>k==='vp9'?vp9:hevc||webkit);
+}
+// Loads url into the element and waits for its first frame, however long that takes.
+// false only on a real error (unsupported or broken file).
+function firstFrame(v,url){
+  return new Promise(resolve=>{
+    const done=ok=>{v.removeEventListener('loadeddata',yes);v.removeEventListener('error',no);resolve(ok);};
+    const yes=()=>done(true),no=()=>done(false);
+    v.addEventListener('loadeddata',yes);v.addEventListener('error',no);v.src=url;v.load();
+  });
+}
+// Two pixels of the decoded first frame: a transparent corner and a fully opaque jacket pixel,
+// so a decoder that drops alpha (or draws nothing) cannot pass.
+function characterHasAlpha(v){
   try{
-    await new Promise((resolve,reject)=>{timeout=setTimeout(()=>reject(Error('Alpha probe timeout')),5000);probe.addEventListener('loadeddata',resolve,{once:true});probe.addEventListener('error',reject,{once:true});probe.src=url;probe.load();});
-    // Two-pixel capability check only, not a frame renderer. Require both a transparent
-    // corner and a fully opaque jacket pixel so an empty decoder cannot pass.
     const canvas=document.createElement('canvas');canvas.width=2;canvas.height=1;
     const context=canvas.getContext('2d',{willReadFrequently:true});
-    context.drawImage(probe,0,0,1,1,0,0,1,1);context.drawImage(probe,350,400,1,1,1,0,1,1);
+    context.drawImage(v,0,0,1,1,0,0,1,1);context.drawImage(v,350,400,1,1,1,0,1,1);
     const pixels=context.getImageData(0,0,2,1).data;
     return pixels[3]===0&&pixels[7]===255;
   }catch{return false;}
-  finally{clearTimeout(timeout);probe.pause();probe.removeAttribute('src');probe.load();}
 }
 
 // 03–05 boards: each has one looping transparent IP clip. The codec is chosen once by a real
@@ -201,23 +222,40 @@ async function setupIpBoards(){
   // The mouse-following frames need no video codec, so they start before the codec check.
   const arsenal=stages.find(s=>s.dataset.ip==='arsenal');
   if(arsenal&&manifest.arsenal?.gaze&&!reducedMotion)setupGaze(arsenal,manifest.arsenal);
-  const sample=manifest[stages[0].dataset.ip];
-  const kind=await hasAlpha(sample.assets.webm.path)?'webm':await hasAlpha(sample.assets.mov.path)?'mov':null;
+  // No separate probe download: the first board clip that decodes is itself the alpha check.
+  // Until then (and on a slow connection) each board shows its poster.
+  const order=alphaOrder().map(k=>k==='vp9'?'webm':'mov');
   const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // The arsenal clip is replaced by the mouse-following frames, so its loop video is not loaded.
+  const gazes=s=>s.dataset.ip==='arsenal'&&manifest.arsenal?.gaze;
+  const boards=stages.filter(s=>!gazes(s)&&s.querySelector('video'));
+  let verified=false;
+  const load=s=>{const v=s.querySelector('video');v.dataset.kind=order[0];v.src=manifest[s.dataset.ip].assets[order[0]].path;};
+  // This format shows no alpha here (or will not decode): move every loaded board to the next one.
+  const reject=v=>{
+    if(verified||v.dataset.kind!==order[0])return;
+    order.shift();
+    for(const s of boards){const w=s.querySelector('video');if(!w.dataset.kind)continue;
+      if(order[0]){load(s);if(s.dataset.seen){if(s.dataset.ip==='music')greet(w,manifest.music);w.play().catch(()=>{});}}
+      else{w.pause();delete w.dataset.kind;w.removeAttribute('src');w.load();}}
+    if(!order[0])observer.disconnect();
+  };
   const observer=new IntersectionObserver(entries=>{
     for(const e of entries){
-      const v=e.target.querySelector('video');if(!v)continue;
+      const v=e.target.querySelector('video');if(!v||!order[0])continue;
       if(e.isIntersecting){
-        if(!v.src){v.src=manifest[e.target.dataset.ip].assets[kind].path;}
-        if(e.target.dataset.ip==='music'&&!e.target.dataset.seen){e.target.dataset.seen='1';greet(v,manifest.music);}
+        const first=!e.target.dataset.seen;e.target.dataset.seen='1';
+        if(!v.dataset.kind)load(e.target);
+        if(e.target.dataset.ip==='music'&&first)greet(v,manifest.music);
         v.play().catch(()=>{});
       }
       else{v.pause();delete e.target.dataset.seen;}
     }
   },{rootMargin:'200px 0px'});
-  // The arsenal clip is replaced by the mouse-following frames, so its loop video is not loaded.
-  const gazes=s=>s.dataset.ip==='arsenal'&&manifest.arsenal?.gaze;
-  if(kind&&!reduced)stages.filter(s=>!gazes(s)).forEach(s=>observer.observe(s));
+  for(const s of boards){const v=s.querySelector('video');
+    v.addEventListener('loadeddata',()=>{if(verified||v.dataset.kind!==order[0])return;if(frameHasAlpha(v))verified=true;else reject(v);});
+    v.addEventListener('error',()=>reject(v));}
+  if(order.length&&!reduced)boards.forEach(s=>observer.observe(s));
 }
 
 // 04 秘密武器库: he watches the mouse the normal way — only real frames of him turning his eyes and
@@ -314,17 +352,14 @@ function setupNowPlaying(){
   // Leaving the page section far behind does not stop the song; leaving the tab does.
   document.addEventListener('visibilitychange',()=>{if(document.hidden)audio.pause();});
 }
-async function hasAlpha(url){
-  const probe=document.createElement('video');probe.muted=true;probe.playsInline=true;probe.preload='auto';let timeout;
+function frameHasAlpha(v){
   try{
-    await new Promise((resolve,reject)=>{timeout=setTimeout(()=>reject(Error('timeout')),5000);probe.addEventListener('loadeddata',resolve,{once:true});probe.addEventListener('error',reject,{once:true});probe.src=url;probe.load();});
     // Real alpha means the frame has both fully transparent and fully opaque pixels.
     const c=document.createElement('canvas');c.width=32;c.height=32;const x=c.getContext('2d',{willReadFrequently:true});
-    x.drawImage(probe,0,0,32,32);const d=x.getImageData(0,0,32,32).data;let clear=false,solid=false;
+    x.drawImage(v,0,0,32,32);const d=x.getImageData(0,0,32,32).data;let clear=false,solid=false;
     for(let i=3;i<d.length;i+=4){if(d[i]===0)clear=true;else if(d[i]===255)solid=true;}
     return clear&&solid;
   }catch{return false;}
-  finally{clearTimeout(timeout);probe.pause();probe.removeAttribute('src');probe.load();}
 }
 
 // 01 headline. Entrance, cartoon style: each letter of SOCIAL MEDIA drops in from above the page,
