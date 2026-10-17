@@ -530,6 +530,30 @@ img, svg { max-width: 100%; }
   font-weight: 900;
   letter-spacing: -0.03em;
 }
+.maker-link-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+.maker-link-kicker {
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.16em;
+}
+.maker-link-title {
+  font-size: clamp(18px, 2vw, 24px);
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+}
+.maker-link-note {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0;
+  line-height: 1.45;
+}
 .maker-link:hover { background: #14080a33; }
 .go {
   display: grid;
