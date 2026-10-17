@@ -267,3 +267,12 @@
 .gate-dot{width:10px;height:10px;border-radius:50%;background:#ed3d40;box-shadow:0 0 0 0 #ed3d4088;animation:gate-pulse 1.6s ease-out infinite}
 @keyframes gate-pulse{to{box-shadow:0 0 0 14px #ed3d4000}}
 .has-gate:not(.entered) body{overflow:hidden}
+
+/* 01 hero: the border collie with his red ball, sitting on the same ground as AZU, right of him */
+.ip-stage.hero-dog{position:absolute;left:auto;right:21%;bottom:2.2%;height:33%;width:auto;aspect-ratio:342/600;max-width:none;margin:0;z-index:2;pointer-events:none;--shadow:#5a0d1099}
+.hero-dog .ip-video{width:100%;height:100%}
+.hero-dog::after{bottom:.4%;width:74%;height:5%}
+@media(min-width:1600px){.ip-stage.hero-dog{right:23%;height:32%}}
+@media(max-width:1100px){.ip-stage.hero-dog{right:15%;height:31%;bottom:2.6%}}
+@media(max-width:650px){.ip-stage.hero-dog{right:auto;left:30%;height:19%;bottom:12.6%}}
+@media(max-width:360px){.ip-stage.hero-dog{left:28%;height:17%;bottom:13.4%}}

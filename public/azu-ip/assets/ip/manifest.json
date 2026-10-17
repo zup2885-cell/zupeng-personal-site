@@ -260,5 +260,29 @@
    }
   },
   "loopStartSource": 16
+ },
+ "dog": {
+  "source": "WeChat videos f26e6a70… (A, red ball) + 764d15d2… (B, ball repainted red)",
+  "size": [
+   342,
+   600
+  ],
+  "fps": 24,
+  "frames": 268,
+  "loopSeconds": 11.167,
+  "assets": {
+   "webm": {
+    "path": "assets/ip/dog-7d522ef89fe5.webm",
+    "bytes": 1751444
+   },
+   "mov": {
+    "path": "assets/ip/dog-c56b596bb0ef.mov",
+    "bytes": 4653909
+   },
+   "png": {
+    "path": "assets/ip/dog-009ad7e2fff8.png",
+    "bytes": 216265
+   }
+  }
  }
 }
