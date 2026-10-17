@@ -3,299 +3,252 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#5a1020">
-  <meta name="description" content="秘密武器，阿祖制作的工具集。拍摄、素材与灵感记录，让创作顺手一点。">
+  <meta name="theme-color" content="#d64212">
+  <meta name="description" content="阿祖的秘密武器：拍摄、素材、备忘、镜头、写作、屏幕翻译和选题，七件能直接打开的工具。">
   <title>秘密武器 · 阿祖的工具集</title>
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%23c70515'/%3E%3Cpath fill='%23f4f4f4' d='M0 0h4v4H0zm8 0h4v4H8zM4 4h4v4H4zm8 4h4v4h-4zM0 8h4v4H0zm8 8h4v-4H8z'/%3E%3C/svg%3E">
-  <link rel="stylesheet" href="./style.css?v=4">
-  <script type="module" src="./app.js?v=5"></script>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%23d64212'/%3E%3Cpath fill='%23f4efe6' d='M2 2h5v5H2zm7 0h5v5H9zM2 9h5v5H2zm7 7V9h5v5z'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="./style.css?v=6">
+  <script type="module" src="./app.js?v=6"></script>
 </head>
 <body>
   <a class="skip" href="#collection">跳到工具列表</a>
   <header class="topbar">
-    <a class="home-link" href="../azu-ip/" aria-label="阿祖个人主页">
-      <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
-        <path d="M4 11.2 12 4l8 7.2V20a1 1 0 0 1-1 1h-5.2v-6.2h-3.6V21H5a1 1 0 0 1-1-1z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
-      </svg>
-    </a>
-    <nav class="top-nav" aria-label="主导航">
-      <a href="#collection">武器库</a>
-      <a href="#about">关于</a>
-      <a href="../azu-ip/">认识阿祖</a>
-    </nav>
-    <span class="nav-flag" aria-hidden="true"></span>
+    <div class="wrap bar">
+      <a class="brand" href="../azu-ip/">阿祖</a>
+      <nav class="top-nav" aria-label="主导航">
+        <a href="#collection">工具</a>
+        <span aria-hidden="true">/</span>
+        <a href="#note">手记</a>
+        <span aria-hidden="true">/</span>
+        <a href="../azu-ip/">关于</a>
+      </nav>
+      <a class="nav-arrow" href="../azu-ip/" aria-label="认识阿祖">
+        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+          <path d="M7 17 17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="1.8"/>
+        </svg>
+      </a>
+    </div>
   </header>
 
-  <main class="board">
-    <section class="hero" aria-label="秘密武器">
-      <div class="hero-main">
-        <div class="hero-art" aria-hidden="true">
-          <i class="checker"></i>
-          <i class="blk"></i>
-          <i class="slash"></i>
-          <i class="slash thin"></i>
-          <div class="lights"><span></span><span></span><span class="lit"></span><span class="lit"></span><span class="lit"></span></div>
-          <b class="big06">07</b>
-          <svg class="car" viewBox="0 0 280 100">
-            <circle cx="62" cy="68" r="22" fill="none" stroke="#f4f4f4" stroke-width="8"/>
-            <circle cx="214" cy="68" r="22" fill="none" stroke="#f4f4f4" stroke-width="8"/>
-            <circle cx="62" cy="68" r="7" fill="#111"/>
-            <circle cx="214" cy="68" r="7" fill="#111"/>
-            <path d="M28 64h132l28-22h52l22 22H28z" fill="#c70515"/>
-            <path d="M156 64l16-30h28l-12 8" fill="#f4f4f4"/>
-            <path d="M48 64h70" stroke="#f4f4f4" stroke-width="4"/>
-          </svg>
-        </div>
-        <div class="hero-copy">
-          <div class="hero-kicker-row">
-            <p class="hero-flag">AN INDEPENDENT COLLECTION <i>||</i> BY AZU</p>
-            <div class="red-seal" aria-label="阿祖制造">阿祖<br>制造</div>
-          </div>
-          <h1>
-            <span class="mega">SECRET</span>
-            <span class="plate">秘密武器</span>
-            <span class="mega">WEAPONS</span>
-          </h1>
-          <h2>把好点子，<br>变成顺手的工具。</h2>
-          <p class="deck">有的用来拍摄，有的帮我记住灵感。<br>这些亲手做的小工具，放在这里慢慢长大。</p>
-        </div>
-      </div>
-      <div class="checker-line" aria-hidden="true"></div>
-      <div class="hero-foot">
-        <p><b>07</b><span>件工具 / 持续更新</span></p>
-        <p>在线使用 04 · Mac 应用 04</p>
-        <a class="hero-jump" href="#collection">打开武器库 <b>↓</b></a>
-      </div>
-    </section>
-
-    <section id="collection" aria-label="全部工具">
-      <div class="pit">
-        <div class="pit-row">
+  <main>
+    <div class="wrap cover">
+      <div class="mast">
+        <p class="issue">
+          <span class="issue-word">ISSUE</span>
+          <span class="issue-num">07</span>
+          <span class="issue-rule" aria-hidden="true"></span>
+          <span class="issue-meta">2026.10<br>VOL. 07</span>
+        </p>
+        <h1>
+          <span class="zh">秘密武器</span>
+          <span class="en" lang="en">(SECRET WEAPONS)</span>
+        </h1>
+        <p class="deck">把好点子，变成顺手的工具。</p>
+        <hr class="rule">
+        <div class="index">
           <div class="filters" role="group" aria-label="按平台筛选">
-            <button type="button" data-filter="all" aria-pressed="true">全部武器 <span>07</span></button>
-            <button type="button" data-filter="web" aria-pressed="false">在线使用 <span>04</span></button>
-            <button type="button" data-filter="mac" aria-pressed="false">Mac 应用 <span>04</span></button>
+            <button type="button" data-filter="all" aria-pressed="true">全部 <span>07</span></button>
+            <button type="button" data-filter="web" aria-pressed="false">在线 <span>04</span></button>
+            <button type="button" data-filter="mac" aria-pressed="false">Mac <span>04</span></button>
           </div>
           <label class="search-box">
-            <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6">
-              <circle cx="10" cy="10" r="6.5"/>
-              <path d="m15 15 5 5"/>
+            <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
+              <circle cx="10" cy="10" r="6.2" fill="none" stroke="currentColor" stroke-width="1.8"/>
+              <path d="m15 15 5 5" fill="none" stroke="currentColor" stroke-width="1.8"/>
             </svg>
-            <input id="search" type="search" placeholder="找一个顺手的工具…" aria-label="搜索工具" autocomplete="off">
+            <input id="search" type="search" placeholder="搜索工具" aria-label="搜索工具" autocomplete="off">
           </label>
+          <p id="result-count" role="status" aria-live="polite">7 件工具</p>
         </div>
-        <div class="collection-meta">
-          <span>SMALL TOOLS. REAL POSSIBILITIES.</span>
-          <span id="result-count" role="status" aria-live="polite">7 件工具</span>
+      </div>
+
+      <section id="collection" class="stack" aria-label="全部工具">
+        <p class="watermark" aria-hidden="true"><span>S</span><span>W</span></p>
+        <div class="tool-grid">
+          <article class="tool-card tone-paper" data-id="shoot">
+            <div class="card-top">
+              <h2>小怡拍摄助手</h2>
+              <p class="vol">VOL. 01</p>
+            </div>
+            <div class="art" aria-hidden="true">
+              <svg viewBox="0 0 200 132">
+                <path d="M70 34h28l8 12H62z" fill="#14080a"/>
+                <rect x="28" y="42" width="144" height="74" fill="none" stroke="#14080a" stroke-width="3"/>
+                <circle cx="100" cy="80" r="26" fill="none" stroke="#14080a" stroke-width="3"/>
+                <circle cx="100" cy="80" r="10" fill="#d64212"/>
+                <rect x="148" y="50" width="14" height="8" fill="#d64212"/>
+                <path d="M40 56h16M144 102h16" stroke="#14080a" stroke-width="3"/>
+              </svg>
+            </div>
+            <p class="purpose">开拍之前，心里有数。</p>
+            <p class="badge">网页 + Mac</p>
+            <div class="card-actions">
+              <a class="primary-link" href="https://xiaoyi-shoot-assistant.zup2885.chatgpt.site/" target="_blank" rel="noopener noreferrer" aria-label="在线使用小怡拍摄助手">在线使用 <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 13 13 3M6 3h7v7" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></a>
+              <button class="detail-button" type="button" data-detail="shoot" aria-label="查看小怡拍摄助手的使用说明">使用说明</button>
+            </div>
+          </article>
+
+          <article class="tool-card tone-paper" data-id="harbor">
+            <div class="card-top">
+              <h2>拾片 <span class="aka">视频素材下载器</span></h2>
+              <p class="vol">VOL. 02</p>
+            </div>
+            <div class="art" aria-hidden="true">
+              <svg viewBox="0 0 200 132">
+                <rect x="22" y="30" width="156" height="74" fill="#14080a"/>
+                <g fill="#f4efe6">
+                  <rect x="30" y="36" width="9" height="7"/><rect x="30" y="50" width="9" height="7"/><rect x="30" y="64" width="9" height="7"/><rect x="30" y="78" width="9" height="7"/><rect x="30" y="92" width="9" height="7"/>
+                  <rect x="161" y="36" width="9" height="7"/><rect x="161" y="50" width="9" height="7"/><rect x="161" y="64" width="9" height="7"/><rect x="161" y="78" width="9" height="7"/><rect x="161" y="92" width="9" height="7"/>
+                </g>
+                <rect x="48" y="40" width="48" height="54" fill="#f4efe6"/>
+                <path d="M48 78 96 46v48H48z" fill="#14080a"/>
+                <rect x="104" y="40" width="48" height="54" fill="#d64212"/>
+                <circle cx="128" cy="67" r="12" fill="#14080a"/>
+              </svg>
+            </div>
+            <p class="purpose">把链接，变成手边的素材。</p>
+            <p class="badge">Mac 1.5.0</p>
+            <div class="card-actions">
+              <a class="primary-link" href="https://github.com/zup2885-cell/zupeng-personal-site/releases/download/clipharbor-v1.5.0/ClipHarbor-Mac-1.5.0.zip" download aria-label="下载拾片 Mac 1.5.0">下载 Mac <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2v8M4.5 7.5 8 11l3.5-3.5M3 13h10" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></a>
+              <button class="detail-button" type="button" data-detail="harbor" aria-label="查看拾片 · 视频素材下载器的使用说明">使用说明</button>
+            </div>
+          </article>
+
+          <article class="tool-card tone-black" data-id="memo">
+            <div class="card-top">
+              <h2><span class="name-en" lang="en">Memo</span> <span class="aka">灵感备忘录</span></h2>
+              <p class="vol">VOL. 03</p>
+            </div>
+            <div class="art" aria-hidden="true">
+              <svg viewBox="0 0 200 132">
+                <rect x="52" y="16" width="96" height="104" fill="#f4efe6"/>
+                <path d="M52 16h26l12 14H52z" fill="#d64212"/>
+                <path d="M66 50h68M66 66h68M66 82h44" stroke="#14080a" stroke-width="3"/>
+                <path d="M128 88l30-42 8 6-30 44-12 2z" fill="#14080a"/>
+              </svg>
+            </div>
+            <p class="purpose">先记下来，再慢慢实现。</p>
+            <p class="badge">网页原型</p>
+            <div class="card-actions">
+              <a class="primary-link" href="https://zup2885-cell.github.io/memo/" target="_blank" rel="noopener noreferrer" aria-label="在线使用 Memo 灵感备忘录">在线使用 <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 13 13 3M6 3h7v7" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></a>
+              <button class="detail-button" type="button" data-detail="memo" aria-label="查看 Memo · 灵感备忘录的使用说明">使用说明</button>
+            </div>
+          </article>
+
+          <article class="tool-card tone-red" data-id="shots">
+            <div class="card-top">
+              <h2>阿祖镜头库</h2>
+              <p class="vol">VOL. 04</p>
+            </div>
+            <div class="art" aria-hidden="true">
+              <svg viewBox="0 0 200 132" fill="none">
+                <circle cx="74" cy="68" r="34" stroke="#f4efe6" stroke-width="3"/>
+                <circle cx="126" cy="68" r="34" stroke="#f4efe6" stroke-width="3"/>
+                <path d="M96 68h8" stroke="#f4efe6" stroke-width="3"/>
+                <circle cx="74" cy="68" r="8" fill="#f4efe6"/>
+                <circle cx="126" cy="68" r="8" fill="#d64212" stroke="#f4efe6" stroke-width="3"/>
+                <path d="M36 68h12M152 68h12" stroke="#f4efe6" stroke-width="3"/>
+              </svg>
+            </div>
+            <p class="purpose">好镜头，值得有个位置。</p>
+            <p class="badge">在线工具</p>
+            <div class="card-actions">
+              <a class="primary-link" href="https://azu-shot-library.zup2885.workers.dev/" target="_blank" rel="noopener noreferrer" aria-label="在线使用阿祖镜头库">在线使用 <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 13 13 3M6 3h7v7" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></a>
+              <button class="detail-button" type="button" data-detail="shots" aria-label="查看阿祖镜头库的使用说明">使用说明</button>
+            </div>
+          </article>
+
+          <article class="tool-card tone-paper" data-id="markdown">
+            <div class="card-top">
+              <h2><span class="name-en" lang="en">Markdown</span> <span class="aka">右键新建</span></h2>
+              <p class="vol">VOL. 05</p>
+            </div>
+            <div class="art art-md" aria-hidden="true">
+              <b>MD</b>
+              <i class="cursor"></i>
+            </div>
+            <p class="purpose">一个右键，开一页新想法。</p>
+            <p class="badge">Mac 应用</p>
+            <div class="card-actions">
+              <a class="primary-link" href="downloads/markdown-mac.zip" download aria-label="下载 Markdown 右键新建 Mac 版">下载 Mac <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2v8M4.5 7.5 8 11l3.5-3.5M3 13h10" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></a>
+              <button class="detail-button" type="button" data-detail="markdown" aria-label="查看 Markdown 右键新建的使用说明">使用说明</button>
+            </div>
+          </article>
+
+          <article class="tool-card tone-hot" id="screen-chinese" data-id="screen-chinese">
+            <div class="card-top">
+              <h2>屏幕中文助手</h2>
+              <p class="vol">VOL. 06</p>
+            </div>
+            <div class="art" aria-hidden="true">
+              <div class="screen-frame">
+                <span class="en-bit" lang="en">EN</span>
+                <span class="zh-bit">中</span>
+                <i class="scan"></i>
+              </div>
+            </div>
+            <p class="purpose">看得懂，也用得顺。</p>
+            <p class="badge">Mac 2.0.0</p>
+            <div class="card-actions">
+              <a class="primary-link" href="downloads/screen-chinese-mac-2.0.0.zip" download aria-label="下载屏幕中文助手 Mac 2.0.0">下载 Mac <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2v8M4.5 7.5 8 11l3.5-3.5M3 13h10" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></a>
+              <button class="detail-button" type="button" data-detail="screen-chinese" aria-label="查看屏幕中文助手的使用说明">使用说明</button>
+            </div>
+          </article>
+
+          <article class="tool-card tone-black" id="topic-radar" data-id="topic-radar">
+            <div class="card-top">
+              <h2>选题雷达</h2>
+              <p class="vol">VOL. 07</p>
+            </div>
+            <div class="art" aria-hidden="true">
+              <svg viewBox="0 0 200 132">
+                <g fill="none" stroke="#f4efe6" stroke-width="2">
+                  <circle cx="100" cy="66" r="50"/>
+                  <circle cx="100" cy="66" r="32"/>
+                  <circle cx="100" cy="66" r="14"/>
+                  <path d="M100 12v10M100 110v10M46 66h10M144 66h10"/>
+                </g>
+                <path d="M100 66 136 32A50 50 0 0 0 100 16Z" fill="#e24a12"/>
+                <circle cx="100" cy="66" r="4" fill="#f4efe6"/>
+              </svg>
+            </div>
+            <p class="purpose">看懂一件事，再决定拍什么。</p>
+            <p class="badge">在线快照</p>
+            <div class="card-actions">
+              <a class="primary-link" href="../tools/topic-radar/" aria-label="在线使用选题雷达">在线使用 <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 13 13 3M6 3h7v7" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></a>
+              <button class="detail-button" type="button" data-detail="topic-radar" aria-label="查看选题雷达的使用说明">使用说明</button>
+            </div>
+          </article>
         </div>
-        <div class="checker-line" aria-hidden="true"></div>
-      </div>
 
-      <div class="tool-grid">
-        <article class="tool-card tone-red" data-id="shoot">
-          <div class="chrome" aria-hidden="true"><span class="mark"></span><span>拍摄创作</span><span>网页 + Mac</span></div>
-          <div class="art" aria-hidden="true">
-            <i class="checker"></i>
-            <i class="blk"></i>
-            <i class="slash"></i>
-            <em class="idx">NO. 01</em>
-            <img src="assets/shoot.png" alt="" width="132" height="132">
-          </div>
-          <div class="mini-workflow">
-            <div class="workflow-top"><span>SHOOTING PLAN</span><span>→</span></div>
-            <div class="workflow-steps"><span><small>01</small>准备</span><span><small>02</small>拍摄</span><span><small>03</small>交接</span></div>
-            <span class="checked">✓ 事情有条理，开拍更从容。</span>
-          </div>
-          <p class="display"><span>SHOOT</span><span>ASSISTANT</span></p>
-          <div class="tool-body">
-            <p class="tool-kind"><span>拍摄创作</span><span>网页 + Mac</span></p>
-            <h2>小怡拍摄助手</h2>
-            <p class="tool-description">从拍前准备到现场镜头，再到收工交接，把一条视频的事情理顺。</p>
-            <div class="card-actions">
-              <a class="primary-link" href="https://xiaoyi-shoot-assistant.zup2885.chatgpt.site/" target="_blank" rel="noopener noreferrer">在线使用 <span>↗</span></a>
-              <button class="detail-button" type="button" data-detail="shoot" aria-label="查看小怡拍摄助手的使用说明">使用说明 +</button>
-            </div>
-          </div>
-        </article>
-
-        <article class="tool-card tone-black" data-id="harbor">
-          <div class="chrome" aria-hidden="true"><span class="mark"></span><span>拍摄创作</span><span>Mac 应用</span></div>
-          <div class="art" aria-hidden="true">
-            <i class="checker"></i>
-            <i class="blk"></i>
-            <i class="slash"></i>
-            <em class="idx">NO. 02</em>
-            <img src="assets/harbor.png" alt="" width="120" height="120">
-          </div>
-          <p class="display"><span>CLIP</span><span>HARBOR</span></p>
-          <div class="tool-body">
-            <p class="tool-kind"><span>拍摄创作</span><span>Mac 应用</span></p>
-            <h2>拾片 · 视频素材下载器</h2>
-            <p class="tool-description">整理视频链接、下载素材、截取片段；可对本地视频做自动去水印／去字幕（也可精细框选），以及音频分离。</p>
-            <div class="card-actions">
-              <a class="primary-link" href="https://github.com/zup2885-cell/zupeng-personal-site/releases/download/clipharbor-v1.5.0/ClipHarbor-Mac-1.5.0.zip" download>下载 Mac 1.5.0 <span>↓</span></a>
-              <button class="detail-button" type="button" data-detail="harbor" aria-label="查看拾片 · 视频素材下载器的使用说明">使用说明 +</button>
-            </div>
-          </div>
-        </article>
-
-        <article class="tool-card tone-white" data-id="memo">
-          <div class="chrome" aria-hidden="true"><span class="mark"></span><span>效率辅助</span><span>网页原型</span></div>
-          <div class="art" aria-hidden="true">
-            <i class="checker"></i>
-            <i class="blk"></i>
-            <i class="slash"></i>
-            <em class="idx">NO. 03</em>
-            <svg class="mark" viewBox="0 0 80 100" aria-hidden="true">
-              <rect x="10" y="8" width="58" height="80" fill="#f4f4f4" stroke="#111" stroke-width="3"/>
-              <path d="M22 32h36M22 46h36M22 60h22" stroke="#c70515" stroke-width="3"/>
-              <path d="M10 8h16l6 10H10z" fill="#111"/>
-            </svg>
-          </div>
-          <p class="display"><span class="sub">A LITTLE</span><span>MEMORY</span></p>
-          <div class="tool-body">
-            <p class="tool-kind"><span>效率辅助</span><span>网页原型</span></p>
-            <h2>Memo · 灵感备忘录</h2>
-            <p class="tool-description">把零散想法放进便签、待办和日历。天空与麦田主题，让记录轻松一点。</p>
-            <div class="card-actions">
-              <a class="primary-link" href="https://zup2885-cell.github.io/memo/" target="_blank" rel="noopener noreferrer">在线使用 <span>↗</span></a>
-              <button class="detail-button" type="button" data-detail="memo" aria-label="查看Memo · 灵感备忘录的使用说明">使用说明 +</button>
-            </div>
-          </div>
-        </article>
-
-        <article class="tool-card tone-black" data-id="shots">
-          <div class="chrome" aria-hidden="true"><span class="mark"></span><span>素材与动效</span><span>在线工具</span></div>
-          <div class="art" aria-hidden="true">
-            <i class="checker"></i>
-            <i class="blk"></i>
-            <i class="slash"></i>
-            <em class="idx">NO. 04</em>
-            <svg class="mark" viewBox="0 0 220 120" aria-hidden="true">
-              <rect x="8" y="18" width="58" height="78" fill="none" stroke="#f4f4f4" stroke-width="4"/>
-              <rect x="80" y="18" width="58" height="78" fill="#c70515"/>
-              <rect x="152" y="18" width="58" height="78" fill="none" stroke="#f4f4f4" stroke-width="4"/>
-              <path d="M18 8h14M40 8h14M62 8h8M90 8h14M112 8h14M162 8h14M184 8h14" stroke="#f4f4f4" stroke-width="4"/>
-            </svg>
-          </div>
-          <p class="display"><span>SHOT</span><span>LIBRARY</span></p>
-          <div class="tool-body">
-            <p class="tool-kind"><span>素材与动效</span><span>在线工具</span></p>
-            <h2>阿祖镜头库</h2>
-            <p class="tool-description">把动效、视频和参考素材按分类放好，找到灵感后，直接进入对应效果的预览与编辑。</p>
-            <div class="card-actions">
-              <a class="primary-link" href="https://azu-shot-library.zup2885.workers.dev/" target="_blank" rel="noopener noreferrer">在线使用 <span>↗</span></a>
-              <button class="detail-button" type="button" data-detail="shots" aria-label="查看阿祖镜头库的使用说明">使用说明 +</button>
-            </div>
-          </div>
-        </article>
-
-        <article class="tool-card tone-black" data-id="markdown">
-          <div class="chrome" aria-hidden="true"><span class="mark"></span><span>效率辅助</span><span>Mac 应用</span></div>
-          <div class="art" aria-hidden="true">
-            <i class="checker"></i>
-            <i class="blk"></i>
-            <i class="slash"></i>
-            <em class="idx">NO. 05</em>
-            <svg class="mark" viewBox="0 0 140 90" aria-hidden="true">
-              <rect x="4" y="10" width="132" height="70" fill="#f4f4f4"/>
-              <path d="M18 58V28l16 16 16-16v30" fill="none" stroke="#111" stroke-width="5" stroke-linejoin="round"/>
-              <path d="M78 28v30m-10-10 10 10 10-10" fill="none" stroke="#c70515" stroke-width="5" stroke-linejoin="round"/>
-            </svg>
-          </div>
-          <p class="display"><span class="sub">QUICK</span><span>MARKDOWN</span></p>
-          <div class="tool-body">
-            <p class="tool-kind"><span>效率辅助</span><span>Mac 应用</span></p>
-            <h2>Markdown 右键新建</h2>
-            <p class="tool-description">在 Finder 里快速创建 Markdown 文件，少一次打开编辑器、另存和选目录的来回。</p>
-            <div class="card-actions">
-              <a class="primary-link" href="downloads/markdown-mac.zip" download>下载 Mac 版 <span>↓</span></a>
-              <button class="detail-button" type="button" data-detail="markdown" aria-label="查看Markdown 右键新建的使用说明">使用说明 +</button>
-            </div>
-          </div>
-        </article>
-
-        <article class="tool-card tone-black" id="screen-chinese" data-id="screen-chinese">
-          <div class="chrome" aria-hidden="true"><span class="mark"></span><span>效率辅助</span><span>Mac 应用</span></div>
-          <div class="art" aria-hidden="true">
-            <i class="checker"></i>
-            <i class="blk"></i>
-            <i class="slash"></i>
-            <em class="idx">NO. 06</em>
-            <b class="han">译</b>
-          </div>
-          <p class="display"><span>SCREEN</span><span>CHINESE</span><span class="sub">ASSISTANT</span></p>
-          <div class="tool-body">
-            <p class="tool-kind"><span>效率辅助</span><span>Mac 应用</span></p>
-            <h2>屏幕中文助手</h2>
-            <p class="tool-description">识别屏幕英文，自动显示中文；自带网页窗口可直接替换文字，保留字体、链接和按钮。</p>
-            <div class="card-actions">
-              <a class="primary-link" href="downloads/screen-chinese-mac-2.0.0.zip" download>下载 Mac 版 <span>↓</span></a>
-              <button class="detail-button" type="button" data-detail="screen-chinese" aria-label="查看屏幕中文助手的使用说明">使用说明 +</button>
-            </div>
-          </div>
-        </article>
-
-        <article class="tool-card tone-black" id="topic-radar" data-id="topic-radar">
-          <div class="chrome" aria-hidden="true"><span class="mark"></span><span>内容选题</span><span>在线快照</span></div>
-          <div class="art" aria-hidden="true">
-            <i class="checker"></i>
-            <i class="blk"></i>
-            <i class="slash"></i>
-            <em class="idx">NO. 07</em>
-            <svg class="mark" viewBox="0 0 160 160" aria-hidden="true">
-              <circle cx="80" cy="80" r="62" fill="none" stroke="#f4f4f4" stroke-width="4"/>
-              <circle cx="80" cy="80" r="38" fill="none" stroke="#f4f4f4" stroke-width="4"/>
-              <circle cx="80" cy="80" r="8" fill="#c70515"/>
-              <path d="M80 80 128 38" stroke="#c70515" stroke-width="6"/>
-            </svg>
-          </div>
-          <p class="display"><span>TOPIC</span><span>RADAR</span></p>
-          <div class="tool-body">
-            <p class="tool-kind"><span>内容选题</span><span>在线快照</span></p>
-            <h2>选题雷达</h2>
-            <p class="tool-description">把公开热榜和订阅源里的线索整理成选题，看懂一件事，再决定拍什么。</p>
-            <div class="card-actions">
-              <a class="primary-link" href="../tools/topic-radar/">在线使用 <span>↗</span></a>
-              <button class="detail-button" type="button" data-detail="topic-radar" aria-label="查看选题雷达的使用说明">使用说明 +</button>
-            </div>
-          </div>
-        </article>
-      </div>
-
-      <div class="empty" id="empty" hidden>
-        <p>换个词，再找找。</p>
-        <h2>这件武器，还没造出来。</h2>
-        <button id="reset" type="button">查看全部工具 ↗</button>
-      </div>
-      <noscript><p>工具链接与下载可以直接使用；开启 JavaScript 后可搜索、筛选和查看使用说明。</p></noscript>
-    </section>
-
-    <section class="closing" id="about">
-      <div class="art" aria-hidden="true">
-        <i class="checker"></i>
-        <i class="slash"></i>
-        <b>07</b>
-      </div>
-      <div class="closing-copy">
-        <p class="eyebrow">A NOTE FROM THE MAKER</p>
-        <p class="display">秘密武器</p>
-        <h2>从自己的小麻烦出发，<br>做一点真正用得上的东西。</h2>
-        <a href="../azu-ip/">走进阿祖的个人空间 <span>↗</span></a>
-      </div>
-    </section>
-
-    <footer class="site-footer">
-      <span>AZU © 2026 · 秘密武器</span>
-      <span>保持好奇，继续制造。</span>
-      <span>MADE WITH IDEAS &amp; A LITTLE PATIENCE.</span>
-    </footer>
+        <div class="empty" id="empty" hidden>
+          <p>没有匹配的工具。</p>
+          <button id="reset" type="button">查看全部</button>
+        </div>
+        <noscript><p class="noscript-note">工具链接可以直接打开。开启 JavaScript 后可搜索、筛选和查看使用说明。</p></noscript>
+      </section>
+    </div>
   </main>
 
+  <footer class="footband" id="note">
+    <div class="wrap foot-inner">
+      <div class="maker">
+        <p class="maker-kicker">手记</p>
+        <p>这些工具，解决我自己的问题。希望也能成为你的秘密武器。</p>
+      </div>
+      <a class="maker-link" href="../azu-ip/">
+        <span class="go" aria-hidden="true">→</span>
+        <span>认识阿祖</span>
+      </a>
+      <p class="legal">阿祖 · 2026 · 秘密武器</p>
+    </div>
+  </footer>
+
   <dialog id="details" aria-labelledby="detail-name">
-    <div class="checker-line" aria-hidden="true"></div>
     <div class="dialog-inner">
-      <button class="close" id="close-details" type="button" aria-label="关闭使用说明">×</button>
+      <button class="close" id="close-details" type="button" aria-label="关闭使用说明">
+        <svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M3 3l10 10M13 3 3 13" stroke="currentColor" stroke-width="1.8"/></svg>
+      </button>
       <p class="eyebrow" id="detail-en"></p>
       <h2 id="detail-name"></h2>
       <p class="dialog-desc" id="detail-description"></p>
