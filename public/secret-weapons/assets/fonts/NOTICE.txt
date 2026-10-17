@@ -1,0 +1,6 @@
+These fonts are licensed under the SIL Open Font License, Version 1.1.
+The license text is in OFL.txt.
+
+- Chakra Petch: Copyright 2020 The Chakra Petch Project Authors (https://github.com/cadson/Chakra-Petch)
+- Share Tech Mono: Copyright 2013 Carrois Apostrophe
+- Noto Sans SC: Copyright 2022 The Noto Project Authors (https://github.com/notofonts/latin-greek-cyrillic)
