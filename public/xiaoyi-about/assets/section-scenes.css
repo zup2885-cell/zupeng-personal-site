@@ -1,0 +1,48 @@
+/* Scrolling paper panels: the cover is deliberately outside this system. */
+html.scene-ready #main{position:relative;background:linear-gradient(to bottom,transparent 0 var(--cover-end,100vh),#e13e17 var(--cover-end,100vh) 100%);padding-bottom:100px}
+html.scene-ready #main>.scene-anchor{height:0;position:relative;pointer-events:none}
+html.scene-ready #main>.scene-anchor:first-of-type{height:68px}
+html.scene-ready #main>.scene-card{position:sticky;top:var(--scene-top,104px);width:calc(100% - 320px);max-width:1100px;margin:0 auto 100px;padding:64px 48px;background:var(--paper);border:1px solid #fff0df8c;border-radius:18px;box-shadow:0 20px 58px #7c190e38;transform-origin:50% 100%;transform:translate3d(var(--scene-x,0px),var(--scene-y,0px),0) rotate(var(--scene-angle,0deg)) scale(var(--scene-scale,1));isolation:isolate;scroll-margin-top:110px;transition:box-shadow .25s}
+html.scene-ready #main>.scene-card:first-of-type{margin-top:0}
+html.scene-ready #main>.scene-card.scene-current{box-shadow:0 25px 65px #70221842}
+/* Plan expansion stays in normal flow so the hovered header remains in place. */
+html.scene-ready #main>#works.scene-card{position:relative;top:auto;transform-origin:50% 0}
+html.practice-layout-settling{overflow-anchor:none;scroll-behavior:auto}
+html.practice-layout-settling body{overflow-anchor:none}
+html.scene-ready #main>.scene-card .section-heading{position:relative}
+html.scene-ready #main>.scene-card .section-heading::after{content:'';display:block;width:42px;height:2px;margin-top:24px;background:var(--orange)}
+.scene-pixels{position:absolute;top:-29px;left:0;width:100%;height:42px;opacity:var(--scene-pixels,0);transform:translateY(var(--scene-pixel-y,0px));pointer-events:none;z-index:0}
+.scene-pixels svg{display:block;width:100%;height:100%;overflow:visible;fill:var(--paper)}
+.scene-rail{position:fixed;z-index:14;left:22px;top:50%;width:132px;transform:translateY(-45%);display:grid;gap:5px;padding:13px 8px 13px 0;opacity:0;visibility:hidden;pointer-events:none;transition:opacity .25s,visibility .25s;color:#ffeadc;font-family:var(--sans)}
+.scene-content .scene-rail{opacity:1;visibility:visible;pointer-events:auto}
+.scene-rail::before{content:'';position:absolute;left:-5px;top:15px;bottom:15px;width:1px;background:repeating-linear-gradient(to bottom,#ffdfc260 0 1px,transparent 1px 7px)}
+.scene-rail a{position:relative;display:flex;align-items:center;gap:9px;padding:10px 9px;border-radius:5px;font-size:11px;line-height:1.6;white-space:nowrap;color:#ffd2be;transition:color .2s,background .2s,transform .2s}
+.scene-rail a>span{font-family:Georgia,serif;font-size:10px;opacity:.72}
+.scene-rail a::before{content:'';position:absolute;left:-5px;top:50%;width:5px;height:1px;background:#ffd2be88;transition:width .2s,background .2s}
+.scene-rail a:hover,.scene-rail a[aria-current]{background:#b92e144d;color:#fff9ec;transform:translateX(3px)}
+.scene-rail a[aria-current]{font-weight:600}
+.scene-rail a[aria-current]::before{width:10px;background:#fff3df}
+.scene-rail a[aria-current]>span{opacity:1}
+html.page-editing #main>.scene-card{position:relative;top:auto;transform:none!important}
+html.page-editing .scene-pixels{display:none}
+
+@media(max-width:1100px){
+  html.scene-ready #main>.scene-card{width:calc(100% - 64px);padding:54px 36px;margin-bottom:80px}
+  .scene-rail{display:none}
+}
+@media(max-width:760px){
+  html.scene-ready #main{padding-bottom:60px}
+  html.scene-ready #main>.scene-anchor:first-of-type{height:48px}
+  html.scene-ready #main>.scene-card{width:calc(100% - 28px);padding:42px 24px;margin-bottom:65px;border-radius:13px}
+  html.scene-ready #main>.scene-card .section-heading::after{margin-top:20px;width:32px}
+  .scene-pixels{height:27px;top:-18px}
+}
+@media(max-width:480px){
+  html.scene-ready #main>.scene-card{width:calc(100% - 22px);padding:38px 20px}
+  html.scene-ready #main>.scene-card .performance-board{padding-left:16px;padding-right:16px}
+}
+@media(prefers-reduced-motion:reduce){
+  html.scene-ready #main>.scene-card{position:relative;top:auto;transform:none!important}
+  .scene-pixels{display:none}
+  .scene-rail,.scene-rail a{transition:none}
+}

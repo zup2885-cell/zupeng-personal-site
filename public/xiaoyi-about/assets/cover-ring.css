@@ -1,0 +1,2 @@
+/* Soft contact shadow under the floating rings; it tightens as they rise. */
+.cover-art::after{content:'';position:absolute;left:22%;right:22%;bottom:6%;height:9%;border-radius:50%;background:radial-gradient(closest-side,rgba(70,12,2,.42),rgba(70,12,2,0));transform:scale(calc(1 - var(--ring-bob,0) * 1.6));opacity:calc(.85 - var(--ring-bob,0) * 2.5);pointer-events:none;z-index:-1}

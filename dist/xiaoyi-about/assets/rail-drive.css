@@ -1,0 +1,73 @@
+/* Section rail as a road with a Tank 500 driving on it (see rail-drive.js). Larger than the
+   original rail, so the cards make a little more room on wide screens. */
+html.scene-ready #main>.scene-card{width:calc(100% - 460px)}
+.scene-rail.rail-driving{left:50px;width:166px;gap:8px;padding:16px 10px 16px 0}
+.scene-rail.rail-driving::before{display:none}
+.scene-rail.rail-driving a{gap:12px;padding:13px 12px;border-radius:7px;font-size:15px}
+.scene-rail.rail-driving a>span{font-size:14px}
+.rail-road{position:absolute;left:-40px;top:2px;bottom:2px;width:32px;border-radius:16px;background:#5a1d0e5e;box-shadow:inset 0 0 0 1px #ffe2c829;pointer-events:none}
+.rail-road::before{content:'';position:absolute;left:50%;top:12px;bottom:12px;width:2px;transform:translateX(-50%);background:repeating-linear-gradient(to bottom,#ffe9d4b3 0 7px,transparent 7px 15px)}
+.rail-trail{position:absolute;left:0;right:0;top:0;height:0;border-radius:16px 16px 6px 6px;background:linear-gradient(to bottom,#ffd9b81a,#ffd9b852)}
+.rail-car{position:absolute;left:50%;top:0;width:34px;height:58px;transform:translate(-50%,0) translateY(-50%);will-change:transform;filter:drop-shadow(0 4px 5px #4a120685)}
+.rail-car svg{position:relative;display:block}
+.tank-body{fill:#2f3431;stroke:#151816;stroke-width:.8}
+.tank-hood{fill:#3a403c}
+.tank-crease{stroke:#262a27;stroke-width:.7;fill:none}
+.tank-glass{fill:#141917}
+.tank-roof{fill:#454c47}
+.tank-rail{stroke:#c9ccc7;stroke-width:1.4;stroke-linecap:round;fill:none}
+.tank-bar{stroke:#9ea29c;stroke-width:.9;fill:none}
+.tank-tire{fill:#151715}
+.tank-hub{fill:#5b615c}
+.tank-grille{stroke:#c9ccc7;stroke-width:1.6;stroke-linecap:round}
+.car-light{fill:#fff7c2}
+.car-tail{fill:#d23a1f}
+.car-signal{fill:#ffb347;opacity:0}
+/* Headlight beam ahead of the car (front faces down at 0deg). */
+.rail-beam{position:absolute;left:50%;top:50px;width:44px;height:64px;transform:translateX(-50%);background:radial-gradient(ellipse 50% 100% at 50% 0,#fff6c8 0%,#fff6c800 72%);clip-path:polygon(28% 0,72% 0,100% 100%,0 100%);opacity:calc(.25 + var(--car-speed,0) * .6);transition:opacity .25s;pointer-events:none}
+.scene-rail[data-signal] .rail-beam{opacity:.95}
+/* Turn signals blink toward the section under the pointer, and once when passing a section. */
+.scene-rail[data-signal] .car-signal{animation:railSignal .62s steps(1) infinite}
+.scene-rail.rail-blink .car-signal{animation:railSignal .62s steps(1) 2}
+@keyframes railSignal{0%{opacity:1}50%{opacity:0}}
+.scene-rail.rail-driving a::before{left:-14px;width:9px;background:#ffd2be55}
+.scene-rail.rail-driving a[aria-current]::before{left:-14px;width:13px;background:#fff3df}
+.scene-rail.rail-driving a.rail-hover:not([aria-current]){background:#b92e1433;transform:translateX(5px)}
+@media(max-width:1280px){html.scene-ready #main>.scene-card{width:calc(100% - 400px)}.scene-rail.rail-driving{left:48px;width:160px}.scene-rail.rail-driving a{font-size:14px;padding:11px 10px}}
+@media(prefers-reduced-motion:reduce){.scene-rail[data-signal] .car-signal,.scene-rail.rail-blink .car-signal{animation:none;opacity:1}}
+
+/* Car-styled labels: dashboard digits and slanted racing lettering. Words are unchanged. */
+@font-face{font-family:"Rail Digits";src:url("fonts/orbitron-digits.woff2") format("woff2");font-weight:700;font-display:swap;unicode-range:U+30-39}
+.scene-rail.rail-driving a{position:relative;overflow:hidden}
+.scene-rail.rail-driving .rail-number{flex:none;display:inline-grid;place-items:center;min-width:34px;height:24px;padding:0 6px;border-radius:5px;background:linear-gradient(180deg,#2a1610,#3a1e14);box-shadow:inset 0 0 0 1px #ffb46a33,inset 0 -6px 10px #00000040;font:700 13px/1 "Rail Digits",ui-monospace,monospace;letter-spacing:.08em;color:#ffb35c;text-shadow:0 0 6px #ff9a3c80;opacity:.82}
+.scene-rail.rail-driving .rail-label{display:inline-block;white-space:nowrap;font-weight:800;font-size:15px;letter-spacing:.04em;transform:skewX(-11deg);color:#fff1e2;text-shadow:1px 1px 0 #a8391780}
+.scene-rail.rail-driving a:not([aria-current]) .rail-label{font-weight:700;color:#ffe2cc}
+/* Speed lines behind the label. */
+.scene-rail.rail-driving a::after{content:'';position:absolute;left:-30%;top:50%;width:60%;height:14px;transform:translateY(-50%) skewX(-20deg);opacity:0;pointer-events:none;background:linear-gradient(#fff2df 0 0) 0 1px/70% 1.5px no-repeat,linear-gradient(#fff2df 0 0) 30% 6px/100% 1.5px no-repeat,linear-gradient(#fff2df 0 0) 10% 11px/55% 1.5px no-repeat;-webkit-mask-image:linear-gradient(90deg,transparent,#000 40%,transparent);mask-image:linear-gradient(90deg,transparent,#000 40%,transparent)}
+.scene-rail.rail-driving a.rail-hover::after{animation:railSpeed .55s cubic-bezier(.3,0,.2,1)}
+@keyframes railSpeed{0%{left:-40%;opacity:0}30%{opacity:.7}100%{left:110%;opacity:0}}
+/* Current section: lit display, racing stripe and steady speed lines. */
+.scene-rail.rail-driving a[aria-current] .rail-number{opacity:1;color:#ffd08a;text-shadow:0 0 8px #ffae4d;box-shadow:inset 0 0 0 1px #ffc27a66,0 0 12px #ff8a3a40}
+.scene-rail.rail-driving a[aria-current] .rail-label{position:relative;font-size:16px;padding-bottom:3px}
+.scene-rail.rail-driving a[aria-current] .rail-label::after{content:'';position:absolute;left:2px;right:-4px;bottom:-1px;height:3px;background:repeating-linear-gradient(90deg,#fff3df 0 10px,transparent 10px 13px,#ffb35c 13px 17px,transparent 17px 20px);border-radius:2px}
+.scene-rail.rail-driving a[aria-current]::after{opacity:.35;left:auto;right:6px;width:28px;animation:none;background:linear-gradient(#fff2df 0 0) 100% 1px/60% 1.5px no-repeat,linear-gradient(#fff2df 0 0) 100% 6px/100% 1.5px no-repeat,linear-gradient(#fff2df 0 0) 100% 11px/75% 1.5px no-repeat}
+@media(prefers-reduced-motion:reduce){.scene-rail.rail-driving a.rail-hover::after{animation:none}}
+.scene-rail.rail-driving .rail-label,.scene-rail.rail-driving .rail-number{position:relative;z-index:1}
+
+/* Traffic lights beside the road: green while driving toward a section, amber then red when
+   the car stops there. The old tick marks give way to them. */
+.scene-rail.rail-driving{left:62px}
+.rail-road{left:-52px}
+.scene-rail.rail-driving a::before,.scene-rail.rail-driving a[aria-current]::before{display:none}
+.rail-light{position:absolute;left:calc(100% + 5px);top:0;width:11px;height:29px;padding:2px;display:grid;gap:1.6px;border-radius:3.5px;background:#1f1310;box-shadow:inset 0 0 0 1px #ffffff14,0 2px 4px #3a0e0566;transform:translateY(-50%)}
+.rail-light::before{content:'';position:absolute;right:100%;top:50%;width:5px;height:1.5px;background:#1f1310}
+.rail-light i{display:block;width:7px;height:7px;border-radius:50%;background:#4a2b24;transition:background .18s,box-shadow .18s}
+.rail-light i:nth-child(2){background:#4a3a20}
+.rail-light i:nth-child(3){background:#23402c}
+.rail-light[data-light="red"] i:nth-child(1){background:#ff4632;box-shadow:0 0 7px 1px #ff4632cc}
+.rail-light[data-light="amber"] i:nth-child(2){background:#ffc235;box-shadow:0 0 7px 1px #ffc235cc}
+.rail-light[data-light="green"] i:nth-child(3){background:#3fe07c;box-shadow:0 0 7px 1px #3fe07ccc}
+/* Brake lights while waiting at red. */
+.scene-rail.rail-braking .car-tail{fill:#ff3a22;filter:drop-shadow(0 0 2.5px #ff3a22)}
+html.scene-ready #main>.scene-card{width:calc(100% - 480px)}
+@media(max-width:1280px){html.scene-ready #main>.scene-card{width:calc(100% - 420px)}.scene-rail.rail-driving{left:58px}}

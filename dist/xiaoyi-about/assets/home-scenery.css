@@ -1,0 +1,13 @@
+/* Preview: cover page set in a sunlit landscape instead of the flat orange wall.
+   The photo is mirrored so the orange-roofed house sits left and the tree spans the middle;
+   past its right edge the sky and lawn continue as a matching gradient behind the portrait. */
+.hero{background:linear-gradient(180deg,rgb(77,146,162) 0%,rgb(104,150,163) 45%,rgb(110,150,156) calc(82% - 1px),rgb(114,97,41) 82%,rgb(101,86,27) 100%)}
+.hero-scenery{position:absolute;inset:0;z-index:-1;overflow:hidden;pointer-events:none}
+.hero-scenery img{position:absolute;left:0;top:-51.3%;height:176.5%;width:auto;max-width:none;transform:scaleX(-1);-webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 14%);mask-image:linear-gradient(90deg,transparent 0%,#000 14%)}
+.hero:before{background:linear-gradient(90deg,rgba(14,30,38,.34) 0%,rgba(14,30,38,.14) 34%,transparent 52%),linear-gradient(0deg,rgba(28,22,8,.3),transparent 30%)}
+.hero-photo img{-webkit-mask-image:none;mask-image:none;filter:drop-shadow(-16px 10px 28px rgba(10,22,28,.32))}
+.hero h1,.hero-role{text-shadow:0 4px 22px rgba(10,30,40,.4)}
+@media(max-width:760px){
+  .hero-scenery img{left:50%;top:0;height:100%;transform:translateX(-50%) scaleX(-1);-webkit-mask-image:none;mask-image:none}
+  .hero:before{background:linear-gradient(180deg,rgba(14,30,38,.45) 0%,rgba(14,30,38,.18) 30%,transparent 55%)}
+}

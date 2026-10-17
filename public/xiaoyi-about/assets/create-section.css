@@ -1,0 +1,10 @@
+/* 07 / 一起创作: three short invitations, in the same paper style as the other sections. */
+.create-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:8px}
+.create-card{position:relative;padding:26px 24px 24px;border:1px solid var(--line);border-radius:10px;background:var(--white);transition:transform .25s,box-shadow .25s,border-color .25s}
+.create-card:hover{transform:translateY(-3px);border-color:#e9b9a0;box-shadow:0 14px 30px #9342261a}
+.create-index{display:inline-grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--orange);color:#fff8f1;font:600 13px/1 Georgia,serif}
+.create-card h3{margin:16px 0 8px;font-size:20px;color:var(--ink)}
+.create-card p{margin:0;color:var(--muted);font-size:14px;line-height:1.9}
+.create-card strong{color:var(--orange-dark);font-weight:600}
+.create-contact{background:#fff6ee;border-color:#efc7af}
+@media(max-width:900px){.create-grid{grid-template-columns:1fr}}

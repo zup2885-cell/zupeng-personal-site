@@ -1,0 +1,8 @@
+/* Softer cover orange: less red, a little lighter (was #e13e17). The portrait photo's own
+   backdrop was recoloured to this orange, so her hair keeps its natural edges. */
+.topbar{background:#eb6d37}
+.hero{background:radial-gradient(ellipse 55% 70% at 66% 42%,#f3874f 0%,rgba(243,135,79,0) 70%),linear-gradient(90deg,#eb6d37 0%,#eb6d37 55%,#dd5f2c 100%)}
+.hero:before{background:linear-gradient(90deg,#eb6d37 0%,rgba(235,109,55,.9) 22%,rgba(235,109,55,.15) 40%,transparent 52%),linear-gradient(0deg,rgba(60,20,8,.18),transparent 32%)}
+.hero h1,.hero-role{text-shadow:0 3px 18px rgba(120,40,10,.25)}
+html.scene-ready #main{background:linear-gradient(to bottom,transparent 0 var(--cover-end,100vh),#eb6d37 var(--cover-end,100vh) 100%)}
+@media(max-width:760px){.hero:before{background:linear-gradient(180deg,#eb6d37 0%,rgba(235,109,55,.92) 18%,rgba(235,109,55,.12) 51%,transparent 70%),linear-gradient(90deg,rgba(235,109,55,.6) 0%,transparent 70%)}}

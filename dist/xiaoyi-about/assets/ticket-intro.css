@@ -1,0 +1,41 @@
+/* Only the temporary opening uses the reference's red paper. */
+.ticket-intro{display:none;position:fixed;inset:0;z-index:150;overflow:hidden;isolation:isolate;background:transparent}
+html.ticket-intro-ready{overflow:hidden;scrollbar-gutter:stable}
+html.ticket-intro-ready body{overflow:hidden}
+html.ticket-intro-ready .ticket-intro{display:block}
+html.ticket-intro-ready main,html.ticket-intro-ready .topbar{pointer-events:none}
+.intro-papers{position:absolute;inset:0;pointer-events:none}
+.intro-image-frame{position:absolute;left:50%;top:50%;width:max(100vw,127.777778vh);height:max(78.26087vw,100vh);transform:translate(-50%,-50%)}
+.intro-paper{position:absolute;inset:0;transform-origin:50% 50%;will-change:transform;transform:translate3d(var(--stack-x),var(--stack-y),0) rotate(var(--stack-angle))}
+.intro-paper img{display:block;width:100%;height:100%;max-width:none;object-fit:fill;user-select:none;-webkit-user-drag:none}
+/* Masks follow the original slanted edges; together they reproduce the image.
+   They sit on the image so the sheet's lift shadow is not clipped away. */
+.intro-paper[data-cut="0"] img{clip-path:polygon(0 0,100% 0,100% 22.13%,0 31.95%)}
+.intro-paper[data-cut="1"] img{clip-path:polygon(0 31.9%,100% 22.08%,100% 65.05%,0 75.05%)}
+.intro-paper[data-cut="2"] img{clip-path:polygon(0 75%,100% 65%,100% 100%,0 100%)}
+.intro-skip{position:absolute;top:24px;right:28px;z-index:5;background:#f8f3e9e6;color:#251711;border:1px solid #25171133;padding:7px 12px;font:600 12px/1.4 var(--sans);cursor:pointer;transition:opacity .15s}
+html.cover-revealing .intro-skip{opacity:0;pointer-events:none}
+.intro-skip:focus-visible{outline:2px solid #251711;outline-offset:4px}
+.ticket-intro[aria-hidden="true"]{display:none}
+/* Preserve the original home design; only synchronize its entrance with the last papers. */
+html.ticket-intro-ready:not(.cover-revealing) .hero-photo img{animation:none;opacity:0}
+html.ticket-intro-ready:not(.cover-revealing) .hero-title-block,
+html.ticket-intro-ready:not(.cover-revealing) .cover-art{opacity:0}
+.hero.paper-arrive .hero-photo img{animation:paperPortraitArrive .86s cubic-bezier(.2,.7,.2,1) both}
+.hero.paper-arrive .hero-title-block{animation:paperTitleArrive .7s .06s cubic-bezier(.2,.7,.2,1) both}
+.hero.paper-arrive h1,.hero.paper-arrive .hero-role{animation:none}
+.hero.paper-arrive .cover-art{animation:paperArtArrive .72s .08s cubic-bezier(.2,.7,.2,1) both}
+@keyframes paperPortraitArrive{from{opacity:0;transform:translate3d(25px,-9px,0) scale(1.015)}to{opacity:1;transform:none}}
+@keyframes paperTitleArrive{from{opacity:0;transform:translate3d(-22px,7px,0)}to{opacity:1;transform:none}}
+@keyframes paperArtArrive{from{opacity:0;transform:translate3d(-12px,4px,0)}to{opacity:1;transform:none}}
+.audio-entry-hint{position:fixed;z-index:160;left:50%;bottom:24px;transform:translate(-50%,6px);display:flex;align-items:center;gap:9px;padding:11px 17px;border:1px solid #f5dbc333;border-radius:3px;background:#30251fee;box-shadow:0 4px 18px #20140d16;color:#fff1df;font:500 12px/1.4 var(--sans);white-space:nowrap;pointer-events:none;opacity:0;visibility:hidden;transition:opacity .2s,transform .2s,visibility .2s}
+.audio-entry-hint>span{font-size:18px;color:#ffb985}
+html[data-audio-needs-gesture="true"] .audio-entry-hint{opacity:1;visibility:visible;transform:translate(-50%,0)}
+@media(max-width:760px){.intro-skip{top:18px;right:18px}}
+@media(prefers-reduced-motion:reduce){html.ticket-intro-ready .ticket-intro{display:none}.hero.paper-arrive .hero-title-block,.hero.paper-arrive .hero-photo img,.hero.paper-arrive .cover-art{animation:none}.audio-entry-hint{transition:none}}
+/* Shown only when the browser blocks autoplay: one touch starts the pull together with its sound. */
+.ticket-intro[data-phase="waiting"]{cursor:pointer}
+.ticket-intro[data-phase="waiting"]::after{content:"轻触任意处 · 抽开纸张";position:absolute;left:50%;bottom:9vh;z-index:4;transform:translateX(-50%);padding:11px 20px;border:1px solid #fff1df55;border-radius:999px;background:#2a0d08cc;color:#fff1df;font:500 14px/1.4 var(--sans);letter-spacing:.12em;white-space:nowrap;animation:introPrompt 1.6s ease-in-out infinite;pointer-events:none}
+@keyframes introPrompt{0%,100%{opacity:.62;transform:translate(-50%,0)}50%{opacity:1;transform:translate(-50%,-4px)}}
+html.ticket-intro-ready .audio-entry-hint{opacity:0;visibility:hidden}
+@media(prefers-reduced-motion:reduce){.ticket-intro[data-phase="waiting"]::after{animation:none}}
