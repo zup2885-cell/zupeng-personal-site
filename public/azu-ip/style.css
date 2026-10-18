@@ -276,3 +276,13 @@
 @media(max-width:1100px){.ip-stage.hero-dog{right:15%;height:31%;bottom:2.6%}}
 @media(max-width:650px){.ip-stage.hero-dog{right:auto;left:30%;height:19%;bottom:12.6%}}
 @media(max-width:360px){.ip-stage.hero-dog{left:28%;height:17%;bottom:13.4%}}
+
+/* 02 photos: bigger cards in a wider, rounder fan, with clear gaps between them */
+.photo-fan{width:min(100%,1360px);aspect-ratio:1200/390}
+.fan-card:nth-child(1){--x:7%;--y:66%;--w:14%;--angle:-24deg}
+.fan-card:nth-child(2){--x:28%;--y:44%;--w:16.5%;--angle:-12deg}
+.fan-card:nth-child(3){--x:50%;--y:33%;--w:18.5%;--angle:0deg}
+.fan-card:nth-child(4){--x:72%;--y:44%;--w:16.5%;--angle:12deg}
+.fan-card:nth-child(5){--x:93%;--y:66%;--w:14%;--angle:24deg}
+@media(max-width:650px){.photo-fan{width:100%;margin:0 auto 8px}
+  .fan-card:nth-child(1){--x:10%;--w:12.5%}.fan-card:nth-child(2){--x:29.5%;--w:15%}.fan-card:nth-child(3){--w:17%}.fan-card:nth-child(4){--x:70.5%;--w:15%}.fan-card:nth-child(5){--x:90%;--w:12.5%}}

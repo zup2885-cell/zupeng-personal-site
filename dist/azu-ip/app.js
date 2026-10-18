@@ -9,7 +9,7 @@ const entered = new Promise(resolve => {
   document.getElementById('gate-button').focus({ preventScroll: true });
 });
 const content = await fetch('./content.json').then(r => {if(!r.ok) throw Error('Content unavailable');return r.json();});
-import { setupWorld } from './world.js?v=20261015-c33';
+import { setupWorld } from './world.js?v=20261018-move';
 
 fillPhotoFan($('#world .photo-fan'));
 setupWorld();
@@ -153,7 +153,16 @@ async function setupCharacter(){
   };
   if(replay)replay.disabled=true;
   video.addEventListener('timeupdate',()=>{cues(video.currentTime);report();});
-  video.addEventListener('ended',()=>{figure.dataset.state='complete';revealAll();report();if(callback!==null){video.cancelVideoFrameCallback?.(callback);callback=null;}});
+  video.addEventListener('ended',()=>{figure.dataset.state='complete';revealAll();report();if(callback!==null){video.cancelVideoFrameCallback?.(callback);callback=null;}scheduleEncore();});
+  // He keeps saying hello: after a few seconds back on his phone he plays the greeting again.
+  // First and last frames are identical, so restarting from 0 shows no jump. Only while the
+  // hero is on screen and the tab is visible; scrolling back to the top resumes it.
+  let encore=null,heroVisible=true;
+  const scheduleEncore=()=>{clearTimeout(encore);if(reduced||broken)return;
+    encore=setTimeout(()=>{if(heroVisible&&!document.hidden&&video.ended)play();else encore=null;},6000);};
+  new IntersectionObserver(e=>{heroVisible=e[e.length-1].isIntersecting;
+    if(heroVisible&&video.ended&&encore===null)scheduleEncore();}).observe(figure);
+  document.addEventListener('visibilitychange',()=>{if(!document.hidden&&video.ended&&encore===null)scheduleEncore();});
   // The intro never waits on the video: on a slow connection the poster stands in meanwhile.
   figure.dataset.state='loading';
   setTimeout(()=>{if(figure.dataset.state==='loading')revealAll();},6000);
@@ -256,28 +265,63 @@ async function setupIpBoards(){
     v.addEventListener('loadeddata',()=>{if(verified||v.dataset.kind!==order[0])return;if(frameHasAlpha(v))verified=true;else reject(v);});
     v.addEventListener('error',()=>reject(v));}
   if(order.length&&!reduced)boards.forEach(s=>observer.observe(s));
+  const talk=boards.find(s=>s.dataset.ip==='talk');
+  if(talk&&manifest.talk?.greetEnd&&order.length&&!reduced)setupTalk(talk,manifest.talk);
+}
+
+// 05: he sits and smiles; when you come near (and each time the board comes into view) he leans
+// in and reaches out to say hi, then settles back. The clip is cut for this (build_talk.py):
+// greeting first [0, greetEnd), then sitting [greetEnd, greetFrom), then three frames that lead
+// back into the sitting start. Sitting loops by jumping back to greetEnd; a greeting is played by
+// jumping from greetFrom to 0, which continues the same motion (source 89 → 90).
+function setupTalk(stage,clip){
+  const v=stage.querySelector('video'),section=stage.closest('section')||stage;
+  v.loop=false;let want=false;const frame=1/48;  // the first play already starts with the greeting
+  const greeting=()=>v.currentTime<clip.greetEnd-frame;
+  const ask=()=>{if(!greeting())want=true;};
+  const check=t=>{if(want&&t>=clip.greetFrom-frame/2&&t<clip.greetFrom+4*frame){want=false;v.currentTime=0;}};
+  if('requestVideoFrameCallback' in HTMLVideoElement.prototype){
+    const on=(_,m)=>{check(m.mediaTime);v.requestVideoFrameCallback(on);};v.requestVideoFrameCallback(on);
+  }else v.addEventListener('timeupdate',()=>check(v.currentTime));
+  v.addEventListener('ended',()=>{v.currentTime=want?(want=false,0):clip.greetEnd;v.play().catch(()=>{});});
+  section.addEventListener('pointerenter',e=>{if(e.pointerType!=='touch')ask();});
+  section.addEventListener('pointerdown',ask);
+  new IntersectionObserver(e=>{if(e[e.length-1].isIntersecting)ask();},{rootMargin:'-25% 0px'}).observe(stage);
 }
 
 // 04 秘密武器库: he watches the mouse the normal way — only real frames of him turning his eyes and
 // head: the stretch of the clip where he looks left (source 60) → at you (80) → right (124), RIFE 2x,
-// neighbouring frames blended by position. No warping. A responsive spring makes it feel like he
-// is following the pointer; with nobody pointing he looks at you and glances aside now and then.
+// neighbouring frames blended by position. No warping. Each time the page comes into view he first
+// looks around (left, right, back to you); then on a row he turns his head to the pointer, and only
+// loosely follows it elsewhere. With nobody pointing he glances aside now and then.
 function setupGaze(stage,clip){
   const g=clip.gaze,section=stage.closest('section'),video=stage.querySelector('video');
   const P=g.poses,first=g.firstSource,last=first+(g.frames.length-1)/g.perSource;
   const images=[];let canvas,ctx,raf=null,prev=null,ready=false,inView=false;
-  let p=P.front,v=0,target=P.front,pointer=false,holdUntil=0,glanceAt=0,looked=null;
-  function aimAt(x){
+  let p=P.front,v=0,target=P.front,pointer=false,holdUntil=0,glanceAt=0,looked=null,sweep=[];
+  const toPose=t=>t<0?P.front+t*(P.front-P.left):P.front+t*(P.right-P.front);
+  // -1 … 1: where x is from his face, left measured to the board's left edge, right to its right edge
+  function side(x){
     const r=stage.getBoundingClientRect(),b=section.getBoundingClientRect(),hx=r.left+r.width*0.5;
-    // left of his face measured to the board's left edge, right of it to the right edge
-    const t=Math.max(-1,Math.min(1,x<hx?(x-hx)/Math.max(80,(hx-b.left)*0.7):(x-hx)/Math.max(80,(b.right-hx)*0.7)));
-    target=t<0?P.front+t*(P.front-P.left):P.front+t*(P.right-P.front);
+    return Math.max(-1,Math.min(1,x<hx?(x-hx)/Math.max(80,(hx-b.left)*0.7):(x-hx)/Math.max(80,(b.right-hx)*0.7)));
+  }
+  function aimAt(x,li){
+    sweep=[];
+    // on a row he looks right at the pointer (his footage turns only left/right, not up/down);
+    // elsewhere on the page he follows it only loosely
+    target=toPose(side(x)*(li?1:0.6));
   }
   function lookAtRow(li){looked?.classList.remove('is-looked');looked=li;li?.classList.add('is-looked');}
+  // Frames arrive in two stages; draw blends the nearest loaded frame below and above.
+  const below=i=>{for(let k=i;k>=0;k--)if(images[k])return k;return -1;};
+  const above=i=>{for(let k=i;k<images.length;k++)if(images[k])return k;return -1;};
   function draw(){
-    const q=(p-first)*g.perSource,i=Math.max(0,Math.min(images.length-1,Math.floor(q))),j=Math.min(images.length-1,i+1),w=q-i;
+    const q=(p-first)*g.perSource;let i=below(Math.floor(q)),j=above(Math.ceil(q));
+    if(i<0)i=j;if(j<0)j=i;
+    const w=j>i?(q-i)/(j-i):0;
     ctx.clearRect(0,0,canvas.width,canvas.height);
     if(w<0.02||i===j)ctx.drawImage(images[i],0,0);
+    else if(w>0.98)ctx.drawImage(images[j],0,0);
     else{ // 'lighter' adds premultiplied colour and alpha: an exact blend of the two neighbours
       ctx.globalCompositeOperation='lighter';ctx.globalAlpha=1-w;ctx.drawImage(images[i],0,0);
       ctx.globalAlpha=w;ctx.drawImage(images[j],0,0);ctx.globalAlpha=1;ctx.globalCompositeOperation='source-over';}
@@ -286,30 +330,41 @@ function setupGaze(stage,clip){
   function tick(t){
     raf=null;if(!inView||document.hidden){prev=null;return;}
     const dt=prev===null?1/60:Math.min(0.04,(t-prev)/1000);prev=t;
-    if(!pointer&&t>holdUntil&&t>glanceAt){target=P.front+(Math.random()-0.5)*(Math.random()<0.5?8:24);glanceAt=t+1800+Math.random()*2400;}
-    const w0=12,z=0.85;v+=(w0*w0*(target-p)-2*z*w0*v)*dt;p+=v*dt;p=Math.max(first,Math.min(last,p));
+    if(sweep.length&&!pointer){ // looking around on arrival: each pose, then how long he holds it
+      const s=sweep[0];target=s.pose;
+      if(Math.abs(p-s.pose)<1.5&&Math.abs(v)<6){s.since??=t;if(t-s.since>s.hold){sweep.shift();glanceAt=t+2200;}}
+    }else if(!pointer&&t>holdUntil&&t>glanceAt){target=P.front+(Math.random()-0.5)*(Math.random()<0.5?8:24);glanceAt=t+1800+Math.random()*2400;}
+    // a softer, critically damped spring: the head eases into place instead of snapping
+    const w0=9,z=1;v+=(w0*w0*(target-p)-2*z*w0*v)*dt;p+=v*dt;p=Math.max(first,Math.min(last,p));
     draw();raf=requestAnimationFrame(tick);
   }
   const run=()=>{if(ready&&inView&&raf===null)raf=requestAnimationFrame(tick);};
+  const lookAround=()=>{sweep=[{pose:P.left+4,hold:450},{pose:P.right-6,hold:550},{pose:P.front,hold:0}];};
   section.addEventListener('pointermove',e=>{
     if(e.pointerType==='touch')return;pointer=true;
     if(performance.now()<holdUntil)return;
-    const li=e.target.closest('.skill-rows li');lookAtRow(li);aimAt(e.clientX);
+    const li=e.target.closest('.skill-rows li');lookAtRow(li);aimAt(e.clientX,li);
   },{passive:true});
-  section.addEventListener('pointerleave',()=>{pointer=false;glanceAt=0;lookAtRow(null);});
-  section.addEventListener('pointerdown',e=>{lookAtRow(e.target.closest('.skill-rows li'));aimAt(e.clientX);
+  section.addEventListener('pointerleave',()=>{pointer=false;glanceAt=0;lookAtRow(null);target=P.front;});
+  section.addEventListener('pointerdown',e=>{const li=e.target.closest('.skill-rows li');lookAtRow(li);aimAt(e.clientX,li);
     holdUntil=performance.now()+(e.pointerType==='touch'?1800:700);glanceAt=holdUntil;});
-  // Frames start loading well before the board is reached, so he is ready when you arrive.
+  // Frames start loading well before the board is reached. Every 4th frame first (he can move as
+  // soon as those are in), then the rest fills in so the motion gets finer.
   const load=new IntersectionObserver(async entries=>{
     if(!entries.some(e=>e.isIntersecting)||images.length)return;
     load.disconnect();images.length=g.frames.length;
-    await Promise.all(g.frames.map(async(name,i)=>{const im=new Image();im.src=`${g.dir}/${name}`;await im.decode();images[i]=im;}));
+    const get=async i=>{const im=new Image();im.src=`${g.dir}/${g.frames[i]}`;await im.decode();images[i]=im;};
+    const idx=g.frames.map((_,i)=>i),firstSet=idx.filter(i=>i%4===0||i===idx.length-1);
+    await Promise.all(firstSet.map(get));
     canvas=document.createElement('canvas');[canvas.width,canvas.height]=clip.size;canvas.className='ip-video';
     canvas.setAttribute('role','img');canvas.setAttribute('aria-label',video.getAttribute('aria-label'));
-    ctx=canvas.getContext('2d');draw();video.pause();video.replaceWith(canvas);ready=true;run();
+    ctx=canvas.getContext('2d');draw();video.pause();video.replaceWith(canvas);ready=true;
+    if(inView&&!pointer)lookAround();run();
+    Promise.all(idx.filter(i=>!firstSet.includes(i)).map(get)).catch(()=>{});
   },{rootMargin:'1400px 0px'});
   load.observe(section);
-  new IntersectionObserver(entries=>{inView=entries[entries.length-1].isIntersecting;run();},{rootMargin:'100px 0px'}).observe(section);
+  new IntersectionObserver(entries=>{const was=inView;inView=entries[entries.length-1].isIntersecting;
+    if(inView&&!was&&ready&&!pointer)lookAround();run();},{rootMargin:'-20% 0px'}).observe(section);
   document.addEventListener('visibilitychange',run);
 }
 

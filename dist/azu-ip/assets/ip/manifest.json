@@ -236,8 +236,8 @@
    900
   ],
   "fps": 48,
-  "frames": 354,
-  "loopSeconds": 7.375,
+  "frames": 357,
+  "loopSeconds": 7.438,
   "crop": [
    24,
    65,
@@ -247,19 +247,22 @@
   "seamBefore": 1.379,
   "assets": {
    "webm": {
-    "path": "assets/ip/talk-daeb6c2a3c12.webm",
-    "bytes": 2439799
+    "path": "assets/ip/talk-8d2d672e8327.webm",
+    "bytes": 2065672
    },
    "mov": {
-    "path": "assets/ip/talk-04abe25b5271.mov",
-    "bytes": 8324153
+    "path": "assets/ip/talk-6cba1978e7ed.mov",
+    "bytes": 6450906
    },
    "png": {
-    "path": "assets/ip/talk-a7d8de24e237.png",
-    "bytes": 426814
+    "path": "assets/ip/talk-2628f970d4d2.png",
+    "bytes": 475339
    }
   },
-  "loopStartSource": 16
+  "loopStartSource": 16,
+  "greetEnd": 4.8125,
+  "greetFrom": 7.375,
+  "note": "greeting first (0 → greetEnd), then sitting; the page loops the sitting part (end → greetEnd) and plays the greeting (greetFrom → 0) when the visitor comes near"
  },
  "dog": {
   "source": "WeChat videos f26e6a70… (A, red ball) + 764d15d2… (B, ball repainted red)",
@@ -268,20 +271,20 @@
    600
   ],
   "fps": 24,
-  "frames": 268,
-  "loopSeconds": 11.167,
+  "frames": 261,
+  "loopSeconds": 10.875,
   "assets": {
    "webm": {
-    "path": "assets/ip/dog-7d522ef89fe5.webm",
-    "bytes": 1751444
+    "path": "assets/ip/dog-c24ba5c264e1.webm",
+    "bytes": 1719211
    },
    "mov": {
-    "path": "assets/ip/dog-c56b596bb0ef.mov",
-    "bytes": 4653909
+    "path": "assets/ip/dog-18878a471818.mov",
+    "bytes": 4522176
    },
    "png": {
-    "path": "assets/ip/dog-009ad7e2fff8.png",
-    "bytes": 216265
+    "path": "assets/ip/dog-1866e3b18cde.png",
+    "bytes": 215465
    }
   }
  }

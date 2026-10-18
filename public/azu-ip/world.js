@@ -171,7 +171,7 @@ export async function setupWorld() {
   let canvas = null, context = null;
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
   const decoded = new Map();
-  let dense = null, pairFrames = null, bridgeFrames = null, walker = null, raf = null, previous = null, inView = false, ready = false, loading = null;
+  let dense = null, timeline = null, bridgeFrames = null, rest = null, walker = null, raf = null, previous = null, inView = false, ready = false, loading = null;
   // Intentions, highest priority first: a tapped photo (held briefly), the hovered photo, keyboard focus.
   let tapped = null, hovered = null, focused = null;
   let leaveTimer = null, holdTimer = null;
@@ -259,19 +259,25 @@ export async function setupWorld() {
     context.clearRect(0, 0, canvas.width, canvas.height);
     context.drawImage(decoded.get(key), 0, 0);
   }
-  // Nearest kept image to a point t (0…1) inside a list of { t, key }.
-  const nearest = (list, t) => list.reduce((best, f) => (Math.abs(f.t - t) < Math.abs(best.t - t) ? f : best)).key;
+  // Images arrive in stages (see preload), so drawing only ever picks among the images already
+  // decoded: the nearest one to the exact position. Early on that is a coarser step, later every
+  // in-between; the motion just gets finer as the rest arrives.
+  const nearestLoaded = (list, x) => {
+    let best = null, bd = Infinity;
+    for (const f of list) { const d = Math.abs(f.x - x); if (d < bd && decoded.has(f.key)) { bd = d; best = f.key; } }
+    return best;
+  };
   function render() {
     const at = walker.picture;
+    let key;
     if (at.bridge !== undefined) {
-      show(nearest(bridgeFrames, at.bridge));
+      key = nearestLoaded(bridgeFrames, at.bridge);
       figure.dataset.frame = `bridge ${at.bridge.toFixed(3)}`;
     } else {
-      const f = at.frame, k = Math.min(LAST - 1, Math.max(FIRST, Math.floor(f)));
-      // pair k: source k (t = 0) and its kept in-betweens; the next source frame closes it at t = 1
-      show(f >= LAST ? `${LAST}:0` : nearest(pairFrames[k].concat({ t: 1, key: `${k + 1}:0` }), f - k));
-      figure.dataset.frame = f.toFixed(2);
+      key = nearestLoaded(timeline, Math.min(LAST, at.frame));
+      figure.dataset.frame = at.frame.toFixed(2);
     }
+    if (key) show(key);
   }
   function schedule() {
     if (!ready || !inView || document.hidden || raf !== null) return;
@@ -307,28 +313,43 @@ export async function setupWorld() {
       const n = names.length, m = Math.min(n, cap);
       return Array.from({ length: m }, (_, i) => Math.round(i * n / m)).map(j => ({ t: j / n, name: names[j] }));
     };
-    const jobs = [[`${LAST}:0`, dense.lastFrame]];
-    pairFrames = {};
+    // timeline: every kept image on the source timeline at x = source frame (+ fraction);
+    // bridgeFrames: the in-betweens of track R at x = 0…1, closed by frames 41 and 103.
+    const jobs = [];
+    timeline = [{ x: LAST, key: `${LAST}:0` }]; jobs.push({ key: `${LAST}:0`, name: dense.lastFrame, stage: 0 });
+    const poses = new Set([THINK, JUNCTION, LAST, ...CARD_POSES]);
     for (const [k, names] of Object.entries(dense.pairs)) {
-      pairFrames[k] = pick(names, 3).map(f => ({ t: f.t, key: `${k}:${f.t}` }));
-      pick(names, 3).forEach(f => jobs.push([`${k}:${f.t}`, f.name]));
-    }
-    bridgeFrames = pick(dense.bridge.frames, 12).map(f => ({ t: f.t, key: `b:${f.t}` }));
-    pick(dense.bridge.frames, 12).forEach(f => jobs.push([`b:${f.t}`, f.name]));
-    bridgeFrames.push({ t: 1, key: `${JUNCTION}:0` });
-    const near = key => (key.startsWith('b:') ? 4 : Math.abs(parseInt(key, 10) - THINK));
-    jobs.sort((a, b) => near(a[0]) - near(b[0]));
-    let next = 0;
-    await Promise.all(Array.from({ length: 6 }, async () => {
-      while (next < jobs.length) {
-        const [key, name] = jobs[next++], frame = new Image();
-        frame.src = `./assets/world-interact/dense/${name}`;
-        await frame.decode();
-        if (!frame.naturalWidth) throw Error(`Empty frame ${name}`);
-        // an ImageBitmap stays decoded, ready to draw without any decoding during playback
-        decoded.set(key, typeof createImageBitmap === 'function' ? await createImageBitmap(frame) : frame);
+      const f = Number(k);
+      for (const p of pick(names, 3)) {
+        const key = `${k}:${p.t}`;
+        timeline.push({ x: f + p.t, key });
+        // stage 0: enough to point at every photo right away; 1: every source frame; 2: in-betweens
+        const stage = p.t > 0 ? 2 : (poses.has(f) || f % 4 === 0 || (f >= IDLE[0] && f <= IDLE[1])) ? 0 : 1;
+        jobs.push({ key, name: p.name, stage });
       }
-    }));
+    }
+    const bridge = pick(dense.bridge.frames, 12);
+    bridgeFrames = [{ x: 0, key: `${THINK}:0` }, ...bridge.map(f => ({ x: f.t, key: `b:${f.t}` })), { x: 1, key: `${JUNCTION}:0` }];
+    bridge.forEach((f, i) => jobs.push({ key: `b:${f.t}`, name: f.name, stage: i % 3 === 0 ? 0 : 2 }));
+    // within a stage, frames nearest the thinking pose first
+    const near = j => (j.key.startsWith('b:') ? 4 : Math.abs(parseInt(j.key, 10) - THINK));
+    jobs.sort((a, b) => a.stage - b.stage || near(a) - near(b));
+    const load = async ({ key, name }) => {
+      const frame = new Image();
+      frame.src = `./assets/world-interact/dense/${name}`;
+      await frame.decode();
+      if (!frame.naturalWidth) throw Error(`Empty frame ${name}`);
+      // an ImageBitmap stays decoded, ready to draw without any decoding during playback
+      decoded.set(key, typeof createImageBitmap === 'function' ? await createImageBitmap(frame) : frame);
+    };
+    const run = async list => {
+      let next = 0;
+      await Promise.all(Array.from({ length: 6 }, async () => { while (next < list.length) await load(list[next++]); }));
+    };
+    await run(jobs.filter(j => j.stage === 0));
+    // the rest keeps arriving while he already moves; a missing image just means a coarser step
+    rest = run(jobs.filter(j => j.stage > 0)).then(() => { figure.dataset.state = 'complete'; })
+      .catch(error => console.warn('World animation stays on its first image set:', error.message));
     walker = new SmoothWalker(THINK, new VisualMetric(dense));
     canvas = document.createElement('canvas');
     [canvas.width, canvas.height] = manifest.size;
