@@ -1,216 +1,198 @@
 [
-  {
-    "id": "shoot",
-    "name": "拍摄助手",
-    "en": "SHOOT ASSISTANT",
-    "category": "拍摄创作",
-    "type": "网页 + Mac",
-    "version": "Mac 1.1.1",
-    "icon": "shoot.png",
-    "accent": "red",
-    "tagline": "开拍之前，心里有数。",
-    "description": "从拍前准备到现场镜头，再到收工交接，把一条视频的事情理顺。",
-    "web": "https://xiaoyi-shoot-assistant.zup2885.chatgpt.site/",
-    "download": "downloads/shoot-mac.zip",
-    "platform": "Mac 版：Apple Silicon · macOS 14+；网页需现代浏览器。",
-    "features": [
-      "准备车型资料、口播稿和出发清单",
-      "逐镜头记录状态、素材位置和补拍事项",
-      "汇总待办，导出交接单与项目备份"
-    ],
-    "steps": [
-      "新建项目，写清主题、车型和拍摄重点。",
-      "拍摄时逐镜头登记，回看后确认可用。",
-      "收工前核对待办，下载交接单和备份。"
-    ],
-    "note": "项目保存在自己的设备或浏览器中，换设备需导出、导入备份。备份不包含原视频。Mac 包为本机测试构建，其他设备未验证。",
-    "cover": "assets/covers/shoot.svg",
-    "coverTheme": "paper",
-    "shortName": "拍摄助手"
-  },
-  {
-    "id": "harbor",
-    "name": "拾片 · 视频素材下载器",
-    "en": "CLIP HARBOR",
-    "category": "拍摄创作",
-    "type": "Mac 应用",
-    "version": "1.7.1",
-    "icon": "harbor.png",
-    "accent": "violet",
-    "tagline": "把链接，变成手边的素材。",
-    "description": "整理视频链接、下载素材、截取片段；可自动去水印、去字幕（也可精细框选），以及音频分离。1.7.1 先从前后帧找回被挡住的真实画面，去完不留马赛克和字影。",
-    "platform": "Apple Silicon · macOS 14+。下载包已公开，无需登录 GitHub。",
-    "features": [
-      "批量识别视频分享链接，保留平台可下载的原画质流",
-      "去字幕、去水印先从前后帧找回真实画面，找不到的部分才由 AI 补全，不留马赛克和字影；图形台标也能自动去掉",
-      "截取片段、静音；音频分离另需本机组件；抖音可用自带网页窗口备用下载"
-    ],
-    "steps": [
-      "下载并解压，将「视频素材下载器.app」移入应用程序文件夹后打开。",
-      "粘贴链接，选择画质、保存位置及处理选项，然后开始下载。",
-      "网页要求登录或验证时，在应用自带窗口完成；完成后可定位输出文件。"
-    ],
-    "note": "1.7.1 已提供公开 Mac 安装包。界面已改为 Singularity 深色主题（黑底、白字、红点缀）。勾选去水印或去字幕后直接出片，完整原片仍复制到「原始备份」；处理比以前慢，1080p 约为视频时长的 25–30 倍。AI 补全和人声／音乐分离依赖额外的本机运行环境和模型（约 1 GB），本包不包含这些组件，缺少时自动退回基础修补。不同平台的可见范围、登录与验证要求会影响下载，不保证所有链接可下载。应用为本机签名构建，未做 Developer ID 公证，其他 Mac 机型的首次安装尚未逐一验证。",
-    "download": "https://github.com/zup2885-cell/zupeng-personal-site/releases/download/clipharbor-v1.7.1/ClipHarbor-Mac-1.7.1.zip",
-    "cover": "assets/covers/harbor.svg",
-    "coverTheme": "paper",
-    "shortName": "拾片"
-  },
-  {
-    "id": "memo",
-    "name": "Memo · 灵感备忘录",
-    "en": "A LITTLE MEMORY",
-    "category": "效率辅助",
-    "type": "网页原型",
-    "version": "网页",
-    "accent": "green",
-    "tagline": "先记下来，再慢慢实现。",
-    "description": "把零散想法放进便签、待办和日历。天空与麦田主题，让记录轻松一点。",
-    "web": "https://zup2885-cell.github.io/memo/",
-    "platform": "现代桌面或手机浏览器。",
-    "features": [
-      "便签、待办、标签和搜索",
-      "月历与单日事件记录",
-      "可更换背景，预览提醒画面与声音"
-    ],
-    "steps": [
-      "打开网页，写下第一张便签。",
-      "使用标签、颜色和置顶整理内容。",
-      "在日历里补上事件，按需查看提醒演示。"
-    ],
-    "note": "当前是网页交互原型：提醒仅供预览，不会定时通知，也不能在关闭网页后运行。数据保存在当前浏览器，清除站点数据会清除记录。",
-    "cover": "assets/covers/memo.svg",
-    "coverTheme": "black",
-    "shortName": "Memo"
-  },
-  {
-    "id": "shots",
-    "name": "阿祖镜头库",
-    "en": "SHOT LIBRARY",
-    "category": "素材与动效",
-    "type": "在线工具",
-    "version": "在线版",
-    "accent": "sand",
-    "tagline": "好镜头，值得有个位置。",
-    "description": "把动效、视频和参考素材按分类放好，找到灵感后，直接进入对应效果的预览与编辑。",
-    "web": "https://azu-shot-library.zup2885.workers.dev/",
-    "platform": "现代浏览器；公开素材可浏览，管理操作需要管理员登录。",
-    "features": [
-      "按分类浏览已有素材与效果",
-      "部分效果支持改文字、换画面和导出",
-      "保留素材来源与具体使用说明"
-    ],
-    "steps": [
-      "打开镜头库，进入需要的分类。",
-      "选择素材查看预览和使用说明。",
-      "可编辑效果进入独立编辑页，按页面说明修改或导出。"
-    ],
-    "note": "不同条目的可编辑能力不同。演示 MP4 不等于剪映可编辑模板；具体兼容情况以各条目说明为准。",
-    "cover": "assets/covers/shots.svg",
-    "coverTheme": "red",
-    "shortName": "阿祖镜头库"
-  },
-  {
-    "id": "markdown",
-    "name": "Markdown 右键新建",
-    "en": "QUICK MARKDOWN",
-    "category": "效率辅助",
-    "type": "Mac 应用",
-    "version": "1.2",
-    "accent": "gray",
-    "tagline": "一个右键，开一页新想法。",
-    "description": "在 Finder 里快速创建 Markdown 文件，少一次打开编辑器、另存和选目录的来回。",
-    "download": "downloads/markdown-mac.zip",
-    "platform": "Apple Silicon · macOS 14+。需在系统设置中启用对应 Finder 扩展。",
-    "features": [
-      "提供 Finder 扩展入口",
-      "在指定文件夹新建 Markdown 文件",
-      "轻量的本机小工具"
-    ],
-    "steps": [
-      "解压后将应用放入应用程序文件夹并打开。",
-      "按系统提示启用对应的 Finder 扩展。",
-      "在 Finder 中打开目标文件夹，使用右键里的新建入口。"
-    ],
-    "note": "这是本机测试构建，其他设备的首次安装和扩展启用尚未验证。若右键入口没有出现，检查系统设置里的 Finder 扩展。"
-  },
-  {
-    "id": "screen-chinese",
-    "name": "屏幕中文助手",
-    "en": "SCREEN CHINESE ASSISTANT",
-    "category": "效率辅助",
-    "type": "Mac 应用",
-    "version": "2.0.0",
-    "accent": "blue",
-    "tagline": "看得懂，也用得顺。",
-    "description": "识别屏幕英文，自动显示中文；自带网页窗口可直接替换文字，保留字体、链接和按钮。",
-    "download": "downloads/screen-chinese-mac-2.0.0.zip",
-    "source": "downloads/screen-chinese-source-2.0.0.zip",
-    "platform": "Apple Silicon · macOS 26+。首次使用需准备英语、简体中文语言包；屏幕模式需录屏授权。",
-    "features": [
-      "悬浮按钮控制屏幕翻译，中文层不挡鼠标",
-      "自带网页窗口自动英译中，支持原文切换与动态内容",
-      "Apple 本机翻译，无需账号或 API 密钥，可设置登录自启"
-    ],
-    "steps": [
-      "下载解压，将应用放入「应用程序」后打开；如安装过旧版屏幕译，先退出旧版。",
-      "按系统提示准备语言包、允许屏幕录制。点击蓝色悬浮图标开启或暂停屏幕翻译。",
-      "右键悬浮图标，选择「打开网页翻译」，粘贴网址、按回车后自动显示中文。"
-    ],
-    "note": "网页文字直接替换仅在应用自带窗口内生效；网页登录状态与其他浏览器分开。其他软件采用屏幕识别，滚动时暂时隐藏旧译文，停稳后更新。已通过 14 项自动检查，并在当前 Mac 实测；其他 Mac、多屏及全部网站尚未验证。此为本机签名构建，未做 Developer ID 公证，其他电脑首次打开可能被系统拦截；源码构建需开发者提供自己的签名身份。",
-    "cover": "assets/covers/screen-chinese.svg",
-    "coverTheme": "hot",
-    "shortName": "屏幕中文助手"
-  },
-  {
-    "id": "topic-radar",
-    "name": "选题雷达",
-    "en": "TOPIC RADAR",
-    "category": "内容选题",
-    "type": "在线快照",
-    "version": "快照",
-    "accent": "blue",
-    "tagline": "看懂一件事，再决定拍什么。",
-    "description": "把公开热榜和订阅源里的线索整理成选题，看懂一件事，再决定拍什么。",
-    "web": "../tools/topic-radar/",
-    "platform": "现代浏览器。网页展示已保存快照；完整采集、刷新和 AI 研判需要本机 http://127.0.0.1:9155/ 。",
-    "features": [
-      "浏览已保存的全国与全球选题快照",
-      "按范围、分类和关键词查看选题指数与原文入口",
-      "下载这份快照里的选题单"
-    ],
-    "steps": [
-      "打开在线页面，阅读今日雷达中已保存的选题。",
-      "点进详情，查看原文入口、评分和已有判断。",
-      "需要重新采集、收藏或 AI 研判时，在本机打开 9155 服务。"
-    ],
-    "note": "GitHub Pages 上的页面只读取已保存快照，不会生成新选题或新统计。收藏、刷新、信息源修改和 AI 研判需要本机 9155 服务。",
-    "cover": "assets/covers/topic-radar.svg",
-    "coverTheme": "black",
-    "shortName": "选题雷达"
-  },
-  {
-    "id": "capso-trim",
-    "name": "Capso 剪切版",
-    "en": "CAPSO TRIM EDITION",
-    "category": "拍摄创作",
-    "type": "Mac 应用",
-    "version": "1.2.4",
-    "accent": "red",
-    "tagline": "录多了，顺手剪掉。",
-    "description": "基于 lzhgus 的开源截图录屏工具 Capso 1.2.4 的非官方改版：录屏完成后的小卡片上多了一个「剪切」按钮，点一下就打开自带剪辑编辑器，剪掉多余的开头和结尾。",
-    "platform": "Apple Silicon · macOS 15+。下载包已公开，无需登录 GitHub。",
-    "features": [
-      "截图、录屏、标注、文字识别等功能与 Capso 1.2.4 相同",
-      "录屏完成卡片上新增「剪切」按钮，直接进入剪辑编辑器",
-      "安装包附 Capso 原许可证和全部代码改动"
-    ],
-    "steps": [
-      "下载解压，如已装官方 Capso 先退出并删除，再把 Capso.app 移入「应用程序」。",
-      "第一次打开如被拦截，到「系统设置 → 隐私与安全性」点「仍要打开」；录屏时按提示允许屏幕录制。",
-      "录完后在弹出的小卡片上点「剪切」，拖动起点和终点，剪掉多余部分后导出。"
-    ],
-    "note": "Capso 版权归 lzhgus 所有（https://github.com/lzhgus/Capso），按 Business Source License 1.1 授权。本改版免费提供、仅供非商业使用，不是官方版本，问题请勿反馈给原作者。本机签名构建，未做 Apple 公证；安装官方更新会换回官方版，「剪切」按钮随之消失。",
-    "download": "https://github.com/zup2885-cell/zupeng-personal-site/releases/download/capso-trim-v1.2.4/Capso-Trim-Mac-1.2.4.zip"
-  }
+ {
+  "id": "shoot",
+  "name": "小怡拍摄助手",
+  "en": "SHOOT ASSISTANT",
+  "category": "拍摄创作",
+  "type": "网页 + Mac",
+  "version": "Mac 1.1.1",
+  "icon": "shoot.png",
+  "accent": "red",
+  "tagline": "开拍之前，心里有数。",
+  "description": "从拍前准备到现场镜头，再到收工交接，把一条视频的事情理顺。",
+  "web": "https://xiaoyi-shoot-assistant.zup2885.chatgpt.site/",
+  "download": "downloads/shoot-mac.zip",
+  "platform": "Mac 版：Apple Silicon · macOS 14+；网页需现代浏览器。",
+  "features": [
+   "准备车型资料、口播稿和出发清单",
+   "逐镜头记录状态、素材位置和补拍事项",
+   "汇总待办，导出交接单与项目备份"
+  ],
+  "steps": [
+   "新建项目，写清主题、车型和拍摄重点。",
+   "拍摄时逐镜头登记，回看后确认可用。",
+   "收工前核对待办，下载交接单和备份。"
+  ],
+  "note": "项目保存在自己的设备或浏览器中，换设备需导出、导入备份。备份不包含原视频。Mac 包为本机测试构建，其他设备未验证。"
+ },
+ {
+  "id": "harbor",
+  "name": "拾片 · 视频素材下载器",
+  "en": "CLIP HARBOR",
+  "category": "拍摄创作",
+  "type": "Mac 应用",
+  "version": "1.7.1",
+  "icon": "harbor.png",
+  "accent": "violet",
+  "tagline": "把链接，变成手边的素材。",
+  "description": "整理视频链接、下载素材、截取片段；可自动去水印、去字幕（也可精细框选），以及音频分离。1.7.1 先从前后帧找回被挡住的真实画面，去完不留马赛克和字影。",
+  "platform": "Apple Silicon · macOS 14+。下载包已公开，无需登录 GitHub。",
+  "features": [
+   "批量识别视频分享链接，保留平台可下载的原画质流",
+   "去字幕、去水印先从前后帧找回真实画面，找不到的部分才由 AI 补全，不留马赛克和字影；图形台标也能自动去掉",
+   "截取片段、静音；音频分离另需本机组件；抖音可用自带网页窗口备用下载"
+  ],
+  "steps": [
+   "下载并解压，将「视频素材下载器.app」移入应用程序文件夹后打开。",
+   "粘贴链接，选择画质、保存位置及处理选项，然后开始下载。",
+   "网页要求登录或验证时，在应用自带窗口完成；完成后可定位输出文件。"
+  ],
+  "note": "1.7.1 已提供公开 Mac 安装包。界面已改为 Singularity 深色主题（黑底、白字、红点缀）。勾选去水印或去字幕后直接出片，完整原片仍复制到「原始备份」；处理比以前慢，1080p 约为视频时长的 25–30 倍。AI 补全和人声／音乐分离依赖额外的本机运行环境和模型（约 1 GB），本包不包含这些组件，缺少时自动退回基础修补。不同平台的可见范围、登录与验证要求会影响下载，不保证所有链接可下载。应用为本机签名构建，未做 Developer ID 公证，其他 Mac 机型的首次安装尚未逐一验证。",
+  "download": "https://github.com/zup2885-cell/zupeng-personal-site/releases/download/clipharbor-v1.7.1/ClipHarbor-Mac-1.7.1.zip"
+ },
+ {
+  "id": "memo",
+  "name": "Memo · 灵感备忘录",
+  "en": "A LITTLE MEMORY",
+  "category": "效率辅助",
+  "type": "网页原型",
+  "version": "网页",
+  "accent": "green",
+  "tagline": "先记下来，再慢慢实现。",
+  "description": "把零散想法放进便签、待办和日历。天空与麦田主题，让记录轻松一点。",
+  "web": "https://zup2885-cell.github.io/memo/",
+  "platform": "现代桌面或手机浏览器。",
+  "features": [
+   "便签、待办、标签和搜索",
+   "月历与单日事件记录",
+   "可更换背景，预览提醒画面与声音"
+  ],
+  "steps": [
+   "打开网页，写下第一张便签。",
+   "使用标签、颜色和置顶整理内容。",
+   "在日历里补上事件，按需查看提醒演示。"
+  ],
+  "note": "当前是网页交互原型：提醒仅供预览，不会定时通知，也不能在关闭网页后运行。数据保存在当前浏览器，清除站点数据会清除记录。"
+ },
+ {
+  "id": "shots",
+  "name": "阿祖镜头库",
+  "en": "SHOT LIBRARY",
+  "category": "素材与动效",
+  "type": "在线工具",
+  "version": "在线版",
+  "accent": "sand",
+  "tagline": "好镜头，值得有个位置。",
+  "description": "把动效、视频和参考素材按分类放好，找到灵感后，直接进入对应效果的预览与编辑。",
+  "web": "https://azu-shot-library.zup2885.workers.dev/",
+  "platform": "现代浏览器；公开素材可浏览，管理操作需要管理员登录。",
+  "features": [
+   "按分类浏览已有素材与效果",
+   "部分效果支持改文字、换画面和导出",
+   "保留素材来源与具体使用说明"
+  ],
+  "steps": [
+   "打开镜头库，进入需要的分类。",
+   "选择素材查看预览和使用说明。",
+   "可编辑效果进入独立编辑页，按页面说明修改或导出。"
+  ],
+  "note": "不同条目的可编辑能力不同。演示 MP4 不等于剪映可编辑模板；具体兼容情况以各条目说明为准。"
+ },
+ {
+  "id": "markdown",
+  "name": "Markdown 右键新建",
+  "en": "QUICK MARKDOWN",
+  "category": "效率辅助",
+  "type": "Mac 应用",
+  "version": "1.2",
+  "accent": "gray",
+  "tagline": "一个右键，开一页新想法。",
+  "description": "在 Finder 里快速创建 Markdown 文件，少一次打开编辑器、另存和选目录的来回。",
+  "download": "downloads/markdown-mac.zip",
+  "platform": "Apple Silicon · macOS 14+。需在系统设置中启用对应 Finder 扩展。",
+  "features": [
+   "提供 Finder 扩展入口",
+   "在指定文件夹新建 Markdown 文件",
+   "轻量的本机小工具"
+  ],
+  "steps": [
+   "解压后将应用放入应用程序文件夹并打开。",
+   "按系统提示启用对应的 Finder 扩展。",
+   "在 Finder 中打开目标文件夹，使用右键里的新建入口。"
+  ],
+  "note": "这是本机测试构建，其他设备的首次安装和扩展启用尚未验证。若右键入口没有出现，检查系统设置里的 Finder 扩展。"
+ },
+ {
+  "id": "screen-chinese",
+  "name": "屏幕中文助手",
+  "en": "SCREEN CHINESE ASSISTANT",
+  "category": "效率辅助",
+  "type": "Mac 应用",
+  "version": "2.0.0",
+  "accent": "blue",
+  "tagline": "看得懂，也用得顺。",
+  "description": "识别屏幕英文，自动显示中文；自带网页窗口可直接替换文字，保留字体、链接和按钮。",
+  "download": "downloads/screen-chinese-mac-2.0.0.zip",
+  "source": "downloads/screen-chinese-source-2.0.0.zip",
+  "platform": "Apple Silicon · macOS 26+。首次使用需准备英语、简体中文语言包；屏幕模式需录屏授权。",
+  "features": [
+   "悬浮按钮控制屏幕翻译，中文层不挡鼠标",
+   "自带网页窗口自动英译中，支持原文切换与动态内容",
+   "Apple 本机翻译，无需账号或 API 密钥，可设置登录自启"
+  ],
+  "steps": [
+   "下载解压，将应用放入「应用程序」后打开；如安装过旧版屏幕译，先退出旧版。",
+   "按系统提示准备语言包、允许屏幕录制。点击蓝色悬浮图标开启或暂停屏幕翻译。",
+   "右键悬浮图标，选择「打开网页翻译」，粘贴网址、按回车后自动显示中文。"
+  ],
+  "note": "网页文字直接替换仅在应用自带窗口内生效；网页登录状态与其他浏览器分开。其他软件采用屏幕识别，滚动时暂时隐藏旧译文，停稳后更新。已通过 14 项自动检查，并在当前 Mac 实测；其他 Mac、多屏及全部网站尚未验证。此为本机签名构建，未做 Developer ID 公证，其他电脑首次打开可能被系统拦截；源码构建需开发者提供自己的签名身份。"
+ },
+ {
+  "id": "topic-radar",
+  "name": "选题雷达",
+  "en": "TOPIC RADAR",
+  "category": "内容选题",
+  "type": "在线快照",
+  "version": "快照",
+  "accent": "blue",
+  "tagline": "看懂一件事，再决定拍什么。",
+  "description": "把公开热榜和订阅源里的线索整理成选题，看懂一件事，再决定拍什么。",
+  "web": "../tools/topic-radar/",
+  "platform": "现代浏览器。网页展示已保存快照；完整采集、刷新和 AI 研判需要本机 http://127.0.0.1:9155/ 。",
+  "features": [
+   "浏览已保存的全国与全球选题快照",
+   "按范围、分类和关键词查看选题指数与原文入口",
+   "下载这份快照里的选题单"
+  ],
+  "steps": [
+   "打开在线页面，阅读今日雷达中已保存的选题。",
+   "点进详情，查看原文入口、评分和已有判断。",
+   "需要重新采集、收藏或 AI 研判时，在本机打开 9155 服务。"
+  ],
+  "note": "GitHub Pages 上的页面只读取已保存快照，不会生成新选题或新统计。收藏、刷新、信息源修改和 AI 研判需要本机 9155 服务。"
+ },
+ {
+  "id": "capso-trim",
+  "name": "Capso 剪切版",
+  "en": "CAPSO TRIM EDITION",
+  "category": "拍摄创作",
+  "type": "Mac 应用",
+  "version": "1.2.4",
+  "accent": "red",
+  "tagline": "录多了，顺手剪掉。",
+  "description": "基于 lzhgus 的开源截图录屏工具 Capso 1.2.4 的非官方改版：录屏完成后的小卡片上多了一个「剪切」按钮，点一下就打开自带剪辑编辑器，剪掉多余的开头和结尾。",
+  "platform": "Apple Silicon · macOS 15+。下载包已公开，无需登录 GitHub。",
+  "features": [
+   "截图、录屏、标注、文字识别等功能与 Capso 1.2.4 相同",
+   "录屏完成卡片上新增「剪切」按钮，直接进入剪辑编辑器",
+   "安装包附 Capso 原许可证和全部代码改动"
+  ],
+  "steps": [
+   "下载解压，如已装官方 Capso 先退出并删除，再把 Capso.app 移入「应用程序」。",
+   "第一次打开如被拦截，到「系统设置 → 隐私与安全性」点「仍要打开」；录屏时按提示允许屏幕录制。",
+   "录完后在弹出的小卡片上点「剪切」，拖动起点和终点，剪掉多余部分后导出。"
+  ],
+  "note": "Capso 版权归 lzhgus 所有（https://github.com/lzhgus/Capso），按 Business Source License 1.1 授权。本改版免费提供、仅供非商业使用，不是官方版本，问题请勿反馈给原作者。本机签名构建，未做 Apple 公证；安装官方更新会换回官方版，「剪切」按钮随之消失。",
+  "download": "https://github.com/zup2885-cell/zupeng-personal-site/releases/download/capso-trim-v1.2.4/Capso-Trim-Mac-1.2.4.zip"
+ }
 ]
