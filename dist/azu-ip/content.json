@@ -280,6 +280,7 @@
         ]
       ],
       "toolIds": [
+        "capso-trim",
         "memo",
         "screen-chinese"
       ]

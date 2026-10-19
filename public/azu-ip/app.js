@@ -16,7 +16,7 @@ const entered = new Promise(resolve => {
   addEventListener('keydown', e => { if (!root.classList.contains('entered') && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); go(); } });
   document.getElementById('gate-button').focus({ preventScroll: true });
 });
-const content = await fetch('./content.json?v=20261019-six-court').then(r => {if(!r.ok) throw Error('Content unavailable');return r.json();});
+const content = await fetch('./content.json?v=20261019-toolbox-sync').then(r => {if(!r.ok) throw Error('Content unavailable');return r.json();});
 import { setupWorld } from './world.js?v=20261018-move';
 
 const openPersonalCard = fillPhotoFan($('#world .photo-fan'));
@@ -100,7 +100,7 @@ async function setupToolbox(){
   const scroller = root.querySelector('.toolbox-scroll');
   let catalog = [];
   try {
-    const response = await fetch('../secret-weapons/catalog.json?v=20261019-toolbox-covers');
+    const response = await fetch('../secret-weapons/catalog.json?v=20261019-toolbox-sync');
     if(!response.ok) throw Error('Tool catalog unavailable');
     catalog = (await response.json()).filter(tool => tool.id !== 'markdown');
   } catch(error) { console.warn('Tool catalog unavailable', error); }
@@ -130,7 +130,7 @@ async function setupToolbox(){
     if(tools.length){
       card.dataset.coverTheme = tools[0].coverTheme;
       const art = card.querySelector('.toolbox-art'); art.classList.add('has-tool-covers');
-      art.replaceChildren(...tools.map(tool => createToolCover(tool)));
+      art.replaceChildren(...tools.slice(0, 2).map(tool => createToolCover(tool)));
       card.querySelector('.toolbox-cover-footer b').textContent = `${tools.length} ↗`;
       card.setAttribute('aria-label', `${card.dataset.title}：${card.dataset.topic}，${tools.map(tool => tool.name).join('、')}`);
     }
