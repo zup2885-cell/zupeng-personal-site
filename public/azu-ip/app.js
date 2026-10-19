@@ -16,7 +16,7 @@ const entered = new Promise(resolve => {
   addEventListener('keydown', e => { if (!root.classList.contains('entered') && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); go(); } });
   document.getElementById('gate-button').focus({ preventScroll: true });
 });
-const content = await fetch('./content.json?v=20261019-toolbox-sync').then(r => {if(!r.ok) throw Error('Content unavailable');return r.json();});
+const content = await fetch('./content.json?v=20261019-memo-card').then(r => {if(!r.ok) throw Error('Content unavailable');return r.json();});
 import { setupWorld } from './world.js?v=20261018-move';
 
 const openPersonalCard = fillPhotoFan($('#world .photo-fan'));
@@ -112,7 +112,7 @@ async function setupToolbox(){
       active = index;
       cards.forEach((card, i) => {
         card.classList.toggle('is-active', i === active);
-        card.setAttribute('aria-pressed', String(i === active));
+        if(card.tagName === 'BUTTON') card.setAttribute('aria-pressed', String(i === active));
       });
 
     }
@@ -132,14 +132,17 @@ async function setupToolbox(){
       const art = card.querySelector('.toolbox-art'); art.classList.add('has-tool-covers');
       art.replaceChildren(...tools.slice(0, 2).map(tool => createToolCover(tool)));
       card.querySelector('.toolbox-cover-footer b').textContent = `${tools.length} ↗`;
-      card.setAttribute('aria-label', `${card.dataset.title}：${card.dataset.topic}，${tools.map(tool => tool.name).join('、')}`);
+      card.setAttribute('aria-label', card.tagName === 'A' ? `打开${card.dataset.topic} · ${tools[0].shortName || tools[0].name}` : `${card.dataset.title}：${card.dataset.topic}，${tools.map(tool => tool.name).join('、')}`);
     }
-    card.setAttribute('aria-haspopup', 'dialog');
-    card.setAttribute('aria-controls', 'world-story');
-    card.setAttribute('aria-expanded', 'false');
+    if(card.tagName !== 'A'){
+      card.setAttribute('aria-haspopup', 'dialog');
+      card.setAttribute('aria-controls', 'world-story');
+      card.setAttribute('aria-expanded', 'false');
+    }
     card.addEventListener('pointerenter', e => { if(e.pointerType !== 'touch') select(i); });
     card.addEventListener('click', () => {
       select(i);
+      if(card.tagName === 'A') return;
       const story = content.toolboxStories?.[i];
       if(story) openPersonalCard({...story, tools:toolsFor(i),
         ...(toolsFor(i).length ? {paragraphs:[],details:[]} : {}),
