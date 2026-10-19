@@ -34,36 +34,201 @@
   ],
   "worldPhotos": [
     {
-      "src": "./assets/world/guiyang.jpg",
-      "alt": "家乡贵阳的甲秀楼",
-      "width": 1280,
-      "height": 853
+      "src": "./assets/world/guiyang-white-palace.jpg",
+      "alt": "贵阳花果园白宫的灯光与湖面倒影",
+      "width": 1680,
+      "height": 945,
+      "eyebrow": "01 / HOME",
+      "title": "来自贵阳",
+      "description": "山水之间，烟火之中。",
+      "paragraphs": [
+        "我是贵州贵阳人。喜欢这座城市的山水，也喜欢它直爽、热闹的生活气息。"
+      ],
+      "tags": [
+        "贵州 · 贵阳",
+        "直爽不绕弯",
+        "家乡味道"
+      ],
+      "theme": "home",
+      "details": [
+        [
+          "城市印象",
+          "花果园白宫的夜色与倒影，是我想给你看的贵阳。"
+        ],
+        [
+          "家乡味道",
+          "酸汤鱼、肠旺面、折耳根。熟悉的味道，最有归属感。"
+        ]
+      ],
+      "position": "55% 62%",
+      "displayTitle": "来自贵阳",
+      "mediaWord": "贵阳"
     },
     {
       "src": "./assets/world/marine.jpg",
       "alt": "海上执勤的军旅时光",
       "width": 964,
       "height": 1280,
-      "position": "50% 32%"
+      "position": "50% 32%",
+      "eyebrow": "02 / SERVICE",
+      "title": "军旅时光",
+      "description": "2021.03 — 2025.03 · 海军陆战队",
+      "paragraphs": [
+        "四年军旅，留下执行力、自律与团队意识。任务面前认真负责，认准的事就做到位。"
+      ],
+      "tags": [
+        "海军陆战队",
+        "执行力",
+        "团队协作"
+      ],
+      "theme": "service",
+      "details": [
+        [
+          "任务经历",
+          "第47批亚丁湾护航 · 联合利剑-2024A"
+        ],
+        [
+          "能力沉淀",
+          "任务导向的执行力、高强度下的抗压能力，以及把团队目标放在前面的习惯。"
+        ]
+      ],
+      "honors": [
+        {
+          "count": "02",
+          "label": "“四有”优秀士兵"
+        },
+        {
+          "count": "02",
+          "label": "嘉奖"
+        },
+        {
+          "count": "01",
+          "label": "班三等功"
+        },
+        {
+          "count": "01",
+          "label": "优秀新兵"
+        }
+      ],
+      "honorNote": "另有集体嘉奖"
     },
     {
       "src": "./assets/world/portrait.jpg",
       "alt": "阿祖在城市街头的生活照",
       "width": 1024,
       "height": 1534,
-      "position": "50% 28%"
+      "position": "50% 28%",
+      "eyebrow": "03 / ABOUT ME",
+      "title": "我叫阿祖",
+      "description": "直爽，认真，也始终好奇。",
+      "paragraphs": [
+        "我是祖朋，叫我阿祖就好。广州软件学院毕业。把军旅积累的执行力，带进学习与生活。"
+      ],
+      "tags": [
+        "广州软件学院",
+        "推理小说",
+        "AI 学习者"
+      ],
+      "theme": "about",
+      "details": [
+        [
+          "书架一角",
+          "东野圭吾：《白夜行》《解忧杂货店》《嫌疑人X的献身》。喜欢在细节里找真相。"
+        ],
+        [
+          "正在学习",
+          "认真学习 AI，把工具用明白，把知识变成能用上的本领。"
+        ],
+        [
+          "生活里的我",
+          "球场、健身房、音乐和书，都是认识我的入口。"
+        ]
+      ]
     },
     {
-      "src": "./assets/world/deck.jpg",
-      "alt": "甲板上的军旅掠影",
-      "width": 1280,
-      "height": 950
+      "src": "./assets/world/beyond-yellow.png",
+      "alt": "阿祖提供的黄色 Beyond 四子海报",
+      "width": 836,
+      "height": 1606,
+      "eyebrow": "04 / MUSIC",
+      "title": "一直听 Beyond",
+      "description": "有些旋律，始终有回响。",
+      "position": "50% 40%",
+      "paragraphs": [],
+      "tags": [
+        "Beyond",
+        "海阔天空",
+        "光辉岁月"
+      ],
+      "theme": "music",
+      "details": [],
+      "displayTitle": "一直听 Beyond",
+      "mediaWord": "",
+      "songs": [
+        {
+          "title": "海阔天空",
+          "cover": "../assets/boundless.jpg",
+          "album": "海闊天空",
+          "reason": "喜欢它关于自由和理想的倔强。认准的方向，再难也想走下去。",
+          "url": "https://music.apple.com/us/album/1722093835"
+        },
+        {
+          "title": "光辉岁月",
+          "cover": "../assets/glorious.jpg",
+          "album": "光輝歲月",
+          "reason": "喜欢那种不向困境低头的力量。时间会过去，心里的信念要留下。",
+          "url": "https://music.apple.com/us/album/1443905184"
+        },
+        {
+          "title": "真的爱你",
+          "cover": "./assets/world/beyond-iv.jpg",
+          "album": "Beyond IV",
+          "reason": "喜欢它把感谢唱得真诚。往前走，也记得珍惜身边的人。",
+          "url": "https://music.apple.com/us/song/1443425287"
+        }
+      ]
     },
     {
-      "src": "./assets/world/court.jpg",
-      "alt": "夕阳下的球场",
-      "width": 1280,
-      "height": 865
+      "src": "../assets/fitness.jpg",
+      "alt": "阿祖进行单杠引体向上训练的照片",
+      "width": 871,
+      "height": 1280,
+      "cover": {
+        "src": "./assets/world/court.jpg",
+        "alt": "夕阳下打篮球的身影",
+        "width": 1280,
+        "height": 865,
+        "position": "50% 50%"
+      },
+      "eyebrow": "05 / SPORTS",
+      "title": "球场上见",
+      "description": "把力量，练进日常。",
+      "paragraphs": [
+        "足球带来协作与热血，训练让人专注，游泳让节奏慢下来。运动，是我保持状态的方式。"
+      ],
+      "tags": [
+        "足球",
+        "健身",
+        "游泳"
+      ],
+      "theme": "sports",
+      "details": [
+        [
+          "足球",
+          "享受奔跑、配合和全力投入的一刻。"
+        ],
+        [
+          "力量训练",
+          "把自律变成习惯，让每一次练习都有积累。"
+        ],
+        [
+          "游泳",
+          "专注呼吸，在自己的节奏里向前。"
+        ]
+      ],
+      "position": "50% 85%",
+      "displayTitle": "热爱运动",
+      "mediaWord": "MOVE."
     }
   ],
   "contact": {
@@ -76,5 +241,125 @@
     "appleTrackId": 1552791427,
     "appleMusicUrl": "https://music.apple.com/us/album/love-story-taylors-version/1552791073?i=1552791427",
     "note": "Official 30-second Apple Music preview of “Love Story (Taylor’s Version)”, streamed from Apple at click time (iTunes lookup API); not stored in the site. Put your own licensed file in src to use it instead."
-  }
+  },
+  "toolboxStories": [
+    {
+      "title": "工作流",
+      "description": "让重复的步骤连起来，让精力留给判断。",
+      "paragraphs": [
+        "正在探索 AI 自动化，从整理一项重复任务开始，理解输入、处理和输出之间的关系。"
+      ],
+      "details": [
+        [
+          "关注方向",
+          "资料收集、信息整理、内容处理。"
+        ],
+        [
+          "做事思路",
+          "先拆步骤，再连接工具；把人工确认留在关键环节。"
+        ]
+      ],
+      "toolIds": [
+        "topic-radar"
+      ]
+    },
+    {
+      "title": "效率工具",
+      "description": "工具的价值，是把手头的事情做得更顺。",
+      "paragraphs": [
+        "把 AI 学习放进具体场景，关注工具是否真正减少操作、方便下一次使用。"
+      ],
+      "details": [
+        [
+          "关注方向",
+          "截图、素材整理与日常信息处理。"
+        ],
+        [
+          "做事思路",
+          "从一个小问题开始，做简单、清楚、用得上的功能。"
+        ]
+      ],
+      "toolIds": [
+        "memo",
+        "screen-chinese"
+      ]
+    },
+    {
+      "title": "视觉表达",
+      "description": "把一个想法，变成看得见的画面。",
+      "paragraphs": [
+        "探索 AI 图像与视频的视觉表达，从参考、构图和人物一致性入手，慢慢形成自己的判断。"
+      ],
+      "details": [
+        [
+          "关注方向",
+          "人物形象、画面构图、色彩与氛围。"
+        ],
+        [
+          "做事思路",
+          "先明确画面要表达什么，再选择合适的工具。"
+        ]
+      ],
+      "toolIds": [
+        "shots"
+      ]
+    },
+    {
+      "title": "动态内容",
+      "description": "让画面动起来，也让故事讲清楚。",
+      "paragraphs": [
+        "关注动作是否自然、镜头是否连贯，以及画面和声音能否一起传达内容。"
+      ],
+      "details": [
+        [
+          "关注方向",
+          "AI 视频、短片与人物动态。"
+        ],
+        [
+          "做事思路",
+          "从短片段开始，检查节奏、衔接和画面细节。"
+        ]
+      ],
+      "toolIds": [
+        "shoot",
+        "harbor"
+      ]
+    },
+    {
+      "title": "界面设计",
+      "description": "让界面好看，也让每一步都容易理解。",
+      "paragraphs": [
+        "在个人网站里探索卡片、排版和交互，关注视觉层次，也关注鼠标和手机操作的体验。"
+      ],
+      "details": [
+        [
+          "关注方向",
+          "信息层级、卡片布局、交互反馈。"
+        ],
+        [
+          "做事思路",
+          "把最重要的内容放清楚，让装饰服务于使用。"
+        ]
+      ],
+      "toolIds": []
+    },
+    {
+      "title": "页面布局",
+      "description": "从页面想法，到可以打开、可以操作的网站。",
+      "paragraphs": [
+        "围绕自己的个人空间，持续尝试照片展示、内容组织和响应式布局。"
+      ],
+      "details": [
+        [
+          "关注方向",
+          "个人网站、照片展示与不同屏幕适配。"
+        ],
+        [
+          "做事思路",
+          "先搭结构，再补内容，最后检查实际使用效果。"
+        ]
+      ],
+      "toolIds": []
+    }
+  ]
 }

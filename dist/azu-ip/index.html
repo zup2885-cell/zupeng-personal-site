@@ -12,17 +12,17 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <!-- hand-lettered marker fonts for the hero profile: Permanent Marker (Latin) + ZCOOL KuaiLe (Chinese), both open licence -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=ZCOOL+KuaiLe&display=swap">
-  <link rel="stylesheet" href="./style.css?v=20261018-move2">
-  <script src="./app.js?v=20261018-move" type="module"></script>
+  <link rel="stylesheet" href="./style.css?v=20261019-sound-recovery">
+  <script src="./app.js?v=20261019-sound-recovery" type="module"></script>
   <script>if(!matchMedia("(prefers-reduced-motion: reduce)").matches){document.documentElement.classList.add("js-drop");if(!location.hash||location.hash==="#home")document.documentElement.classList.add("has-gate")}</script>
 </head>
 <body>
   <!-- Enter page: browsers only allow sound after a click, so this one click lets the headline drop play with sound -->
-  <div class="enter-gate" id="enter-gate" role="dialog" aria-label="进入阿祖的个人空间"><p class="gate-brand">AZU</p><button class="gate-button" id="gate-button" type="button"><span class="gate-dot" aria-hidden="true"></span>点击进入<small>建议打开声音</small></button></div>
+  <div class="enter-gate" id="enter-gate" role="dialog" aria-label="进入阿祖的个人空间"><p class="gate-brand">AZU</p><button class="gate-button" id="gate-button" type="button"><span class="gate-dot" aria-hidden="true"></span>点击进入</button></div>
   <a class="skip" href="#main">跳到正文</a>
   <header class="header">
     <a class="brand" href="#home" aria-label="阿祖 AZU 首页">AZU</a>
-    <nav class="nav" aria-label="主导航"><a href="#home" class="active">首页</a><a href="#work">作品</a><a href="#modules">探索 <span>↗</span></a></nav>
+    <nav class="nav" aria-label="主导航"><a href="#home" class="active">首页</a><a href="#work">作品</a><a href="#modules">探索 <span>↗</span></a><button class="sound-toggle" id="sound-toggle" type="button" aria-label="关闭音效" aria-pressed="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9h4l5-4v14l-5-4H4z"/><path class="sound-waves" d="M16 8c2 2 2 6 0 8m3-11c4 4 4 10 0 14"/><path class="sound-off" d="m16 9 6 6m0-6-6 6"/></svg></button></nav>
   </header>
   <main id="main">
     <section class="hero" id="home" data-module="01" aria-labelledby="hero-title">
@@ -43,15 +43,14 @@
       <div class="hero-footer"><a class="scroll-cue" href="#world"><span>↓</span>向下认识我</a></div>
     </section>
     <section class="world-page" id="world" data-module="02" aria-labelledby="world-title">
-      <h2 class="visually-hidden" id="world-title">生活照片</h2>
+      <h2 class="visually-hidden" id="world-title">生活里的我</h2>
       <div class="world-light" aria-hidden="true"></div>
-      <ul class="photo-fan" aria-label="阿祖的生活照片"></ul>
+      <ul class="photo-fan" aria-label="阿祖的家乡、军旅、个人介绍、音乐和运动"></ul>
       <div class="world-stage">
         <div class="world-playground" id="world-playground">
           <figure class="world-character" id="world-character" data-state="loading" data-look="think" aria-label="阿祖的绿色外套男性潮玩形象">
             <img id="world-character-frame" src="./assets/world-interact/dense/041-00.webp" width="327" height="768" alt="阿祖的绿色外套男性潮玩形象" decoding="async">
           </figure>
-          <a class="world-entry" href="#work">全部作品 <span>↓</span></a>
         </div>
       </div>
     </section>
@@ -60,26 +59,48 @@
         <figure class="ip-stage" data-ip="music"><video class="ip-video" muted loop playsinline preload="none" aria-label="戴着耳机听歌的阿祖潮玩形象"></video></figure>
         <button class="now-playing" type="button" aria-pressed="false" aria-label="播放 Taylor Swift《Love Story》"><span class="disc-wrap" aria-hidden="true"><span class="disc"></span><span class="toggle"></span></span><span class="track"><b>Love Story</b><small>Taylor Swift</small></span><span class="eq" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span></button>
         <p class="now-playing-hint" id="now-playing-hint" role="status" aria-live="polite"></p>
-        <a class="now-playing-source" id="now-playing-source" target="_blank" rel="noopener" hidden>30 秒官方试听 · 在 Apple Music 听完整版 ↗</a>
+        <a class="now-playing-source" id="now-playing-source" target="_blank" rel="noopener" hidden>Apple Music ↗</a>
         <audio id="bgm" preload="none" loop></audio>
       </div>
       <div class="board-body">
-        <div class="module-heading"><div><p class="eyebrow">03 / SELECTED WORK</p><h2 id="work-title">创作案例</h2></div><p class="module-placeholder">案例位置已预留</p></div>
-        <div class="work-controls"><p>响应式网站 · 界面交互 · AI 短剧</p><div><button type="button" id="work-prev" aria-label="上一个案例">←</button><button type="button" id="work-next" aria-label="下一个案例">→</button></div></div>
-        <div class="work-track" id="work-track" role="region" aria-label="创作案例横向列表" tabindex="0">
-          <article class="work-slot"><div class="work-cover"><span>01</span><span>WEBSITE</span></div><div class="work-copy"><h3>响应式网站</h3><p>项目介绍、职责与交付成果</p><span>待补充案例</span></div></article>
-          <article class="work-slot"><div class="work-cover"><span>02</span><span>INTERACTION</span></div><div class="work-copy"><h3>界面交互</h3><p>设计过程、交互方案与效果</p><span>待补充案例</span></div></article>
-          <article class="work-slot"><div class="work-cover"><span>03</span><span>AI FILM</span></div><div class="work-copy"><h3>AI 短剧</h3><p>故事构思、制作流程与成片</p><span>待补充案例</span></div></article>
+        <div class="module-heading"><div><h2 id="work-title">创作案例</h2></div></div>
+
+        <div class="work-track" id="work-track" role="region" aria-label="三张黑胶封套，左右半幅叠放">
+          <div class="work-sleeves">
+          <article class="work-slot work-slot--xiaoyi" id="work-card-1">
+            <a class="work-select" href="../xiaoyi-about/" aria-label="打开小怡说车个人网页"></a>
+            <div class="work-record" aria-hidden="true"><span class="record-print">XIAOYI • VOL. 01</span><span class="record-label"><b>小怡</b><small>01 / WEBSITE</small></span></div>
+            <div class="work-card-face"><div class="work-cover work-cover--xiaoyi">
+              <img class="sleeve-portrait" src="../xiaoyi-about/assets/xiaoyi-portrait-retouch.jpg" alt="" width="1122" height="1402" loading="lazy">
+              <div class="sleeve-meta"><span>XIAOYI / PERSONAL SITE</span><b class="sleeve-number">01</b></div>
+              <div class="sleeve-art" aria-hidden="true"></div>
+              <div class="sleeve-title"><h3>小怡说车 <span class="sleeve-open" aria-hidden="true">↗</span></h3><span>汽车内容创作者</span></div>
+            </div></div>
+          </article>
+          <article class="work-slot is-active" id="work-card-2"><button class="work-select" type="button" aria-label="界面交互，抽出唱片" aria-pressed="true"></button><div class="work-record" aria-hidden="true"><span class="record-print">AZU • VOL. 02</span><span class="record-label"><b>AZU</b><small>02 / INTERACTION</small></span></div><div class="work-card-face"><div class="work-cover"><div class="sleeve-meta"><span>AZU / SELECTED WORK</span><b class="sleeve-number">02</b></div><div class="sleeve-art" aria-hidden="true"><i></i><i></i><i></i></div><div class="sleeve-title"><h3>界面交互</h3><span>INTERACTION</span></div></div></div></article>
+          <article class="work-slot" id="work-card-3"><button class="work-select" type="button" aria-label="AI 短剧，抽出唱片" aria-pressed="false"></button><div class="work-record" aria-hidden="true"><span class="record-print">AZU • VOL. 03</span><span class="record-label"><b>AZU</b><small>03 / AI FILM</small></span></div><div class="work-card-face"><div class="work-cover"><div class="sleeve-meta"><span>AZU / SELECTED WORK</span><b class="sleeve-number">03</b></div><div class="sleeve-art" aria-hidden="true"><i></i><i></i><i></i></div><div class="sleeve-title"><h3>AI 短剧</h3><span>AI FILM</span></div></div></div></article>
+          </div>
         </div>
+
       </div>
     </section>
     <section class="content-module module-skills ip-board" id="skills" data-module="04" aria-labelledby="skills-title">
       <div class="board-body">
-        <div class="module-heading"><div><p class="eyebrow">04 / MY CREATIVE TOOLBOX</p><h2 id="skills-title">秘密武器库</h2></div><p class="module-placeholder"><a href="../secret-weapons/" style="color:inherit;text-decoration:underline;text-underline-offset:5px">打开秘密武器 ↗</a></p></div>
-        <ol class="skill-rows"><li><span>01</span><h3>AI 自动化</h3><p>工作流与效率工具</p></li><li><span>02</span><h3>AI 视频</h3><p>视觉表达与动态内容</p></li><li><span>03</span><h3>UI / UX</h3><p>界面与用户体验</p></li><li><span>04</span><h3>网站开发</h3><p>从页面到可运行网站</p></li><li><span>05</span><h3>0–1 产品架构</h3><p>从想法到产品结构</p></li></ol>
+        <div class="module-heading"><div><h2 id="skills-title">秘密武器库</h2></div></div>
+        <div class="toolbox" id="toolbox" aria-label="四类创作能力卡片">
+        <div class="toolbox-scroll"><div class="toolbox-rack" role="group" aria-label="6 个立体档案盒">
+        <button class="toolbox-card" type="button" data-group="0" data-title="AI 自动化" data-description="工作流与效率工具" data-topic="工作流" style="--index:0;--variant:0" aria-label="AI 自动化：工作流" aria-pressed="false"><span class="toolbox-box"><span class="toolbox-spine" aria-hidden="true"><b>01</b><span>工作流</span><i></i></span><span class="toolbox-top" aria-hidden="true"></span><span class="toolbox-cover"><span class="toolbox-edition">ARCHIVE / 01</span><span class="toolbox-art" aria-hidden="true"><b>01</b><i></i><i></i></span><span class="toolbox-cover-title">工作流</span><span class="toolbox-cover-footer">AUTOMATION<b>↗</b></span></span></span></button>
+        <button class="toolbox-card" type="button" data-group="0" data-title="AI 自动化" data-description="工作流与效率工具" data-topic="效率工具" style="--index:1;--variant:1" aria-label="AI 自动化：效率工具" aria-pressed="false"><span class="toolbox-box"><span class="toolbox-spine" aria-hidden="true"><b>02</b><span>效率工具</span><i></i></span><span class="toolbox-top" aria-hidden="true"></span><span class="toolbox-cover"><span class="toolbox-edition">ARCHIVE / 02</span><span class="toolbox-art" aria-hidden="true"><b>02</b><i></i><i></i></span><span class="toolbox-cover-title">效率工具</span><span class="toolbox-cover-footer">AUTOMATION<b>↗</b></span></span></span></button>
+        <button class="toolbox-card" type="button" data-group="1" data-title="AI 视频" data-description="视觉表达与动态内容" data-topic="视觉表达" style="--index:2;--variant:2" aria-label="AI 视频：视觉表达" aria-pressed="false"><span class="toolbox-box"><span class="toolbox-spine" aria-hidden="true"><b>03</b><span>视觉表达</span><i></i></span><span class="toolbox-top" aria-hidden="true"></span><span class="toolbox-cover"><span class="toolbox-edition">ARCHIVE / 03</span><span class="toolbox-art" aria-hidden="true"><b>03</b><i></i><i></i></span><span class="toolbox-cover-title">视觉表达</span><span class="toolbox-cover-footer">AI VIDEO<b>↗</b></span></span></span></button>
+        <button class="toolbox-card" type="button" data-group="1" data-title="AI 视频" data-description="视觉表达与动态内容" data-topic="动态内容" style="--index:3;--variant:3" aria-label="AI 视频：动态内容" aria-pressed="false"><span class="toolbox-box"><span class="toolbox-spine" aria-hidden="true"><b>04</b><span>动态内容</span><i></i></span><span class="toolbox-top" aria-hidden="true"></span><span class="toolbox-cover"><span class="toolbox-edition">ARCHIVE / 04</span><span class="toolbox-art" aria-hidden="true"><b>04</b><i></i><i></i></span><span class="toolbox-cover-title">动态内容</span><span class="toolbox-cover-footer">AI VIDEO<b>↗</b></span></span></span></button>
+        <button class="toolbox-card" type="button" data-group="2" data-title="UI / UX" data-description="界面与用户体验" data-topic="界面设计" style="--index:4;--variant:0" aria-label="UI / UX：界面设计" aria-pressed="false"><span class="toolbox-box"><span class="toolbox-spine" aria-hidden="true"><b>05</b><span>界面设计</span><i></i></span><span class="toolbox-top" aria-hidden="true"></span><span class="toolbox-cover"><span class="toolbox-edition">ARCHIVE / 05</span><span class="toolbox-art" aria-hidden="true"><b>05</b><i></i><i></i></span><span class="toolbox-cover-title">界面设计</span><span class="toolbox-cover-footer">INTERACTION<b>↗</b></span></span></span></button>
+        <button class="toolbox-card" type="button" data-group="3" data-title="网站开发" data-description="从页面到可运行网站" data-topic="页面布局" style="--index:5;--variant:1" aria-label="网站开发：页面布局" aria-pressed="false"><span class="toolbox-box"><span class="toolbox-spine" aria-hidden="true"><b>06</b><span>页面布局</span><i></i></span><span class="toolbox-top" aria-hidden="true"></span><span class="toolbox-cover"><span class="toolbox-edition">ARCHIVE / 06</span><span class="toolbox-art" aria-hidden="true"><b>06</b><i></i><i></i></span><span class="toolbox-cover-title">页面布局</span><span class="toolbox-cover-footer">WEB DEVELOPMENT<b>↗</b></span></span></span></button>
+        </div></div>
+
+        </div>
       </div>
       <div class="board-ip board-ip--bust">
-        <p class="ip-stamp" aria-hidden="true">5 件武器<br><b>随时上场</b></p>
+        <p class="ip-stamp" aria-hidden="true">4 类能力<br><b>随时上场</b></p>
         <figure class="ip-stage" data-ip="arsenal"><video class="ip-video" muted loop playsinline preload="none" aria-label="双手抱胸、自信微笑的阿祖潮玩形象"></video></figure>
       </div>
     </section>
@@ -90,10 +111,10 @@
       </div>
       <div class="board-body">
         <div class="module-heading"><div><p class="eyebrow">05 / LET’S TALK</p><h2 id="contact-title">联系我</h2></div></div>
-        <div class="contact-layout"><div class="contact-identity"><div><h3>阿祖 AZU</h3><p>祖朋 · 家乡贵州贵阳</p><p class="contact-note">所在地与合作方向待补充</p></div></div><div class="contact-email"><span class="eyebrow">EMAIL / 邮箱</span><p id="contact-email">邮箱待补充</p><div class="contact-actions"><button id="copy-email" type="button" disabled>复制邮箱</button><a id="send-email" hidden>发送邮件 ↗</a></div><p id="contact-status" class="contact-note" role="status" aria-live="polite">填写公开邮箱后开放联系入口</p></div></div>
+        <div class="contact-layout"><div class="contact-identity"><div><h3>阿祖 AZU</h3><p>祖朋 · 家乡贵州贵阳</p></div></div><div class="contact-email"><span class="eyebrow">EMAIL / 邮箱</span><p id="contact-email"></p><div class="contact-actions"><button id="copy-email" type="button" disabled>复制邮箱</button><a id="send-email" hidden>发送邮件 ↗</a></div><p id="contact-status" class="contact-note" role="status" aria-live="polite"></p></div></div>
       </div>
     </section>
   </main>
-  <footer class="module-footer" id="modules"><div class="footer-intro"><p>每一面，都很阿祖。</p><span>故事才刚刚开始，接着往下看。</span></div><nav id="module-links" aria-label="五个模块导航"></nav><div class="footer-bottom"><span>AZU — 个人空间</span><a href="#home">回到顶部 ↑</a><span>STAY CURIOUS. KEEP GOING. ↗</span></div></footer>
+  <footer class="module-footer" id="modules"><div class="footer-intro"><p>每一面，都很阿祖。</p></div><nav id="module-links" aria-label="五个模块导航"></nav><div class="footer-bottom"><span>AZU — 个人空间</span><a href="./media-credits.html">影像来源</a><a href="#home">回到顶部 ↑</a><span>STAY CURIOUS. KEEP GOING. ↗</span></div></footer>
 </body>
 </html>

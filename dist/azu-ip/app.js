@@ -1,17 +1,25 @@
+import { createSiteSound } from './sound.js?v=20261019-sound-recovery';
+const siteSound = createSiteSound();
 const $ = (s) => document.querySelector(s);
 // Resolves when the visitor clicks into the site (enter page), or straight away when there is none.
 const entered = new Promise(resolve => {
   const root = document.documentElement, gate = document.getElementById('enter-gate');
   if (!root.classList.contains('has-gate') || !gate) { resolve(false); return; }
-  const go = () => { root.classList.add('entered'); gate.setAttribute('aria-hidden', 'true'); resolve(true); };
+  let entering = false;
+  const go = async () => {
+    if(entering) return;
+    entering = true;
+    await siteSound.unlock();
+    root.classList.add('entered'); gate.setAttribute('aria-hidden', 'true'); resolve(true);
+  };
   document.getElementById('gate-button').addEventListener('click', go, { once: true });
   addEventListener('keydown', e => { if (!root.classList.contains('entered') && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); go(); } });
   document.getElementById('gate-button').focus({ preventScroll: true });
 });
-const content = await fetch('./content.json').then(r => {if(!r.ok) throw Error('Content unavailable');return r.json();});
+const content = await fetch('./content.json?v=20261019-six-court').then(r => {if(!r.ok) throw Error('Content unavailable');return r.json();});
 import { setupWorld } from './world.js?v=20261018-move';
 
-fillPhotoFan($('#world .photo-fan'));
+const openPersonalCard = fillPhotoFan($('#world .photo-fan'));
 setupWorld();
 $('#intro-lead').textContent = content.introLead;
 $('#intro-detail').textContent = content.introDetail;
@@ -39,6 +47,7 @@ if(modules.some(item => item.id === previousPage) || legacyHash){
   requestAnimationFrame(() => document.getElementById(target).scrollIntoView({behavior:'instant'}));
 }
 setupWorkGallery();
+setupToolbox();
 setupIpBoards();
 setupNowPlaying();
 setupContact();
@@ -46,30 +55,159 @@ setupHeadlineDrop();
 setupCharacter();
 
 function setupWorkGallery(){
-  const track = $('#work-track'), previous = $('#work-prev'), next = $('#work-next');
-  const update = () => {
-    previous.disabled = track.scrollLeft <= 2;
-    next.disabled = track.scrollLeft + track.clientWidth >= track.scrollWidth - 2;
+  const track = $('#work-track');
+  const cards = [...track.querySelectorAll('.work-slot')];
+  const buttons = [...track.querySelectorAll('.work-select')];
+  let active = -1;
+  const select = index => {
+    const target = (index + cards.length) % cards.length;
+    if(target === active) return;
+    active = target;
+    cards.forEach((card, i) => {
+      card.classList.toggle('is-active', i === active);
+      // Nearest neighbours sit above the farthest sleeve: the middle is never fully covered.
+      card.style.zIndex = String(cards.length - Math.abs(i - active));
+      if(buttons[i].tagName === 'BUTTON') buttons[i].setAttribute('aria-pressed', String(i === active));
+    });
   };
-  const move = direction => {
-    const step = track.firstElementChild.getBoundingClientRect().width + parseFloat(getComputedStyle(track).gap);
-    track.scrollBy({left:direction * step, behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});
-  };
-  previous.addEventListener('click', () => move(-1));
-  next.addEventListener('click', () => move(1));
-  track.addEventListener('scroll', update, {passive:true});
-  track.addEventListener('keydown', event => {
-    if(event.key === 'ArrowLeft' || event.key === 'ArrowRight'){
-      event.preventDefault();move(event.key === 'ArrowLeft'?-1:1);
-    }
+  cards.forEach((card, i) => {
+    // Each sleeve itself is the control; its uncovered half stays reachable.
+    // No hover reset or movement can make neighbouring cards fight for focus.
+    const hover = event => { if(event.pointerType !== 'touch') select(i); };
+    card.addEventListener('pointerenter', hover);
+
+    buttons[i].addEventListener('click', () => select(i));
+    buttons[i].addEventListener('focus', () => select(i));
   });
-  new ResizeObserver(update).observe(track);
-  update();
+  track.addEventListener('keydown', event => {
+    let target;
+    if(event.key === 'ArrowLeft') target = (active - 1 + cards.length) % cards.length;
+    else if(event.key === 'ArrowRight') target = (active + 1) % cards.length;
+    else if(event.key === 'Home') target = 0;
+    else if(event.key === 'End') target = cards.length - 1;
+    else return;
+    event.preventDefault();
+    buttons[target].focus({preventScroll:true});
+  });
+  // Keep the most recently chosen card in front when the pointer leaves.
+  select(1);
+}
+
+async function setupToolbox(){
+  const root = $('#toolbox');
+  if(!root) return;
+  const cards = [...root.querySelectorAll('.toolbox-card')];
+  const scroller = root.querySelector('.toolbox-scroll');
+  let catalog = [];
+  try {
+    const response = await fetch('../secret-weapons/catalog.json?v=20261019-toolbox-covers');
+    if(!response.ok) throw Error('Tool catalog unavailable');
+    catalog = (await response.json()).filter(tool => tool.id !== 'markdown');
+  } catch(error) { console.warn('Tool catalog unavailable', error); }
+  const toolsFor = index => (content.toolboxStories?.[index]?.toolIds || [])
+    .map(id => catalog.find(tool => tool.id === id)).filter(Boolean);
+  let active = -1;
+  function select(index, reveal = false){
+    if(index !== active){
+      active = index;
+      cards.forEach((card, i) => {
+        card.classList.toggle('is-active', i === active);
+        card.setAttribute('aria-pressed', String(i === active));
+      });
+
+    }
+    if(reveal){
+      // Move only the horizontal rack, never the page or the character.
+      const card = cards[active];
+      const x = card.offsetLeft - scroller.clientWidth / 2 + 90;
+      scroller.scrollTo({left: Math.max(0, x), behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth'});
+    }
+  }
+  cards.forEach((card, i) => {
+    // Fixed hit areas and pointer-transparent covers prevent hover oscillation
+    // when a raised cover travels across its neighbours. CSS retargets in flight.
+    const tools = toolsFor(i);
+    if(tools.length){
+      card.dataset.coverTheme = tools[0].coverTheme;
+      const art = card.querySelector('.toolbox-art'); art.classList.add('has-tool-covers');
+      art.replaceChildren(...tools.map(tool => createToolCover(tool)));
+      card.querySelector('.toolbox-cover-footer b').textContent = `${tools.length} ↗`;
+      card.setAttribute('aria-label', `${card.dataset.title}：${card.dataset.topic}，${tools.map(tool => tool.name).join('、')}`);
+    }
+    card.setAttribute('aria-haspopup', 'dialog');
+    card.setAttribute('aria-controls', 'world-story');
+    card.setAttribute('aria-expanded', 'false');
+    card.addEventListener('pointerenter', e => { if(e.pointerType !== 'touch') select(i); });
+    card.addEventListener('click', () => {
+      select(i);
+      const story = content.toolboxStories?.[i];
+      if(story) openPersonalCard({...story, tools:toolsFor(i),
+        ...(toolsFor(i).length ? {paragraphs:[],details:[]} : {}),
+        theme:'toolbox', number:String(i + 1).padStart(2,'0')}, card);
+    });
+    card.addEventListener('focus', () => select(i, true));
+    card.addEventListener('keydown', e => {
+      const next = e.key === 'ArrowRight' ? Math.min(i + 1, cards.length - 1) : e.key === 'ArrowLeft' ? Math.max(i - 1, 0) : e.key === 'Home' ? 0 : e.key === 'End' ? cards.length - 1 : null;
+      if(next === null) return;
+      e.preventDefault();cards[next].focus({preventScroll:true});
+    });
+  });
+  select(3);
+}
+
+function createToolCover(tool){
+  const cover = document.createElement('span');cover.className='tool-cover';
+  cover.dataset.tone=tool.coverTheme || 'paper';
+  const image=document.createElement('img');
+  image.src=new URL(tool.cover,new URL('../secret-weapons/',location.href)).href;
+  image.alt='';image.width=200;image.height=132;
+  const name=document.createElement('span');name.textContent=tool.shortName || tool.name;
+  cover.append(image,name);return cover;
+}
+
+function createToolEntry(tool, compact = false){
+  const entry = document.createElement('article');
+  entry.className = 'tool-entry' + (compact ? ' tool-entry--compact' : '');
+  entry.dataset.tool = tool.id;
+  if(tool.cover)entry.append(createToolCover(tool));
+  const heading = document.createElement('div'); heading.className = 'tool-entry-heading';
+  const title = document.createElement(compact ? 'h4' : 'h3'); title.textContent = tool.name;
+  const type = document.createElement('span'); type.textContent = tool.type;
+  heading.append(title, type); entry.append(heading);
+  if(!compact){
+    const tagline = document.createElement('p'); tagline.textContent = tool.tagline;
+    entry.append(tagline);
+  }
+  const actions = document.createElement('div'); actions.className = 'tool-entry-actions';
+  for(const [url,label,download] of [[tool.web,'在线打开',false],[tool.download,'下载 Mac',true]]){
+    if(!url)continue;
+    const link = document.createElement('a');
+    link.href = new URL(url, new URL('../secret-weapons/',location.href)).href;
+    link.textContent = label + (download ? ' ↓' : ' ↗');
+    link.setAttribute('aria-label', `${label} · ${tool.name}`);
+    if(download)link.download='';else{link.target='_blank';link.rel='noopener noreferrer';}
+    actions.append(link);
+  }
+  entry.append(actions);
+  if(!compact){
+    const more = document.createElement('details'), summary = document.createElement('summary');
+    summary.textContent = '使用说明';more.append(summary);
+    const description = document.createElement('p');description.textContent=tool.description;more.append(description);
+    for(const [label,items,tag] of [['可以做什么',tool.features,'ul'],['开始使用',tool.steps,'ol']]){
+      const subtitle=document.createElement('h4');subtitle.textContent=label;
+      const list=document.createElement(tag);
+      for(const text of items || []){const item=document.createElement('li');item.textContent=text;list.append(item);}
+      more.append(subtitle,list);
+    }
+    for(const text of [tool.platform,tool.note]){if(text){const p=document.createElement('p');p.textContent=text;more.append(p);}}
+    entry.append(more);
+  }
+  return entry;
 }
 
 function setupContact(){
   const email = content.contact?.email?.trim();
-  if(!email) return;
+  if(!email){ $('.contact-email').hidden = true; return; }
   $('#contact-email').textContent = email;
   $('#copy-email').disabled = false;
   $('#send-email').hidden = false;
@@ -86,29 +224,103 @@ function setupContact(){
 }
 
 function fillPhotoFan(gallery){
-  // Photos left of centre turn the character left, right of centre turn him right.
   const photos = content.worldPhotos || [];
   const middle = (photos.length - 1) / 2;
-  photos.forEach((photo, index) => {
-    const card = document.createElement('li');
-    card.className = 'fan-card';
-    const image = document.createElement('img');
-    image.src = photo.src;
-    image.alt = photo.alt;
-    image.width = photo.width;
-    image.height = photo.height;
-    image.decoding = 'async';
-    image.loading = 'lazy';
-    image.style.objectPosition = photo.position || 'center';
-    const trigger = document.createElement('button');
-    trigger.type = 'button';
-    trigger.className = 'photo-trigger';
-    trigger.dataset.look = index < middle ? 'left' : index > middle ? 'right' : 'front';
-    trigger.setAttribute('aria-label', photo.alt);
-    trigger.append(image);
-    card.append(trigger);
-    gallery.append(card);
+  const dialog = document.createElement('dialog');
+  dialog.className = 'world-dialog';
+  dialog.id = 'world-story';
+  dialog.setAttribute('aria-labelledby', 'world-story-title');
+  dialog.innerHTML = `<button class="world-dialog-close" type="button" aria-label="关闭介绍">×</button>
+    <div class="world-story-layout"><div class="world-story-photo"><img alt=""><span class="world-media-word" aria-hidden="true"></span><div class="world-story-archive" hidden><b></b><strong></strong></div><div class="world-story-tool-covers" hidden></div></div>
+    <div class="world-story-content"><h2 id="world-story-title"></h2>
+    <p class="world-story-lead"></p><div class="world-song-grid" hidden></div><div class="world-story-paragraphs"></div><section class="world-story-honors" hidden aria-label="军旅荣誉"><h3>军旅荣誉</h3><div class="honor-grid"></div><p></p></section><dl class="world-story-details"></dl><div class="world-tool-list" hidden></div></div></div>`;
+  document.body.append(dialog);
+  const close = dialog.querySelector('.world-dialog-close');
+  let opener = null, previousOverflow = '';
+  close.addEventListener('click', () => dialog.close());
+  let backdropDown = false;
+  dialog.addEventListener('pointerdown', event => { backdropDown = event.target === dialog; });
+  dialog.addEventListener('click', event => { if(backdropDown && event.target === dialog) dialog.close(); });
+  dialog.addEventListener('close', () => {
+    document.documentElement.style.overflow = previousOverflow;
+    opener?.setAttribute('aria-expanded', 'false');
+    opener?.focus({preventScroll:true});
   });
+  function openStory(photo, trigger){
+    if(dialog.open) return;
+    opener = trigger;
+    const image = dialog.querySelector('img');
+    image.hidden = !photo.src;
+    const archive = dialog.querySelector('.world-story-archive');
+    archive.hidden = Boolean(photo.src) || !!photo.tools?.length;
+    const covers = dialog.querySelector('.world-story-tool-covers');
+    covers.hidden = !photo.tools?.length;
+    covers.replaceChildren(...(photo.tools || []).filter(tool=>tool.cover).map(tool=>createToolCover(tool)));
+    if(photo.src){image.src = photo.src; image.alt = photo.alt; image.width = photo.width; image.height = photo.height;}
+    else {image.removeAttribute('src'); archive.querySelector('b').textContent = photo.number; archive.querySelector('strong').textContent = photo.title;}
+    const honors = dialog.querySelector('.world-story-honors');
+    honors.hidden = !photo.honors?.length;
+    honors.querySelector('.honor-grid').replaceChildren(...(photo.honors || []).map(honor => {
+      const item = document.createElement('div'), count = document.createElement('b'), label = document.createElement('span');
+      count.textContent = `${Number(honor.count)} 次`; label.textContent = honor.label; item.append(count, label); return item;
+    }));
+    honors.querySelector('p').textContent = photo.honorNote || '';
+    dialog.dataset.theme = photo.theme || 'about';
+    dialog.querySelector('h2').textContent = photo.displayTitle || photo.title || photo.alt;
+    dialog.querySelector('.world-media-word').textContent = photo.mediaWord || '';
+    const tools = dialog.querySelector('.world-tool-list');
+    tools.hidden = !photo.tools?.length;
+    tools.replaceChildren(...(photo.tools || []).map(tool => createToolEntry(tool)));
+    const songs = dialog.querySelector('.world-song-grid');
+    songs.hidden = !photo.songs?.length;
+    songs.replaceChildren(...(photo.songs || []).map(song => {
+      const card = document.createElement('article'); card.className = 'song-card';
+      const link = document.createElement('a'); link.className = 'song-art'; link.href = song.url; link.target = '_blank'; link.rel = 'noopener';
+      link.setAttribute('aria-label', `在 Apple Music 打开${song.title}`);
+      const disc = document.createElement('span'); disc.className = 'song-vinyl'; disc.setAttribute('aria-hidden','true');
+      const cover = document.createElement('img'); cover.src = song.cover; cover.alt = `Beyond《${song.album}》封面`; cover.width = 300; cover.height = 300;
+      link.append(disc, cover);
+      const copy = document.createElement('div'); copy.className = 'song-copy';
+      const title = document.createElement('h3'), reason = document.createElement('p');
+      title.textContent = song.title; reason.textContent = song.reason;
+      copy.append(title, reason); card.append(link, copy); return card;
+    }));
+    dialog.querySelector('.world-story-lead').textContent = photo.description || '';
+    dialog.querySelector('.world-story-paragraphs').replaceChildren(...(photo.paragraphs || []).map(text => {
+      const p = document.createElement('p'); p.textContent = text; return p;
+    }));
+    dialog.querySelector('.world-story-details').replaceChildren(...(photo.details || []).map(([label, text]) => {
+      const row = document.createElement('div'), term = document.createElement('dt'), detail = document.createElement('dd');
+      term.textContent = label; detail.textContent = text; row.append(term, detail); return row;
+    }));
+    previousOverflow = document.documentElement.style.overflow;
+    document.documentElement.style.overflow = 'hidden';
+    trigger.setAttribute('aria-expanded', 'true');
+    dialog.showModal(); dialog.scrollTop = 0;
+    close.focus({preventScroll:true});
+  }
+  photos.forEach((photo, index) => {
+    const card = document.createElement('li'); card.className = 'fan-card';
+    const cover = photo.cover || photo;
+    const image = document.createElement('img');
+    image.src = cover.src; image.alt = cover.alt;
+    image.width = cover.width; image.height = cover.height;
+    image.decoding = 'async'; image.loading = 'lazy';
+    image.style.objectPosition = cover.position || 'center';
+    const trigger = document.createElement('button');
+    trigger.type = 'button'; trigger.className = 'photo-trigger';
+    trigger.dataset.look = index < middle ? 'left' : index > middle ? 'right' : 'front';
+    trigger.setAttribute('aria-label', `打开${photo.title || photo.alt}介绍`);
+    trigger.setAttribute('aria-haspopup', 'dialog');
+    trigger.setAttribute('aria-controls', dialog.id);
+    trigger.setAttribute('aria-expanded', 'false');
+    const caption = document.createElement('span');
+    caption.className = 'fan-caption'; caption.textContent = photo.title || photo.alt;
+    trigger.append(image, caption);
+    trigger.addEventListener('click', () => openStory(photo, trigger));
+    card.append(trigger); gallery.append(card);
+  });
+  return openStory;
 }
 
 async function setupCharacter(){
@@ -157,11 +369,15 @@ async function setupCharacter(){
   // He keeps saying hello: after a few seconds back on his phone he plays the greeting again.
   // First and last frames are identical, so restarting from 0 shows no jump. Only while the
   // hero is on screen and the tab is visible; scrolling back to the top resumes it.
-  let encore=null,heroVisible=true;
+  let encore=null,heroVisible=false,characterReady=false,entranceAllowed=false;
+  let initialAway = !!location.hash && location.hash !== '#home';
   const scheduleEncore=()=>{clearTimeout(encore);if(reduced||broken)return;
     encore=setTimeout(()=>{if(heroVisible&&!document.hidden&&video.ended)play();else encore=null;},6000);};
-  new IntersectionObserver(e=>{heroVisible=e[e.length-1].isIntersecting;
-    if(heroVisible&&video.ended&&encore===null)scheduleEncore();}).observe(figure);
+  new IntersectionObserver(e=>{heroVisible=e[e.length-1].isIntersecting && e[e.length-1].intersectionRatio >= .35;
+    if(!heroVisible)initialAway=false;
+    if(heroVisible&&!initialAway&&characterReady&&entranceAllowed&&run===0)play();
+    else if(heroVisible&&video.ended&&encore===null)scheduleEncore();},{threshold:.35}).observe(document.getElementById('home'));
+  document.addEventListener('azu:replay-hero',()=>{initialAway=false;if(characterReady&&!reduced)play();});
   document.addEventListener('visibilitychange',()=>{if(!document.hidden&&video.ended&&encore===null)scheduleEncore();});
   // The intro never waits on the video: on a slow connection the poster stands in meanwhile.
   figure.dataset.state='loading';
@@ -181,7 +397,7 @@ async function setupCharacter(){
     // stutter the one-shot animation. Some mobile browsers stop buffering before that point
     // until play() is called; when the download is suspended like that, start anyway.
     let started=false;
-    const start=()=>{if(started)return;started=true;if(replay)replay.disabled=false;if(reduced){figure.dataset.state='static';revealAll();}else entered.then(play);};
+    const start=()=>{if(started)return;started=true;if(replay)replay.disabled=false;if(reduced){figure.dataset.state='static';revealAll();}else {characterReady=true;entered.then(()=>{entranceAllowed=true;if(heroVisible&&!initialAway)play();});}};
     if(video.readyState>=4)start();else{video.addEventListener('canplaythrough',start,{once:true});video.addEventListener('suspend',start,{once:true});}
     replay?.addEventListener('click',play);
   }catch(error){console.warn('Character static fallback',error);fallback();}
@@ -343,10 +559,10 @@ function setupGaze(stage,clip){
   section.addEventListener('pointermove',e=>{
     if(e.pointerType==='touch')return;pointer=true;
     if(performance.now()<holdUntil)return;
-    const li=e.target.closest('.skill-rows li');lookAtRow(li);aimAt(e.clientX,li);
+    const li=e.target.closest('.toolbox-card');lookAtRow(li);aimAt(e.clientX,li);
   },{passive:true});
   section.addEventListener('pointerleave',()=>{pointer=false;glanceAt=0;lookAtRow(null);target=P.front;});
-  section.addEventListener('pointerdown',e=>{const li=e.target.closest('.skill-rows li');lookAtRow(li);aimAt(e.clientX,li);
+  section.addEventListener('pointerdown',e=>{const li=e.target.closest('.toolbox-card');lookAtRow(li);aimAt(e.clientX,li);
     holdUntil=performance.now()+(e.pointerType==='touch'?1800:700);glanceAt=holdUntil;});
   // Frames start loading well before the board is reached. Every 4th frame first (he can move as
   // soon as those are in), then the rest fills in so the motion gets finer.
@@ -386,26 +602,46 @@ function setupNowPlaying(){
   audio.addEventListener('play',()=>show(true));audio.addEventListener('pause',()=>show(false));
   const source=document.getElementById('now-playing-source');
   if(bgm.appleMusicUrl&&!bgm.src){source.href=bgm.appleMusicUrl;source.hidden=false;}
-  // Own licensed file first; otherwise Apple's official 30-second preview, looked up at click time
-  // (preview addresses change, the track id does not).
+  // Resolve near the music card, so playback can begin in the actual click gesture.
   async function resolve(){
     if(bgm.src)return bgm.src;
     if(!bgm.appleTrackId)return null;
     const r=await fetch(`https://itunes.apple.com/lookup?id=${bgm.appleTrackId}`).then(r=>r.json());
     return r.results?.[0]?.previewUrl||null;
   }
+  let loading=null,resumeOnReturn=false;
+  function prepare(){
+    if(audio.getAttribute('src'))return Promise.resolve(true);
+    if(loading)return loading;
+    loading=resolve().then(url=>{
+      if(!url)return false;
+      audio.src=url;audio.preload='auto';audio.load();return true;
+    }).catch(()=>false).finally(()=>{loading=null;});
+    return loading;
+  }
+  const nearMusic=new IntersectionObserver(entries=>{
+    if(entries.some(entry=>entry.isIntersecting)){void prepare();nearMusic.disconnect();}
+  },{rootMargin:'500px'});
+  nearMusic.observe(button);
+  async function play(){
+    if(document.hidden){resumeOnReturn=true;return;}
+    try{audio.volume=.7;await audio.play();hint.textContent='';}
+    catch{hint.textContent='点击播放';show(false);}
+  }
   button.addEventListener('click',async()=>{
-    if(!audio.src){
+    resumeOnReturn=false;
+    if(!audio.paused){audio.pause();return;}
+    if(!audio.getAttribute('src')){
       hint.textContent='正在载入…';
-      let url=null;try{url=await resolve();}catch{}
-      if(!url){hint.textContent='暂时连不上音乐，请稍后再试';return;}
-      audio.src=url;
+      if(!await prepare()){hint.textContent='暂时连不上音乐，请稍后再试';return;}
     }
-    if(audio.paused){try{audio.volume=.7;await audio.play();hint.textContent='';}catch{hint.textContent='暂时无法播放，请再点一次';}}
-    else audio.pause();
+    void play();
   });
-  // Leaving the page section far behind does not stop the song; leaving the tab does.
-  document.addEventListener('visibilitychange',()=>{if(document.hidden)audio.pause();});
+  // Only restore a song the visitor actually started; switching tabs is not a manual pause.
+  document.addEventListener('visibilitychange',()=>{
+    if(document.hidden){resumeOnReturn=!audio.paused;audio.pause();}
+    else if(resumeOnReturn){resumeOnReturn=false;void play();}
+  });
 }
 function frameHasAlpha(v){
   try{
@@ -424,35 +660,28 @@ function frameHasAlpha(v){
 // After that the letters play with the mouse: the one nearest the pointer is pushed taller and a
 // little wider, its neighbours a little less, and they spring back when the pointer leaves.
 // Sound (a crisp tap on landing, a crack and glassy chips on breaking) is made live with Web Audio. Browsers keep sound off until
-// the page is clicked, so the first drop is usually silent; clicking the headline replays it.
+// the page is clicked. The entry button unlocks audio; clicking the headline replays it.
 function setupHeadlineDrop(){
   const box=document.querySelector('.hero-headline'),svg=box?.querySelector('svg'),text=svg?.querySelector('text');
   const reveal=()=>document.body.classList.add('headline-done');
   if(!text||!document.documentElement.classList.contains('js-drop')){reveal();return;}
   const ns='http://www.w3.org/2000/svg',str=text.textContent,base=Number(text.getAttribute('y'));
   const rnd=(a,b)=>a+Math.random()*(b-a),FALL=820,STEP=65,FLOOR=26;
-  let running=false,audio=null,live=[];
+  let running=false,live=[],hasRun=false;
   const el=(tag,attrs)=>{const n=document.createElementNS(ns,tag);for(const k in attrs)n.setAttribute(k,attrs[k]);return n;};
   const defs=svg.querySelector('defs')||svg.insertBefore(el('defs',{}),svg.firstChild);
   const extents=()=>[...str].map((c,i)=>c===' '?null:{c,e:text.getExtentOfChar(i)}).filter(Boolean);
 
   // --- sound -----------------------------------------------------------------------------------
-  async function soundReady(){
-    if(!audio){const C=window.AudioContext||window.webkitAudioContext;if(!C)return null;audio=new C();}
-    if(audio.state!=='running'){try{await Promise.race([audio.resume(),new Promise(r=>setTimeout(r,250))]);}catch{}}
-    return audio.state==='running'?audio:null;
-  }
-  // any first click / key on the page unlocks sound for later drops
-  const unlock=()=>{soundReady();removeEventListener('pointerdown',unlock);removeEventListener('keydown',unlock);};
-  addEventListener('pointerdown',unlock);addEventListener('keydown',unlock);
+  const soundReady = () => siteSound.ready();
   function noise(ctx,sec){const b=ctx.createBuffer(1,Math.ceil(ctx.sampleRate*sec),ctx.sampleRate),d=b.getChannelData(0);for(let i=0;i<d.length;i++)d[i]=Math.random()*2-1;return b;}
   // everything goes through one gentle compressor so eleven overlapping hits never clip
   let bus=null;
   function out(ctx){
     if(bus&&bus.context===ctx)return bus;
     const comp=ctx.createDynamicsCompressor(),g=ctx.createGain();
-    comp.threshold.value=-18;comp.ratio.value=6;comp.attack.value=0.002;comp.release.value=0.12;g.gain.value=1.2;
-    comp.connect(g).connect(ctx.destination);bus=comp;return bus;
+    comp.threshold.value=-18;comp.ratio.value=6;comp.attack.value=0.002;comp.release.value=0.12;g.gain.value=.65;
+    comp.connect(g).connect(siteSound.output());bus=comp;return bus;
   }
   function burst(ctx,t,{type,freq,q=1,vol,len}){ // a short filtered noise hit
     const n=ctx.createBufferSource(),f=ctx.createBiquadFilter(),g=ctx.createGain();
@@ -512,8 +741,14 @@ function setupHeadlineDrop(){
 
   async function run(withSound){
     if(running)return;running=true;
+    const ctx=withSound?await soundReady():null;
+    if(withSound && siteSound.isEnabled() && !ctx && document.documentElement.dataset.sound!=='unavailable'){
+      running=false;box.dataset.animation='waiting-for-sound';goLive();reveal();return;
+    }
+    hasRun=true;box.dataset.animation='playing';box.dataset.animationSound=ctx?'on':'off';
     document.body.classList.remove('headline-done');box.classList.remove('is-dropped');box.classList.add('is-dropping');
-    const ctx=withSound?await soundReady():null,letters=build(),t0=ctx?ctx.currentTime+0.02:0;
+    const letters=build(),t0=ctx?ctx.currentTime+0.02:0;
+    if(ctx)siteSound.monitor(2600);
     letters.forEach(({g,pieces,e},i)=>{
       const rot=rnd(4,9)*(Math.random()<.5?-1:1),delay=100+i*STEP,hit=delay+FALL*0.7;
       g.animate([
@@ -538,7 +773,7 @@ function setupHeadlineDrop(){
         pieces.forEach(pg=>back.push(pg.animate([{transform:getComputedStyle(pg).transform},{transform:'translate(0,0) rotate(0deg)'}],{duration:240,delay:d,easing:'cubic-bezier(.3,1.4,.6,1)',fill:'forwards'}).finished));
         back.push(g.animate([{transform:getComputedStyle(g).transform},{transform:`translate(0,-14px) rotate(0deg) scale(.97,1.05)`,offset:.55},{transform:'translate(0,0) rotate(0deg) scale(1,1)'}],{duration:620,delay:d+160,easing:'cubic-bezier(.3,.9,.4,1.2)',fill:'forwards'}).finished);
       });
-      Promise.all(back).then(()=>{box.classList.remove('is-dropping');goLive();running=false;reveal();});
+      Promise.all(back).then(()=>{box.classList.remove('is-dropping');goLive();running=false;box.dataset.animation='complete';reveal();});
     },allDown);
   }
 
@@ -570,9 +805,26 @@ function setupHeadlineDrop(){
   hero.addEventListener('pointerleave',()=>{last=null;if(!frame)frame=requestAnimationFrame(squeeze);});
   addEventListener('resize',()=>{if(live.length&&!running)goLive();});
 
-  // The enter click is a user gesture: open the sound inside it, then drop with sound.
-  document.getElementById('gate-button')?.addEventListener('click',()=>{soundReady();},{once:true});
-  entered.then(()=>document.fonts.ready).then(()=>run(true));
+  // Wait only for our local headline font, not every remote font on the page.
+  const fontReady = Promise.race([document.fonts.load('160px Anton'),new Promise(resolve=>setTimeout(resolve,1500))]);
+  let visible = false, mayStart = false;
+  let initialAway = !!location.hash && location.hash !== '#home';
+  const visibleHero = new IntersectionObserver(entries => {
+    visible = entries[entries.length-1].isIntersecting && entries[entries.length-1].intersectionRatio >= .35;
+    if(!visible)initialAway=false;
+    if(visible && !initialAway && mayStart && !hasRun) run(true);
+  },{threshold:.35});
+  visibleHero.observe(hero);
+  document.addEventListener('azu:sound-change',()=>{
+    if(visible&&!initialAway&&mayStart&&!hasRun)run(true);
+  });
+  entered.then(()=>fontReady).then(()=>{mayStart=true;if(visible&&!initialAway)run(true);});
+  // Returning through Home is an explicit replay gesture, including from deep links.
+  document.querySelectorAll('a[href="#home"]').forEach(link=>link.addEventListener('click',()=>{
+    initialAway=false;siteSound.unlock();
+    fontReady.then(()=>{if(mayStart)run(true);});
+    document.dispatchEvent(new Event('azu:replay-hero'));
+  }));
   box.style.cursor='pointer';box.title='点一下，再摔一次（有声音）';
   box.addEventListener('click',()=>run(true));
 }
