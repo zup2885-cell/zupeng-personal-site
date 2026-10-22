@@ -70,15 +70,9 @@
     if (!pin) return 0;
     var total = pin.offsetHeight - window.innerHeight;
     if (total <= 0) return 0;
-    /* scrollY vs pin document offset — more reliable under position:sticky */
-    var top = 0;
-    var el = pin;
-    while (el) {
-      top += el.offsetTop;
-      el = el.offsetParent;
-    }
-    var y = window.scrollY || window.pageYOffset || 0;
-    return clamp((y - top) / total, 0, 1);
+    /* sticky pin: progress = how far the pin top has scrolled above the viewport */
+    var top = pin.getBoundingClientRect().top;
+    return clamp((-top) / total, 0, 1);
   }
 
   function padNum(n, width) {
@@ -190,11 +184,13 @@
     idx = clamp(idx | 0, 0, max);
 
     /* Reliable path: DOM <img> src swap — always visible frame change */
-    if (scrubImgEl && idx !== lastScrubImgIdx) {
-      scrubImgEl.src = frameSrc(idx);
+    if (scrubImgEl) {
+      if (idx !== lastScrubImgIdx) {
+        scrubImgEl.src = frameSrc(idx);
+        lastScrubImgIdx = idx;
+      }
       scrubImgEl.setAttribute('data-idx', String(idx));
       scrubImgEl.classList.add('is-ready');
-      lastScrubImgIdx = idx;
       if (stage) {
         stage.classList.add('is-frames-on');
         stage.classList.add('is-video-on');
@@ -225,8 +221,9 @@
 
   function scrubVisual(progress) {
     var p = clamp(progress, 0, 1);
-    var count = frameCount || frames.length;
-    if (useFrames && count > 0) {
+    var count = frameCount || frames.length || 0;
+    /* DOM img always follows scroll — never wait on Image() cache */
+    if (count > 0) {
       var idx = Math.round(p * (count - 1));
       drawFrame(idx);
       return;
@@ -238,99 +235,6 @@
       }
     }
   }
-
-  function armVideo() {
-    if (!video || reduce) return;
-    try {
-      video.pause();
-      video.muted = true;
-    } catch (e) {}
-
-    function onMeta() {
-      videoDuration = video.duration || 0;
-      if (!(videoDuration > 0) || !isFinite(videoDuration)) return;
-      videoReady = true;
-      /* Probe seekability once */
-      var probeAt = Math.min(0.5, videoDuration * 0.1);
-      var start = video.currentTime;
-      var onSeeked = function () {
-        video.removeEventListener('seeked', onSeeked);
-        videoCanSeek = Math.abs(video.currentTime - probeAt) > 0.05;
-        if (videoCanSeek && !framesReady) {
-          video.classList.add('is-ready');
-          if (stage) stage.classList.add('is-video-on');
-        }
-        try { video.currentTime = 0; } catch (e) {}
-      };
-      video.addEventListener('seeked', onSeeked);
-      try { video.currentTime = probeAt; } catch (e) {
-        video.removeEventListener('seeked', onSeeked);
-        videoCanSeek = false;
-      }
-      /* timeout fallback */
-      setTimeout(function () {
-        if (!videoCanSeek) {
-          try { video.currentTime = 0; } catch (e) {}
-        }
-      }, 800);
-    }
-
-    if (video.readyState >= 1 && video.duration) onMeta();
-    video.addEventListener('loadedmetadata', onMeta);
-  }
-
-  function applyCopy(p) {
-    var titleWindow = clamp(1 - p / 0.42, 0, 1);
-    var titleEase = easeInOut(titleWindow);
-    chars.forEach(function (ch, i) {
-      var stagger = i * 0.07;
-      var fade = clamp((titleEase - stagger) / Math.max(0.001, 1 - stagger * 0.5), 0, 1);
-      ch.style.opacity = fade.toFixed(3);
-      ch.style.transform = 'translate3d(0,' + ((1 - fade) * -36).toFixed(2) + 'px,0)';
-    });
-
-    if (eyebrow) {
-      eyebrow.style.opacity = titleEase.toFixed(3);
-      eyebrow.style.transform = 'translateY(' + ((1 - titleEase) * -18).toFixed(2) + 'px)';
-    }
-    if (lead) {
-      var leadFade = clamp(1 - p / 0.36, 0, 1);
-      lead.style.opacity = leadFade.toFixed(3);
-      lead.style.transform = 'translateY(' + ((1 - leadFade) * -14).toFixed(2) + 'px)';
-    }
-    if (cta) {
-      var ctaLinear = clamp(1 - p / 0.40, 0, 1);
-      var ctaFade = Math.pow(ctaLinear, 4);
-      cta.style.opacity = ctaFade.toFixed(3);
-      cta.style.pointerEvents = ctaFade < 0.08 ? 'none' : 'auto';
-      cta.style.transform = 'translateY(' + ((1 - ctaFade) * -10).toFixed(2) + 'px)';
-    }
-    if (copy) copy.style.transform = 'translate3d(0,' + (p * -22).toFixed(2) + 'px,0)';
-    if (hint) hint.style.opacity = clamp(1 - p * 2.6, 0, 1).toFixed(3);
-    if (stage) {
-      if (p > 0.22) stage.classList.add('is-deep');
-      else stage.classList.remove('is-deep');
-    }
-  }
-
-  function scrubVisual(progress) {
-    var p = clamp(progress, 0, 1);
-    if (useFrames && frames.length) {
-      var idx = Math.round(p * (frames.length - 1));
-      /* draw when ready OR when the desired frame already arrived (early scroll) */
-      if (framesReady || frames[idx]) {
-        drawFrame(idx);
-        return;
-      }
-    }
-    if (videoReady && videoCanSeek && video && !video.seeking) {
-      var t = p * Math.max(0, videoDuration - 0.04);
-      if (Math.abs(video.currentTime - t) >= 0.02) {
-        try { video.currentTime = t; } catch (e) {}
-      }
-    }
-  }
-
   function frame() {
     rafId = 0;
     targetProgress = heroProgress();
@@ -398,6 +302,17 @@
       var x = Math.cos(local * Math.PI * 0.85 + phase) * (amp * 0.35);
       chip.style.transform = 'translate3d(' + x.toFixed(1) + 'px,' + y.toFixed(1) + 'px,0)';
     });
+  }
+
+  /* sync: know frame count before any Image() resolves */
+  if (wrap) {
+    var _c = parseInt(wrap.getAttribute('data-scrub-count') || '0', 10);
+    if (_c > 0) {
+      frameCount = _c;
+      scrubDir = wrap.getAttribute('data-scrub-dir') || scrubDir;
+      scrubPad = parseInt(wrap.getAttribute('data-scrub-pad') || '3', 10);
+      scrubExt = wrap.getAttribute('data-scrub-ext') || scrubExt;
+    }
   }
 
   if (!reduce) {
