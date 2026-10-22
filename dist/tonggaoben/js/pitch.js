@@ -219,6 +219,80 @@
     ctx.drawImage(img, dx, dy, dw, dh);
   }
 
+  function armVideo() {
+    if (!video || reduce) return;
+    try {
+      video.pause();
+      video.muted = true;
+    } catch (e) {}
+
+    function onMeta() {
+      videoDuration = video.duration || 0;
+      if (!(videoDuration > 0) || !isFinite(videoDuration)) return;
+      videoReady = true;
+      /* Probe seekability once */
+      var probeAt = Math.min(0.5, videoDuration * 0.1);
+      var start = video.currentTime;
+      var onSeeked = function () {
+        video.removeEventListener('seeked', onSeeked);
+        videoCanSeek = Math.abs(video.currentTime - probeAt) > 0.05;
+        if (videoCanSeek && !framesReady) {
+          video.classList.add('is-ready');
+          if (stage) stage.classList.add('is-video-on');
+        }
+        try { video.currentTime = 0; } catch (e) {}
+      };
+      video.addEventListener('seeked', onSeeked);
+      try { video.currentTime = probeAt; } catch (e) {
+        video.removeEventListener('seeked', onSeeked);
+        videoCanSeek = false;
+      }
+      /* timeout fallback */
+      setTimeout(function () {
+        if (!videoCanSeek) {
+          try { video.currentTime = 0; } catch (e) {}
+        }
+      }, 800);
+    }
+
+    if (video.readyState >= 1 && video.duration) onMeta();
+    video.addEventListener('loadedmetadata', onMeta);
+  }
+
+  function applyCopy(p) {
+    var titleWindow = clamp(1 - p / 0.42, 0, 1);
+    var titleEase = easeInOut(titleWindow);
+    chars.forEach(function (ch, i) {
+      var stagger = i * 0.07;
+      var fade = clamp((titleEase - stagger) / Math.max(0.001, 1 - stagger * 0.5), 0, 1);
+      ch.style.opacity = fade.toFixed(3);
+      ch.style.transform = 'translate3d(0,' + ((1 - fade) * -36).toFixed(2) + 'px,0)';
+    });
+
+    if (eyebrow) {
+      eyebrow.style.opacity = titleEase.toFixed(3);
+      eyebrow.style.transform = 'translateY(' + ((1 - titleEase) * -18).toFixed(2) + 'px)';
+    }
+    if (lead) {
+      var leadFade = clamp(1 - p / 0.36, 0, 1);
+      lead.style.opacity = leadFade.toFixed(3);
+      lead.style.transform = 'translateY(' + ((1 - leadFade) * -14).toFixed(2) + 'px)';
+    }
+    if (cta) {
+      var ctaLinear = clamp(1 - p / 0.40, 0, 1);
+      var ctaFade = Math.pow(ctaLinear, 4);
+      cta.style.opacity = ctaFade.toFixed(3);
+      cta.style.pointerEvents = ctaFade < 0.08 ? 'none' : 'auto';
+      cta.style.transform = 'translateY(' + ((1 - ctaFade) * -10).toFixed(2) + 'px)';
+    }
+    if (copy) copy.style.transform = 'translate3d(0,' + (p * -22).toFixed(2) + 'px,0)';
+    if (hint) hint.style.opacity = clamp(1 - p * 2.6, 0, 1).toFixed(3);
+    if (stage) {
+      if (p > 0.22) stage.classList.add('is-deep');
+      else stage.classList.remove('is-deep');
+    }
+  }
+
   function scrubVisual(progress) {
     var p = clamp(progress, 0, 1);
     var count = frameCount || frames.length || 0;
@@ -235,6 +309,7 @@
       }
     }
   }
+
   function frame() {
     rafId = 0;
     targetProgress = heroProgress();
