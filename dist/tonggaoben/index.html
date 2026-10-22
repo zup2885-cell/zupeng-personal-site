@@ -4,38 +4,34 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="theme-color" content="#FFFFFF" />
-  <meta name="description" content="通告本 1.4.1 — 一线女演员与执行助理的本机通告工作台。提案展示。" />
-  <title>通告本 · 提案展示 1.4.1</title>
+  <meta name="description" content="通告本 1.4.1 提案展示 — 一线女演员与执行助理的本机通告工作台。" />
+  <title>通告本 · 提案 1.4.1</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;600;700&family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/pitch.css" />
 </head>
 <body>
-  <!-- Edge nav -->
+  <!-- OYLA edge nav → 通告本 -->
   <header class="nav" role="banner">
-    <a class="nav-brand" href="#top">
+    <a class="nav-brand" href="#top" aria-label="通告本">
       <span class="nav-mark" aria-hidden="true">本</span>
       <span class="nav-name">通告本</span>
       <span class="nav-ver">1.4.1</span>
     </a>
     <div class="nav-right">
       <a href="#why">为什么</a>
-      <a href="#entries">双入口</a>
-      <a href="#assistant">助理</a>
-      <a href="#actor">本人</a>
-      <button type="button" class="nav-burger" aria-label="菜单" id="nav-burger">
+      <button type="button" class="nav-burger" id="nav-burger" aria-label="菜单" aria-expanded="false">
         <span></span><span></span>
       </button>
-      <a href="#deliver">[ 交付 ]</a>
+      <a class="nav-bag" href="#deliver">[ 交付 ]</a>
     </div>
   </header>
 
-  <!-- 1. HERO — figure enters the lens (OYLA enter) -->
+  <!-- 1. HERO — figure enters the lens -->
   <section class="hero-pin" id="top" aria-label="首屏">
     <div class="hero-sticky">
       <div class="hero-stage">
-        <!-- Full-bleed figure: zoom into outstretched hands -->
         <div class="hero-figure" id="hero-focal" aria-hidden="true">
           <div class="hero-figure-bg" id="hero-bg">
             <picture>
@@ -43,7 +39,7 @@
               <img src="img/hero-figure.jpg" alt="" width="1600" height="2133" decoding="async" fetchpriority="high" />
             </picture>
           </div>
-          <div class="hero-figure-fg" id="hero-fg" aria-hidden="true">
+          <div class="hero-figure-fg" id="hero-fg">
             <picture>
               <source srcset="img/hero-figure.webp" type="image/webp" />
               <img src="img/hero-figure.jpg" alt="" width="1600" height="2133" decoding="async" />
@@ -58,8 +54,8 @@
             一线女演员 + 执行助理的本机通告工作台：一套产品、两个入口，同一份本地数据。
           </p>
           <div class="cta-row" id="hero-cta">
-            <a class="cta-pill" href="#assistant">进入助理<span class="plus" aria-hidden="true">+</span></a>
-            <a class="cta-pill ghost" href="#actor">看本人今天<span class="plus" aria-hidden="true">+</span></a>
+            <a class="cta-pill" href="#entries">进入助理<span class="plus" aria-hidden="true">+</span></a>
+            <a class="cta-pill ghost" href="#pick">看本人今天<span class="plus" aria-hidden="true">+</span></a>
           </div>
         </div>
         <p class="hero-scroll-hint" aria-hidden="true">SCROLL</p>
@@ -67,359 +63,276 @@
     </div>
   </section>
 
-  <!-- 2. WHY — manifesto grid 1 large + 2 stacked -->
-  <section class="ed-grid" id="why" aria-labelledby="why-title">
-    <div class="ed-row cols-2">
+  <!-- 2. Manifesto grid: 1 large + stacked stats (OYLA f-11) -->
+  <section class="ed" id="why" aria-labelledby="why-title">
+    <div class="ed-row c2">
       <article class="ed-cell reveal">
-        <p class="ed-label">为什么做</p>
-        <h2 class="ed-display" id="why-title">通告散、档期冲、词临时改</h2>
+        <p class="ed-label">简介 · 为什么做</p>
+        <h2 class="ed-display" id="why-title">一套产品 · 两个入口</h2>
         <p class="ed-body">
-          助理要能执行；本人要一眼看清。两边看同一份数据，但主流程分开——别搅在一个大屏里。
+          通告散落在群聊与表格里；档期互相冲；台词临时改。助理要能执行，本人要一眼看清——两边读写同一份本机数据，主流程分开。无账号、无云同步；示例全虚构。
         </p>
-        <div class="cta-row" style="margin-top:28px;">
-          <a class="cta-pill" href="#entries">一套产品 · 两个入口<span class="plus" aria-hidden="true">+</span></a>
+        <div class="cta-row" style="margin-top:32px;">
+          <a class="cta-pill" href="#pick">选择模块<span class="plus" aria-hidden="true">+</span></a>
         </div>
       </article>
-      <div class="ed-cell stack-parent">
+      <div class="ed-cell ed-stack">
         <article class="ed-cell reveal">
-          <p class="ed-stat">01 · 通告散落</p>
-          <p class="ed-body">群聊截图、表格、口头改期叠在一起，消场与 checklist 难对齐。</p>
+          <p class="ed-stat">通告散落</p>
+          <p class="ed-body">截图、口头改期、消场与 checklist 难对齐。</p>
         </article>
         <article class="ed-cell reveal">
-          <p class="ed-stat">02 · 档期冲突</p>
-          <p class="ed-body">锁档与在组重叠、待定撞车——需要红黄一眼分轻重。</p>
+          <p class="ed-stat">档期冲突</p>
+          <p class="ed-body">锁档 / 在组重叠——红黄一眼分轻重。</p>
         </article>
       </div>
     </div>
-    <div class="ed-row cols-2-eq">
+    <div class="ed-row c2eq">
       <article class="ed-cell reveal">
-        <p class="ed-stat">03 · 台词临时改</p>
-        <p class="ed-body">场次对白常改。本人要遮词自测，不当场背着助理练。</p>
+        <p class="ed-stat">台词临时改</p>
+        <p class="ed-body">本人遮词自测，不当场背着助理练。</p>
       </article>
       <article class="ed-cell reveal">
-        <p class="ed-stat">04 · 各看各的</p>
-        <p class="ed-body">助理厚执行，本人薄摘要 + 决策；数据一份，文件交接。</p>
+        <p class="ed-stat">各看各的</p>
+        <p class="ed-body">助理厚执行；本人薄摘要 + 决策。文件交接。</p>
       </article>
     </div>
   </section>
 
-  <!-- 3. DUAL ENTRY -->
-  <section class="ed-grid" id="entries" aria-labelledby="entries-title">
-    <div class="ed-row cols-2-eq">
-      <article class="ed-cell reveal">
-        <span class="mod-tag">助理版</span>
+  <!-- 3. Dual entry — selectable 2-col (still hairline) -->
+  <section class="ed" id="entries" aria-labelledby="entries-title">
+    <div class="ed-row c2eq">
+      <article class="ed-cell reveal" data-select-jump="assistant">
+        <p class="ed-label">助理版</p>
         <h2 class="ed-display" id="entries-title">通告本 · 助理</h2>
-        <p class="ed-body" style="margin-bottom:8px;">给生活 / 执行助理 · 默认首页 <strong style="color:var(--ink)">通告</strong></p>
+        <p class="ed-body" style="margin-bottom:8px;">生活 / 执行助理 · 默认首页 <strong style="color:var(--ink)">通告</strong></p>
         <ul class="ed-list">
           <li><strong>通告</strong><span>时间轴、消场、七步 checklist、复制转发</span></li>
-          <li><strong>档期</strong><span>建项目、改状态、看红黄冲突</span></li>
-          <li><strong>提醒</strong><span>妆造 / 到场提前 · 本地通知可关</span></li>
-          <li><strong>交接</strong><span>导出完整备份 / 脱敏稿 · 导入</span></li>
+          <li><strong>档期</strong><span>建项目、改状态、红黄冲突</span></li>
+          <li><strong>提醒</strong><span>妆造 / 到场提前 · 本地可关</span></li>
+          <li><strong>交接</strong><span>导出备份 / 脱敏稿 · 导入</span></li>
           <li><strong>我的</strong><span>示例、偏好、视差与提醒开关</span></li>
         </ul>
         <div class="cta-row" style="margin-top:auto;padding-top:28px;">
-          <a class="cta-pill" href="#assistant">进入助理<span class="plus" aria-hidden="true">+</span></a>
+          <a class="cta-pill" href="#pick" data-pick="assistant">进入助理<span class="plus" aria-hidden="true">+</span></a>
         </div>
       </article>
       <article class="ed-cell reveal">
-        <span class="mod-tag">本人版</span>
+        <p class="ed-label">本人版</p>
         <h2 class="ed-display">通告本 · 本人</h2>
-        <p class="ed-body" style="margin-bottom:8px;">给女演员本人 · 默认首页 <strong style="color:var(--ink)">今天</strong></p>
+        <p class="ed-body" style="margin-bottom:8px;">女演员本人 · 默认首页 <strong style="color:var(--ink)">今天</strong></p>
         <ul class="ed-list">
           <li><strong>今天</strong><span>下一场倒计时、消场进度、待决策</span></li>
-          <li><strong>台词</strong><span>分场遮词练习、情绪笔记</span></li>
+          <li><strong>台词</strong><span>分场遮词练习</span></li>
           <li><strong>档期</strong><span>邀约接 / 缓 / 拒</span></li>
-          <li><strong>商务</strong><span>节点列表与到期提醒</span></li>
+          <li><strong>商务</strong><span>节点列表与到期</span></li>
           <li><strong>提醒</strong><span>本地通知 · 我的偏好</span></li>
         </ul>
         <div class="cta-row" style="margin-top:auto;padding-top:28px;">
-          <a class="cta-pill ghost" href="#actor">看本人今天<span class="plus" aria-hidden="true">+</span></a>
+          <a class="cta-pill ghost" href="#pick" data-pick="actor">看本人今天<span class="plus" aria-hidden="true">+</span></a>
         </div>
       </article>
     </div>
   </section>
 
-  <!-- 4a. ASSISTANT MODULE — product close-up -->
-  <section class="panel-full" id="assistant" aria-labelledby="assistant-title">
-    <div class="intro reveal">
-      <p class="ed-label">模拟 App · 助理版</p>
-      <h2 class="ed-display" id="assistant-title">通告台：时间轴 · 消场 · checklist</h2>
-      <p class="ed-body">虚构示例「星河录」。助理主填妆造/到场、场次与消场，一键复制转发文案。</p>
-    </div>
-
-    <div class="mock mock-wide reveal">
-      <div class="mock-head">
-        <h3>今日通告 · 星河录</h3>
-        <span class="tag">助理版 · 通告</span>
-      </div>
-      <div class="mock-body">
-        <div class="call-meta">
-          <div class="call-meta-item">
-            <div class="k">妆造</div>
-            <div class="v">05:30</div>
-            <div class="sub">交妆随组</div>
-          </div>
-          <div class="call-meta-item">
-            <div class="k">到场</div>
-            <div class="v">06:40</div>
-            <div class="sub">星港码头</div>
-          </div>
-          <div class="call-meta-item">
-            <div class="k">在组</div>
-            <div class="v" style="font-size:14px;">10/19–11/11</div>
-            <div class="sub">项目代号 · 星河录</div>
-          </div>
-        </div>
-        <div class="call-note">备注：副导对讲频道 3 · 中午换装 13:20</div>
-
-        <div class="timeline">
-          <div class="tl-row">
-            <div class="tl-time">07:00</div>
-            <span class="tl-dot done"></span>
-            <div class="tl-body">
-              <p class="scene">场 12 · 星港码头对峙</p>
-              <p class="desc">日外 · 妆造备注：湿发补妆</p>
-            </div>
-            <span class="tl-status cleared">已消场</span>
-          </div>
-          <div class="tl-row">
-            <div class="tl-time">08:30</div>
-            <span class="tl-dot done"></span>
-            <div class="tl-body">
-              <p class="scene">场 12B · 码头过场补拍</p>
-              <p class="desc">日外 · 短过场</p>
-            </div>
-            <span class="tl-status cleared">已消场</span>
-          </div>
-          <div class="tl-row">
-            <div class="tl-time">14:00</div>
-            <span class="tl-dot pending"></span>
-            <div class="tl-body">
-              <p class="scene">场 13 · 审讯室独白</p>
-              <p class="desc">日内 · 长台词 · 待背</p>
-            </div>
-            <span class="tl-status open">未消场</span>
-          </div>
-          <div class="tl-row">
-            <div class="tl-time">16:30</div>
-            <span class="tl-dot"></span>
-            <div class="tl-body">
-              <p class="scene">场 14 · 指挥舱汇报</p>
-              <p class="desc">日内 · 对戏</p>
-            </div>
-            <span class="tl-status open">未消场</span>
-          </div>
-          <div class="tl-row">
-            <div class="tl-time">20:00</div>
-            <span class="tl-dot"></span>
-            <div class="tl-body">
-              <p class="scene">场 15 · 甲板夜戏收工</p>
-              <p class="desc">夜外 · 收工场</p>
-            </div>
-            <span class="tl-status open">未消场</span>
-          </div>
-        </div>
-
-        <div class="check-strip" aria-label="固定七步 checklist">
-          <span class="check-chip done">✓ 叫早</span>
-          <span class="check-chip done">✓ 开工箱</span>
-          <span class="check-chip done">✓ 通知副导</span>
-          <span class="check-chip done">✓ 通知司机</span>
-          <span class="check-chip">取餐</span>
-          <span class="check-chip">确认无戏份</span>
-          <span class="check-chip">回酒店后勤</span>
-        </div>
-
-        <div class="fwd-bar">
-          <code id="fwd-text">【通告本】10-22 星河录｜妆造05:30 到场06:40｜场次07:00场12 · 08:30场12B · 14:00场13 · 16:30场14 · 20:00场15｜备注副导对讲频道3</code>
-          <button type="button" class="btn-ghost" id="btn-copy">复制转发</button>
-        </div>
+  <!-- 4. SELECTABLE 3-COL STRIPS (OYLA product columns) -->
+  <section class="ed" id="pick" aria-label="选择模块">
+    <div class="ed-row" style="border-bottom:1px solid var(--line);">
+      <div class="ed-cell reveal" style="border-right:none; min-height:0; padding:36px 40px 28px;">
+        <p class="ed-label">选择</p>
+        <h2 class="ed-display" style="margin:0;">点选一列 · 看真实模块</h2>
+        <p class="ed-body" style="margin-top:10px;">虚构示例项目「星河录」。列可选中——助理通告台 / 本人下一场 / 档期冲突。</p>
       </div>
     </div>
 
-    <div class="mock mock-wide reveal" style="margin-top:16px;">
-      <div class="mock-head">
-        <h3>档期 · 冲突徽章</h3>
-        <span class="tag">助理版 · 档期</span>
-      </div>
-      <div class="mock-body">
-        <div class="sched-row">
-          <span class="cdot none"></span>
-          <span class="name">星河录</span>
-          <span class="dates">10/19 – 11/11</span>
-          <span class="pill shoot">在组</span>
+    <div class="select-row" id="select-row" role="listbox" aria-label="提案模块">
+      <button type="button" class="select-col is-active" role="option" aria-selected="true" data-panel="assistant" id="col-assistant">
+        <div class="select-thumb" aria-hidden="true">
+          <span class="kicker">助理 · 通告</span>
+          <span class="big">星河录</span>
+          <span class="meta">妆造 05:30 · 到场 06:40</span>
         </div>
-        <div class="sched-row">
-          <span class="cdot red"></span>
-          <span class="name">潮声计划</span>
-          <span class="dates">11/05 – 11/20</span>
-          <span class="pill lock">锁档</span>
+        <p class="select-name">助理通告台</p>
+        <p class="select-sub">时间轴 · 消场 · checklist</p>
+        <div class="select-detail">
+          <ul>
+            <li>07:00 场12 → 20:00 场15</li>
+            <li>固定七步 checklist</li>
+            <li>一键复制转发文案</li>
+          </ul>
         </div>
-        <div class="sched-row">
-          <span class="cdot yellow"></span>
-          <span class="name">银杏广告二轮</span>
-          <span class="dates">10/28 – 10/30</span>
-          <span class="pill pend">待定</span>
+      </button>
+
+      <button type="button" class="select-col" role="option" aria-selected="false" data-panel="actor" id="col-actor">
+        <div class="select-thumb" aria-hidden="true">
+          <span class="kicker">本人 · 今天</span>
+          <span class="big">下一场</span>
+          <span class="meta">14:00 · 场 13</span>
         </div>
-        <div class="sched-row" style="margin-bottom:0;">
-          <span class="cdot none"></span>
-          <span class="name">冬至特别篇</span>
-          <span class="dates">12/01 – 12/18</span>
-          <span class="pill promo">宣发</span>
+        <p class="select-name">本人今天</p>
+        <p class="select-sub">倒计时 · 遮词 · 接缓拒</p>
+        <div class="select-detail">
+          <ul>
+            <li>下一场主角倒计时</li>
+            <li>台词遮词（字变＿）</li>
+            <li>档期接 / 缓 / 拒</li>
+          </ul>
         </div>
-      </div>
+      </button>
+
+      <button type="button" class="select-col" role="option" aria-selected="false" data-panel="conflict" id="col-conflict">
+        <div class="select-thumb" aria-hidden="true">
+          <span class="kicker">共用 · 档期</span>
+          <span class="big">红 / 黄</span>
+          <span class="meta">冲突一眼分轻重</span>
+        </div>
+        <p class="select-name">档期冲突</p>
+        <p class="select-sub">红硬冲突 · 黄留意</p>
+        <div class="select-detail">
+          <ul>
+            <li>双锁档/在组/宣发重叠 → 红</li>
+            <li>一方待定或撞商务 → 黄</li>
+            <li>只标颜色，不替你决定</li>
+          </ul>
+        </div>
+      </button>
     </div>
-  </section>
 
-  <!-- 4b. ACTOR — 下一场 foreground -->
-  <section class="panel-full" id="actor" aria-labelledby="actor-title" style="background:#FAFAFA;">
-    <div class="intro reveal">
-      <p class="ed-label">模拟 App · 本人版</p>
-      <h2 class="ed-display" id="actor-title">下一场</h2>
-      <p class="ed-body">本人首页最大块是「下一场」。台词可遮词自测；档期邀约一键接 / 缓 / 拒。</p>
-    </div>
-
-    <div class="mock mock-wide reveal">
-      <div class="mock-head">
-        <h3>今天</h3>
-        <span class="tag">本人版 · 今天</span>
+    <!-- Panels revealed by selection -->
+    <div class="select-panel is-open" id="panel-assistant" data-panel-body="assistant">
+      <p class="ed-label">助理示意 · 星河录</p>
+      <h3>今日通告</h3>
+      <p class="ed-body">在组 10/19–11/11 · 备注：副导对讲频道 3 · 中午换装 13:20</p>
+      <ul class="line-list">
+        <li><span class="t">07:00</span><span class="s">场 12 · 星港码头对峙</span><span class="st ok">已消场</span></li>
+        <li><span class="t">08:30</span><span class="s">场 12B · 码头过场补拍</span><span class="st ok">已消场</span></li>
+        <li><span class="t">14:00</span><span class="s">场 13 · 审讯室独白</span><span class="st">未消场</span></li>
+        <li><span class="t">16:30</span><span class="s">场 14 · 指挥舱汇报</span><span class="st">未消场</span></li>
+        <li><span class="t">20:00</span><span class="s">场 15 · 甲板夜戏收工</span><span class="st">未消场</span></li>
+      </ul>
+      <div class="chip-row" aria-label="七步 checklist">
+        <span class="chip on">叫早</span>
+        <span class="chip on">开工箱</span>
+        <span class="chip on">通知副导</span>
+        <span class="chip on">通知司机</span>
+        <span class="chip">取餐</span>
+        <span class="chip">确认无戏份</span>
+        <span class="chip">回酒店后勤</span>
       </div>
-      <div class="mock-body">
-        <div class="today-hero" id="parallax-card">
-          <p class="eyebrow">下一场</p>
-          <p class="next-label">14:00 · 场 13 · 审讯室独白</p>
-          <h3 class="next-title">距开场还剩</h3>
-          <div class="countdown" aria-live="polite">
-            <span class="digits" id="cd-h">02</span><span class="unit">时</span>
-            <span class="digits" id="cd-m">18</span><span class="unit">分</span>
-            <span class="digits" id="cd-s">44</span><span class="unit">秒</span>
-          </div>
-          <div class="today-stats">
-            <span class="stat-pill">未消场 <strong>3</strong></span>
-            <span class="stat-pill">待背场 <strong>1</strong></span>
-            <span class="stat-pill">今日场次 <strong>5</strong></span>
-          </div>
-        </div>
-
-        <div class="script-block">
-          <div class="script-meta">
-            <span>台词 · 场 13 · 角色「沈星河」</span>
-            <span id="mask-state">遮词中</span>
-          </div>
-          <p class="script-line masked" id="script-line">
-            <span class="role">沈星河</span>
-            <span class="words" id="script-words"
-              data-full="你们要的答案，不在这份口供里——在你们不敢问的那一页。"
-              data-masked="＿＿＿＿＿＿，＿＿＿＿＿＿——＿＿＿＿＿＿＿＿＿＿。">＿＿＿＿＿＿，＿＿＿＿＿＿——＿＿＿＿＿＿＿＿＿＿。</span>
-          </p>
-          <div class="script-actions">
-            <button type="button" class="btn-primary" id="btn-reveal">显示原文</button>
-            <button type="button" class="btn-ghost" id="btn-remask">再遮一次</button>
-          </div>
-        </div>
+      <div class="fwd">
+        <code id="fwd-text">【通告本】10-22 星河录｜妆造05:30 到场06:40｜场次07:00场12 · 08:30场12B · 14:00场13 · 16:30场14 · 20:00场15｜备注副导对讲频道3</code>
+        <button type="button" class="cta-pill" id="btn-copy" style="height:34px;flex-shrink:0;">复制<span class="plus" aria-hidden="true">+</span></button>
       </div>
     </div>
 
-    <div class="split-mocks reveal">
-      <div class="mock">
-        <div class="mock-head">
-          <h3>档期 · 接 / 缓 / 拒</h3>
-          <span class="tag">本人版 · 档期</span>
+    <div class="select-panel" id="panel-actor" data-panel-body="actor">
+      <p class="ed-label">本人示意 · 今天</p>
+      <h3>下一场</h3>
+      <p class="ed-body">14:00 · 场 13 · 审讯室独白</p>
+      <div class="big-count" aria-live="polite">
+        <span class="n" id="cd-h">02</span><span class="u">时</span>
+        <span class="n" id="cd-m">18</span><span class="u">分</span>
+        <span class="n" id="cd-s">44</span><span class="u">秒</span>
+      </div>
+      <div class="chip-row">
+        <span class="chip">未消场 3</span>
+        <span class="chip">待背场 1</span>
+        <span class="chip">今日场次 5</span>
+      </div>
+      <div class="script-box">
+        <div class="meta">
+          <span>台词 · 场 13 · 沈星河</span>
+          <span id="mask-state">遮词中</span>
         </div>
-        <div class="mock-body">
-          <div class="sched-row">
-            <span class="cdot yellow"></span>
-            <span class="name">银杏广告二轮</span>
-            <span class="dates">10/28 – 10/30 · 待定</span>
-          </div>
-          <p style="margin:4px 0 6px;font-size:12px;color:var(--app-ink-soft);">待决策邀约（示意）</p>
-          <div class="decide-btns" id="decide-btns">
-            <button type="button" data-v="accept">接</button>
-            <button type="button" data-v="hold">缓</button>
-            <button type="button" data-v="reject">拒</button>
-          </div>
+        <p class="line masked" id="script-line">
+          <span id="script-words"
+            data-full="你们要的答案，不在这份口供里——在你们不敢问的那一页。"
+            data-masked="＿＿＿＿＿＿，＿＿＿＿＿＿——＿＿＿＿＿＿＿＿＿＿。">＿＿＿＿＿＿，＿＿＿＿＿＿——＿＿＿＿＿＿＿＿＿＿。</span>
+        </p>
+        <div class="cta-row">
+          <button type="button" class="cta-pill" id="btn-reveal">显示原文<span class="plus" aria-hidden="true">+</span></button>
+          <button type="button" class="cta-pill ghost" id="btn-remask">再遮一次<span class="plus" aria-hidden="true">+</span></button>
         </div>
       </div>
-      <div class="mock">
-        <div class="mock-head">
-          <h3>商务节点</h3>
-          <span class="tag">本人版 · 商务</span>
-        </div>
-        <div class="mock-body">
-          <div class="biz-row"><span class="name">品牌试用反馈</span><span class="dates">10/24</span></div>
-          <div class="biz-row"><span class="name">杂志封面定妆</span><span class="dates">11/02</span></div>
-          <div class="biz-row" style="margin-bottom:0;"><span class="name">年底晚宴出席确认</span><span class="dates">11/15</span></div>
-        </div>
+      <p class="ed-body" style="margin-top:22px;">待决策 · 银杏广告二轮（10/28–10/30 · 待定）</p>
+      <div class="decide" id="decide-btns">
+        <button type="button">接</button>
+        <button type="button">缓</button>
+        <button type="button">拒</button>
       </div>
+      <p class="ed-body" style="margin-top:22px;">商务节点：品牌试用反馈 10/24 · 杂志封面定妆 11/02 · 年底晚宴出席确认 11/15</p>
+    </div>
+
+    <div class="select-panel" id="panel-conflict" data-panel-body="conflict">
+      <p class="ed-label">档期 · 冲突规则</p>
+      <h3>红与黄</h3>
+      <div class="ed-row c2eq" style="border:1px solid var(--line); border-bottom:1px solid var(--line); margin-top:8px;">
+        <article class="ed-cell" style="min-height:0;">
+          <p class="ed-stat"><span class="dot red"></span>红 · 硬冲突</p>
+          <p class="ed-body">两项目日期重叠，且双方都处在锁档 / 在组 / 宣发之一。</p>
+        </article>
+        <article class="ed-cell" style="min-height:0;">
+          <p class="ed-stat"><span class="dot yellow"></span>黄 · 留意</p>
+          <p class="ed-body">一方仍为待定；或同日在组与商务节点撞车。</p>
+        </article>
+      </div>
+      <ul class="line-list" style="margin-top:8px;">
+        <li><span class="t">在组</span><span class="s">星河录</span><span class="st">10/19–11/11</span></li>
+        <li><span class="t"><span class="dot red"></span>锁档</span><span class="s">潮声计划</span><span class="st">11/05–11/20</span></li>
+        <li><span class="t"><span class="dot yellow"></span>待定</span><span class="s">银杏广告二轮</span><span class="st">10/28–10/30</span></li>
+        <li><span class="t">宣发</span><span class="s">冬至特别篇</span><span class="st">12/01–12/18</span></li>
+      </ul>
     </div>
   </section>
 
-  <!-- 5. Conflict -->
-  <section class="ed-grid" id="conflict" aria-labelledby="conflict-title">
-    <div class="ed-row cols-2-eq">
-      <article class="ed-cell swatch red reveal">
-        <p class="ed-label">档期冲突</p>
-        <strong><span class="dot"></span>红 · 硬冲突</strong>
-        <p class="ed-body">两项目日期重叠，且双方都处在锁档 / 在组 / 宣发之一。</p>
-      </article>
-      <article class="ed-cell swatch yellow reveal">
-        <p class="ed-label" id="conflict-title">一眼分轻重</p>
-        <strong><span class="dot"></span>黄 · 留意</strong>
-        <p class="ed-body">一方仍为待定；或同日在组与商务节点撞车。只标颜色，不替你做决定。</p>
-      </article>
-    </div>
-  </section>
-
-  <!-- 6. Local facts — 3 col strip -->
-  <section class="ed-grid" id="shared" aria-labelledby="shared-title">
-    <div class="ed-row cols-3">
+  <!-- 5. Local facts 3-col -->
+  <section class="ed" id="shared" aria-labelledby="shared-title">
+    <div class="ed-row c3">
       <article class="ed-cell reveal">
-        <p class="ed-label">本机能力</p>
+        <p class="ed-label">本机</p>
         <h3 class="ed-stat" style="font-size:28px;" id="shared-title">本地提醒</h3>
-        <p class="ed-body">妆造提前、到场提前；商务节点到期。走 macOS 本地通知，在「我的」可关。</p>
+        <p class="ed-body">妆造 / 到场提前；商务到期。macOS 本地通知，在「我的」可关。</p>
       </article>
       <article class="ed-cell reveal">
         <p class="ed-label">同一份数据</p>
         <h3 class="ed-stat" style="font-size:28px;">data.json</h3>
-        <p class="ed-body">助理版与本人版读写：~/Library/Application Support/TonggaoBen/data.json</p>
+        <p class="ed-body">~/Library/Application Support/TonggaoBen/data.json — 双入口读写同一份。</p>
       </article>
       <article class="ed-cell reveal">
-        <p class="ed-label">双机怎么传</p>
+        <p class="ed-label">双机</p>
         <h3 class="ed-stat" style="font-size:28px;">文件交接</h3>
-        <p class="ed-body">导出完整备份或脱敏稿；导入前预览新增 / 覆盖条数，确认后写入。</p>
+        <p class="ed-body">导出完整备份或脱敏稿；导入前预览新增 / 覆盖条数。</p>
       </article>
     </div>
   </section>
 
-  <!-- 7. Deliver -->
-  <section class="deliver" id="deliver" aria-labelledby="deliver-title">
-    <article class="ed-cell reveal">
-      <p class="ed-label">交付</p>
-      <h2 class="ed-display" id="deliver-title">Mac App 1.4.1</h2>
-      <p class="ed-body">
-        桌面安装包解压后拖入「应用程序」即可打开。<br/>
-        <span style="font-family:var(--mono);font-size:12px;color:var(--ink);display:inline-block;margin-top:12px;padding:8px 12px;border:1px solid var(--hairline);">
-          ~/Desktop/通告本-Mac-1.4.1.zip → /Applications/通告本.app
-        </span>
-      </p>
-    </article>
-    <article class="ed-cell reveal" style="justify-content:center;gap:14px;">
-      <a class="cta-pill" href="https://zup2885-cell.github.io/zupeng-personal-site/tonggaoben-manual/" target="_blank" rel="noopener">
-        打开产品说明书<span class="plus" aria-hidden="true">+</span>
-      </a>
-      <p class="ed-body" style="margin:0;">附录 · /tonggaoben-manual/</p>
-    </article>
+  <!-- 6. Deliver -->
+  <section class="ed" id="deliver" aria-labelledby="deliver-title">
+    <div class="ed-row c2">
+      <article class="ed-cell reveal">
+        <p class="ed-label">交付</p>
+        <h2 class="ed-display" id="deliver-title">Mac App 1.4.1</h2>
+        <p class="ed-body">桌面 zip 解压后拖入「应用程序」。</p>
+        <span class="path-box">~/Desktop/通告本-Mac-1.4.1.zip → /Applications/通告本.app</span>
+      </article>
+      <article class="ed-cell reveal" style="justify-content:center;gap:16px;">
+        <a class="cta-pill" href="https://zup2885-cell.github.io/zupeng-personal-site/tonggaoben-manual/" target="_blank" rel="noopener">
+          打开产品说明书<span class="plus" aria-hidden="true">+</span>
+        </a>
+        <p class="ed-body" style="margin:0;">附录 · /tonggaoben-manual/</p>
+      </article>
+    </div>
   </section>
 
-  <div class="footer-bar">
+  <div class="foot">
     <div class="ed-cell">通告本 · macOS 本地 App</div>
     <div class="ed-cell">数据仅存本机 · 示例全虚构</div>
-    <div class="ed-cell" style="font-family:var(--mono);letter-spacing:0.08em;">VERSION 1.4.1</div>
+    <div class="ed-cell" style="font-family:var(--mono);letter-spacing:0.1em;">VERSION 1.4.1</div>
   </div>
 
   <aside class="disclaimer" role="note">
     <strong>虚构示例声明。</strong>
-    页内「星河录」通告、档期与台词均为虚构，不含真实艺人姓名与真实地点，仅供提案演示。通告本为通用本地工具，非任何艺人 / 工作室官方产品。
+    「星河录」通告、档期与台词均为虚构，不含真实艺人姓名与真实地点。通告本为通用本地工具，非任何艺人 / 工作室官方产品。
   </aside>
 
   <script src="js/pitch.js"></script>
