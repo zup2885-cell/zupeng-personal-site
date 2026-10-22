@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;600;700&family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/pitch.css" />
+  <link rel="stylesheet" href="css/pitch.css?v=121c" />
 </head>
 <body>
   <!-- Orla chrome: serif logo left · thin dual-line burger right -->
@@ -37,6 +37,8 @@
              data-scrub-ext="jpg">
           <!-- Primary: frame-sequence scrub (reliable seek). Video secondary if browser can seek. -->
           <canvas id="hero-canvas" class="hero-canvas" width="1280" height="948"></canvas>
+          <img id="hero-scrub-img" class="hero-scrub-img" alt="" width="1280" height="948"
+               src="img/scrub/f-001.jpg" decoding="async" fetchpriority="high" data-idx="0" />
           <video
             id="hero-scrub"
             class="hero-scrub"
@@ -337,6 +339,6 @@
     「星河录」通告、档期与台词均为虚构，不含真实艺人姓名与真实地点。通告本为通用本地工具，非任何艺人 / 工作室官方产品。
   </aside>
 
-  <script src="js/pitch.js"></script>
+  <script src="js/pitch.js?v=121c"></script>
 </body>
 </html>

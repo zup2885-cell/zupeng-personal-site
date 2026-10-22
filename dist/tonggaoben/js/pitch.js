@@ -39,6 +39,7 @@
   var stage = document.querySelector('.hero-stage');
   var wrap = document.querySelector('.hero-video-wrap');
   var canvas = document.getElementById('hero-canvas');
+  var scrubImgEl = document.getElementById('hero-scrub-img');
   var video = document.getElementById('hero-scrub');
   var copy = document.getElementById('hero-copy');
   var lead = document.getElementById('hero-lead');
@@ -56,6 +57,10 @@
   var framesReady = false;
   var frameCount = 0;
   var useFrames = true;
+  var scrubDir = 'img/scrub';
+  var scrubPad = 3;
+  var scrubExt = 'jpg';
+  var lastScrubImgIdx = -1;
 
   var videoDuration = 0;
   var videoReady = false;
@@ -63,10 +68,17 @@
 
   function heroProgress() {
     if (!pin) return 0;
-    var rect = pin.getBoundingClientRect();
     var total = pin.offsetHeight - window.innerHeight;
     if (total <= 0) return 0;
-    return clamp(-rect.top / total, 0, 1);
+    /* scrollY vs pin document offset — more reliable under position:sticky */
+    var top = 0;
+    var el = pin;
+    while (el) {
+      top += el.offsetTop;
+      el = el.offsetParent;
+    }
+    var y = window.scrollY || window.pageYOffset || 0;
+    return clamp((y - top) / total, 0, 1);
   }
 
   function padNum(n, width) {
@@ -75,18 +87,40 @@
     return s;
   }
 
+  function frameSrc(zeroIdx) {
+    return scrubDir + '/f-' + padNum(zeroIdx + 1, scrubPad) + '.' + scrubExt;
+  }
+
   function loadFrames() {
-    if (!wrap || !canvas || reduce) return Promise.resolve(false);
-    var dir = wrap.getAttribute('data-scrub-dir') || 'img/scrub';
+    if (!wrap || reduce) return Promise.resolve(false);
+    if (!canvas && !scrubImgEl) return Promise.resolve(false);
+    scrubDir = wrap.getAttribute('data-scrub-dir') || 'img/scrub';
     var count = parseInt(wrap.getAttribute('data-scrub-count') || '0', 10);
-    var pad = parseInt(wrap.getAttribute('data-scrub-pad') || '3', 10);
-    var ext = wrap.getAttribute('data-scrub-ext') || 'jpg';
+    scrubPad = parseInt(wrap.getAttribute('data-scrub-pad') || '3', 10);
+    scrubExt = wrap.getAttribute('data-scrub-ext') || 'jpg';
     if (!count) return Promise.resolve(false);
     frameCount = count;
 
-    var ctx = canvas.getContext('2d', { alpha: false });
     var loaded = 0;
+    var readyThreshold = Math.min(12, count);
     frames = new Array(count);
+
+    function desiredFrameIdx() {
+      var p = heroProgress();
+      return Math.round(clamp(p, 0, 1) * (count - 1));
+    }
+
+    /* poster ASAP on DOM img */
+    if (scrubImgEl) {
+      scrubImgEl.src = frameSrc(0);
+      scrubImgEl.setAttribute('data-idx', '0');
+      scrubImgEl.classList.add('is-ready');
+      lastScrubImgIdx = 0;
+      if (stage) {
+        stage.classList.add('is-frames-on');
+        stage.classList.add('is-video-on');
+      }
+    }
 
     return new Promise(function (resolve) {
       var i;
@@ -95,36 +129,81 @@
           var img = new Image();
           img.decoding = 'async';
           img.onload = function () {
-            frames[idx - 1] = img;
+            var fi = idx - 1;
+            frames[fi] = img;
             loaded++;
+
             if (loaded === 1) {
-              /* draw first frame ASAP */
-              drawFrame(0);
-              canvas.classList.add('is-ready');
+              if (canvas) canvas.classList.add('is-ready');
               if (stage) {
                 stage.classList.add('is-frames-on');
                 stage.classList.add('is-video-on');
               }
-              framesReady = true;
-              kickLoop();
+              lastFrameIdx = -1;
+              drawFrame(fi);
             }
-            if (loaded === count) resolve(true);
+
+            if (!framesReady && loaded >= readyThreshold) {
+              framesReady = true;
+            }
+
+            /* every successful load: force redraw if this is the scrub target */
+            var desired = desiredFrameIdx();
+            if (fi === desired) {
+              lastFrameIdx = -1;
+              lastScrubImgIdx = -1;
+              drawFrame(desired);
+            }
+            kickLoop();
+
+            if (loaded === count) {
+              framesReady = true;
+              lastFrameIdx = -1;
+              lastScrubImgIdx = -1;
+              drawFrame(desiredFrameIdx());
+              kickLoop();
+              resolve(true);
+            }
           };
           img.onerror = function () {
             loaded++;
-            if (loaded === count) resolve(frames.filter(Boolean).length > 0);
+            if (loaded === count) {
+              framesReady = frames.filter(Boolean).length > 0 || !!scrubImgEl;
+              if (framesReady) {
+                lastFrameIdx = -1;
+                lastScrubImgIdx = -1;
+                drawFrame(desiredFrameIdx());
+                kickLoop();
+              }
+              resolve(framesReady);
+            }
           };
-          img.src = dir + '/f-' + padNum(idx, pad) + '.' + ext;
+          img.src = frameSrc(idx - 1);
         })(i);
       }
     });
   }
 
   function drawFrame(idx) {
+    var max = (frameCount || frames.length) - 1;
+    if (max < 0) return;
+    idx = clamp(idx | 0, 0, max);
+
+    /* Reliable path: DOM <img> src swap — always visible frame change */
+    if (scrubImgEl && idx !== lastScrubImgIdx) {
+      scrubImgEl.src = frameSrc(idx);
+      scrubImgEl.setAttribute('data-idx', String(idx));
+      scrubImgEl.classList.add('is-ready');
+      lastScrubImgIdx = idx;
+      if (stage) {
+        stage.classList.add('is-frames-on');
+        stage.classList.add('is-video-on');
+      }
+    }
+
     if (!canvas || !frames.length) return;
-    idx = clamp(idx | 0, 0, frames.length - 1);
     var img = frames[idx];
-    if (!img) return;
+    if (!img) return; /* keep lastFrameIdx so a later load can force-draw */
     if (idx === lastFrameIdx) return;
     lastFrameIdx = idx;
     var ctx = canvas.getContext('2d', { alpha: false });
@@ -142,6 +221,22 @@
     ctx.fillStyle = '#fff';
     ctx.fillRect(0, 0, cw, ch);
     ctx.drawImage(img, dx, dy, dw, dh);
+  }
+
+  function scrubVisual(progress) {
+    var p = clamp(progress, 0, 1);
+    var count = frameCount || frames.length;
+    if (useFrames && count > 0) {
+      var idx = Math.round(p * (count - 1));
+      drawFrame(idx);
+      return;
+    }
+    if (videoReady && videoCanSeek && video && !video.seeking) {
+      var t = p * Math.max(0, videoDuration - 0.04);
+      if (Math.abs(video.currentTime - t) >= 0.02) {
+        try { video.currentTime = t; } catch (e) {}
+      }
+    }
   }
 
   function armVideo() {
@@ -220,10 +315,13 @@
 
   function scrubVisual(progress) {
     var p = clamp(progress, 0, 1);
-    if (useFrames && framesReady && frames.length) {
+    if (useFrames && frames.length) {
       var idx = Math.round(p * (frames.length - 1));
-      drawFrame(idx);
-      return;
+      /* draw when ready OR when the desired frame already arrived (early scroll) */
+      if (framesReady || frames[idx]) {
+        drawFrame(idx);
+        return;
+      }
     }
     if (videoReady && videoCanSeek && video && !video.seeking) {
       var t = p * Math.max(0, videoDuration - 0.04);
@@ -241,7 +339,8 @@
       smoothProgress = targetProgress;
     }
     applyCopy(smoothProgress);
-    scrubVisual(smoothProgress);
+    /* frame index follows raw scroll target so sticky scrub never lags to frame 0 */
+    scrubVisual(targetProgress);
     updateWhyFloat(smoothProgress);
 
     var pinRect = pin ? pin.getBoundingClientRect() : null;
@@ -255,9 +354,16 @@
     rafId = requestAnimationFrame(frame);
   }
 
+  var scrollEndTimer = 0;
   function onScroll() {
     targetProgress = heroProgress();
     kickLoop();
+    /* after scroll settles, kick once more so late-loaded frames still paint */
+    if (scrollEndTimer) clearTimeout(scrollEndTimer);
+    scrollEndTimer = setTimeout(function () {
+      scrollEndTimer = 0;
+      kickLoop();
+    }, 100);
   }
 
   /* —— why figure AFTER entrance —— */
