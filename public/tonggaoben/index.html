@@ -2,400 +2,277 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="通告本 — 一套产品 · 两个入口。通用一线女演员本地工作台。" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="description" content="通告本 — 一套产品 · 两个入口。助理执行台 / 本人摘要台。本机数据，虚构示例。" />
+  <meta name="theme-color" content="#ffffff" />
   <title>通告本</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/app.css" />
 </head>
 <body>
-  <a class="skip-link" href="#main">跳到主要内容</a>
-
-  <header class="nav" role="banner">
-    <div class="nav-inner">
-      <a class="nav-logo" href="#top" aria-label="通告本首页">通告本</a>
-      <nav class="nav-links" aria-label="主导航">
-        <a href="#assistant">助理版</a>
-        <a href="#actor">本人版</a>
-        <a href="#data">数据交接</a>
-        <a href="#week1">第一周</a>
+  <!-- ===== 入口：横向时装社论 ===== -->
+  <div id="view-entry" aria-label="通告本入口体验">
+    <header class="ed-header" role="banner">
+      <a class="ed-mark" href="#/" aria-label="通告本首页">
+        <span class="ed-mark-glyph" aria-hidden="true">本</span>
+      </a>
+      <nav class="ed-nav" aria-label="入口导航">
+        <a href="#panel-01" data-jump="0" class="is-active">首页</a>
+        <a href="#panel-02" data-jump="1">结构</a>
+        <a href="#panel-03" data-jump="2">助理</a>
+        <a href="#panel-04" data-jump="3">本人</a>
+        <a href="#panel-05" data-jump="4">交接</a>
+        <a href="#panel-06" data-jump="5">进入</a>
       </nav>
-      <div class="nav-ctas">
-        <a class="btn btn-ghost btn-sm" href="#assistant">助理版</a>
-        <a class="btn btn-dark btn-sm" href="#actor">本人版</a>
+      <div class="ed-header-actions">
+        <a class="ed-link-enter" href="#/assistant/call">通告本 · 助理</a>
+        <a class="ed-link-enter" href="#/actor/today">通告本 · 本人</a>
+        <button type="button" class="ed-burger" id="ed-burger" aria-label="菜单" aria-expanded="false">
+          <span></span><span></span>
+        </button>
       </div>
+    </header>
+
+    <div class="ed-burger-panel" id="ed-burger-panel" hidden>
+      <a href="#/assistant/call">进入 · 助理版</a>
+      <a href="#/actor/today">进入 · 本人版</a>
+      <a href="#panel-02" data-jump="1">产品结构</a>
+      <a href="#panel-05" data-jump="4">数据交接</a>
+      <a href="#panel-06" data-jump="5">第一周清单</a>
     </div>
-  </header>
 
-  <main id="main">
-    <!-- Hero -->
-    <section id="top" class="hero" aria-labelledby="hero-title">
-      <div class="hero-inner reveal">
-        <p class="eyebrow">一套产品 · 两个入口</p>
-        <h1 id="hero-title">通告本</h1>
-        <p class="hero-sub">助理有一张能执行的通告台；<br class="br-desktop" />本人一眼看清今天怎么拍、词在哪、档冲不冲。</p>
-        <div class="hero-ctas">
-          <a class="btn btn-dark btn-lg" href="#assistant">
-            <span class="btn-label">进入助理版</span>
-            <span class="btn-sub">通告本 · 助理</span>
+    <div class="ed-track" id="ed-track" tabindex="0" aria-label="横向浏览面板，可用方向键或底部箭头">
+      <!-- *01 Hero -->
+      <section class="ed-panel" id="panel-01" data-i="1" aria-label="面板 01 首页">
+        <div class="plx blob blob-a" data-speed="0.25" aria-hidden="true"></div>
+        <div class="plx blob blob-b" data-speed="0.45" aria-hidden="true"></div>
+        <div class="panel-inner hero-inner">
+          <div class="hero-copy plx" data-speed="0.12">
+            <p class="ed-eyebrow">LOCAL WORKBENCH · SPECIAL ISSUE</p>
+            <h1 class="ed-display">通告本</h1>
+            <p class="ed-lead">
+              助理有一张能执行的通告台；本人一眼看清今天怎么拍、词在哪、档冲不冲。
+            </p>
+            <p class="ed-meta">本机数据 · 文件交接 · 无云账号 · 示例虚构</p>
+            <div class="ed-cta-row">
+              <a class="ed-cta" href="#/assistant/call">
+                <span class="ed-cta-label">通告本 · 助理</span>
+                <span class="ed-cta-arrow" aria-hidden="true">→</span>
+              </a>
+              <a class="ed-cta ed-cta-alt" href="#/actor/today">
+                <span class="ed-cta-label">通告本 · 本人</span>
+                <span class="ed-cta-arrow" aria-hidden="true">→</span>
+              </a>
+            </div>
+            <p id="entry-sample-hint" class="ed-hint hidden">进入后将自动载入虚构示例（可随时清空）</p>
+          </div>
+          <aside class="hero-aside plx" data-speed="0.35" aria-hidden="true">
+            <div class="hero-frame">
+              <span class="hero-frame-num">*01</span>
+              <span class="hero-frame-tag">一套产品<br/>两个入口</span>
+            </div>
+            <div class="octagon-badge">FICTION ONLY</div>
+          </aside>
+        </div>
+        <p class="ed-scroll-cue" aria-hidden="true">横向滑动 · SCROLL</p>
+      </section>
+
+      <!-- *02 产品结构 -->
+      <section class="ed-panel" id="panel-02" data-i="2" aria-label="面板 02 产品结构">
+        <div class="plx blob blob-c" data-speed="0.3" aria-hidden="true"></div>
+        <div class="panel-inner structure-inner">
+          <div class="struc-left plx" data-speed="0.1">
+            <p class="ed-eyebrow">PRODUCT MAP</p>
+            <h2 class="ed-display ed-display-md">产品结构</h2>
+            <p class="ed-body">一套「通告本」= 两套入口界面 + 同一份本机数据模型。界面文案与信息密度按入口拆开，不做登录协作套件。</p>
+          </div>
+          <div class="struc-cols plx" data-speed="0.22">
+            <article class="struc-card">
+              <span class="struc-who">给谁</span>
+              <h3>通告本 · 助理</h3>
+              <dl>
+                <dt>默认首页</dt><dd>今日通告台</dd>
+                <dt>主能力</dt><dd>建通告 · checklist · 消场 · 转发文案 · 导出</dd>
+              </dl>
+            </article>
+            <article class="struc-card struc-card-pink">
+              <span class="struc-who">给谁</span>
+              <h3>通告本 · 本人</h3>
+              <dl>
+                <dt>默认首页</dt><dd>今日摘要</dd>
+                <dt>主能力</dt><dd>下一场 · 遮词 · 接缓拒 · 商务一眼 · 健康红线</dd>
+              </dl>
+            </article>
+          </div>
+          <div class="struc-vert plx" data-speed="0.4" aria-hidden="true">
+            <span>EDITORIAL</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- *03 助理执行 -->
+      <section class="ed-panel" id="panel-03" data-i="3" aria-label="面板 03 助理执行">
+        <div class="plx blob blob-d" data-speed="0.28" aria-hidden="true"></div>
+        <div class="panel-inner exec-inner">
+          <div class="exec-title plx" data-speed="0.08">
+            <p class="ed-eyebrow">ASSISTANT FLOW</p>
+            <h2 class="ed-display ed-display-lg">助理<br/>执行</h2>
+          </div>
+          <div class="exec-grid plx" data-speed="0.2">
+            <article>
+              <span class="feat-num">01</span>
+              <h3>通告台</h3>
+              <p>时间轴 · 场次表 · 妆造 / 交妆 / 到场 · 项目代号</p>
+            </article>
+            <article>
+              <span class="feat-num">02</span>
+              <h3>七步 checklist</h3>
+              <p>叫早 · 开工箱 · 通知副导 · 通知司机 · 取餐 · 确认无戏份 · 回酒店后勤</p>
+            </article>
+            <article>
+              <span class="feat-num">03</span>
+              <h3>消场</h3>
+              <p>场次勾选消场；未消场数回写本人「今天」摘要</p>
+            </article>
+            <article>
+              <span class="feat-num">04</span>
+              <h3>转发文案</h3>
+              <p>一键复制司机 / 副导模板，字段来自当日通告</p>
+            </article>
+          </div>
+          <a class="ed-cta plx" data-speed="0.35" href="#/assistant/call">
+            <span class="ed-cta-label">打开助理版</span>
+            <span class="ed-cta-arrow" aria-hidden="true">→</span>
           </a>
-          <a class="btn btn-light btn-lg" href="#actor">
-            <span class="btn-label">进入本人版</span>
-            <span class="btn-sub">通告本 · 本人</span>
+        </div>
+      </section>
+
+      <!-- *04 本人决策 -->
+      <section class="ed-panel" id="panel-04" data-i="4" aria-label="面板 04 本人决策">
+        <div class="plx blob blob-e" data-speed="0.32" aria-hidden="true"></div>
+        <div class="panel-inner actor-inner">
+          <div class="actor-title plx" data-speed="0.1">
+            <p class="ed-eyebrow">ACTOR FLOW</p>
+            <h2 class="ed-display ed-display-lg">本人<br/>决策</h2>
+          </div>
+          <div class="actor-list plx" data-speed="0.25">
+            <div class="actor-row">
+              <strong>今天摘要</strong>
+              <span>下一场倒计时 · 未消场 · 待背场 · 健康黄条</span>
+            </div>
+            <div class="actor-row">
+              <strong>遮词</strong>
+              <span>分角色 / 今日场 · 轻触揭词 · 情绪笔记 · 改词标记</span>
+            </div>
+            <div class="actor-row">
+              <strong>接 · 缓 · 拒</strong>
+              <span>邀约决策 · 精力分 · 私密理由（脱敏导出去掉）</span>
+            </div>
+            <div class="actor-row">
+              <strong>健康红线</strong>
+              <span>「今日需要压缩通告」→ 黄条备忘 · 禁止病历上传</span>
+            </div>
+          </div>
+          <a class="ed-cta plx" data-speed="0.4" href="#/actor/today">
+            <span class="ed-cta-label">打开本人版</span>
+            <span class="ed-cta-arrow" aria-hidden="true">→</span>
           </a>
         </div>
-        <p class="hero-note">本机数据 · JSON 交接 · 无云同步账号</p>
-      </div>
-    </section>
+      </section>
 
-    <!-- 产品结构 -->
-    <section id="structure" class="section section-light" aria-labelledby="structure-title">
-      <div class="wrap">
-        <header class="section-head reveal">
-          <p class="eyebrow">产品结构</p>
-          <h2 id="structure-title">一套产品，两套入口，同一份本机数据。</h2>
-          <p class="lede">打开先选入口。界面文案与信息密度按角色拆开，不要一个大屏里两人字段搅在一起。</p>
-        </header>
-        <div class="entry-grid reveal">
-          <article class="entry-card">
-            <div class="entry-badge">通告本 · 助理</div>
-            <h3>助理版</h3>
-            <p class="entry-who">给生活 / 执行助理</p>
-            <dl class="entry-meta">
-              <div><dt>默认首页</dt><dd>今日通告台</dd></div>
-              <div><dt>主能力</dt><dd>建通告、checklist、消场、转发文案、导出</dd></div>
-            </dl>
-            <a class="text-link" href="#assistant">查看助理能力 →</a>
-          </article>
-          <article class="entry-card entry-card-dark">
-            <div class="entry-badge">通告本 · 本人</div>
-            <h3>本人版</h3>
-            <p class="entry-who">给女演员</p>
-            <dl class="entry-meta">
-              <div><dt>默认首页</dt><dd>今日摘要</dd></div>
-              <div><dt>主能力</dt><dd>下一场、台词遮词、档期接缓拒、商务一眼、健康红线</dd></div>
-            </dl>
-            <a class="text-link" href="#actor">查看本人能力 →</a>
-          </article>
+      <!-- *05 数据交接 -->
+      <section class="ed-panel" id="panel-05" data-i="5" aria-label="面板 05 数据交接">
+        <div class="plx blob blob-f" data-speed="0.3" aria-hidden="true"></div>
+        <div class="panel-inner handoff-inner">
+          <div class="hand-left plx" data-speed="0.12">
+            <p class="ed-eyebrow">SAME JSON</p>
+            <h2 class="ed-display ed-display-md">数据交接</h2>
+            <p class="ed-body">双机靠「导出 JSON → 传输 → 导入」。不做云同步账号。</p>
+          </div>
+          <ul class="hand-rules plx" data-speed="0.28">
+            <li>
+              <span class="rule-k">同一份</span>
+              <span class="rule-v">本机 JSON · 通告日 / 场次 / 档期 / 台词 / 商务 / 隐私开关</span>
+            </li>
+            <li>
+              <span class="rule-k">导入预览</span>
+              <span class="rule-v">确认前显示将新增 / 覆盖条数</span>
+            </li>
+            <li>
+              <span class="rule-k">脱敏</span>
+              <span class="rule-v">完整备份 vs 脱敏稿（去掉地点酒店与私密理由）</span>
+            </li>
+            <li>
+              <span class="rule-k">红黄冲突</span>
+              <span class="rule-v">双硬档重叠<strong>红</strong> · 一方待定<strong>黄</strong> · 在组撞商务<strong>黄</strong></span>
+            </li>
+          </ul>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- 一句话 -->
-    <section id="oneline" class="section section-dark quote-section" aria-labelledby="oneline-title">
-      <div class="wrap reveal">
-        <p class="eyebrow light">一句话</p>
-        <h2 id="oneline-title" class="quote">助理有一张能执行的通告台；本人一眼看清今天怎么拍、词在哪、档冲不冲。</h2>
-      </div>
-    </section>
-
-    <!-- 助理版 -->
-    <section id="assistant" class="section section-light" aria-labelledby="assistant-title">
-      <div class="wrap">
-        <header class="section-head reveal">
-          <p class="eyebrow">通告本 · 助理</p>
-          <h2 id="assistant-title">通告执行做厚。</h2>
-          <p class="lede">时间轴、场次、消场、固定七步 checklist、转发文案。助理主填字段；弱化遮词与接缓拒私密理由。</p>
-        </header>
-
-        <div class="feature-grid reveal">
-          <article class="feature-card">
-            <span class="feature-num" aria-hidden="true">01</span>
-            <h3>通告（主）</h3>
-            <p>时间轴、场次表、消场、固定七步 checklist、转发文案复制。</p>
-          </article>
-          <article class="feature-card">
-            <span class="feature-num" aria-hidden="true">02</span>
-            <h3>档期</h3>
-            <p>建项目、改状态、看冲突。执行向，字段全。</p>
-          </article>
-          <article class="feature-card">
-            <span class="feature-num" aria-hidden="true">03</span>
-            <h3>交接</h3>
-            <p>导出完整备份 / 脱敏稿给工作室，或导入本人回传。</p>
-          </article>
-          <article class="feature-card">
-            <span class="feature-num" aria-hidden="true">04</span>
-            <h3>我的</h3>
-            <p>载入示例、清空、声明。</p>
-          </article>
-        </div>
-
-        <div class="two-col reveal">
-          <div class="panel">
-            <h3>通告字段（助理主填）</h3>
-            <ul class="clean-list">
-              <li>日期 · 项目代号</li>
-              <li>妆造 / 交妆 / 到场</li>
-              <li>场次：场号、日夜内外、摘要、妆造备注</li>
-              <li>消场</li>
-              <li>地点 / 酒店：<strong>默认关</strong></li>
+      <!-- *06 第一周 + 进入 -->
+      <section class="ed-panel" id="panel-06" data-i="6" aria-label="面板 06 第一周与进入">
+        <div class="plx blob blob-g" data-speed="0.35" aria-hidden="true"></div>
+        <div class="panel-inner week-inner">
+          <div class="week-copy plx" data-speed="0.1">
+            <p class="ed-eyebrow">WEEK ONE</p>
+            <h2 class="ed-display ed-display-md">第一周</h2>
+            <ul class="week-list">
+              <li>双入口壳 + 通告 CRUD + checklist + 消场</li>
+              <li>本人今天摘要 + 台词遮词</li>
+              <li>档期状态与红黄冲突</li>
+              <li>导出导入 + 脱敏</li>
+              <li>虚构示例与空状态</li>
             </ul>
+            <p class="ed-meta">以后再说：PDF 识别 · 云同步 · 录音跟读 · 飞书日历</p>
           </div>
-          <div class="panel panel-accent">
-            <h3>Checklist 七步（固定）</h3>
-            <ol class="checklist">
-              <li>叫早</li>
-              <li>开工箱</li>
-              <li>通知副导</li>
-              <li>通知司机</li>
-              <li>取餐</li>
-              <li>确认无戏份</li>
-              <li>回酒店后勤</li>
-            </ol>
-          </div>
-        </div>
-
-        <div class="template-block reveal">
-          <p class="eyebrow">转发模板</p>
-          <code class="template">【通告本】{日期} {项目}｜妆造{妆造} 到场{到场}｜场次{列表}｜备注{备注}</code>
-        </div>
-      </div>
-    </section>
-
-    <!-- 本人版 -->
-    <section id="actor" class="section section-tint" aria-labelledby="actor-title">
-      <div class="wrap">
-        <header class="section-head reveal">
-          <p class="eyebrow">通告本 · 本人</p>
-          <h2 id="actor-title">摘要、台词、决策做薄。</h2>
-          <p class="lede">下一场倒计时、遮词、接缓拒、商务一眼、健康红线。弱化 checklist 逐步操作与给司机文案。</p>
-        </header>
-
-        <div class="feature-grid feature-grid-5 reveal">
-          <article class="feature-card">
-            <span class="feature-num" aria-hidden="true">01</span>
-            <h3>今天（主）</h3>
-            <p>下一场倒计时、未消场数、待背场、健康红线黄条。</p>
-          </article>
-          <article class="feature-card">
-            <span class="feature-num" aria-hidden="true">02</span>
-            <h3>台词</h3>
-            <p>分角色、今日场、遮词、情绪笔记、改词标记。</p>
-          </article>
-          <article class="feature-card">
-            <span class="feature-num" aria-hidden="true">03</span>
-            <h3>档期</h3>
-            <p>邀约接 / 缓 / 拒、精力分、私密理由（脱敏导出时去掉）。</p>
-          </article>
-          <article class="feature-card">
-            <span class="feature-num" aria-hidden="true">04</span>
-            <h3>商务</h3>
-            <p>节点列表、逾期、与在组日撞车黄提醒。</p>
-          </article>
-          <article class="feature-card">
-            <span class="feature-num" aria-hidden="true">05</span>
-            <h3>我的</h3>
-            <p>导入助理文件、导出、脱敏开关、路透自检、声明。</p>
-          </article>
-        </div>
-
-        <div class="callout reveal" role="note">
-          <div class="callout-badge">健康红线</div>
-          <p>开关：「今日需要压缩通告（团队备忘）」→ 今天页黄条；脱敏分享稿可带一行艺人侧备注。</p>
-          <p class="callout-warn"><strong>禁止：</strong>病历、诊断、用药上传。</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- 共享数据与冲突 -->
-    <section id="data" class="section section-light" aria-labelledby="data-title">
-      <div class="wrap">
-        <header class="section-head reveal">
-          <p class="eyebrow">共享数据与冲突规则</p>
-          <h2 id="data-title">两入口读写同一份。文件交接，不是登录协作。</h2>
-          <p class="lede">通告日、场次与消场、档期项目与状态、商务节点、角色台词行、隐私开关与路透自检。</p>
-        </header>
-
-        <div class="two-col reveal">
-          <div class="panel">
-            <h3>导入规则</h3>
-            <ul class="clean-list">
-              <li>导入前预览将新增 / 覆盖条数</li>
-              <li>确认后写入</li>
-              <li>后导入覆盖冲突键</li>
-              <li>双机靠「导出 JSON → 传输 → 导入」</li>
-            </ul>
-          </div>
-          <div class="panel">
-            <h3>档期状态跳转</h3>
-            <p class="status-flow">待定 → 锁档 → 在组 → 宣发 → 已结束</p>
-            <ul class="clean-list">
-              <li>待定可直接已结束</li>
-              <li>锁档回待定须写改期原因</li>
-            </ul>
+          <div class="week-enter plx" data-speed="0.3">
+            <p class="ed-eyebrow">ENTER</p>
+            <h3 class="enter-title">选择入口</h3>
+            <a class="enter-door" href="#/assistant/call">
+              <span class="enter-door-tag">FOR ASSISTANT</span>
+              <span class="enter-door-name">通告本 · 助理</span>
+              <span class="enter-door-desc">通告台 · 七步 · 消场 · 转发</span>
+            </a>
+            <a class="enter-door enter-door-pink" href="#/actor/today">
+              <span class="enter-door-tag">FOR ACTOR</span>
+              <span class="enter-door-name">通告本 · 本人</span>
+              <span class="enter-door-desc">摘要 · 遮词 · 接缓拒 · 红线</span>
+            </a>
+            <p class="ed-foot-note">通告本 · 通用一线女演员本地工作台演示 · 非官方 · 禁止真实艺人名与医疗数据</p>
           </div>
         </div>
-
-        <div class="conflict-grid reveal" role="table" aria-label="档期冲突规则">
-          <div class="conflict-card conflict-red">
-            <span class="conflict-dot" aria-hidden="true"></span>
-            <h3>红</h3>
-            <p>两项目日期重叠，且双方 ∈ {锁档, 在组, 宣发}</p>
-          </div>
-          <div class="conflict-card conflict-yellow">
-            <span class="conflict-dot" aria-hidden="true"></span>
-            <h3>黄</h3>
-            <p>一方仅待定；或同日在组 + 商务节点</p>
-          </div>
-        </div>
-
-        <div class="compare-wrap reveal">
-          <h3 class="compare-title">双入口对照</h3>
-          <div class="table-scroll" role="region" aria-label="双入口对照表" tabindex="0">
-            <table class="compare-table">
-              <thead>
-                <tr>
-                  <th scope="col">维度</th>
-                  <th scope="col">通告本 · 助理</th>
-                  <th scope="col">通告本 · 本人</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <th scope="row">默认首页</th>
-                  <td>今日通告台</td>
-                  <td>今日摘要</td>
-                </tr>
-                <tr>
-                  <th scope="row">做厚</th>
-                  <td>通告执行、checklist、转发</td>
-                  <td>摘要、台词遮词、决策</td>
-                </tr>
-                <tr>
-                  <th scope="row">弱化</th>
-                  <td>遮词练习、接缓拒私密理由</td>
-                  <td>checklist 逐步操作、司机文案</td>
-                </tr>
-                <tr>
-                  <th scope="row">数据</th>
-                  <td colspan="2">同一份本机数据 · JSON 导入导出 · 无云同步账号</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 第一周 -->
-    <section id="week1" class="section section-tint" aria-labelledby="week1-title">
-      <div class="wrap">
-        <header class="section-head reveal">
-          <p class="eyebrow">第一周范围</p>
-          <h2 id="week1-title">先把能演示的骨架立住。</h2>
-        </header>
-        <div class="table-scroll reveal" role="region" aria-label="第一周范围" tabindex="0">
-          <table class="scope-table">
-            <thead>
-              <tr>
-                <th scope="col">必做</th>
-                <th scope="col">以后再说</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>双入口壳 + 通告 CRUD + checklist + 消场</td>
-                <td>PDF 通告识别</td>
-              </tr>
-              <tr>
-                <td>本人今天摘要 + 台词遮词</td>
-                <td>云同步 / 推送</td>
-              </tr>
-              <tr>
-                <td>档期状态与红黄冲突</td>
-                <td>录音跟读</td>
-              </tr>
-              <tr>
-                <td>导出导入 + 脱敏</td>
-                <td>飞书日历双向</td>
-              </tr>
-              <tr>
-                <td>虚构示例与空状态</td>
-                <td>多艺人工作室版</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </section>
-
-    <!-- 刻意不做 -->
-    <section id="not-doing" class="section section-dark" aria-labelledby="not-title">
-      <div class="wrap">
-        <header class="section-head reveal">
-          <p class="eyebrow light">刻意不做</p>
-          <h2 id="not-title">边界比功能清单更重要。</h2>
-        </header>
-        <ul class="not-grid reveal">
-          <li>海投 CRM</li>
-          <li>真实行程 / 酒店库</li>
-          <li>艺人官方皮</li>
-          <li>粉丝打投</li>
-          <li>谈合同 / 治病 / 当保镖</li>
-          <li>一个界面硬塞两套主流程</li>
-        </ul>
-      </div>
-    </section>
-
-    <!-- 验收 -->
-    <section id="acceptance" class="section section-light" aria-labelledby="accept-title">
-      <div class="wrap">
-        <header class="section-head reveal">
-          <p class="eyebrow">验收</p>
-          <h2 id="accept-title">能演示，才算完成。</h2>
-        </header>
-        <ul class="accept-list reveal">
-          <li>
-            <span class="check" aria-hidden="true"></span>
-            <span>从启动能明确进入助理版或本人版</span>
-          </li>
-          <li>
-            <span class="check" aria-hidden="true"></span>
-            <span>助理：建明日通告 → 勾 checklist → 消场 → 复制司机文案 → 导出</span>
-          </li>
-          <li>
-            <span class="check" aria-hidden="true"></span>
-            <span>本人：导入后看下一场 → 遮词两场 → 拒一条邀约</span>
-          </li>
-          <li>
-            <span class="check" aria-hidden="true"></span>
-            <span>双锁档重叠必红</span>
-          </li>
-          <li>
-            <span class="check" aria-hidden="true"></span>
-            <span>无真实艺人名与真实地点示例</span>
-          </li>
-        </ul>
-      </div>
-    </section>
-
-    <!-- 收尾 CTA -->
-    <section id="cta" class="section section-cta" aria-labelledby="cta-title">
-      <div class="wrap reveal">
-        <p class="eyebrow">开始</p>
-        <h2 id="cta-title">选一个入口。</h2>
-        <p class="lede">助理篇做厚通告执行；本人篇做薄摘要 + 台词 + 决策。数据一份，文件交接。</p>
-        <div class="hero-ctas">
-          <a class="btn btn-dark btn-lg" href="#assistant">
-            <span class="btn-label">助理版</span>
-            <span class="btn-sub">通告本 · 助理</span>
-          </a>
-          <a class="btn btn-light btn-lg" href="#actor">
-            <span class="btn-label">本人版</span>
-            <span class="btn-sub">通告本 · 本人</span>
-          </a>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer class="footer" role="contentinfo">
-    <div class="wrap">
-      <p class="footer-brand">通告本</p>
-      <p class="footer-note">通用一线女演员本地工作台；示例虚构；非官方；无云同步账号</p>
+      </section>
     </div>
-  </footer>
 
-  <script src="app.js"></script>
+    <div class="ed-progress" aria-hidden="true">
+      <div class="ed-progress-bar" id="ed-progress-bar"></div>
+    </div>
+
+    <div class="ed-index" role="navigation" aria-label="面板索引">
+      <button type="button" class="ed-nav-btn" id="ed-prev" aria-label="上一面板">‹</button>
+      <button type="button" class="ed-nav-btn" id="ed-next" aria-label="下一面板">›</button>
+      <span class="ed-index-num" id="ed-index-num" aria-live="polite">*01</span>
+      <span class="ed-social" aria-hidden="true">本机 · JSON · 无云</span>
+    </div>
+  </div>
+
+  <!-- ===== 应用壳 ===== -->
+  <div id="view-app" class="hidden">
+    <header class="app-top">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true">本</span>
+        通告本<span id="app-brand-sub">助理</span>
+      </div>
+      <button type="button" class="switch-entry" id="btn-back-entry">切换入口</button>
+    </header>
+    <main class="app-main" id="app-main"></main>
+    <nav class="app-tabbar" id="app-tabbar" aria-label="主导航"></nav>
+  </div>
+
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
 </body>
 </html>
