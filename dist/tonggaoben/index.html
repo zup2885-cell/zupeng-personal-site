@@ -31,50 +31,33 @@
     </div>
   </header>
 
-  <!-- 1. HERO — scroll-zoom stage -->
+  <!-- 1. HERO — figure enters the lens (OYLA enter) -->
   <section class="hero-pin" id="top" aria-label="首屏">
     <div class="hero-sticky">
       <div class="hero-stage">
-        <div class="hero-focal" id="hero-focal">
-          <div class="hero-focal-inner">
-            <div class="mac-window" aria-hidden="true">
-              <div class="mac-titlebar">
-                <div class="mac-dots"><i></i><i></i><i></i></div>
-                <div class="mac-title">通告本 · 助理</div>
-              </div>
-              <div class="mac-body">
-                <nav class="mac-sidebar">
-                  <div class="mac-nav-item is-active">通告</div>
-                  <div class="mac-nav-item">档期</div>
-                  <div class="mac-nav-item">提醒</div>
-                  <div class="mac-nav-item">交接</div>
-                  <div class="mac-nav-item">我的</div>
-                </nav>
-                <div class="mac-main">
-                  <p class="mac-caption">今日通告 · 星河录</p>
-                  <p class="mac-date">10 月 22 日</p>
-                  <div class="mac-pills">
-                    <span class="mac-pill">妆造 <strong>05:30</strong></span>
-                    <span class="mac-pill">到场 <strong>06:40</strong></span>
-                  </div>
-                  <div class="mac-scenes">
-                    场 12 · 星港码头对峙<br/>
-                    场 13 · 审讯室独白<br/>
-                    <em>+ 3 场 · checklist 4/7</em>
-                  </div>
-                </div>
-              </div>
-            </div>
+        <!-- Full-bleed figure: zoom into outstretched hands -->
+        <div class="hero-figure" id="hero-focal" aria-hidden="true">
+          <div class="hero-figure-bg" id="hero-bg">
+            <picture>
+              <source srcset="img/hero-figure.webp" type="image/webp" />
+              <img src="img/hero-figure.jpg" alt="" width="1600" height="2133" decoding="async" fetchpriority="high" />
+            </picture>
+          </div>
+          <div class="hero-figure-fg" id="hero-fg" aria-hidden="true">
+            <picture>
+              <source srcset="img/hero-figure.webp" type="image/webp" />
+              <img src="img/hero-figure.jpg" alt="" width="1600" height="2133" decoding="async" />
+            </picture>
           </div>
         </div>
 
-        <div class="hero-copy">
+        <div class="hero-copy" id="hero-copy">
           <p class="hero-eyebrow">MAC 本机 · 双入口 · 虚构示例</p>
           <h1 class="hero-title">通告本</h1>
-          <p class="hero-lead">
+          <p class="hero-lead" id="hero-lead">
             一线女演员 + 执行助理的本机通告工作台：一套产品、两个入口，同一份本地数据。
           </p>
-          <div class="cta-row">
+          <div class="cta-row" id="hero-cta">
             <a class="cta-pill" href="#assistant">进入助理<span class="plus" aria-hidden="true">+</span></a>
             <a class="cta-pill ghost" href="#actor">看本人今天<span class="plus" aria-hidden="true">+</span></a>
           </div>
