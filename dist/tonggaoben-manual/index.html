@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#F6F5F3" />
+  <meta name="description" content="通告本 1.4.1 — macOS 本地 App 产品说明书。助理版 / 本人版双入口，数据仅存本机。" />
+  <title>通告本 · 产品说明书 1.4.1</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/app.css" />
+</head>
+<body>
+  <header class="topbar" role="banner">
+    <div class="topbar-inner">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true">本</span>
+        <span class="brand-name">通告本</span>
+        <span class="brand-ver">1.4.1</span>
+      </div>
+      <nav class="topbar-nav" aria-label="章节">
+        <a href="#install">安装</a>
+        <a href="#entries">双入口</a>
+        <a href="#reminders">提醒</a>
+        <a href="#data">数据</a>
+        <a href="#conflict">冲突</a>
+        <a href="#not">不做</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <!-- 1. What it is -->
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-badge">macOS 本地 App · 产品说明书</div>
+      <h1 id="hero-title">通告本</h1>
+      <p class="hero-lead">
+        给一线女演员与执行助理用的本机工作台：一套产品、两个入口，通告执行与今日决策各走各的主流程，数据只留在这台 Mac。
+      </p>
+      <div class="hero-meta">
+        <span>版本 1.4.1</span>
+        <span>无云同步 · 无账号</span>
+        <span>示例全虚构 · 非官方</span>
+      </div>
+    </section>
+
+    <!-- 2. Install -->
+    <section class="section" id="install" aria-labelledby="install-title">
+      <p class="section-label">安装与打开</p>
+      <h2 id="install-title">从压缩包装到「应用程序」</h2>
+      <div class="card">
+        <ol class="steps">
+          <li>在桌面找到安装包 <code>通告本-Mac-1.4.1.zip</code>，解压得到 <strong>通告本.app</strong>。</li>
+          <li>把 <strong>通告本.app</strong> 拖进 <code>/Applications</code>（应用程序文件夹）。</li>
+          <li>从启动台或「应用程序」打开；首次启动可选载入虚构示例，便于熟悉流程。</li>
+          <li>启动后选择入口：<strong>助理版</strong> 或 <strong>本人版</strong>。之后可在「我的」里切换或重载示例。</li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- 3. Two entries -->
+    <section class="section" id="entries" aria-labelledby="entries-title">
+      <p class="section-label">两个入口</p>
+      <h2 id="entries-title">助理版与本人版</h2>
+      <p style="margin:0 0 14px;color:var(--ink-soft);font-size:14.5px;">
+        同一份本机数据，两套界面与信息密度。不要把两人的主流程塞进同一个大屏。
+      </p>
+      <div class="entry-grid">
+        <article class="entry-card">
+          <span class="badge">助理版</span>
+          <h3>通告本 · 助理</h3>
+          <p class="for-whom">给生活 / 执行助理</p>
+          <p class="home">默认首页 · <em>通告</em></p>
+          <ul class="feature-list">
+            <li><strong>通告</strong> — 时间轴、消场、checklist、复制转发文案</li>
+            <li><strong>档期</strong> — 建项目、改状态、看红黄冲突</li>
+            <li><strong>提醒</strong> — 妆造 / 到场提前等本地通知</li>
+            <li><strong>交接</strong> — 导出 / 导入备份与脱敏稿</li>
+            <li><strong>我的</strong> — 示例、清空、声明与偏好</li>
+          </ul>
+        </article>
+        <article class="entry-card">
+          <span class="badge">本人版</span>
+          <h3>通告本 · 本人</h3>
+          <p class="for-whom">给女演员本人</p>
+          <p class="home">默认首页 · <em>今天</em></p>
+          <ul class="feature-list">
+            <li><strong>今天</strong> — 下一场倒计时、消场进度、背词入口</li>
+            <li><strong>台词遮词</strong> — 按场练习，遮住对白自测</li>
+            <li><strong>档期</strong> — 邀约接 / 缓 / 拒</li>
+            <li><strong>商务</strong> — 节点列表与到期提醒</li>
+            <li><strong>提醒 · 我的</strong> — 本地通知与偏好</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <!-- 4. Reminders & motion -->
+    <section class="section" id="reminders" aria-labelledby="reminders-title">
+      <p class="section-label">提醒与动效</p>
+      <h2 id="reminders-title">本地通知，可随时关掉</h2>
+      <div class="card">
+        <div class="kv">
+          <div class="kv-row">
+            <div class="kv-k">会提醒什么</div>
+            <p class="kv-v">妆造提前、到场提前；商务节点到期；待定档期可手动设提醒。全部走 <strong>macOS 本地通知</strong>，不经过服务器。</p>
+          </div>
+          <div class="kv-row">
+            <div class="kv-k">如何关闭</div>
+            <p class="kv-v">在「我的」里关闭对应提醒开关；也可在系统「通知」设置中关闭通告本。</p>
+          </div>
+          <div class="kv-row">
+            <div class="kv-k">视差动效</div>
+            <p class="kv-v">轻微视差可关：在「我的」关闭视差 / 动效偏好即可，界面保持静态。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. Data -->
+    <section class="section" id="data" aria-labelledby="data-title">
+      <p class="section-label">数据与交接</p>
+      <h2 id="data-title">只存在这台 Mac</h2>
+      <div class="card">
+        <div class="kv">
+          <div class="kv-row">
+            <div class="kv-k">存放位置</div>
+            <p class="kv-v"><code>~/Library/Application Support/TonggaoBen/data.json</code><br />助理版与本人版读写同一份文件。</p>
+          </div>
+          <div class="kv-row">
+            <div class="kv-k">云同步</div>
+            <p class="kv-v"><strong>没有。</strong>无账号、无上传。换机或给对方看数据，请用导出文件。</p>
+          </div>
+          <div class="kv-row">
+            <div class="kv-k">交接方式</div>
+            <p class="kv-v">助理版「交接」可导出完整备份或脱敏稿；对方在「我的」或「交接」里导入。导入前会预览新增 / 覆盖条数，确认后写入。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. Conflict colors -->
+    <section class="section" id="conflict" aria-labelledby="conflict-title">
+      <p class="section-label">档期冲突</p>
+      <h2 id="conflict-title">红与黄，一眼分轻重</h2>
+      <div class="card">
+        <p style="margin-top:0;">两入口共用同一套规则，只标颜色，不替你做决定。</p>
+        <div class="swatches">
+          <div class="swatch red">
+            <strong><span class="dot" aria-hidden="true"></span>红 · 硬冲突</strong>
+            <p>两项目日期重叠，且双方都处在锁档 / 在组 / 宣发之一。</p>
+          </div>
+          <div class="swatch yellow">
+            <strong><span class="dot" aria-hidden="true"></span>黄 · 留意</strong>
+            <p>一方仍为待定；或同日在组与商务节点撞车。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. Deliberately not -->
+    <section class="section" id="not" aria-labelledby="not-title">
+      <p class="section-label">边界</p>
+      <h2 id="not-title">刻意不做</h2>
+      <div class="card">
+        <ul class="not-list">
+          <li>云同步 / 账号登录</li>
+          <li>海投 CRM 或合同洽谈</li>
+          <li>真实行程 / 酒店库对接</li>
+          <li>艺人官方皮或粉丝打投</li>
+          <li>病历、诊断、用药上传</li>
+          <li>把两套主流程塞进同一界面</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 8. Version + disclaimer -->
+    <aside class="disclaimer" role="note">
+      <strong>虚构示例声明。</strong>
+      应用内可载入的示例通告、档期与台词均为虚构，不含真实艺人姓名与真实地点，仅供熟悉流程。通告本为通用本地工具，非任何艺人 / 工作室官方产品，亦不提供法律、医疗或安保建议。
+    </aside>
+
+    <footer class="footer">
+      <div>通告本 · macOS 本地 App</div>
+      <div>数据仅存本机 · 无云同步 · 示例全虚构</div>
+      <div class="ver">VERSION 1.4.1</div>
+    </footer>
+  </main>
+</body>
+</html>
