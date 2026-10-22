@@ -1,27 +1,27 @@
 /* 通告本 · light editorial dual-entry (Pinterest / The Little Vanity) */
 :root {
-  --bg: #f3f3f5;
+  --bg: #f6f5f7;
   --bg-page: #ffffff;
   --bg-elev: #ffffff;
-  --bg-card: #fafafa;
-  --bg-soft: #f0f0f3;
+  --bg-card: #fbfafb;
+  --bg-soft: #f3f2f5;
   --line: rgba(0, 0, 0, 0.06);
   --line-strong: rgba(0, 0, 0, 0.14);
-  --text: #0a0a0c;
-  --muted: #6a6a72;
-  --faint: #9a9aa3;
-  --accent: #c45a8c;
-  --accent-dim: rgba(196, 90, 140, 0.12);
-  --pink: #f3c6de;
-  --lavender: #d4c8f0;
-  --blob: radial-gradient(circle, rgba(243, 198, 222, 0.85) 0%, rgba(212, 200, 240, 0.55) 45%, transparent 70%);
-  --red: #d64545;
-  --red-dim: rgba(214, 69, 69, 0.12);
-  --yellow: #c9962a;
-  --yellow-dim: rgba(201, 150, 42, 0.14);
-  --green: #3d9a6a;
-  --green-dim: rgba(61, 154, 106, 0.12);
-  --blue: #4a78c8;
+  --text: #2c2a30;
+  --muted: #7d7a84;
+  --faint: #a8a5ae;
+  --accent: #b8899c;
+  --accent-dim: rgba(184, 137, 156, 0.14);
+  --pink: #f0dde8;
+  --lavender: #ddd6eb;
+  --blob: radial-gradient(circle, rgba(240, 221, 232, 0.55) 0%, rgba(221, 214, 235, 0.32) 45%, transparent 70%);
+  --red: #c87272;
+  --red-dim: rgba(200, 114, 114, 0.12);
+  --yellow: #c4a86a;
+  --yellow-dim: rgba(196, 168, 106, 0.14);
+  --green: #6a9e82;
+  --green-dim: rgba(106, 158, 130, 0.12);
+  --blue: #7a92b8;
   --font-display: "Noto Serif SC", "Songti SC", "STSong", "SimSun", Georgia, serif;
   --font-ui: "Noto Sans SC", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", system-ui, sans-serif;
   --radius: 12px;
@@ -376,8 +376,8 @@ a:hover { text-decoration: underline; }
   aspect-ratio: 3 / 4;
   border: 1px solid var(--line-strong);
   background:
-    linear-gradient(160deg, rgba(243, 198, 222, 0.35), transparent 55%),
-    linear-gradient(20deg, #f7f7f9, #ebebef);
+    linear-gradient(160deg, rgba(240, 221, 232, 0.28), transparent 55%),
+    linear-gradient(20deg, #f8f7f9, #f0eef2);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -429,7 +429,7 @@ a:hover { text-decoration: underline; }
   backdrop-filter: blur(6px);
 }
 .struc-card-pink {
-  background: linear-gradient(160deg, rgba(243, 198, 222, 0.45), rgba(255, 255, 255, 0.85));
+  background: linear-gradient(160deg, rgba(240, 221, 232, 0.32), rgba(255, 255, 255, 0.9));
 }
 .struc-who {
   font-size: 0.68rem;
@@ -648,7 +648,7 @@ a:hover { text-decoration: underline; }
   background: #fff;
 }
 .enter-door-pink {
-  background: linear-gradient(135deg, rgba(243, 198, 222, 0.5), rgba(212, 200, 240, 0.35));
+  background: linear-gradient(135deg, rgba(240, 221, 232, 0.38), rgba(221, 214, 235, 0.28));
 }
 .enter-door-tag {
   display: block;
@@ -691,7 +691,7 @@ a:hover { text-decoration: underline; }
 .ed-progress-bar {
   height: 100%;
   width: 0%;
-  background: linear-gradient(90deg, #e8a0c4, #c4b0e8);
+  background: linear-gradient(90deg, #e5c9d6, #d4cee6);
   transition: width 0.08s linear;
 }
 
