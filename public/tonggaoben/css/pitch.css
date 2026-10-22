@@ -108,6 +108,19 @@ button { font-family: inherit; }
   z-index: 1;
 }
 .hero-canvas.is-ready { opacity: 1; }
+.hero-scrub-img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: 50% 40%;
+  display: block;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.25s var(--ease);
+  z-index: 2;
+}
+.hero-scrub-img.is-ready { opacity: 1; }
+.hero-stage.is-frames-on .hero-scrub-img.is-ready { opacity: 1; }
 .hero-scrub {
   position: absolute; inset: 0;
   width: 100%; height: 100%;
