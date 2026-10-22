@@ -12,44 +12,53 @@
   <link rel="stylesheet" href="css/pitch.css" />
 </head>
 <body>
-  <!-- OYLA edge nav → 通告本 -->
+  <!-- Orla chrome: serif logo left · thin dual-line burger right -->
   <header class="nav" role="banner">
     <a class="nav-brand" href="#top" aria-label="通告本">
-      <span class="nav-mark" aria-hidden="true">本</span>
-      <span class="nav-name">通告本</span>
+      <span class="nav-name">通告本.</span>
       <span class="nav-ver">1.4.1</span>
     </a>
     <div class="nav-right">
-      <a href="#why">为什么</a>
+      <a class="nav-link" href="#why">为什么</a>
       <button type="button" class="nav-burger" id="nav-burger" aria-label="菜单" aria-expanded="false">
         <span></span><span></span>
       </button>
-      <a class="nav-bag" href="#deliver">[ 交付 ]</a>
     </div>
   </header>
 
-  <!-- 1. HERO — figure enters the lens -->
+  <!-- 1. HERO — OYLA/bewpost scroll-scrub video (钻镜头整段) -->
   <section class="hero-pin" id="top" aria-label="首屏">
     <div class="hero-sticky">
       <div class="hero-stage">
-        <div class="hero-figure" id="hero-focal" aria-hidden="true">
-          <div class="hero-figure-bg" id="hero-bg">
-            <picture>
-              <source srcset="img/hero-figure.webp" type="image/webp" />
-              <img src="img/hero-figure.jpg" alt="" width="1600" height="2133" decoding="async" fetchpriority="high" />
-            </picture>
-          </div>
-          <div class="hero-figure-fg" id="hero-fg">
-            <picture>
-              <source srcset="img/hero-figure.webp" type="image/webp" />
-              <img src="img/hero-figure.jpg" alt="" width="1600" height="2133" decoding="async" />
-            </picture>
-          </div>
+        <div class="hero-video-wrap" aria-hidden="true"
+             data-scrub-dir="img/scrub"
+             data-scrub-count="76"
+             data-scrub-pad="3"
+             data-scrub-ext="jpg">
+          <!-- Primary: frame-sequence scrub (reliable seek). Video secondary if browser can seek. -->
+          <canvas id="hero-canvas" class="hero-canvas" width="1280" height="948"></canvas>
+          <video
+            id="hero-scrub"
+            class="hero-scrub"
+            muted
+            playsinline
+            preload="auto"
+            poster="img/scrub/f-001.jpg"
+          >
+            <source src="img/hero-scrub.mp4" type="video/mp4" />
+          </video>
+          <picture class="hero-fallback" id="hero-fallback">
+            <img src="img/scrub/f-001.jpg" alt="" width="1280" height="948" decoding="async" fetchpriority="high" />
+          </picture>
         </div>
 
         <div class="hero-copy" id="hero-copy">
-          <p class="hero-eyebrow">MAC 本机 · 双入口 · 虚构示例</p>
-          <h1 class="hero-title">通告本</h1>
+          <p class="hero-eyebrow" id="hero-eyebrow">MAC 本机 · 双入口 · 虚构示例</p>
+          <h1 class="hero-title" id="hero-title" aria-label="通告本">
+            <span class="hero-line" data-line="0">
+              <span class="ch">通</span><span class="ch">告</span><span class="ch">本</span>
+            </span>
+          </h1>
           <p class="hero-lead" id="hero-lead">
             一线女演员 + 执行助理的本机通告工作台：一套产品、两个入口，同一份本地数据。
           </p>
@@ -58,151 +67,144 @@
             <a class="cta-pill ghost" href="#pick">看本人今天<span class="plus" aria-hidden="true">+</span></a>
           </div>
         </div>
-        <p class="hero-scroll-hint" aria-hidden="true">SCROLL</p>
+        <p class="hero-scroll-hint" id="hero-hint" aria-hidden="true">SCROLL</p>
       </div>
     </div>
   </section>
 
-  <!-- 2. Manifesto grid: 1 large + stacked stats (OYLA f-11) -->
-  <section class="ed" id="why" aria-labelledby="why-title">
-    <div class="ed-row c2">
-      <article class="ed-cell reveal">
-        <p class="ed-label">简介 · 为什么做</p>
-        <h2 class="ed-display" id="why-title">一套产品 · 两个入口</h2>
-        <p class="ed-body">
+  <!-- 2. WHY — Orla manifesto: left copy + CTA · center figure (post-entrance float) · right 4-row list -->
+  <section class="orla-why" id="why" aria-labelledby="why-title">
+    <div class="orla-why-stage">
+      <div class="orla-why-copy reveal">
+        <p class="orla-kicker">简介 · 为什么做</p>
+        <h2 class="orla-lead" id="why-title">一套产品 · 两个入口</h2>
+        <p class="orla-body">
           通告散落在群聊与表格里；档期互相冲；台词临时改。助理要能执行，本人要一眼看清——两边读写同一份本机数据，主流程分开。无账号、无云同步；示例全虚构。
         </p>
-        <div class="cta-row" style="margin-top:32px;">
-          <a class="cta-pill" href="#pick">选择模块<span class="plus" aria-hidden="true">+</span></a>
-        </div>
-      </article>
-      <div class="ed-cell ed-stack">
-        <article class="ed-cell reveal">
-          <p class="ed-stat">通告散落</p>
-          <p class="ed-body">截图、口头改期、消场与 checklist 难对齐。</p>
-        </article>
-        <article class="ed-cell reveal">
-          <p class="ed-stat">档期冲突</p>
-          <p class="ed-body">锁档 / 在组重叠——红黄一眼分轻重。</p>
-        </article>
+        <a class="cta-rect" href="#pick">选择模块</a>
       </div>
-    </div>
-    <div class="ed-row c2eq">
-      <article class="ed-cell reveal">
-        <p class="ed-stat">台词临时改</p>
-        <p class="ed-body">本人遮词自测，不当场背着助理练。</p>
-      </article>
-      <article class="ed-cell reveal">
-        <p class="ed-stat">各看各的</p>
-        <p class="ed-body">助理厚执行；本人薄摘要 + 决策。文件交接。</p>
-      </article>
+
+      <div class="orla-why-figure" id="why-figure" aria-hidden="true">
+        <div class="why-fig-wrap" id="why-fig-wrap">
+          <picture>
+            <source srcset="img/hero-figure.webp" type="image/webp" />
+            <img src="img/hero-figure.jpg" alt="" width="800" height="1066" decoding="async" loading="lazy" />
+          </picture>
+        </div>
+        <button type="button" class="float-chip" data-pick="assistant" data-float="1" aria-label="通告卡">通告卡</button>
+        <button type="button" class="float-chip" data-pick="conflict" data-float="2" aria-label="红黄冲突">红 / 黄</button>
+        <button type="button" class="float-chip" data-pick="actor" data-float="3" aria-label="下一场">下一场</button>
+      </div>
+
+      <dl class="orla-spec reveal">
+        <div class="orla-spec-row">
+          <dt>通告散落</dt>
+          <dd>截图、口头改期、消场与 checklist 难对齐</dd>
+        </div>
+        <div class="orla-spec-row">
+          <dt>档期冲突</dt>
+          <dd>锁档 / 在组重叠——红黄一眼分轻重</dd>
+        </div>
+        <div class="orla-spec-row">
+          <dt>台词临时改</dt>
+          <dd>本人遮词自测，不当场背着助理练</dd>
+        </div>
+        <div class="orla-spec-row">
+          <dt>各看各的</dt>
+          <dd>助理厚执行；本人薄摘要 + 决策 · 文件交接</dd>
+        </div>
+      </dl>
     </div>
   </section>
 
-  <!-- 3. Dual entry — selectable 2-col (still hairline) -->
-  <section class="ed" id="entries" aria-labelledby="entries-title">
-    <div class="ed-row c2eq">
-      <article class="ed-cell reveal" data-select-jump="assistant">
-        <p class="ed-label">助理版</p>
-        <h2 class="ed-display" id="entries-title">通告本 · 助理</h2>
-        <p class="ed-body" style="margin-bottom:8px;">生活 / 执行助理 · 默认首页 <strong style="color:var(--ink)">通告</strong></p>
-        <ul class="ed-list">
+  <!-- 3. Dual entry — airy, no hairline grid -->
+  <section class="orla-block" id="entries" aria-labelledby="entries-title">
+    <div class="orla-dual">
+      <article class="orla-dual-card reveal">
+        <p class="orla-kicker">助理版</p>
+        <h2 class="orla-h" id="entries-title">通告本 · 助理</h2>
+        <p class="orla-body slim">生活 / 执行助理 · 默认首页 <strong>通告</strong></p>
+        <ul class="orla-list">
           <li><strong>通告</strong><span>时间轴、消场、七步 checklist、复制转发</span></li>
           <li><strong>档期</strong><span>建项目、改状态、红黄冲突</span></li>
           <li><strong>提醒</strong><span>妆造 / 到场提前 · 本地可关</span></li>
           <li><strong>交接</strong><span>导出备份 / 脱敏稿 · 导入</span></li>
           <li><strong>我的</strong><span>示例、偏好、视差与提醒开关</span></li>
         </ul>
-        <div class="cta-row" style="margin-top:auto;padding-top:28px;">
-          <a class="cta-pill" href="#pick" data-pick="assistant">进入助理<span class="plus" aria-hidden="true">+</span></a>
-        </div>
+        <a class="cta-rect" href="#pick" data-pick="assistant">进入助理</a>
       </article>
-      <article class="ed-cell reveal">
-        <p class="ed-label">本人版</p>
-        <h2 class="ed-display">通告本 · 本人</h2>
-        <p class="ed-body" style="margin-bottom:8px;">女演员本人 · 默认首页 <strong style="color:var(--ink)">今天</strong></p>
-        <ul class="ed-list">
+      <article class="orla-dual-card reveal">
+        <p class="orla-kicker">本人版</p>
+        <h2 class="orla-h">通告本 · 本人</h2>
+        <p class="orla-body slim">女演员本人 · 默认首页 <strong>今天</strong></p>
+        <ul class="orla-list">
           <li><strong>今天</strong><span>下一场倒计时、消场进度、待决策</span></li>
           <li><strong>台词</strong><span>分场遮词练习</span></li>
           <li><strong>档期</strong><span>邀约接 / 缓 / 拒</span></li>
           <li><strong>商务</strong><span>节点列表与到期</span></li>
           <li><strong>提醒</strong><span>本地通知 · 我的偏好</span></li>
         </ul>
-        <div class="cta-row" style="margin-top:auto;padding-top:28px;">
-          <a class="cta-pill ghost" href="#pick" data-pick="actor">看本人今天<span class="plus" aria-hidden="true">+</span></a>
-        </div>
+        <a class="cta-rect ghost" href="#pick" data-pick="actor">看本人今天</a>
       </article>
     </div>
   </section>
 
-  <!-- 4. SELECTABLE 3-COL STRIPS (OYLA product columns) -->
-  <section class="ed" id="pick" aria-label="选择模块">
-    <div class="ed-row" style="border-bottom:1px solid var(--line);">
-      <div class="ed-cell reveal" style="border-right:none; min-height:0; padding:36px 40px 28px;">
-        <p class="ed-label">选择</p>
-        <h2 class="ed-display" style="margin:0;">点选一列 · 看真实模块</h2>
-        <p class="ed-body" style="margin-top:10px;">虚构示例项目「星河录」。列可选中——助理通告台 / 本人下一场 / 档期冲突。</p>
-      </div>
+  <!-- 4. PICK — Orla masonry: left two small + right one large; hover/click select -->
+  <section class="orla-shop" id="pick" aria-label="选择模块">
+    <div class="orla-shop-head reveal">
+      <p class="orla-kicker">选择</p>
+      <h2 class="orla-h">点选一张 · 看真实模块</h2>
+      <p class="orla-body">虚构示例项目「星河录」。悬停或点选——助理通告台 / 本人今天 / 档期冲突。</p>
     </div>
 
-    <div class="select-row" id="select-row" role="listbox" aria-label="提案模块">
-      <button type="button" class="select-col is-active" role="option" aria-selected="true" data-panel="assistant" id="col-assistant">
-        <div class="select-thumb" aria-hidden="true">
-          <span class="kicker">助理 · 通告</span>
-          <span class="big">星河录</span>
-          <span class="meta">妆造 05:30 · 到场 06:40</span>
+    <div class="shop-masonry" id="select-row" role="listbox" aria-label="提案模块">
+      <!-- left column: two small -->
+      <button type="button" class="shop-card shop-s shop-s1" role="option" aria-selected="false" data-panel="actor" id="col-actor">
+        <div class="shop-thumb" aria-hidden="true">
+          <span class="shop-thumb-kicker">本人 · 今天</span>
+          <span class="shop-thumb-big">下一场</span>
+          <span class="shop-thumb-meta">14:00 · 场 13</span>
         </div>
-        <p class="select-name">助理通告台</p>
-        <p class="select-sub">时间轴 · 消场 · checklist</p>
-        <div class="select-detail">
-          <ul>
-            <li>07:00 场12 → 20:00 场15</li>
-            <li>固定七步 checklist</li>
-            <li>一键复制转发文案</li>
-          </ul>
+        <div class="shop-meta-row">
+          <span class="shop-title">本人今天</span>
+          <span class="shop-tag">本人</span>
         </div>
+        <p class="shop-cat">倒计时 · 遮词 · 接缓拒</p>
       </button>
 
-      <button type="button" class="select-col" role="option" aria-selected="false" data-panel="actor" id="col-actor">
-        <div class="select-thumb" aria-hidden="true">
-          <span class="kicker">本人 · 今天</span>
-          <span class="big">下一场</span>
-          <span class="meta">14:00 · 场 13</span>
+      <button type="button" class="shop-card shop-s shop-s2" role="option" aria-selected="false" data-panel="conflict" id="col-conflict">
+        <div class="shop-thumb" aria-hidden="true">
+          <span class="shop-thumb-kicker">共用 · 档期</span>
+          <span class="shop-thumb-big">红 / 黄</span>
+          <span class="shop-thumb-meta">冲突一眼分轻重</span>
         </div>
-        <p class="select-name">本人今天</p>
-        <p class="select-sub">倒计时 · 遮词 · 接缓拒</p>
-        <div class="select-detail">
-          <ul>
-            <li>下一场主角倒计时</li>
-            <li>台词遮词（字变＿）</li>
-            <li>档期接 / 缓 / 拒</li>
-          </ul>
+        <div class="shop-meta-row">
+          <span class="shop-title">档期冲突</span>
+          <span class="shop-tag muted">共用</span>
         </div>
+        <p class="shop-cat">红硬冲突 · 黄留意</p>
       </button>
 
-      <button type="button" class="select-col" role="option" aria-selected="false" data-panel="conflict" id="col-conflict">
-        <div class="select-thumb" aria-hidden="true">
-          <span class="kicker">共用 · 档期</span>
-          <span class="big">红 / 黄</span>
-          <span class="meta">冲突一眼分轻重</span>
+      <!-- right: one large -->
+      <button type="button" class="shop-card shop-lg is-active" role="option" aria-selected="true" data-panel="assistant" id="col-assistant">
+        <div class="shop-thumb" aria-hidden="true">
+          <span class="shop-thumb-kicker">助理 · 通告</span>
+          <span class="shop-thumb-big">星河录</span>
+          <span class="shop-thumb-meta">妆造 05:30 · 到场 06:40</span>
         </div>
-        <p class="select-name">档期冲突</p>
-        <p class="select-sub">红硬冲突 · 黄留意</p>
-        <div class="select-detail">
-          <ul>
-            <li>双锁档/在组/宣发重叠 → 红</li>
-            <li>一方待定或撞商务 → 黄</li>
-            <li>只标颜色，不替你决定</li>
-          </ul>
+        <div class="shop-meta-row">
+          <span class="shop-title">助理通告台</span>
+          <span class="shop-tag">助理</span>
         </div>
+        <p class="shop-cat">时间轴 · 消场 · checklist</p>
       </button>
     </div>
 
     <!-- Panels revealed by selection -->
     <div class="select-panel is-open" id="panel-assistant" data-panel-body="assistant">
-      <p class="ed-label">助理示意 · 星河录</p>
+      <p class="orla-kicker">助理示意 · 星河录</p>
       <h3>今日通告</h3>
-      <p class="ed-body">在组 10/19–11/11 · 备注：副导对讲频道 3 · 中午换装 13:20</p>
+      <p class="orla-body">在组 10/19–11/11 · 备注：副导对讲频道 3 · 中午换装 13:20</p>
       <ul class="line-list">
         <li><span class="t">07:00</span><span class="s">场 12 · 星港码头对峙</span><span class="st ok">已消场</span></li>
         <li><span class="t">08:30</span><span class="s">场 12B · 码头过场补拍</span><span class="st ok">已消场</span></li>
@@ -221,14 +223,14 @@
       </div>
       <div class="fwd">
         <code id="fwd-text">【通告本】10-22 星河录｜妆造05:30 到场06:40｜场次07:00场12 · 08:30场12B · 14:00场13 · 16:30场14 · 20:00场15｜备注副导对讲频道3</code>
-        <button type="button" class="cta-pill" id="btn-copy" style="height:34px;flex-shrink:0;">复制<span class="plus" aria-hidden="true">+</span></button>
+        <button type="button" class="cta-rect" id="btn-copy">复制</button>
       </div>
     </div>
 
     <div class="select-panel" id="panel-actor" data-panel-body="actor">
-      <p class="ed-label">本人示意 · 今天</p>
+      <p class="orla-kicker">本人示意 · 今天</p>
       <h3>下一场</h3>
-      <p class="ed-body">14:00 · 场 13 · 审讯室独白</p>
+      <p class="orla-body">14:00 · 场 13 · 审讯室独白</p>
       <div class="big-count" aria-live="polite">
         <span class="n" id="cd-h">02</span><span class="u">时</span>
         <span class="n" id="cd-m">18</span><span class="u">分</span>
@@ -250,30 +252,30 @@
             data-masked="＿＿＿＿＿＿，＿＿＿＿＿＿——＿＿＿＿＿＿＿＿＿＿。">＿＿＿＿＿＿，＿＿＿＿＿＿——＿＿＿＿＿＿＿＿＿＿。</span>
         </p>
         <div class="cta-row">
-          <button type="button" class="cta-pill" id="btn-reveal">显示原文<span class="plus" aria-hidden="true">+</span></button>
-          <button type="button" class="cta-pill ghost" id="btn-remask">再遮一次<span class="plus" aria-hidden="true">+</span></button>
+          <button type="button" class="cta-rect" id="btn-reveal">显示原文</button>
+          <button type="button" class="cta-rect ghost" id="btn-remask">再遮一次</button>
         </div>
       </div>
-      <p class="ed-body" style="margin-top:22px;">待决策 · 银杏广告二轮（10/28–10/30 · 待定）</p>
+      <p class="orla-body" style="margin-top:22px;">待决策 · 银杏广告二轮（10/28–10/30 · 待定）</p>
       <div class="decide" id="decide-btns">
         <button type="button">接</button>
         <button type="button">缓</button>
         <button type="button">拒</button>
       </div>
-      <p class="ed-body" style="margin-top:22px;">商务节点：品牌试用反馈 10/24 · 杂志封面定妆 11/02 · 年底晚宴出席确认 11/15</p>
+      <p class="orla-body" style="margin-top:22px;">商务节点：品牌试用反馈 10/24 · 杂志封面定妆 11/02 · 年底晚宴出席确认 11/15</p>
     </div>
 
     <div class="select-panel" id="panel-conflict" data-panel-body="conflict">
-      <p class="ed-label">档期 · 冲突规则</p>
+      <p class="orla-kicker">档期 · 冲突规则</p>
       <h3>红与黄</h3>
-      <div class="ed-row c2eq" style="border:1px solid var(--line); border-bottom:1px solid var(--line); margin-top:8px;">
-        <article class="ed-cell" style="min-height:0;">
-          <p class="ed-stat"><span class="dot red"></span>红 · 硬冲突</p>
-          <p class="ed-body">两项目日期重叠，且双方都处在锁档 / 在组 / 宣发之一。</p>
+      <div class="rule-pair">
+        <article>
+          <p class="rule-title"><span class="dot red"></span>红 · 硬冲突</p>
+          <p class="orla-body">两项目日期重叠，且双方都处在锁档 / 在组 / 宣发之一。</p>
         </article>
-        <article class="ed-cell" style="min-height:0;">
-          <p class="ed-stat"><span class="dot yellow"></span>黄 · 留意</p>
-          <p class="ed-body">一方仍为待定；或同日在组与商务节点撞车。</p>
+        <article>
+          <p class="rule-title"><span class="dot yellow"></span>黄 · 留意</p>
+          <p class="orla-body">一方仍为待定；或同日在组与商务节点撞车。</p>
         </article>
       </div>
       <ul class="line-list" style="margin-top:8px;">
@@ -285,49 +287,49 @@
     </div>
   </section>
 
-  <!-- 5. Local facts 3-col -->
-  <section class="ed" id="shared" aria-labelledby="shared-title">
-    <div class="ed-row c3">
-      <article class="ed-cell reveal">
-        <p class="ed-label">本机</p>
-        <h3 class="ed-stat" style="font-size:28px;" id="shared-title">本地提醒</h3>
-        <p class="ed-body">妆造 / 到场提前；商务到期。macOS 本地通知，在「我的」可关。</p>
+  <!-- 5. Local facts — airy triple -->
+  <section class="orla-block" id="shared" aria-labelledby="shared-title">
+    <div class="orla-triple">
+      <article class="reveal">
+        <p class="orla-kicker">本机</p>
+        <h3 class="orla-h sm" id="shared-title">本地提醒</h3>
+        <p class="orla-body">妆造 / 到场提前；商务到期。macOS 本地通知，在「我的」可关。</p>
       </article>
-      <article class="ed-cell reveal">
-        <p class="ed-label">同一份数据</p>
-        <h3 class="ed-stat" style="font-size:28px;">data.json</h3>
-        <p class="ed-body">~/Library/Application Support/TonggaoBen/data.json — 双入口读写同一份。</p>
+      <article class="reveal">
+        <p class="orla-kicker">同一份数据</p>
+        <h3 class="orla-h sm">data.json</h3>
+        <p class="orla-body">~/Library/Application Support/TonggaoBen/data.json — 双入口读写同一份。</p>
       </article>
-      <article class="ed-cell reveal">
-        <p class="ed-label">双机</p>
-        <h3 class="ed-stat" style="font-size:28px;">文件交接</h3>
-        <p class="ed-body">导出完整备份或脱敏稿；导入前预览新增 / 覆盖条数。</p>
+      <article class="reveal">
+        <p class="orla-kicker">双机</p>
+        <h3 class="orla-h sm">文件交接</h3>
+        <p class="orla-body">导出完整备份或脱敏稿；导入前预览新增 / 覆盖条数。</p>
       </article>
     </div>
   </section>
 
   <!-- 6. Deliver -->
-  <section class="ed" id="deliver" aria-labelledby="deliver-title">
-    <div class="ed-row c2">
-      <article class="ed-cell reveal">
-        <p class="ed-label">交付</p>
-        <h2 class="ed-display" id="deliver-title">Mac App 1.4.1</h2>
-        <p class="ed-body">桌面 zip 解压后拖入「应用程序」。</p>
+  <section class="orla-block" id="deliver" aria-labelledby="deliver-title">
+    <div class="orla-dual">
+      <article class="reveal">
+        <p class="orla-kicker">交付</p>
+        <h2 class="orla-h" id="deliver-title">Mac App 1.4.1</h2>
+        <p class="orla-body">桌面 zip 解压后拖入「应用程序」。</p>
         <span class="path-box">~/Desktop/通告本-Mac-1.4.1.zip → /Applications/通告本.app</span>
       </article>
-      <article class="ed-cell reveal" style="justify-content:center;gap:16px;">
-        <a class="cta-pill" href="https://zup2885-cell.github.io/zupeng-personal-site/tonggaoben-manual/" target="_blank" rel="noopener">
-          打开产品说明书<span class="plus" aria-hidden="true">+</span>
+      <article class="reveal orla-deliver-cta">
+        <a class="cta-rect" href="https://zup2885-cell.github.io/zupeng-personal-site/tonggaoben-manual/" target="_blank" rel="noopener">
+          打开产品说明书
         </a>
-        <p class="ed-body" style="margin:0;">附录 · /tonggaoben-manual/</p>
+        <p class="orla-body slim">附录 · /tonggaoben-manual/</p>
       </article>
     </div>
   </section>
 
   <div class="foot">
-    <div class="ed-cell">通告本 · macOS 本地 App</div>
-    <div class="ed-cell">数据仅存本机 · 示例全虚构</div>
-    <div class="ed-cell" style="font-family:var(--mono);letter-spacing:0.1em;">VERSION 1.4.1</div>
+    <div>通告本 · macOS 本地 App</div>
+    <div>数据仅存本机 · 示例全虚构</div>
+    <div class="foot-ver">VERSION 1.4.1</div>
   </div>
 
   <aside class="disclaimer" role="note">
