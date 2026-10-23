@@ -12,13 +12,20 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <!-- hand-lettered marker fonts for the hero profile: Permanent Marker (Latin) + ZCOOL KuaiLe (Chinese), both open licence -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=ZCOOL+KuaiLe&display=swap">
-  <link rel="stylesheet" href="./style.css?v=20261023-gate-wordmark">
-  <script src="./app.js?v=20261023-gate-wordmark" type="module"></script>
+  <link rel="stylesheet" href="./style.css?v=20261023-americana">
+  <script src="./app.js?v=20261023-americana" type="module"></script>
   <script>if(!matchMedia("(prefers-reduced-motion: reduce)").matches){document.documentElement.classList.add("js-drop");if(!location.hash||location.hash==="#home")document.documentElement.classList.add("has-gate")}</script>
 </head>
 <body>
   <!-- Enter page: browsers only allow sound after a click, so this one click lets the headline drop play with sound -->
-  <div class="enter-gate" id="enter-gate" role="dialog" aria-label="进入阿祖的个人空间"><button class="gate-brand" id="gate-enter" type="button" aria-label="进入">AZU</button></div>
+  <div class="enter-gate" id="enter-gate" role="dialog" aria-label="进入阿祖的个人空间">
+    <div class="gate-lockup">
+      <p class="gate-kicker" aria-hidden="true"><i class="azu-star"></i><span>VARSITY</span><i class="azu-star"></i></p>
+      <button class="gate-brand" id="gate-enter" type="button" aria-label="进入" aria-describedby="gate-hint">AZU</button>
+      <span class="gate-stripe" aria-hidden="true"></span>
+      <p class="gate-hint" id="gate-hint"><span class="gate-chevron" aria-hidden="true"></span>点击 AZU 进入</p>
+    </div>
+  </div>
   <a class="skip" href="#main">跳到正文</a>
   <header class="header">
     <a class="brand" href="#home" aria-label="阿祖 AZU 首页">AZU</a>
@@ -26,6 +33,8 @@
   </header>
   <main id="main">
     <section class="hero" id="home" data-module="01" aria-labelledby="hero-title">
+      <div class="hero-piping" aria-hidden="true"></div>
+      <p class="hero-badge" aria-hidden="true"><i class="azu-star"></i><b>NO. 01</b><span>VARSITY</span></p>
       <h1 class="hero-headline" id="hero-title" aria-label="SOCIAL MEDIA"><svg viewBox="0 0 1400 285" role="img" aria-label="SOCIAL MEDIA"><text x="0" y="260" textLength="1400" lengthAdjust="spacingAndGlyphs">SOCIAL MEDIA</text></svg></h1>
       <p class="reference-marketing">MARKETING</p>
       <div class="hero-profile">

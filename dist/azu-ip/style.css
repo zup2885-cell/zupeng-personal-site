@@ -571,3 +571,46 @@
 .sound-unlock:hover{background:#363738}
 .sound-unlock:focus-visible{outline:2px solid #ed5845;outline-offset:4px}
 html[data-sound="waiting"] .sound-toggle{border-style:dashed}
+
+/* Light Americana: letterman piping, a varsity patch, and an on-page enter cue.
+   The AZU letters stay the only enter control — the line under them is a hint, not a button. */
+.azu-star{display:block;width:12px;height:12px;background:currentColor;flex:none;
+  clip-path:polygon(50% 0%,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%)}
+.brand::before{content:"";width:11px;height:11px;background:currentColor;flex:none;
+  clip-path:polygon(50% 0%,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%)}
+.gate-lockup{display:flex;flex-direction:column;align-items:center;max-width:92vw}
+.gate-kicker{display:flex;align-items:center;gap:14px;margin:0 0 18px;color:#f4efe4;
+  font-family:Anton,Impact,"Arial Narrow",sans-serif;font-size:clamp(14px,1.7vw,20px);letter-spacing:.46em;line-height:1}
+.gate-kicker span{padding-left:.46em}
+.gate-kicker .azu-star{width:13px;height:13px}
+.gate-stripe{display:block;width:72%;height:11px;margin-top:12px;
+  background:linear-gradient(#1c2a48 0 3px,#f4efe4 3px 8px,#1c2a48 8px 11px)}
+.gate-hint{margin:20px 0 0;padding:0 0 0 .18em;border:0;background:none;color:#fffaf4;text-align:center;pointer-events:none;
+  font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;font-size:clamp(15px,1.9vw,20px);font-weight:500;
+  letter-spacing:.18em;line-height:1.4;text-shadow:0 1px 0 #9a1e2480;animation:gate-hint 2.2s ease-in-out infinite}
+.gate-chevron{display:block;width:9px;height:9px;margin:0 auto 12px;border-top:2px solid #f4efe4;border-left:2px solid #f4efe4;
+  transform:rotate(45deg);animation:gate-chevron 1.5s ease-in-out infinite}
+@keyframes gate-hint{0%,100%{opacity:.78}50%{opacity:1}}
+@keyframes gate-chevron{0%,100%{translate:0 3px;opacity:.5}50%{translate:0 -3px;opacity:1}}
+.hero-piping{position:absolute;left:0;top:0;bottom:0;width:14px;z-index:4;pointer-events:none;
+  background:linear-gradient(90deg,#1c2a48 0 5px,#f4efe4 5px 9px,#1c2a48 9px 14px)}
+.hero-badge{position:absolute;right:5.3%;top:39%;z-index:4;display:flex;align-items:center;gap:10px;margin:0;
+  padding:8px 12px 7px;background:#f4efe4;color:#1c2a48;font-family:Anton,Impact,"Arial Narrow",sans-serif;
+  letter-spacing:.12em;line-height:1;box-shadow:3px 3px 0 #1c2a48}
+.hero-badge .azu-star{width:11px;height:11px}
+.hero-badge b{font-weight:400;font-size:18px}
+.hero-badge span{font-size:13px;padding-left:10px;border-left:2px solid #1c2a48}
+.js-drop body:not(.headline-done) .hero-badge{opacity:0;translate:0 16px;animation:profile-fallback 0s 7s forwards}
+.js-drop .hero-badge{transition:opacity .7s var(--ease),translate .7s var(--ease);transition-delay:.18s}
+.work-card-face::before{content:"";position:absolute;z-index:5;left:0;right:0;top:0;height:8px;pointer-events:none;
+  background:linear-gradient(#f4efe4 0 2px,#ed3d40 2px 5px,#1c2a48 5px 8px)}
+.sleeve-number{display:inline-flex;align-items:center;gap:.28em;padding:.1em .38em .06em;background:#f4efe4;color:#1c2a48;
+  box-shadow:2px 2px 0 #1c2a48}
+@media(max-width:1200px){.hero-badge{display:none}}
+@media(max-width:650px){
+  .gate-kicker{letter-spacing:.32em;margin-bottom:12px}.gate-kicker span{padding-left:.32em}
+  .gate-stripe{height:9px;margin-top:8px}.gate-hint{margin-top:16px;letter-spacing:.12em;padding-left:.12em}
+  .hero-piping{width:8px;background:linear-gradient(90deg,#1c2a48 0 3px,#f4efe4 3px 5px,#1c2a48 5px 8px)}
+  .brand::before{width:9px;height:9px}
+}
+@media(prefers-reduced-motion:reduce){.gate-hint,.gate-chevron{animation:none}.gate-hint{opacity:1}}
