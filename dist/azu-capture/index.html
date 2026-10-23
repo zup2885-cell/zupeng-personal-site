@@ -3,11 +3,11 @@
 <head>
   <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#f5f2eb">
-  <meta name="description" content="阿祖截图：在线截屏、裁剪和收集图片，批量打包带走。也可以下载阿祖的 Mac 截图收集盒。">
+  <meta name="description" content="阿祖截图：在线截屏、录屏、裁剪和收集图片。录完可以选定开始和结束，下载需要的那一段。也可以下载阿祖的 Mac 截图收集盒。">
   <title>阿祖截图 · 留住每一个好点子</title>
   <link rel="icon" href="./mark.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="./style.css?v=1">
-  <script type="module" src="./app.js?v=1"></script>
+  <link rel="stylesheet" href="./style.css?v=2">
+  <script type="module" src="./app.js?v=2"></script>
 </head>
 <body>
   <a class="skip" href="#collection">跳到收集盒</a>
@@ -20,9 +20,9 @@
       <div class="intro-copy">
         <p class="eyebrow"><span></span> A SMALL TOOL BY AZU</p>
         <h1>把一瞬间，<br>留在<span class="orange">手边。</span><svg viewBox="0 0 80 80" aria-hidden="true"><path d="M40 4v72M4 40h72M14 14l52 52M14 66l52-52"/></svg></h1>
-        <p class="lead">看到好点子，就收起来。<br>截图、裁剪、整理，再一起带走。</p>
-        <div class="intro-actions"><button class="button primary" id="start-capture"><span aria-hidden="true">⌗</span> 开始截屏</button><button class="button" id="import">＋ 导入图片</button></div>
-        <p class="hint" id="capture-hint">选择一个屏幕、窗口或标签页，再截取你想要的画面。</p>
+        <p class="lead">看到好点子，就收起来。<br>截一张，或录一段，再裁剪带走。</p>
+        <div class="intro-actions"><button class="button primary" id="start-capture"><span aria-hidden="true">⌗</span> 开始截屏</button><button class="button" id="start-record"><span class="rec-mark" aria-hidden="true"></span> 开始录屏</button><button class="button" id="import">＋ 导入图片</button></div>
+        <p class="hint" id="capture-hint">截图只留一张画面。录屏结束后，可以选定开始和结束，下载需要的那一段。</p>
       </div>
       <div class="preview-art" aria-hidden="true">
         <div class="art-label">GOOD IDEAS, SAFELY KEPT.</div>
@@ -46,6 +46,8 @@
   <footer><span><b>AZU.</b> 小工具，大好奇。</span><a href="https://github.com/zup2885-cell/zupeng-personal-site/tree/main/public/azu-capture" target="_blank" rel="noopener noreferrer">查看 GitHub 源码 ↗</a><span>© 2026 阿祖</span></footer>
   <input type="file" id="files" accept="image/png,image/jpeg,image/webp,image/gif,image/avif,image/bmp" multiple hidden>
   <dialog id="capture-dialog" aria-labelledby="capture-title"><div class="dialog-head"><div><p class="eyebrow">LIVE PREVIEW</p><h2 id="capture-title">选好画面，再按快门。</h2></div><button class="close-button" id="cancel-capture" aria-label="关闭截屏">×</button></div><video id="screen-preview" autoplay muted playsinline></video><div class="dialog-foot"><p>只截取一张图片，不录制声音或视频。</p><button class="button primary" id="take-shot" disabled>截取这一帧</button></div></dialog>
+  <dialog id="record-dialog" aria-labelledby="record-title"><div class="dialog-head"><div><p class="eyebrow">SCREEN RECORDING</p><h2 id="record-title">正在录画面。</h2></div><button class="close-button" id="cancel-record" type="button" aria-label="放弃录屏">×</button></div><video id="record-preview" autoplay muted playsinline></video><div class="record-status"><i class="record-dot live" aria-hidden="true"></i><span id="record-time">00:00</span><span>只录画面，不录音。停下来再选一段。</span></div><div class="dialog-foot"><button class="button primary" id="record-stop" type="button">停止并剪辑</button></div></dialog>
+  <dialog id="trim-dialog" aria-labelledby="trim-title"><div class="dialog-head"><div><p class="eyebrow">TRIM THE CLIP</p><h2 id="trim-title">留下需要的那一段。</h2></div><button class="close-button" id="close-trim" type="button" aria-label="关闭剪辑">×</button></div><video id="trim-video" playsinline controls></video><label class="trim-field">开始<input id="trim-start" type="range" min="0" max="1000" value="0" aria-label="片段开始"></label><label class="trim-field">结束<input id="trim-end" type="range" min="0" max="1000" value="1000" aria-label="片段结束"></label><p id="trim-info">拖动开始和结束，留下你需要的长度。</p><p id="trim-progress" class="trim-progress" hidden></p><div class="dialog-foot"><button class="button primary" id="download-trim" type="button">下载这一段</button></div></dialog>
   <dialog id="editor" aria-labelledby="editor-title"><div class="dialog-head"><div><p class="eyebrow" id="editor-eyebrow">CAPTURE & KEEP</p><h2 id="editor-title">留住你想要的部分。</h2></div><button class="close-button" id="close-editor" aria-label="关闭图片编辑">×</button></div><label class="name-field">图片名称<input id="image-name" maxlength="100" autocomplete="off"></label><div class="editor-stage"><canvas id="crop-canvas" aria-label="图片预览，拖动可以选择裁剪范围"></canvas><div id="crop-box" hidden></div></div><div class="crop-options"><p id="crop-info">拖动框选裁剪范围，也可以保留整张。</p><button class="text-button" id="reset-crop">重置选区</button></div><div class="dialog-foot"><button class="button" id="copy">复制图片</button><button class="button" id="download-one">下载 PNG ↓</button><button class="button primary" id="save">保存到收集盒</button></div></dialog>
   <div class="toast" id="toast" role="status" aria-live="polite" hidden><span></span><button id="undo" hidden>撤销</button></div>
   <noscript><p class="noscript">请开启 JavaScript 使用在线收集盒。Mac 下载链接无需 JavaScript。</p></noscript>
