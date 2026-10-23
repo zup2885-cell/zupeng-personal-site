@@ -8,13 +8,20 @@
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23e9662c'/%3E%3Ctext x='32' y='46' text-anchor='middle' font-size='42' font-family='Arial' font-weight='900' fill='%23f3f0e9'%3EA%3C/text%3E%3C/svg%3E">
   <link rel="preload" as="font" href="./assets/anton.ttf" type="font/ttf" crossorigin>
   <link rel="preload" as="image" href="./assets/azu-poster-800cfc457216.png">
-  <link rel="stylesheet" href="./style.css?v=20261023-type">
-  <script src="./app.js?v=20261023-gate-wordmark" type="module"></script>
+  <link rel="stylesheet" href="./style.css?v=20261023-americana">
+  <script src="./app.js?v=20261023-americana" type="module"></script>
   <script>if(!matchMedia("(prefers-reduced-motion: reduce)").matches){document.documentElement.classList.add("js-drop");if(!location.hash||location.hash==="#home")document.documentElement.classList.add("has-gate")}</script>
 </head>
 <body>
   <!-- Enter page: browsers only allow sound after a click, so this one click lets the headline drop play with sound -->
-  <div class="enter-gate" id="enter-gate" role="dialog" aria-label="进入阿祖的个人空间"><button class="gate-brand" id="gate-enter" type="button" aria-label="进入">AZU</button></div>
+  <div class="enter-gate" id="enter-gate" role="dialog" aria-label="进入阿祖的个人空间">
+    <div class="gate-lockup">
+      <p class="gate-kicker" aria-hidden="true"><i class="azu-star"></i><span>VARSITY</span><i class="azu-star"></i></p>
+      <button class="gate-brand" id="gate-enter" type="button" aria-label="进入" aria-describedby="gate-hint">AZU</button>
+      <span class="gate-stripe" aria-hidden="true"></span>
+      <p class="gate-hint" id="gate-hint"><span class="gate-chevron" aria-hidden="true"></span>点击 AZU 进入</p>
+    </div>
+  </div>
   <a class="skip" href="#main">跳到正文</a>
   <header class="header">
     <a class="brand" href="#home" aria-label="阿祖 AZU 首页">AZU</a>
@@ -22,6 +29,8 @@
   </header>
   <main id="main">
     <section class="hero" id="home" data-module="01" aria-labelledby="hero-title">
+      <div class="hero-piping" aria-hidden="true"></div>
+      <p class="hero-badge" aria-hidden="true"><i class="azu-star"></i><b>NO. 01</b><span>VARSITY</span></p>
       <h1 class="hero-headline" id="hero-title" aria-label="SOCIAL MEDIA"><svg viewBox="0 0 1400 285" role="img" aria-label="SOCIAL MEDIA"><text x="0" y="260" textLength="1400" lengthAdjust="spacingAndGlyphs">SOCIAL MEDIA</text></svg></h1>
       <p class="reference-marketing">MARKETING</p>
       <div class="hero-profile">
