@@ -4,17 +4,23 @@ const $ = (s) => document.querySelector(s);
 // Resolves when the visitor clicks into the site (enter page), or straight away when there is none.
 const entered = new Promise(resolve => {
   const root = document.documentElement, gate = document.getElementById('enter-gate');
-  if (!root.classList.contains('has-gate') || !gate) { resolve(false); return; }
+  const wordmark = document.getElementById('gate-enter');
+  if (!root.classList.contains('has-gate') || !gate || !wordmark) { resolve(false); return; }
   let entering = false;
   const go = async () => {
     if(entering) return;
     entering = true;
     await siteSound.unlock();
-    root.classList.add('entered'); gate.setAttribute('aria-hidden', 'true'); resolve(true);
+    root.classList.add('entered'); gate.setAttribute('aria-hidden', 'true');
+    wordmark.disabled = true; resolve(true);
   };
-  document.getElementById('gate-button').addEventListener('click', go, { once: true });
-  addEventListener('keydown', e => { if (!root.classList.contains('entered') && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); go(); } });
-  document.getElementById('gate-button').focus({ preventScroll: true });
+  wordmark.addEventListener('click', go);
+  wordmark.addEventListener('keydown', e => {
+    if (root.classList.contains('entered') || (e.key !== 'Enter' && e.key !== ' ')) return;
+    e.preventDefault(); go();
+  });
+  try { wordmark.focus({ preventScroll: true, focusVisible: false }); }
+  catch { wordmark.focus({ preventScroll: true }); }
 });
 const content = await fetch('./content.json?v=20261019-memo-card').then(r => {if(!r.ok) throw Error('Content unavailable');return r.json();});
 import { setupWorld } from './world.js?v=20261018-move';
