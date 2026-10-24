@@ -1,16 +1,18 @@
 'use strict';
 
-// 2022 fan milestones as a road trip: a Tank 500 drives past four road signs, each lighting up
-// as it passes, while an odometer counts fans from 0 to 1,000,000. Click the road to replay.
+// A road trip through dated Douyin observations, including decreases.
+// Travel and odometer interpolation are decorative, not a historical daily series.
 (() => {
   const source = document.querySelector('#history .milestones');
   if (!source) return;
   const items = [...source.children].map(item => ({
     label: item.querySelector('strong')?.textContent.trim() || '',
+    fans: Number(item.dataset.fans),
+    approximate: item.dataset.approx === 'true',
     date: item.querySelector('p')?.textContent.trim() || '',
     day: item.querySelector('small')?.textContent.trim() || ''
   }));
-  const toFans = label => parseFloat(label) * (label.includes('万') ? 10000 : 1);
+  if (!items.length || items.some(item => !Number.isFinite(item.fans) || item.fans < 0)) return;
   const el = (tag, className, text) => {
     const node = document.createElement(tag);
     if (className) node.className = className;
@@ -18,12 +20,19 @@
     return node;
   };
   const trip = el('div', 'ms-trip');
-  trip.setAttribute('role', 'img');
+  trip.setAttribute('role', 'group');
   trip.setAttribute('aria-label', items.map(i => `${i.label}粉丝 ${i.date}`).join('，'));
   const odo = el('div', 'ms-odo');
-  odo.append(el('span', 'ms-odo-label', '粉丝里程'));
+  odo.append(el('span', 'ms-odo-label', '抖音粉丝'));
+  const approx = el('span', 'ms-approx', '约');
+  approx.hidden = true;
+  odo.append(approx);
   const reading = el('b', 'ms-odo-value', '0000000');
   odo.append(reading);
+  const viewport = el('div', 'ms-viewport');
+  viewport.tabIndex = 0;
+  viewport.setAttribute('role', 'region');
+  viewport.setAttribute('aria-label', '粉丝足迹路牌，窄屏可左右滚动');
   const scene = el('div', 'ms-scene');
   const road = el('div', 'ms-road');
   const lit = el('span', 'ms-lit');
@@ -38,7 +47,7 @@
     const sign = el('div', 'ms-sign');
     sign.style.left = `${positions[i]}%`;
     const board = el('div', 'ms-board');
-    board.append(el('strong', '', item.label), el('span', '', '粉丝'));
+    board.append(el('strong', '', item.label), el('span', '', '抖音粉丝'));
     const post = el('i', 'ms-post');
     const meta = el('div', 'ms-meta');
     meta.append(el('b', '', item.date), el('small', '', item.day));
@@ -47,16 +56,20 @@
     return sign;
   });
   scene.append(road);
-  trip.append(odo, scene, el('span', 'ms-hint', '点击重播'));
+  viewport.append(scene);
+  const replay = el('button', 'ms-hint', '点击重播 ↻');
+  replay.type = 'button';
+  replay.setAttribute('aria-label', '重播汽车经过粉丝路牌的动画');
+  trip.append(odo, replay, viewport, el('span', 'ms-swipe', '左右滑动查看各站')); 
   source.replaceWith(trip);
 
   const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const DURATION = 3600;
-  const fans = items.map(i => toFans(i.label));
+  const fans = items.map(i => i.fans);
   let frame = 0;
   const fansAt = x => {
-    // Fans grow between signs; before the first sign they climb from 0.
-    if (x <= positions[0]) return fans[0] * (x - 4) / (positions[0] - 4);
+    // Hold the first observation, then interpolate up OR down between records.
+    if (x <= positions[0]) return fans[0];
     for (let i = 1; i < positions.length; i++) {
       if (x <= positions[i]) return fans[i - 1] + (fans[i] - fans[i - 1]) * (x - positions[i - 1]) / (positions[i] - positions[i - 1]);
     }
@@ -65,6 +78,7 @@
   const show = x => {
     car.style.left = `${x}%`;
     lit.style.width = `${x}%`;
+    approx.hidden = !(x >= positions[positions.length - 1] && items[items.length - 1].approximate);
     reading.textContent = String(Math.max(0, Math.round(fansAt(x)))).padStart(7, '0');
     signs.forEach((sign, i) => sign.classList.toggle('ms-on', x >= positions[i] - .5));
   };

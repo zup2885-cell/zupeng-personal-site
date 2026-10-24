@@ -1,0 +1,16 @@
+/* User-provided Feishu documents, one entry under each car card. */
+#works .work-feishu-link{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  width:100%;min-height:44px;margin-top:12px;padding:11px 15px;
+  border:1px solid #c65a3580;border-radius:12px;
+  background:#f6eee4;color:#873b21;
+  font:600 13px/1.5 var(--sans);text-decoration:none;
+  transition:background .18s,border-color .18s;
+}
+#works .work-feishu-link:hover{background:#edddcb;border-color:#a24a29}
+#works .work-feishu-link>span:last-child{font-size:19px;line-height:1}
+#works .work-feishu-link:focus-visible{outline:3px solid var(--orange);outline-offset:3px}
+@media(max-width:1100px){html.scene-ready #main>#works.scene-card{width:calc(100% - 64px)}}
+@media(max-width:760px){html.scene-ready #main>#works.scene-card{width:calc(100% - 28px)}}
+@media(max-width:480px){html.scene-ready #main>#works.scene-card{width:calc(100% - 22px)}}
+@media(prefers-reduced-motion:reduce){#works .work-feishu-link{transition:none}}

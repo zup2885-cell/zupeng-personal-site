@@ -1,0 +1,47 @@
+/* Borrow only Xiaoteng's portrait grains and split-letter entrance.
+   The original cover artwork, typography, positions and final photo stay intact. */
+#top.hero .hero-photo img,
+#top.hero .hero-title-block,
+#top.hero h1,
+#top.hero .hero-role{animation:none}
+#top.hero .hero-photo img{transform:none}
+.hero-portrait-grains{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:0;contain:strict;mask-image:linear-gradient(90deg,transparent 0%,#000 14%,#000 86%,transparent 100%)}
+#top.hero .hero-photo img{transition:opacity .52s ease}
+html.hero-entrance-pending #top .hero-photo img,
+#top.hero.hero-entrance-playing:not(.hero-portrait-resolved) .hero-photo img{opacity:0}
+#top.hero.hero-portrait-resolved .hero-photo img{opacity:1}
+#top.hero.hero-entrance-playing .hero-portrait-grains{opacity:1}
+#top.hero.hero-entrance-finished .hero-portrait-grains{display:none}
+html.hero-entrance-pending #top .hero-role{opacity:0}
+#top.hero.hero-entrance-playing .hero-role{animation:hero-role-assemble 1.3s .25s cubic-bezier(.4,0,.2,1) both}
+#hero-title>span[data-glyph]{position:relative}
+#hero-title>span[data-glyph]::before,
+#hero-title>span[data-glyph]::after{content:attr(data-glyph);position:absolute;inset:0;pointer-events:none;opacity:0;color:#fff8f1;-webkit-text-stroke:.026em currentColor}
+#hero-title>span[data-glyph]::before{clip-path:polygon(-8% -8%,108% -8%,108% 48%,-8% 48%)}
+#hero-title>span[data-glyph]::after{clip-path:polygon(-8% 48%,108% 48%,108% 108%,-8% 108%)}
+html.hero-entrance-pending #hero-title>span,
+#top.hero.hero-entrance-playing #hero-title>span{color:transparent;-webkit-text-stroke-color:transparent}
+#top.hero.hero-entrance-playing #hero-title>span::before{animation:hero-letter-top .82s cubic-bezier(.16,.8,.22,1) both;animation-delay:calc(var(--glyph-index)*210ms)}
+#top.hero.hero-entrance-playing #hero-title>span::after{animation:hero-letter-bottom .82s cubic-bezier(.16,.8,.22,1) both;animation-delay:calc(var(--glyph-index)*210ms + 140ms)}
+@keyframes hero-letter-top{
+  0%{opacity:0;transform:translate3d(-54px,20px,0) skewX(-8deg)}
+  24%{opacity:.4}
+  68%{opacity:1;transform:translate3d(1.9px,-.7px,0) skewX(0)}
+  100%{opacity:1;transform:none}
+}
+@keyframes hero-letter-bottom{
+  0%{opacity:0;transform:translate3d(48px,-18px,0) skewX(-8deg)}
+  24%{opacity:.4}
+  68%{opacity:1;transform:translate3d(-1.7px,.6px,0) skewX(0)}
+  100%{opacity:1;transform:none}
+}
+@keyframes hero-role-assemble{from{opacity:0;transform:translate3d(0,12px,0)}to{opacity:1;transform:none}}
+html.page-editing #top .hero-photo img,
+html.page-editing #top .hero-role{opacity:1!important;animation:none!important}
+html.page-editing #top #hero-title>span{color:inherit!important;-webkit-text-stroke-color:currentColor!important}
+html.page-editing #hero-title>span::before,html.page-editing #hero-title>span::after{display:none}
+@media(prefers-reduced-motion:reduce){
+  #top.hero .hero-photo img,#top.hero .hero-role{opacity:1!important;animation:none!important;transition:none!important;transform:none!important}
+  #top.hero #hero-title>span{color:inherit!important;-webkit-text-stroke-color:currentColor!important}
+  #hero-title>span::before,#hero-title>span::after,.hero-portrait-grains{display:none!important;animation:none!important}
+}

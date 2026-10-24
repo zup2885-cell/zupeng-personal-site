@@ -1,0 +1,25 @@
+/* Restore the original orange site; carry its warm palette into the car opening. */
+.sky-intro{background:#fff1e5}
+.car-intro-room{background:radial-gradient(ellipse at 50% 83%,#fffcf7 0%,#fff2e6 47%,#f5e2d1 100%)}
+.car-intro-room::before{opacity:.3}
+.car-intro-brand,.car-intro-note{color:var(--ink)}
+.car-intro-copy{color:#c65027}
+.car-intro-eyebrow,.car-intro-copy .car-intro-tagline,.car-intro-note span,.car-intro-actions .car-interaction-hint{color:#6f5849}
+.car-hover-target:focus-visible{outline-color:#bd4a23}
+
+/* The moving driver's handle is the entry: no floating navigation button. */
+.car-rig{z-index:16;pointer-events:none}
+.car-front-door{z-index:8}
+.car-intro .car-intro-actions{bottom:7%;min-height:20px;gap:0}
+.car-door-entry{position:absolute;left:42%;top:45%;z-index:25;display:block;width:52px;height:44px;padding:0;border:0;border-radius:50%;background:transparent;pointer-events:auto;cursor:pointer;transform:translate(-50%,-50%) rotateY(calc(var(--front) * 62deg)) translateZ(60px);color:#69331e}
+.car-door-entry[hidden]{display:none}
+.car-door-entry::before{content:'';position:absolute;left:50%;top:50%;width:24px;height:24px;margin:-12px;border:1.5px solid #fff0cf;border-radius:50%;box-shadow:0 0 12px #fff0cfcc,0 0 0 6px #ffcf6c33;animation:door-handle-glow 2s ease-in-out infinite;pointer-events:none}
+.car-door-entry::after{content:'';position:absolute;left:50%;top:50%;width:5px;height:5px;margin:-2.5px;background:#fff6dd;border-radius:50%;box-shadow:0 0 6px #ffcf6c;pointer-events:none}
+.car-door-entry:focus-visible{outline:2px solid #fff6dd;outline-offset:4px}
+.car-door-label{position:absolute;bottom:calc(100% + 4px);left:50%;transform:translate(-50%,4px);opacity:0;white-space:nowrap;padding:8px 12px;border:1px solid #eac3a5;border-radius:999px;background:#fff7ecf5;box-shadow:0 4px 18px #69331e1a;font:500 13px/1.4 var(--sans);pointer-events:none;transition:opacity .18s,transform .18s}
+.car-door-entry:hover .car-door-label,.car-door-entry:focus-visible .car-door-label{opacity:1;transform:translate(-50%,0)}
+html[data-intro-state="exiting"] .car-door-entry::before,html[data-intro-state="exiting"] .car-door-entry::after{display:none}
+html[data-intro-state="exiting"] .car-intro .car-door-entry .car-door-label{opacity:0}
+.car-trunk-cavity{opacity:clamp(0,calc(var(--trunk) * 4),1)}
+@keyframes door-handle-glow{0%,100%{box-shadow:0 0 12px #fff0cfcc,0 0 0 4px #ffcf6c40}50%{box-shadow:0 0 18px #fff0cf,0 0 0 11px #ffcf6c00}}
+@media(prefers-reduced-motion:reduce){.car-door-entry::before{animation:none}}

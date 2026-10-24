@@ -1,0 +1,31 @@
+/* Home heading hierarchy: clean Chinese sans, shared with the site UI. */
+#top.hero .hero-title-block{gap:22px}
+#top.hero #hero-title{
+  font-family:var(--sans);
+  font-size:clamp(76px,7.8vw,138px);
+  font-weight:700;
+  line-height:1.12;
+  letter-spacing:0;
+  gap:.04em;
+  -webkit-text-stroke-width:0;
+}
+#top.hero #hero-title>span{transform:none}
+#top.hero #hero-title>span::before,
+#top.hero #hero-title>span::after{-webkit-text-stroke-width:0}
+#top.hero .hero-role{
+  font-family:var(--sans);
+  font-size:clamp(20px,1.65vw,28px);
+  font-weight:400;
+  line-height:1.5;
+  letter-spacing:.14em;
+  -webkit-text-stroke-width:0;
+}
+@media(max-width:1050px){
+  #top.hero #hero-title{font-size:clamp(58px,8.5vw,88px)}
+  #top.hero .hero-role{font-size:clamp(18px,2.15vw,22px)}
+}
+@media(max-width:760px){
+  #top.hero .hero-title-block{gap:16px}
+  #top.hero #hero-title{font-size:clamp(48px,16vw,96px)}
+  #top.hero .hero-role{font-size:clamp(17px,4.8vw,24px);letter-spacing:.1em}
+}

@@ -1,14 +1,63 @@
-/* Sky opening: shares the cover-arrive rules in ticket-intro.css. */
-.sky-intro{display:none;position:fixed;inset:0;z-index:150;overflow:hidden;background:#120f0a;transition:opacity .36s cubic-bezier(.4,0,.2,1)}
+/* A light studio, burgundy typography and an independently moving vintage car. */
+.sky-intro{display:none;position:fixed;inset:0;z-index:150;overflow:hidden;background:#e9ecf0;isolation:isolate}
 html.ticket-intro-ready .sky-intro{display:block}
-.sky-intro canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
-.sky-intro.cutting{background:transparent}
-.sky-intro[data-phase="splitting"]{pointer-events:none}
 .sky-intro[aria-hidden="true"]{display:none}
-.sky-intro .intro-skip{position:absolute;top:24px;right:28px;z-index:5;background:#f8f3e9e6;color:#251711;border:1px solid #25171133;padding:7px 12px;font:600 12px/1.4 var(--sans);cursor:pointer}
-.sky-intro.cutting .intro-skip{opacity:0;pointer-events:none;transition:opacity .15s}
-.sky-intro[data-phase="waiting"]{cursor:pointer}
-.sky-intro[data-phase="waiting"]::after{content:"轻触任意处 · 进入";position:absolute;left:50%;bottom:9vh;z-index:4;transform:translateX(-50%);padding:11px 22px;border:1px solid #ffffff55;border-radius:999px;background:#0d1a26aa;color:#fff;font:500 14px/1.4 var(--sans);letter-spacing:.14em;white-space:nowrap;backdrop-filter:blur(6px);animation:skyPrompt 1.6s ease-in-out infinite;pointer-events:none}
-@keyframes skyPrompt{0%,100%{opacity:.62;transform:translate(-50%,0)}50%{opacity:1;transform:translate(-50%,-4px)}}
-@media(max-width:760px){.sky-intro .intro-skip{top:18px;right:18px}}
-@media(prefers-reduced-motion:reduce){html.ticket-intro-ready .sky-intro{display:none}}
+.car-intro-room{position:absolute;inset:0;z-index:-1;background:radial-gradient(ellipse at 50% 83%,#fff 0%,#edf0f3 47%,#e3e7ec 100%)}
+.car-intro-room::before{content:"";position:absolute;left:18%;right:18%;top:-4%;height:21%;background:linear-gradient(158deg,transparent 49.6%,#7a858f2b 49.9% 50.2%,transparent 50.5%),linear-gradient(22deg,transparent 49.6%,#7a858f29 49.9% 50.2%,transparent 50.5%);opacity:.45}
+.car-intro-brand{position:absolute;top:28px;left:38px;font:600 19px/1.4 var(--sans);letter-spacing:.04em;color:#262d33}
+.car-intro .intro-skip{position:absolute;top:25px;right:32px;z-index:5;border:1px solid #222b3033;border-radius:999px;background:#fff9;color:#253039;padding:9px 15px;font:500 12px/1.3 var(--sans);cursor:pointer}
+.car-intro .intro-skip:focus-visible{outline:3px solid #a1284b;outline-offset:4px}
+.car-intro-copy{position:absolute;z-index:2;top:17%;left:8%;right:8%;text-align:center;color:#a42c50}
+.car-intro-eyebrow{font:500 12px/1.5 var(--sans);letter-spacing:.24em;color:#48525a;margin:0 0 15px}
+.car-intro-copy h2{font-family:var(--serif);font-size:clamp(70px,8.8vw,152px);font-weight:600;letter-spacing:.02em;line-height:1.16;margin:0}
+.car-intro-copy .car-intro-tagline{font:400 clamp(16px,1.45vw,23px)/1.7 var(--sans);letter-spacing:.12em;color:#3d464e;margin-top:22px}
+.car-intro-stage{position:absolute;left:50%;bottom:7%;width:min(76vw,1250px);margin-left:max(-38vw,-625px);transform-origin:50% 85%;will-change:transform;opacity:0}
+.car-intro-stage img{display:block;width:100%;height:auto;max-width:none;user-select:none;-webkit-user-drag:none}
+.car-intro-note{position:absolute;top:65%;display:grid;gap:8px;text-align:center;color:#263039}
+.car-intro-note-left{left:4%}.car-intro-note-right{right:4%}
+.car-intro-note strong{font:500 clamp(18px,1.7vw,28px)/1.4 var(--serif)}
+.car-intro-note span{font:400 11px/1.6 var(--sans);color:#59646d;letter-spacing:.03em}
+@media(max-width:1050px){.car-intro-note{top:auto;bottom:4%}.car-intro-note-left{left:8%}.car-intro-note-right{right:8%}.car-intro-stage{width:90vw;margin-left:-45vw;bottom:13%}.car-intro-copy{top:20%}}
+@media(max-width:600px){.car-intro-brand{top:23px;left:22px;font-size:15px}.car-intro .intro-skip{top:18px;right:18px}.car-intro-copy{top:25%;left:4%;right:4%}.car-intro-copy h2{font-size:clamp(48px,14vw,78px)}.car-intro-eyebrow{font-size:10px;letter-spacing:.16em;margin-bottom:15px}.car-intro-copy .car-intro-tagline{font-size:14px;letter-spacing:.05em;margin-top:17px}.car-intro-stage{left:0;width:100%;margin-left:0;bottom:24%}.car-intro-note{bottom:12%;gap:5px}.car-intro-note-left{left:9%}.car-intro-note-right{right:9%}.car-intro-note strong{font-size:18px}.car-intro-note span{font-size:10px}.car-intro-room::before{left:5%;right:5%;height:17%}}
+@media(max-height:580px) and (min-width:601px){.car-intro-copy{top:14%}.car-intro-copy h2{font-size:64px}.car-intro-eyebrow{margin-bottom:5px}.car-intro-copy .car-intro-tagline{margin-top:8px;font-size:14px}.car-intro-stage{width:64vw;margin-left:-32vw;bottom:3%}.car-intro-note{top:72%;bottom:auto}}
+@media(prefers-reduced-motion:reduce){html.ticket-intro-ready .sky-intro{display:none}.car-intro-stage{will-change:auto}}
+
+/* The hover target stays fixed; only photo pieces and flowers move. */
+.car-rig-masks{position:absolute;pointer-events:none}
+.car-rig{position:relative;width:100%;aspect-ratio:3/1;perspective:1400px;perspective-origin:45% 50%;--front:0;--rear:0;--trunk:0;--flowers:0}
+.car-intro-stage .car-rig img{position:absolute;display:block;inset:0;width:100%;height:100%;max-width:none;object-fit:fill;pointer-events:none}
+.car-rig-base{z-index:2;clip-path:url(#sedan-body-mask)}
+.car-cabin{position:absolute;inset:0;z-index:1;clip-path:url(#sedan-cabin-mask)}
+.car-cabin svg{display:block;width:100%;height:100%}
+.car-trunk-cavity{position:absolute;inset:0;z-index:1;clip-path:url(#sedan-trunk-mask);background:linear-gradient(12deg,#332226,#101113 66%)}
+.car-part{position:absolute;inset:0;pointer-events:none;transform-style:preserve-3d;backface-visibility:hidden}
+.car-front-door{z-index:6;transform-origin:24% 43%;transform:rotateY(calc(var(--front) * -62deg))}
+.car-front-door img{clip-path:url(#sedan-front-mask)}
+.car-rear-door{z-index:7;transform-origin:46% 45%;transform:rotateY(calc(var(--rear) * -58deg))}
+.car-rear-door img{clip-path:url(#sedan-rear-mask)}
+.car-trunk-lid{z-index:5;transform-origin:71.3% 39.3%;transform:rotate(calc(var(--trunk) * -24deg))}
+.car-trunk-lid img{clip-path:url(#sedan-trunk-mask)}
+.car-blooms{position:absolute;inset:0;pointer-events:none;z-index:4}
+.car-intro-stage .car-rig .car-bloom{inset:auto;height:auto;transform-origin:50% 100%;opacity:clamp(0,calc(var(--bloom,0) * 3),1);transform:translate(-50%,0) rotate(calc(var(--turn,0deg) * var(--bloom,0))) scale(var(--bloom,0));filter:drop-shadow(0 3px 3px #0003)}
+.car-intro-stage .car-rig .bloom-seat-a{width:20%;left:51%;bottom:20%;--turn:-12deg}
+.car-intro-stage .car-rig .bloom-seat-b{width:16%;left:54%;bottom:22%;--turn:14deg}
+.car-intro-stage .car-rig .bloom-trunk-a{width:16%;left:80%;bottom:48%;--turn:-18deg}
+.car-intro-stage .car-rig .bloom-trunk-b{width:15%;left:86%;bottom:45%;--turn:8deg}
+.car-intro-stage .car-rig .bloom-trunk-c{width:13%;left:91%;bottom:43%;--turn:26deg}
+.car-hover-target{position:absolute;inset:0;z-index:15;width:100%;height:100%;padding:0;border:0;background:transparent;border-radius:20px;cursor:pointer}
+.car-hover-target:focus-visible{outline:2px dashed #a42c50;outline-offset:12px}
+.car-interaction-hint{position:absolute;bottom:2.7%;left:20%;right:20%;text-align:center;color:#525e67;font:400 12px/1.6 var(--sans);letter-spacing:.06em}
+@media(max-width:1050px){.car-interaction-hint{bottom:9%}}
+@media(max-width:600px){.car-interaction-hint{bottom:5%;left:8%;right:8%}}
+
+.car-intro-stage .car-rig .car-cabin-photo{left:-26.95%;top:-120%;width:153.9%;height:234.78%;max-width:none;object-fit:fill}
+
+/* The invitation belongs below the car and unlocks after the full bloom. */
+.car-intro-stage{bottom:18%}
+.car-intro-actions{position:absolute;z-index:20;left:20%;right:20%;bottom:3.5%;display:flex;flex-direction:column;align-items:center;gap:16px;min-height:96px}
+.car-intro-actions .car-interaction-hint{position:static;margin:0;min-height:20px;color:#48545e;font-size:13px;letter-spacing:.025em}
+.car-intro .intro-skip{position:static;display:inline-flex;align-items:center;justify-content:center;gap:42px;min-width:206px;min-height:54px;padding:13px 24px;border:1px solid #a42c50;border-radius:999px;background:#a42c50;color:#fff;font:500 16px/1.4 var(--sans);box-shadow:0 7px 22px #76213b24;transition:background .2s,box-shadow .2s}
+.car-intro .intro-skip[hidden]{display:none}
+.car-intro .intro-skip:hover{background:#82213f;box-shadow:0 10px 26px #76213b35}
+.car-intro .intro-skip span{font-size:22px;line-height:1}
+@media(max-height:850px) and (min-width:1051px){.car-intro-copy{top:12%}.car-intro-copy h2{font-size:clamp(70px,8vw,112px)}.car-intro-copy .car-intro-tagline{font-size:17px;margin-top:12px}.car-intro-eyebrow{margin-bottom:10px}.car-intro-stage{bottom:19%}.car-intro-actions{bottom:3%;gap:12px;min-height:90px}}

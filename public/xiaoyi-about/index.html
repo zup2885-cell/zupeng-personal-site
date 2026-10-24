@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#e13e17">
   <meta name="description" content="我是小怡，一名汽车内容创作者。这里记录我的用车经历、作品、账号数据与品牌内容。">
-  <title>小怡说车 · 关于我</title>
+  <title>小怡说车</title>
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="preload" href="assets/fonts/xiaoyi-paper-chinese.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="style.css?v=layout-refined-3">
@@ -18,16 +18,19 @@
   <link rel="stylesheet" href="assets/ticket-intro.css?v=tissue-2">
   <script>if ((!location.hash || location.hash === '#top') && !matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('ticket-intro-ready');</script>
   <script src="assets/chart-sound.js?v=no-scroll-1" defer></script>
-  <link rel="stylesheet" href="assets/sky-intro.css?v=2">
+  <link rel="preload" href="assets/intro-orange-sedan.png" as="image">
+  <link rel="stylesheet" href="assets/sky-intro.css?v=door-entry-20261025">
   <link rel="stylesheet" href="assets/create-section.css?v=1">
   <link rel="stylesheet" href="assets/cover-ring.css?v=2">
   <link rel="stylesheet" href="assets/text-lite.css?v=6">
   <link rel="stylesheet" href="assets/practice-panel.css?v=2">
-  <link rel="stylesheet" href="assets/milestone-road.css?v=2">
+  <link rel="stylesheet" href="assets/milestone-road.css?v=20261024">
   <link rel="stylesheet" href="assets/brand-viz.css?v=4">
   <link rel="stylesheet" href="assets/side-print.css?v=4">
   <link rel="stylesheet" href="assets/rail-drive.css?v=8">
-  <script src="assets/sky-intro.js?v=6" defer></script>
+  <link rel="stylesheet" href="assets/hero-entrance.css?v=sky-particles-1">
+  <script>if (!matchMedia('(prefers-reduced-motion: reduce)').matches) { document.documentElement.classList.add('hero-entrance-pending'); setTimeout(() => document.documentElement.classList.remove('hero-entrance-pending'), 8000); }</script>
+  <script src="assets/sky-intro.js?v=door-entry-20261025" defer></script>
   <script src="assets/peak-chart.js?v=water-rise-5" defer></script>
   <script src="assets/audience-chart.js?v=audible-6" defer></script>
   <script src="app.js?v=layout-refined-3" defer></script>
@@ -38,18 +41,48 @@
   <script src="assets/brand-viz.js?v=4" defer></script>
   <script src="assets/side-print.js?v=2" defer></script>
   <script src="assets/rail-drive.js?v=7" defer></script>
-  <script src="assets/milestone-road.js?v=2" defer></script>
+  <script src="assets/milestone-road.js?v=20261024" defer></script>
+  <script src="assets/hero-entrance.js?v=sky-particles-1" defer></script>
+  <link rel="stylesheet" href="assets/hero-type.css?v=20261024">
+  <link rel="stylesheet" href="assets/work-doc-links.css?v=20261024">
+  <link rel="stylesheet" href="assets/orange-theme.css?v=door-entry-20261025">
 </head>
 <body>
-  <div class="sky-intro" id="sky-intro" role="dialog" aria-modal="true" aria-label="天空开场" tabindex="-1">
-    <button class="intro-skip" type="button">跳过 ↗</button>
-    <canvas aria-hidden="true"></canvas>
+  <div class="sky-intro car-intro" id="sky-intro" role="dialog" aria-modal="true" aria-label="小怡说车汽车开场" tabindex="-1">
+    <div class="car-intro-room" aria-hidden="true"></div>
+    <span class="car-intro-brand" aria-hidden="true">小怡说车</span>
+    <div class="car-intro-copy"><p class="car-intro-eyebrow">汽车内容创作者</p><h2>小怡说车</h2><p class="car-intro-tagline">把用车的事，讲给你听。</p></div>
+    <div class="car-intro-stage">
+      <svg class="car-rig-masks" width="0" height="0" aria-hidden="true"><defs>
+        <clipPath id="sedan-body-mask" clipPathUnits="objectBoundingBox"><path clip-rule="evenodd" d="M0 0H1V1H0Z M.239 .385 C.245 .35 .28 .28 .33 .145 Q.39 .12 .462 .145 L.452 .776 Q.32 .755 .255 .738 C.235 .69 .234 .48 .239 .385Z M.462 .145 Q.532 .16 .576 .265 L.591 .414 L.555 .828 L.452 .776Z M.713 .393 Q.82 .35 .938 .444 L.94 .495 Q.82 .48 .7 .438Z"/></clipPath>
+        <clipPath id="sedan-front-mask" clipPathUnits="objectBoundingBox"><path d="M.239 .385 C.245 .35 .28 .28 .33 .145 Q.39 .12 .462 .145 L.452 .776 Q.32 .755 .255 .738 C.235 .69 .234 .48 .239 .385Z"/></clipPath>
+        <clipPath id="sedan-rear-mask" clipPathUnits="objectBoundingBox"><path d="M.462 .145 Q.532 .16 .576 .265 L.591 .414 L.555 .828 L.452 .776Z"/></clipPath>
+        <clipPath id="sedan-trunk-mask" clipPathUnits="objectBoundingBox"><path d="M.713 .393 Q.82 .35 .938 .444 L.94 .495 Q.82 .48 .7 .438Z"/></clipPath>
+        <clipPath id="sedan-cabin-mask" clipPathUnits="objectBoundingBox"><path d="M.239 .385 C.245 .35 .28 .28 .33 .145 Q.39 .12 .462 .145 L.452 .776 Q.32 .755 .255 .738 C.235 .69 .234 .48 .239 .385Z M.462 .145 Q.532 .16 .576 .265 L.591 .414 L.555 .828 L.452 .776Z"/></clipPath>
+      </defs></svg>
+      <div class="car-rig">
+        <div class="car-cabin"><img class="car-cabin-photo" src="assets/intro-cabin-source.png" alt=""></div>
+        <div class="car-trunk-cavity"></div>
+        <img class="car-rig-base" src="assets/intro-orange-sedan.png" alt="" width="2172" height="724" decoding="async" fetchpriority="high">
+        <div class="car-blooms car-blooms-seat"><img src="assets/intro-meadow-flowers.png" alt="" class="car-bloom bloom-seat-a"><img src="assets/intro-meadow-flowers.png" alt="" class="car-bloom bloom-seat-b"></div>
+        <div class="car-blooms car-blooms-trunk"><img src="assets/intro-meadow-flowers.png" alt="" class="car-bloom bloom-trunk-a"><img src="assets/intro-meadow-flowers.png" alt="" class="car-bloom bloom-trunk-b"><img src="assets/intro-meadow-flowers.png" alt="" class="car-bloom bloom-trunk-c"></div>
+        <div class="car-part car-front-door"><img src="assets/intro-orange-sedan.png" alt=""><button class="car-door-entry" type="button" aria-label="握住驾驶位门把手，上车进入首页" aria-describedby="car-interaction-hint" hidden><span class="car-door-label" aria-hidden="true">上车出发 ↗</span></button></div>
+        <div class="car-part car-rear-door"><img src="assets/intro-orange-sedan.png" alt=""></div>
+        <div class="car-part car-trunk-lid"><img src="assets/intro-orange-sedan.png" alt=""></div>
+      </div>
+      <button class="car-hover-target" type="button" aria-label="汽车互动：打开两扇侧门和后备厢，展开鲜花" aria-pressed="false" aria-describedby="car-interaction-hint"></button>
+    </div>
+    <div class="car-intro-actions">
+      <p class="car-interaction-hint" id="car-interaction-hint" role="status">靠近这辆车，等鲜花展开，一起出发。</p>
+    </div>
+    <div class="car-intro-note car-intro-note-left" aria-hidden="true"><strong>车主视角</strong><span>从日常用车出发</span></div>
+    <div class="car-intro-note car-intro-note-right" aria-hidden="true"><strong>真实体验</strong><span>把每次感受讲清楚</span></div>
   </div>
   <div class="audio-entry-hint" role="status"><span aria-hidden="true">♪</span> 轻点页面，听见纸张与琴声</div>
   <a class="skip" href="#main">跳到正文</a>
   <header class="topbar">
     <nav aria-label="页面目录">
-      <a href="#profile">关于我</a><a href="#history">经历</a><a href="#works">IP助理实训</a><a href="#performance">数据</a><a href="#audience">受众</a><a href="#business">商业合作</a><a href="#create">一起创作</a>
+      <a href="#profile">个人介绍</a><a href="#history">经历</a><a href="#works">IP助理实训</a><a href="#performance">账号数据</a><a href="#audience">粉丝分布</a><a href="#business">商业合作</a><a href="#create">一起创作</a>
     </nav>
     <div class="topbar-actions"><button class="button button-small" id="toggle-page-editor" aria-pressed="false" aria-controls="page-editor-toolbar">编辑内容</button></div>
     <div class="reading-progress" aria-hidden="true"><span></span></div>
@@ -73,7 +106,7 @@
     </section>
 
     <section class="section profile" id="profile" aria-labelledby="profile-title">
-      <div class="section-heading reveal"><p class="section-number">01 / 关于我</p><h2 id="profile-title">一个喜欢车的北方姑娘。</h2></div>
+      <div class="section-heading reveal"><p class="section-number">01 / 个人介绍</p><h2 id="profile-title">一个喜欢车的北方姑娘。</h2></div>
       <div class="profile-layout">
         <div class="profile-story reveal">
           <p class="lead">把用车的事，讲给你听。</p>
@@ -94,7 +127,24 @@
     <section class="section history" id="history" aria-labelledby="history-title">
       <div class="section-heading reveal"><p class="section-number">02 / 经历</p><h2 id="history-title">我怎么开始说车。</h2></div>
       <div class="timeline">
-        <article class="timeline-item reveal"><div class="timeline-year">2022<span>开始积累</span></div><div><h3>从车主经历，走到持续拍视频</h3><div class="milestones" aria-label="粉丝增长里程碑"><div><strong>1万</strong><span>粉丝</span><p>2022.03.17</p><small>第492天</small></div><div><strong>10万</strong><span>粉丝</span><p>2022.05.15</p><small>第551天</small></div><div><strong>30万</strong><span>粉丝</span><p>2022.08.02</p><small>第630天</small></div><div><strong>100万</strong><span>粉丝</span><p>2022.12.18</p><small>第768天</small></div></div></div></article>
+        <article class="timeline-item reveal timeline-fans"><div class="timeline-year">2023—26<span>粉丝足迹</span></div><div><h3>一路说车，也记录每一站</h3>
+          <div class="milestones" aria-label="抖音粉丝公开记录，2023年至2026年" data-platform="抖音">
+            <div data-fans="3011000"><strong>301.1万</strong><span>粉丝</span><p>2023.08.06</p><small>历史榜单</small></div>
+            <div data-fans="3751100"><strong>375.11万</strong><span>粉丝</span><p>2025.06.12</p><small>历史榜单</small></div>
+            <div data-fans="3752200"><strong>375.22万</strong><span>粉丝</span><p>2025.07.07</p><small>历史榜单</small></div>
+            <div data-fans="3440000" data-approx="true"><strong>约344万</strong><span>粉丝</span><p>2026.10</p><small>近期公开快照</small></div>
+          </div>
+          <details class="ms-sources"><summary>数据来源与口径</summary><div>
+            <p>仅记录抖音粉丝数，不与全平台合计混用。各站为公开记录，不代表首次突破该数值的日期；汽车与数字变化用于串联节点，不是逐日涨粉曲线。</p>
+            <ul>
+              <li><a href="https://www.relangdata.cn/douyin/douyin_rank_2023-08-06_1_1_10.html" target="_blank" rel="noopener noreferrer">2023.08.06 · 热浪数据榜单：301.1万</a></li>
+              <li><a href="https://www.newrank.cn/rankfans/douyin/15/1/2025-06-12" target="_blank" rel="noopener noreferrer">2025.06.12 · 新榜：375.11万</a></li>
+              <li><a href="https://www.newrank.cn/rankfans/douyin/15/1/2025-07-07" target="_blank" rel="noopener noreferrer">2025.07.07 · 新榜：375.22万</a></li>
+              <li><a href="https://www.douyin.com/video/7356211325485190426?source=Baiduspider" target="_blank" rel="noopener noreferrer">2026.10 · 抖音作品页作者栏：近期快照343.6万</a>，路牌取整为约344万。</li>
+            </ul>
+            <p>检索日期：2026.10.24。2026年数值来自近期搜索快照，非当日后台实时值，也不是该视频发布时的粉丝数。2022年旧节点与2024年粉丝数未找到可核实的历史记录，暂不补写。</p>
+          </div></details>
+        </div></article>
         <article class="timeline-item reveal"><div class="timeline-year">2023<span>车主视角</span></div><div><h3>拍新车，也讲买车之后的事</h3><div class="tl-chips"><span><b>理想L9</b>一年4万公里</span><span><b>smart精灵1号</b>付费订阅</span></div></div></article>
         <article class="timeline-item reveal"><div class="timeline-year">2024<span>内容延伸</span></div><div><h3>家庭用车之外，多了旅途与城市</h3><div class="tl-chips"><span><b>极狐考拉</b>带娃出行</span><span><b>怡路有电</b>柳州之行</span></div></div></article>
         <article class="timeline-item reveal"><div class="timeline-year">2025—26<span>近期选题</span></div><div><h3>家庭车型比较、辅助驾驶和新车体验</h3><div class="tl-chips"><span><b>深蓝S09 vs 领克900</b>空间与舒适</span><span><b>新车</b>鸿蒙智行 · 上汽大众 · 智界</span></div></div></article>
@@ -111,6 +161,7 @@
             <h3>深圳晚高峰实测<span>启境GT7 · 华为乾崑ADS5</span></h3>
             <ol class="work-steps"><li><span class="ico-badge"><i class="ico ico-target"></i></span><b>选题</b><span>晚高峰通勤</span></li><li><span class="ico-badge"><i class="ico ico-script"></i></span><b>脚本</b><span>路况 · 体验 · 反馈</span></li><li><span class="ico-badge"><i class="ico ico-film"></i></span><b>素材</b><span>道路 · 车内 · 人物</span></li></ol>
             <button class="text-link practice-open" type="button" data-open-practice="practice-gt7" aria-controls="practice-gt7" aria-expanded="false">查看方案 <span aria-hidden="true">↓</span></button>
+            <a class="work-feishu-link" href="https://my.feishu.cn/wiki/RYJlwWipPiLae0kg77kcJfaYnCe?from=from_copylink" target="_blank" rel="noopener noreferrer" aria-label="打开启境GT7的飞书文档（新标签页）"><span>查看飞书文档</span><span aria-hidden="true">↗</span></a>
           </div>
         </article><article class="work-card work-experience-card">
           <a class="work-image" href="https://www.douyin.com/video/7676376235915676943" target="_blank" rel="noopener noreferrer" aria-label="观看参考作品：挑战8D山城，上汽大众ID.ERA5S"><img src="assets/mountain.webp" alt="挑战8D山城视频封面" width="961" height="1282" loading="lazy"><span class="work-play" aria-hidden="true"></span><span class="image-link-label">观看参考作品</span></a>
@@ -120,6 +171,7 @@
             <h3>挑战8D山城<span>上汽大众ID.ERA5S</span></h3>
             <ol class="work-steps"><li><span class="ico-badge"><i class="ico ico-target"></i></span><b>选题</b><span>山城复杂路况</span></li><li><span class="ico-badge"><i class="ico ico-script"></i></span><b>脚本</b><span>按路段组织</span></li><li><span class="ico-badge"><i class="ico ico-film"></i></span><b>素材</b><span>场景分类素材表</span></li></ol>
             <button class="text-link practice-open" type="button" data-open-practice="practice-mountain" aria-controls="practice-mountain" aria-expanded="false">查看方案 <span aria-hidden="true">↓</span></button>
+            <a class="work-feishu-link" href="https://my.feishu.cn/wiki/TYmrw7NG0iXpEtkxOilcJnxbnme?from=from_copylink" target="_blank" rel="noopener noreferrer" aria-label="打开大众ID.ERA5S的飞书文档（新标签页）"><span>查看飞书文档</span><span aria-hidden="true">↗</span></a>
           </div>
         </article><article class="work-card work-experience-card">
           <a class="work-image" href="https://www.douyin.com/video/7670936507498220815" target="_blank" rel="noopener noreferrer" aria-label="观看参考作品：西湖晚高峰体验，全新深蓝S05"><img src="assets/s05.webp" alt="西湖晚高峰体验视频封面" width="961" height="1282" loading="lazy"><span class="work-play" aria-hidden="true"></span><span class="image-link-label">观看参考作品</span></a>
@@ -129,6 +181,7 @@
             <h3>西湖晚高峰体验<span>全新深蓝S05</span></h3>
             <ol class="work-steps"><li><span class="ico-badge"><i class="ico ico-target"></i></span><b>选题</b><span>西湖晚高峰</span></li><li><span class="ico-badge"><i class="ico ico-script"></i></span><b>脚本</b><span>开头 · 过程 · 收尾</span></li><li><span class="ico-badge"><i class="ico ico-film"></i></span><b>素材</b><span>口播画面对照</span></li></ol>
             <button class="text-link practice-open" type="button" data-open-practice="practice-s05" aria-controls="practice-s05" aria-expanded="false">查看方案 <span aria-hidden="true">↓</span></button>
+            <a class="work-feishu-link" href="https://my.feishu.cn/wiki/Et8Xwa7RsioiZvkW3bgcCShsnSd?from=from_copylink" target="_blank" rel="noopener noreferrer" aria-label="打开深蓝S05的飞书文档（新标签页）"><span>查看飞书文档</span><span aria-hidden="true">↗</span></a>
           </div>
         </article></div>
       <div class="practice-plans"><details class="practice-plan" id="practice-gt7">
@@ -159,7 +212,7 @@
     </section>
 
     <section class="section performance" id="performance" aria-labelledby="performance-title">
-      <div class="section-heading reveal"><p class="section-number">04 / 作品表现</p><h2 id="performance-title">我的账号，一些数字。</h2><p>15条作品，点开光峰看每条表现。</p></div>
+      <div class="section-heading reveal"><p class="section-number">04 / 账号数据</p><h2 id="performance-title">账号数据</h2><p>15条作品，点开光峰看每条表现。</p></div>
       <div class="chart-panel peak-panel performance-board reveal" role="group" aria-label="作品表现与直播数据">
         <div class="performance-top"><div class="number-stat"><strong>286.5<span>万</span></strong><p>15条作品平均播放量</p></div><div class="number-stat"><strong>70.7<span>万</span></strong><p>商单播放中位数</p></div></div>
         <div class="chart-toolbar"><div><h3>最近15条作品的播放量</h3><p>2026.06.18 — 09.29 · 单位：万</p></div><div class="segmented" role="group" aria-label="筛选作品类型"><button class="active" data-chart-filter="all" aria-pressed="true">全部15条</button><button data-chart-filter="business" aria-pressed="false">品牌内容</button><button data-chart-filter="personal" aria-pressed="false">个人视频</button></div></div>
@@ -174,7 +227,7 @@
     </section>
 
     <section class="section audience" id="audience" aria-labelledby="audience-title">
-      <div class="section-heading reveal"><p class="section-number">05 / 受众</p><h2 id="audience-title">来看我作品的，<br>都是哪些朋友？</h2></div>
+      <div class="section-heading reveal"><p class="section-number">05 / 粉丝分布</p><h2 id="audience-title">粉丝分布</h2></div>
       <div class="audience-layout reveal">
         <div class="audience-panel"><div class="segmented audience-tabs" role="group" aria-label="切换人群"><button data-audience="fans" class="active" aria-pressed="true">粉丝</button><button data-audience="viewers" aria-pressed="false">观众</button></div><div class="audience-tools"><span>移动鼠标，转动圆环</span></div><div class="audience-visual"><div class="gender-ring" id="gender-ring"><div><span id="gender-caption">男性粉丝</span><strong id="gender-value">91.49<span>%</span></strong></div></div><div class="gender-labels"><span><i class="legend-dot business"></i>男性 <strong id="male-label">91.49%</strong></span><span><i class="legend-dot personal"></i>女性 <strong id="female-label">8.51%</strong></span></div></div></div>
         <div class="audience-copy"><h3>女车主视角，男性朋友更多</h3><p>观众里，50岁以上的朋友最多。</p><div class="audience-highlight"><strong>31—40岁</strong><span>粉丝最多的年龄段</span><b>33.27%</b></div><h4>我的粉丝来自哪里</h4><div class="region-bars"><div><span>广东</span><i style="--w:100%"><span class="region-fill"></span></i><b>12.7%</b></div><div><span>江苏</span><i style="--w:65.4%"><span class="region-fill"></span></i><b>8.3%</b></div><div><span>山东</span><i style="--w:53.5%"><span class="region-fill"></span></i><b>6.8%</b></div><div><span>浙江</span><i style="--w:53.5%"><span class="region-fill"></span></i><b>6.8%</b></div></div></div>
