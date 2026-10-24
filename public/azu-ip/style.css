@@ -282,11 +282,11 @@
 .has-gate .enter-gate{position:fixed;inset:0;z-index:50;display:flex;align-items:center;justify-content:center;
   background:#ed3d40 url('./assets/red-paper.png') center/cover no-repeat;color:#fffaf4;transition:opacity .6s ease,visibility .6s}
 .has-gate.entered .enter-gate{opacity:0;visibility:hidden;pointer-events:none}
-.gate-brand{margin:0;padding:.02em .06em .04em;border:0;border-radius:0;background:transparent;color:inherit;cursor:pointer;user-select:none;
+.gate-brand{margin:.08em 0 0;padding:.02em .06em .04em;border:0;border-radius:0;background:transparent;color:inherit;cursor:pointer;user-select:none;
   appearance:none;-webkit-appearance:none;font-family:var(--display);font-weight:400;font-style:normal;
-  line-height:.78;letter-spacing:.02em;font-size:clamp(112px,22vw,360px);white-space:nowrap;touch-action:manipulation;
+  line-height:.78;letter-spacing:.02em;font-size:clamp(124px,25vw,400px);white-space:nowrap;touch-action:manipulation;
   transition:transform .28s var(--ease),letter-spacing .28s var(--ease)}
-.gate-brand{font-size:clamp(112px,min(22vw,38svh),360px)}
+.gate-brand{font-size:clamp(124px,min(25vw,42svh),400px)}
 .gate-brand:hover{transform:scale(1.035);letter-spacing:.04em}
 .gate-brand:active{transform:scale(.97)}
 .gate-brand:focus-visible{outline:3px solid #fffaf4;outline-offset:.06em}
@@ -563,10 +563,10 @@ html[data-sound="waiting"] .sound-toggle{border-style:dashed}
 .brand::before{content:"";width:11px;height:11px;background:currentColor;flex:none;
   clip-path:polygon(50% 0%,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%)}
 .gate-lockup{display:flex;flex-direction:column;align-items:center;max-width:92vw}
-.gate-kicker{display:flex;align-items:center;gap:14px;margin:0 0 14px;color:#f4efe4;
-  font-family:var(--display);font-size:clamp(13px,1.5vw,18px);letter-spacing:.42em;line-height:1}
+.gate-kicker{display:flex;align-items:center;gap:16px;margin:0 0 40px;color:#f4efe4;
+  font-family:var(--display);font-size:clamp(16px,1.85vw,22px);letter-spacing:.42em;line-height:1;translate:0 -10px}
 .gate-kicker span{padding-left:.46em}
-.gate-kicker .azu-star{width:13px;height:13px}
+.gate-kicker .azu-star{width:16px;height:16px}
 .gate-stripe{display:block;width:72%;height:11px;margin-top:12px;
   background:linear-gradient(#1c2a48 0 3px,#f4efe4 3px 8px,#1c2a48 8px 11px)}
 .gate-hint{margin:16px 0 0;padding:0 0 0 .18em;border:0;background:none;color:#fffaf4;text-align:center;pointer-events:none;
@@ -592,7 +592,7 @@ html[data-sound="waiting"] .sound-toggle{border-style:dashed}
   box-shadow:2px 2px 0 #1c2a48}
 @media(max-width:1200px){.hero-badge{display:none}}
 @media(max-width:650px){
-  .gate-kicker{letter-spacing:.32em;margin-bottom:12px}.gate-kicker span{padding-left:.32em}
+  .gate-kicker{letter-spacing:.32em;margin-bottom:32px;translate:0 -6px}.gate-kicker span{padding-left:.32em}
   .gate-stripe{height:9px;margin-top:8px}.gate-hint{margin-top:16px;letter-spacing:.12em;padding-left:.12em}
   .hero-piping{width:8px;background:linear-gradient(90deg,#1c2a48 0 3px,#f4efe4 3px 5px,#1c2a48 5px 8px)}
   .brand::before{width:9px;height:9px}
