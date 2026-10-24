@@ -202,9 +202,6 @@
 }
 .module-skills .skill-rows li.is-looked{background:#f1eee80d;padding-left:14px}
 .module-skills .skill-rows li.is-looked h3{color:#fff}
-.ip-stamp{position:absolute;top:6%;left:-6%;margin:0;padding:12px 16px;border:1px solid #ed3d40;color:#ed3d40;font-size:11px;line-height:1.6;letter-spacing:1px;rotate:-6deg;z-index:2;background:#1b1b1ecc}
-.ip-stamp b{font-size:18px;letter-spacing:2px}
-
 /* 05 联系我 — light grey from his sweatshirt; he sits on a block and talks to you */
 .module-contact.ip-board{grid-template-columns:minmax(240px,34%) 1fr;background:linear-gradient(180deg,#ecebe7 0%,#e2e0db 100%);color:#202024;--shadow:#20202440}
 /* Overlap the matching end colours to prevent subpixel seams at fractional zoom. */
@@ -227,7 +224,6 @@
   .module-skills .board-body{padding-bottom:10px}
   .board-ip--bust .ip-stage{max-width:300px}
   .board-ip--bust{order:2}
-  .ip-stamp{left:6%;top:10%}
   .board-ip--seat .ip-stage{max-width:240px}
   .talk-bubble{right:0}
   .module-work .work-slot{flex-basis:80%}
