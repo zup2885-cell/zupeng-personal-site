@@ -287,7 +287,6 @@ img, svg { max-width: 100%; }
 .tool-card:nth-child(4) { --tilt: 1.7deg; }
 .tool-card:nth-child(5) { --tilt: 1deg; }
 .tool-card:nth-child(6) { --tilt: -1.45deg; }
-.tool-card:nth-child(7) { --tilt: 0.8deg; }
 .tone-paper { --card: var(--paper); --on: var(--ink); }
 .tone-black { --card: var(--black); --on: var(--paper); }
 .tone-red { --card: var(--red-card); --on: #fff; }
@@ -668,7 +667,6 @@ dialog::backdrop { background: #2a0c08d0; }
 .local-note { margin: 0; font-size: 14px; }
 
 @media (min-width: 1240px) {
-  .tool-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
   .tool-card { min-height: 308px; }
 }
 

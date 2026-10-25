@@ -259,9 +259,7 @@
           "先拆步骤，再连接工具；把人工确认留在关键环节。"
         ]
       ],
-      "toolIds": [
-        "topic-radar"
-      ]
+      "toolIds": []
     },
     {
       "title": "效率工具",
@@ -321,8 +319,7 @@
         ]
       ],
       "toolIds": [
-        "shoot",
-        "harbor"
+        "shoot"
       ]
     },
     {

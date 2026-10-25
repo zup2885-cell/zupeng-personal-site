@@ -22,7 +22,7 @@ const entered = new Promise(resolve => {
   try { wordmark.focus({ preventScroll: true, focusVisible: false }); }
   catch { wordmark.focus({ preventScroll: true }); }
 });
-const content = await fetch('./content.json?v=20261019-memo-card').then(r => {if(!r.ok) throw Error('Content unavailable');return r.json();});
+const content = await fetch('./content.json?v=20261025-drop').then(r => {if(!r.ok) throw Error('Content unavailable');return r.json();});
 import { setupWorld } from './world.js?v=20261018-move';
 
 const openPersonalCard = fillPhotoFan($('#world .photo-fan'));
@@ -106,7 +106,7 @@ async function setupToolbox(){
   const scroller = root.querySelector('.toolbox-scroll');
   let catalog = [];
   try {
-    const response = await fetch('../secret-weapons/catalog.json?v=20261019-toolbox-sync');
+    const response = await fetch('../secret-weapons/catalog.json?v=20261025-drop');
     if(!response.ok) throw Error('Tool catalog unavailable');
     catalog = (await response.json()).filter(tool => tool.id !== 'markdown');
   } catch(error) { console.warn('Tool catalog unavailable', error); }
