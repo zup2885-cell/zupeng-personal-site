@@ -71,8 +71,9 @@ function setupWorkGallery(){
     active = target;
     cards.forEach((card, i) => {
       card.classList.toggle('is-active', i === active);
-      // Nearest neighbours sit above the farthest sleeve: the middle is never fully covered.
-      card.style.zIndex = String(cards.length - Math.abs(i - active));
+      // Keep the catalogue order fixed: Xiaoyi (01) always sits above 02 and 03.
+      // Hover and focus may pull a record out, but never reorder the sleeves.
+      card.style.zIndex = String(cards.length - i);
       if(buttons[i].tagName === 'BUTTON') buttons[i].setAttribute('aria-pressed', String(i === active));
     });
   };

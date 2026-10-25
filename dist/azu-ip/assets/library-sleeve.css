@@ -14,3 +14,8 @@
   .module-work .work-cover--library .sleeve-title>span{font-size:7px;letter-spacing:0}
   .module-work .work-cover--library .sleeve-title .sleeve-open{font-size:13px}
 }
+
+/* Keep the same order before scripts load and after hover or focus: 01, 02, 03. */
+.module-work #work-card-1{z-index:3}
+.module-work #work-card-2{z-index:2}
+.module-work #work-card-3{z-index:1}
