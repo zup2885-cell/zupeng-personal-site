@@ -95,8 +95,8 @@ function setupWorkGallery(){
     event.preventDefault();
     buttons[target].focus({preventScroll:true});
   });
-  // Keep the most recently chosen card in front when the pointer leaves.
-  select(1);
+  // Start with Xiaoyi; keep the most recently chosen sleeve in front.
+  select(0);
 }
 
 async function setupToolbox(){
