@@ -1,0 +1,16 @@
+/* The supplied photograph stays intact; the sleeve crops it to the existing square. */
+.module-work .work-slot--library{--sleeve:#122027;--sleeve-ink:#fffaf2;--record-accent:#7794a1}
+.work-cover--library{position:relative;isolation:isolate}
+.work-cover--library .sleeve-library-art{position:absolute;z-index:-2;inset:0;display:block;width:100%;height:100%;object-fit:cover;object-position:50% 30%}
+.work-cover--library::before{content:"";position:absolute;z-index:-1;inset:0;background:linear-gradient(180deg,rgba(0,9,17,.4) 0%,transparent 25%,transparent 60%,rgba(0,9,17,.8) 100%)}
+.module-work .work-cover--library .sleeve-meta,.work-cover--library .sleeve-title{position:relative;color:var(--sleeve-ink)}
+.work-cover--library .sleeve-title{border:0;padding-top:0}
+.work-cover--library .sleeve-title h3{display:flex;align-items:center;justify-content:space-between;gap:8px;font-family:'Xiaoyi Cover','PingFang SC',sans-serif;font-size:clamp(20px,2.7vw,40px);font-weight:400;letter-spacing:.04em;line-height:1.2}
+.module-work .work-cover--library .sleeve-title>span{color:#f1f0eb;letter-spacing:.4px;font-family:'PingFang SC',sans-serif;font-size:clamp(8px,.7vw,11px)}
+.module-work .work-cover--library .sleeve-title .sleeve-open{font:400 22px/1 Arial,sans-serif;letter-spacing:0;color:var(--sleeve-ink)}
+.work-slot--library .record-label b{font-family:'Xiaoyi Cover','PingFang SC',sans-serif;font-size:clamp(14px,2vw,26px);color:#f6f0e5}
+@media(max-width:650px){
+  .work-cover--library .sleeve-title h3{font-size:clamp(16px,4vw,24px)}
+  .module-work .work-cover--library .sleeve-title>span{font-size:7px;letter-spacing:0}
+  .module-work .work-cover--library .sleeve-title .sleeve-open{font-size:13px}
+}
