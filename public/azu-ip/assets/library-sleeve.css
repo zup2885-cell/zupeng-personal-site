@@ -19,3 +19,10 @@
 .module-work #work-card-1{z-index:3}
 .module-work #work-card-2{z-index:2}
 .module-work #work-card-3{z-index:1}
+
+/* Labels stay in the exposed right halves of the two rear sleeves. */
+.module-work :is(.work-slot--library,.work-slot--tonggao) .sleeve-title{margin-left:50%;width:50%}
+.module-work :is(.work-slot--library,.work-slot--tonggao) .sleeve-title h3{display:block;font-family:'Xiaoyi Cover','PingFang SC',sans-serif;font-size:clamp(13px,1.5vw,22px);letter-spacing:0;line-height:1.3}
+.module-work :is(.work-slot--library,.work-slot--tonggao) .sleeve-title .sleeve-open{display:none}
+.module-work .work-slot--tonggao .sleeve-title>span{letter-spacing:0;font-family:'PingFang SC',sans-serif;font-size:clamp(7px,.7vw,10px);line-height:1.5}
+@media(max-width:650px){.module-work :is(.work-slot--library,.work-slot--tonggao) .sleeve-title h3{font-size:clamp(10px,2.8vw,15px)}}
