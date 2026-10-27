@@ -1,0 +1,46 @@
+---
+import type { chapters } from '@/data/proposal';
+interface Props { chapter: (typeof chapters)[number] }
+const { chapter: c } = Astro.props;
+const editorial = c.id === 'opening' || c.id === 'proof';
+---
+<section class:list={['chapter', `chapter-${c.id}`]} id={c.id} aria-labelledby={`${c.id}-title`} data-section-name={c.name}>
+  <div class="chapter-heading content-width">
+    <h2 id={`${c.id}-title`} data-reveal>{c.title.split('\n').map(line=><span>{line}</span>)}</h2>
+    <p class="chapter-time">{c.time}</p>
+  </div>
+
+  {editorial ? (
+    <div class="editorial-panel content-width">
+      <figure class="chapter-visual" data-reveal><img src={c.image} alt={c.imageAlt} loading="lazy" width="1224" height="1632" /></figure>
+      <div class="editorial-copy">
+        <p class="chapter-lead" data-reveal>{c.lead.split('\n').map((line,j)=><>{j>0&&<br />}{line}</>)}</p>
+        <p class="chapter-summary" data-reveal>{c.summary}</p>
+        <details class="reasoning"><summary>展开创作思路 <span aria-hidden="true">+</span></summary><div class="reasoning-body">{c.points.map(([title,text])=><article><h3>{title}</h3><p>{text}</p></article>)}</div></details>
+        <blockquote data-reveal>{c.quote}</blockquote>
+      </div>
+    </div>
+  ) : (
+    <div class="chapter-body content-width">
+      <p class="chapter-lead centered" data-reveal>{c.lead.split('\n').map((line,j)=><>{j>0&&<br />}{line}</>)}</p>
+      <p class="chapter-summary centered" data-reveal>{c.summary}</p>
+      {c.id === 'pain' && <div class="pain-diptych">
+        <article class="pain-card pain-movement" data-reveal><img src="/mountains/ski-movement.png" alt="AI 概念配图：滑雪者在雪山间腾空，身体舒展" loading="lazy" width="1254" height="1254" /><span class="pain-word" aria-hidden="true">卡</span><div><h3>每一次翻转<br />都需要自由</h3><p>身体在空中舒展，衣服却卡住动作。</p></div></article>
+        <article class="pain-card pain-cold" data-reveal><img src="/mountains/ski-sweat.png" alt="AI 概念配图：滑雪运动后，滑雪者额头与鬓角带有汗珠" loading="lazy" width="1254" height="1254" /><span class="pain-word" aria-hidden="true">汗</span><div><h3>滑时一身热<br />停下满身冷</h3><p>出汗之后，一坐上缆车就冷。</p></div></article>
+      </div>}
+      {c.id === 'product' && <div class="product-layout">
+        <figure class="product-landscape" data-reveal><img src={c.image} alt={c.imageAlt} loading="lazy" width="816" height="1456" /><figcaption>让功能回到人的感受里</figcaption></figure>
+        <div class="product-answers">{c.points.map(([title,text])=><article data-reveal><h3>{title}</h3><p>{text}</p></article>)}</div>
+      </div>}
+      {c.id === 'fabric' && <div class="fabric-measures" data-reveal>
+        <article><strong>30<span>万转</span></strong><h3>把耐磨说得直观</h3><p>狂磨 30 万转不破。</p></article>
+        <article><strong>30<span>克 / ㎡</span></strong><h3>几张纸那么轻</h3><p>一平方米的重量，有了日常的比方。</p></article>
+        <article><strong>20<span>倍</span></strong><h3>让比较有感知</h3><p>耐磨是羊毛的 20 倍。</p></article>
+      </div>}
+      {c.id === 'fabric' && <p class="data-note">原稿参数表达，待品牌资料核对。</p>}
+      {c.id === 'ending' && <figure class="ending-landscape" data-reveal><img src={c.image} alt={c.imageAlt} loading="lazy" width="1774" height="887" /><figcaption>好装备<br />陪你走进自然</figcaption></figure>}
+      {c.id !== 'product' && <details class="reasoning reasoning-wide"><summary>展开创作思路 <span aria-hidden="true">+</span></summary><div class="reasoning-body">{c.points.map(([title,text])=><article><h3>{title}</h3><p>{text}</p></article>)}</div></details>}
+      <blockquote class="closing-line" data-reveal>{c.quote}</blockquote>
+    </div>
+  )}
+</section>

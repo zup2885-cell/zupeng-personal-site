@@ -1,0 +1,20 @@
+---
+import config from '@/config/config.json';
+import '@/styles/main.css';
+export interface Props { title?: string; description?: string; }
+const { title = config.site.title, description = config.metadata.meta_description } = Astro.props;
+---
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#091922" />
+    <meta name="robots" content="noindex,nofollow" />
+    <link rel="icon" href="/mountain.svg" type="image/svg+xml" />
+    <link rel="preload" as="image" href="/mountains/hero-poster.jpg" />
+    <title>{title}</title>
+  </head>
+  <body><slot /></body>
+</html>

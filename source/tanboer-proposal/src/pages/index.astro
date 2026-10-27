@@ -1,0 +1,84 @@
+---
+import Base from '@/layouts/Base.astro';
+import ProposalChapter from '@/components/ProposalChapter.astro';
+import { chapters } from '@/data/proposal';
+---
+<Base>
+  <a class="skip" href="#intro">跳至提案正文</a>
+  <header class="site-header">
+    <a class="brand" href="#home" aria-label="坦博尔雪服创意提案首页">坦博尔<span>与自然为友</span></a>
+    <nav aria-label="主导航"><a href="#intro">创作思路</a><a href="#chapters">分段讲解</a><a href="#inspiration">视觉灵感</a></nav>
+    <button class="present-toggle" type="button" aria-pressed="false">演示模式 <span aria-hidden="true">↗</span></button>
+  </header>
+  <main>
+    <section class="hero" id="home" aria-labelledby="hero-title">
+      <div class="hero-depth"><div class="hero-scene">
+        <img class="hero-poster" src="/mountains/hero-poster.jpg" alt="蓝白色群山与山谷中流动的云雾" width="1280" height="720" fetchpriority="high" />
+        <video class="hero-video" muted loop playsinline preload="none" poster="/mountains/hero-poster.jpg" aria-hidden="true"><source src="/mountains/makara-mountain-loop.mp4" type="video/mp4" /></video>
+      </div></div>
+      <div class="hero-shade"></div>
+      <div class="hero-copy">
+        <h1 id="hero-title">与自然为友</h1>
+        <p class="hero-subtitle">坦博尔雪服 · 影像创意提案</p>
+        <div class="hero-actions">
+          <button class="film-trigger" type="button" aria-haspopup="dialog" aria-controls="proposal-film"><span aria-hidden="true">▶</span>播放宣传片<span class="film-duration">50 秒</span></button>
+          <a class="primary-link" href="#intro">走进这个故事 <span aria-hidden="true">↓</span></a>
+        </div>
+      </div>
+      <p class="hero-bottom-line">从人的需要出发讲一件衣服的价值</p>
+      <button class="motion-toggle" type="button" aria-label="播放雪山动画" aria-pressed="false"><span class="motion-icon" aria-hidden="true">▶</span><span class="motion-label">播放动态</span></button>
+      <a class="hero-credit" href="https://www.artstation.com/artwork/B15GmA" target="_blank" rel="noopener noreferrer">Mountain · Makara</a>
+    </section>
+
+    <section class="intro section-pad" id="intro" aria-labelledby="intro-title">
+      <div class="intro-heading"><h2 id="intro-title" data-reveal>开场先讲人</h2><p class="section-meta">30 秒把思路讲清楚</p></div>
+      <div class="intro-body">
+        <p class="opening-statement" data-reveal>这条片子从“一个人为什么<br class="desktop-break" />需要这件衣服”开始</p>
+        <p data-reveal>先用李方慧在冬奥会上的一跳把人抓住，<br class="desktop-break" />再讲滑过雪的人都懂的两个痛点：<strong>卡和汗。</strong></p>
+        <p data-reveal>然后讲专业人群为什么选择坦博尔。<br class="desktop-break" />最后再讲产品——每一个卖点，都回答前面的问题。</p>
+        <div class="duration" data-reveal><strong>2<span>分钟</span></strong><p>用一个人的感受，串起一件衣服的价值。</p></div>
+      </div>
+    </section>
+
+    <section class="strategy section-pad" id="strategy" aria-labelledby="strategy-title">
+      <div class="content-width">
+        <div class="strategy-heading"><h2 id="strategy-title" data-reveal>痛点在前<br />卖点在后</h2><p data-reveal>先让人产生共鸣<br />再让产品成为答案</p></div>
+        <div class="strategy-points">
+          <article data-reveal><h3>先抓住注意力</h3><p>开头不急着讲品牌。先讲人和问题，让观众愿意停下来。</p></article>
+          <article data-reveal><h3>再建立需要</h3><p>先让观众觉得“这真要命”，后面的参数才有被在乎的理由。</p></article>
+          <article data-reveal><h3>让表达更像人</h3><p>沿用《猛犸象》《喜马拉雅》的口气：抛问题、讲故事，短句讲参数，用一句有记忆点的话收尾。</p></article>
+        </div>
+      </div>
+    </section>
+
+    <div id="chapters" class="chapters">
+      <nav class="chapter-nav" aria-label="分段讲解目录">{chapters.map(c=><a href={`#${c.id}`} data-chapter-link={c.id}>{c.name}</a>)}</nav>
+      {chapters.map(c=><ProposalChapter chapter={c} />)}
+    </div>
+
+    <section class="inspiration section-pad" id="inspiration" aria-labelledby="inspiration-title">
+      <div class="content-width"><div class="gallery-heading"><h2 id="inspiration-title" data-reveal>山野给出灵感</h2><p>冰壁、雪脊、风与人<br />这一次让画面先说话</p></div>
+      <div class="gallery">
+        {[
+          ['ice-climb','攀登的张力','攀冰海报，含 Patagonia 原有标识'],
+          ['snow-ridge','雪山的呼吸','蓝调雪山摄影'],
+          ['unknown','走向未知','雪山与滑雪者平面海报'],
+          ['only-a-few-steps','再向前一步','雪峰与攀登者平面海报'],
+        ].map(([image,title,alt])=><button class="gallery-item" data-image={`/mountains/${image}.jpg`} data-caption={title} aria-label={`放大查看：${title}`}><img src={`/mountains/${image}.jpg`} alt={alt} loading="lazy" /><span>{title}<span aria-hidden="true">↗</span></span></button>)}
+      </div></div>
+    </section>
+
+    <footer class="site-footer section-pad">
+      <div class="content-width"><p>坦博尔雪服 · 创作讲解稿</p><h2>与自然为友</h2>
+      <div class="footer-bottom"><a href="#home">回到雪山 <span aria-hidden="true">↑</span></a><details class="credits"><summary>素材与内容说明</summary><p>首页动画：<a href="https://www.artstation.com/artwork/B15GmA" target="_blank" rel="noopener noreferrer">Mountain / Makara</a>，由你提供的 Pinterest 链接选用。其余四张图片来自你提供的本地收藏，保留原有文字与标识，作为视觉参考。“卡”“汗”及结尾的雪山徒步配图为 AI 生成的场景示意。</p><p>文字按你提供的创作讲解稿整理。运动员动作、合作背书、ISPO 奖项及产品数据尚未独立核验；正式对外使用前需与品牌资料核对。参考素材的公开使用授权尚未确认。</p></details></div></div>
+    </footer>
+  </main>
+  <dialog class="film-dialog" id="proposal-film" aria-labelledby="proposal-film-title">
+    <div class="film-toolbar"><h2 id="proposal-film-title">坦博尔 ISPO 2026 提案片</h2><button class="film-close" type="button" aria-label="关闭宣传片">关闭 <span aria-hidden="true">×</span></button></div>
+    <video class="proposal-film" controls playsinline preload="none" poster="/media/tanboer-ispo2026-poster.jpg" aria-label="坦博尔 ISPO 2026 宣传片"><source src="/media/tanboer-ispo2026-v2.mp4" type="video/mp4" /></video>
+    <p class="film-status" role="status" hidden></p>
+  </dialog>
+  <dialog class="lightbox" aria-label="查看视觉灵感大图"><button class="lightbox-close" aria-label="关闭大图">关闭 <span aria-hidden="true">×</span></button><img alt="" /><p></p></dialog>
+  <div class="present-controls" hidden><button type="button" class="previous-section" aria-label="上一个板块">↑</button><span class="present-label">首页</span><button type="button" class="next-section" aria-label="下一个板块">↓</button><button type="button" class="exit-present">退出演示</button></div>
+  <script src="../scripts/proposal.ts"></script>
+</Base>

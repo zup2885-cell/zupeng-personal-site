@@ -1,0 +1,58 @@
+{
+  "site": {
+    "title": "与自然为友 · 坦博尔雪服创意提案",
+    "base_url": "http://localhost:4326",
+    "base_path": "/",
+    "trailing_slash": false,
+    "favicon": "/mountain.svg",
+    "logo": "/images/logo.png",
+    "logo_darkmode": "/images/logo-darkmode.png",
+    "logo_width": "150",
+    "logo_height": "30",
+    "logo_text": "坦博尔"
+  },
+  "settings": {
+    "search": true,
+    "sticky_header": true,
+    "theme_switcher": true,
+    "default_theme": "system",
+    "pagination": 2,
+    "summary_length": 200,
+    "blog_folder": "blog"
+  },
+  "announcement": {
+    "enable": false,
+    "content": "<span class='text-center block'>♥️ Loving Astroplate? <a class='underline' href='https://github.com/zeon-studio/astroplate' target='_blank' rel='noopener'>Please ⭐️ on Github</a></span>",
+    "expire_days": 7
+  },
+  "params": {
+    "contact_form_action": "#",
+    "copyright": "Designed And Developed by [Zeon Studio](https://zeon.studio)"
+  },
+  "navigation_button": {
+    "enable": true,
+    "label": "Github",
+    "link": "https://github.com/zeon-studio/astroplate"
+  },
+  "google_tag_manager": {
+    "enable": false,
+    "gtm_id": "GTM-XXXXXX"
+  },
+  "disqus": {
+    "enable": false,
+    "shortname": "themefisher-template",
+    "settings": {}
+  },
+  "metadata": {
+    "meta_author": "阿祖",
+    "meta_image": "/mountains/hero-poster.jpg",
+    "meta_description": "从人的需要出发，讲一件衣服的价值。坦博尔雪服创作思路与分段讲解。"
+  },
+  "llms": {
+    "generate_llms_txt": false,
+    "generate_llms_full_txt": false,
+    "generate_individual_md": false,
+    "include": [],
+    "exclude": []
+  }
+}
